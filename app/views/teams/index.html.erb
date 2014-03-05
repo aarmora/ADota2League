@@ -1,0 +1,18 @@
+Index here
+<% if session.key? :current_user %>
+	<h3>Current user:</h3>
+	<%= image_tag session[:current_user][:image] %>
+	<p><%= session[:current_user][:nickname] %></p>
+	<p><%= session[:current_user][:uid] %></p>
+<%else%>
+	this
+<% end %>
+<%if 1: 2%>
+	addd
+<%else%>
+	asdf
+<%end%>
+<%@teams.each do |team|%>
+	<%= link_to team.teamname, "http://dotabuff.com/teams/#{team.id}" %><br>
+<%end%>
+<%=@x%>
