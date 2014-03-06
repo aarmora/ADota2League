@@ -2,6 +2,7 @@ namespace :dota do
   desc "Update our local games table from the DotA API"
   task :pull_games => :environment do
   	# NOTE: This might need to be run while no games are going on. Unclear if it returns in-progress matches
+  	# NOTE: Dota API "matches" are really just single games AFAIK. That convolutes the notation a bit.
  
   	# For now assume the league id is 158...we may need multiple leagues later (get from std in)
   	league_id = 158
@@ -11,7 +12,10 @@ namespace :dota do
   	last_seen_id = Game.maximum(:steam_match_id)
   	last_start_id = nil
   	
+  	puts "Working backwards from now to game #{last_seen_id}"
+  	
   	begin
+  	 puts "Pulling a batch of games starting at #{last_start_id}"
   	 history = Dota.history(:league_id => 158, :start_at_match_id => last_start_id)
   	 matches = history.matches
   	 break if matches.empty?
@@ -42,9 +46,8 @@ namespace :dota do
   	 	radiant_team = Team.find_by_dotabuff_id(game_entry.radiant_team_id)
   	 	if dire_team && radiant_team
   	 		m = Match.where(:away_team_id => [dire_team.id, radiant_team.id], :home_team_id => [dire_team.id, radiant_team.id]).first
-  	 		start_time = Date.parse(m.start)
   	 		# NOTE: This is time boxed, so the game should take place within a week of the scheduled match for auto-matching
-  	 		if m && (start_time - m.date.to_date).abs <= 8
+  	 		if m && (Date.parse(m.start) - m.date.to_date).abs <= 8
   	 			game_entry.match_id = m.id
   	 			puts "Found matching match! #{m.id}"
   	 			# TODO: adjust MMR here based on results?
@@ -54,7 +57,7 @@ namespace :dota do
   	 	game_entry.save!  	 	
   	 end
   	 
-  	end while last_start_id 
+  	end while last_seen_id <= last_start_id
   end
 
   desc "Generate Matches for a given league and week"
