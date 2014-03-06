@@ -4,7 +4,7 @@
 		height: 100%;
 	}
     html{
-      background: url(images/dota2background.png) no-repeat center center fixed; 
+      background: url(image_path('dota2background.png')) no-repeat center center fixed; 
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -97,7 +97,7 @@
 	background-image: -webkit-linear-gradient(top, #D7D7D7 40%, #CCCCCC 60%);
 	/* IE 6-9  */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D7D7D7', endColorstr='#CCCCCC',GradientType=0 );
-    background: #1B1B1B url(images/bg01.png) repeat;
+    background: #1B1B1B url(image_path('bg01.png')) repeat;
 }
  
 .tab{
@@ -481,7 +481,7 @@
 
 	#menu
 	{
-		background: #1B1B1B url(images/bg01.png) repeat;
+		background: #1B1B1B url(image_path('bg01.png')) repeat;
 		border-bottom: 4px solid #BC1414;
 	}
 	

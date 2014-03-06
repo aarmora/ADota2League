@@ -12,22 +12,23 @@
 	    <div id="closedlivegames">Games are live right now!</div>
 		<h1>
 			<a href="/index.asp">Amateur <span>Dota</span> 2 League</a>
-	            <div style="float: right; margin-top: 15px"><img src="" id="steampic"/><span style="margin-left: 5px; font-size: 20px" id="steamname"></span></div>
-			    <a href="/SteamLogin/Account/Login"><img id="steamsignin" style="margin-left:290px" src="images/sits_small.png" width="154" height="23" alt="" title="" border="0" /></a>
 		</h1>
-	            <span>Hi Admin!  Push <a href="captaininfo.asp" >this</a> to go to captaininfo!</span>
-	            <div style="font-size: 10px; color:##919191; float:left; font-weight: bold; ">For those of us not as good as [A]lliance.</div>
-	            <a href="logout.asp" style="font-size: 10px; color:#BC1414; float: right; ">Logout</a>
+        <div style="font-size: 10px; color:##919191; float:left; font-weight: bold; ">For those of us not as good as [A]lliance.</div>
+		<% if session.key? :current_user %>
+			<div style="float: right; margin-top: 15px"><%= image_tag session[:current_user][:image] %>
+				<span style="margin-left: 5px; font-size: 20px" id="steamname"><%= session[:current_user][:nickname] %></span>
+			</div>
+			<span style="font-size: 10px; color:#BC1414; float: right; "><%= link_to 'Logout', logout_url %></span>
+		<%else%>
+			<p style="margin-left:290px"><%= link_to image_tag("http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_large_noborder.png"), '/auth/steam' %></p>
+		<% end %>
 		
 	</div>
 	<div id="menu" class="container">
 		<ul>
 			<li class="current_page_item" ><a href="Index.asp" accesskey="1" title="">Home</a></li>
-			<li  class="current_page_item" >
-	            <a href="Schedule.asp" accesskey="2" title="">Schedule</a>
-	        </li>
-			<li id="teampage" style="display: none;" class="current_page_item" ><a href="teampage.asp" accesskey="3" title="">Team Page</a></li>
-	            <li class="current_page_item" ><a href="teampage.asp" accesskey="3" title="">Team Page</a></li>
+			<li  class="current_page_item" ><a href="Schedule.asp" accesskey="2" title="">Schedule</a></li>
+            <li class="current_page_item" ><%= link_to "Team Page", controller: 'teams' %></li>
 			<li class="current_page_item"><a href="freeagent.asp" accesskey="3" title="">Free Agents</a></li>
 	        <li id="entry"class="current_page_item" ><a href="entry.asp" accesskey="4" title="">Sign up!</a></li>
 			<li class="current_page_item"><a href="community.asp" accesskey="5" title="">Community</a></li>
@@ -37,15 +38,17 @@
 	<div id="sponsors" class="container">
 	    <div id="sponsorholder">
 	        <a style="margin-left:15px;" href="http://www.dota2.com/store/itemdetails/15548?r=1f4" target="_blank">
-	            <img style="width:11%" src="/images/AD2LS3.png">
+	            <%= image_tag "AD2LS3.png" %>
 	        </a>
-	        <a style="margin-left:215px;" href="https://probuiltsystems.com/" target="_blank">            
-	            <img style="width:30%" src="/images/probuilt2.png">
+	        <a style="margin-left:215px;" href="https://probuiltsystems.com/" target="_blank">    
+	            <%= image_tag "Probuilt2.png" %>        
 	        </a>
 	    </div>
 	</div>
 
 <%= yield %>
-
+	<div id="copyright" class="container">
+		<p>Copyright (c) 2013 AmateurDota2League.com. All rights reserved. | <a href="http://www.steampowered.com/">Powered by Steam</a></p>
+	</div>
 </body>
 </html>
