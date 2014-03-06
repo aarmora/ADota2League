@@ -15,6 +15,7 @@ gem 'omniauth-steam'
 # gem for managing environment variables (steam webapi key)
 gem 'figaro'
 
+gem 'dota', :git => 'git://github.com/nashby/dota.git'
 
 
 # Gems used only for assets and not required

@@ -13,4 +13,9 @@ class WelcomeController < ApplicationController
                                           :uid => auth.uid }
     redirect_to teams_url
   end
+
+  def logout
+      reset_session
+      redirect_to :controller => 'welcome'
+  end
 end

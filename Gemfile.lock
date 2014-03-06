@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/nashby/dota.git
+  revision: 840a15952609324874c3b0218349f2b34cb88c71
+  specs:
+    dota (0.0.1)
+      faraday (~> 0.8.4)
+      faraday_middleware (~> 0.9.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -41,6 +49,10 @@ GEM
     coffee-script-source (1.7.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    faraday (0.8.9)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -57,6 +69,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     multi_json (1.8.4)
+    multipart-post (1.2.0)
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
@@ -125,6 +138,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-sqlserver-adapter
   coffee-rails (~> 3.2.1)
+  dota!
   execjs
   figaro
   jquery-rails

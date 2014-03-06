@@ -1,10 +1,7 @@
 class TeamsController < ApplicationController
 	def index
 		@teams = Team.where("season is not null")
-		@x = 3
-		@teams.each do |pizza|
-			@x = @x + 77
-		end
+		#@teamsmatches = Match.away_team.teamname.where("season is not null")
 	end
 	def show
 		@team = Team.find(params[:id])
