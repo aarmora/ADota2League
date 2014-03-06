@@ -1,5 +1,7 @@
 class MatchesController < ApplicationController
 	def index
-		@leagues = Dota.history("where league_id = 193")
+		@leaguematches = Dota.history(:league_id => 158)
+
+		#@matchdetails = Dota.match(22345678)
 	end
 end
