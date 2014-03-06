@@ -11,10 +11,10 @@
 	    <div id="livegamescontent"></div>
 	    <div id="closedlivegames">Games are live right now!</div>
 		<h1>
-			<a href="/index.asp">Amateur <span>Dota</span> 2 League</a>
+			<a href="/">Amateur <span>Dota</span> 2 League</a>
 		</h1>
         <div style="font-size: 10px; color:##919191; float:left; font-weight: bold; ">For those of us not as good as [A]lliance.</div>
-		<% if session.key? :current_user %>
+		<% if @current_user %>
 			<div style="float: right; margin-top: 15px"><%= image_tag session[:current_user][:image] %>
 				<span style="margin-left: 5px; font-size: 20px" id="steamname"><%= session[:current_user][:nickname] %></span>
 			</div>
@@ -48,7 +48,7 @@
 
 <%= yield %>
 	<div id="copyright" class="container">
-		<p>Copyright (c) 2013 AmateurDota2League.com. All rights reserved. | <a href="http://www.steampowered.com/">Powered by Steam</a></p>
+		<p>Copyright (c) 2014 AmateurDota2League.com. All rights reserved. | <a href="http://www.steampowered.com/">Powered by Steam</a></p>
 	</div>
 </body>
 </html>
