@@ -13,13 +13,13 @@ $(document).on('click', '#updateteamname', function(){
         var $this = $(this)
         if($(this).val() == ""){
             alert('Sorry, your team name can\'t be   ')
-            $this.focus();                
+            $this.focus();
         }
         else{
             $.get('ajax.asp', {teamname:$this.val(), teamkey:$('#imdone').attr("teamkey"), action:4}, function(){
                 alert('Name changed.  May you win more games with this name!')
-            })                            
-        }         
+            })
+        }
         $('#teamname').html($this.val())
     })
     $('#updateteamname').html('I\'m done').attr('id', 'imdone')
@@ -38,7 +38,7 @@ $(document).on('click', '.bootfromteam', function(){
         $this.parent().find('span').html('');
         $this.parent().find('.bootfromteam').remove();
         if(data == "redirect"){
-            window.location.replace("/freeagent.asp")                
+            window.location.replace("/freeagent.asp")
         }
     })
 })
@@ -51,7 +51,7 @@ $(document).on('change', 'input', function(){
     /*$.getJSON('apitalker.asp', {matchid:435847425, action:2}, function(data){
         for(var i = 0; i < data.result.players.length; i++){
             if(data.result.players[i].account_id == "435847425" || data.result.players[i].account_id == "125911951"){
-                if(data.result.players[i].account_id == "80623424"){                   
+                if(data.result.players[i].account_id == "80623424"){
                     var cptOneslot = data.result.players[i].player_slot
                     if(cptOneslot > 4){
                         var cptOneside = "dire"
@@ -69,8 +69,8 @@ $(document).on('change', 'input', function(){
 //delete team
 $(document).on('click', '#removeteam', function(){
     if(confirm("Abandon your team?  Sure, you won't go in low priority.  But still.  Sad, right?")){
-        $.get('ajax.asp', {teamkey:$(this).attr("teamkey"), action:8}, function(){            
-            window.location.replace("/entry.asp")                
+        $.get('ajax.asp', {teamkey:$(this).attr("teamkey"), action:8}, function(){
+            window.location.replace("/entry.asp")
         })
     }
 })
