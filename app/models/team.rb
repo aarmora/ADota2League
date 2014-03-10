@@ -3,6 +3,7 @@ class Team < ActiveRecord::Base
   has_many :home_matches, :class_name => 'Match', :foreign_key => "home_team_id"
   has_many :away_matches, :class_name => 'Match', :foreign_key => "away_team_id"
   has_one :captain, :class_name => "Player"
+  has_many :team_seasons, :dependent => :delete_all
 
   # Note: this will probably be read only
   def matches
