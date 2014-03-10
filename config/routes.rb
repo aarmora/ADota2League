@@ -1,5 +1,7 @@
 Ad2l::Application.routes.draw do
   get "welcome/index"
+  resources :seasons, :only => [:index, :show]
+  get "schedule" => 'seasons#index'
   resources :teams
   resources :matches
   post 'auth/steam/callback' => 'welcome#auth_callback'

@@ -1,0 +1,66 @@
+
+<div id="three-column" class="container">
+    <div id="fullbox">
+        <div id="tabs">
+            <div class="tab active" id="tab3">Thursday Open (Starts 03/06)</div>
+            <div style="float: right;margin-right: 20px" class="tab nonactive" id="tab4">Thursday Playoffs</div>
+            <div style="float: right;" class="tab nonactive" id="tab5">Tuesday Playoffs</div>
+            <div style="clear: both"></div>
+            <div class="TabsContainer">
+                <div class="tabbody3 active">
+                    <div style="width: 400px" id="tbox1">
+                        <div><h2>Rankings</h2></div>
+                        <table style="margin: 10px 0">
+                            <thead>
+                                <tr>
+                                    <th style="width: 204px; text-align: left"><h3>Name</h3></th>
+                                    <th><h3>Total Points</h3></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                <%@teams.each do |team|%>
+                                 <tr>
+                                    <td><%= link_to team.teamname, team %></td>
+                                    <td></td>
+                                 </tr>
+                <%end%>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div style="width: 400px" id="tbox2">
+                        <div><h2>Schedule</h2></div>
+                        <table style="width:100%; margin-bottom: 10px">
+                             <thead>
+                                <tr>
+                                    <th style="width: 100px;"><h3>Date</h3></th>
+                                    <th style="width: 250px; text-align: left"><h3>Match</h3></th>
+                                    <th><h3>Score</h3></th>
+                                    <th><h3>Caster</h3></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tabbody4 nonactive">
+                    <iframe src="http://challonge.com/ge6kjaip/module" width="1000px" height="550" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
+                </div>
+                <div class="tabbody5 nonactive">
+                    <iframe src="http://challonge.com/31ep6uzm/module" width="1000px" height="550" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!--<div id="tbox3">
+    <h2>Praesent scelerisque</h2>
+    <p>Donec mattis libero eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit nulla suscipit interdum. Nullam non wisi a sem semper eleifend.</p>
+    <a href="#" class="button">Learn More</a> </div>-->
+</div>
