@@ -1,17 +1,17 @@
-	
+
     html, body
 	{
 		height: 100%;
 	}
     html{
-      background: url(image_path('dota2background.png')) no-repeat center center fixed; 
+      background: image-url('dota2background.png') no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-      
+
     }
-	
+
 	body
 	{
 		margin: 0px;
@@ -21,44 +21,44 @@
 		font-weight: 400;
 		color: #919191;
 	}
-	
-	
+
+
 	h1, h2, h3
 	{
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	p, ol, ul
 	{
 		margin-top: 0;
 	}
-	
+
 	ol, ul
 	{
 		padding: 0;
 		list-style: none;
 	}
-	
+
 	p
 	{
 		line-height: 180%;
 	}
-	
+
 	strong
 	{
 	}
-	
+
 	a
 	{
 		color: #747474;
 	}
-	
+
 	a:hover
 	{
 		text-decoration: none;
 	}
-	
+
 	.container
 	{
 		margin: 0px auto;
@@ -67,15 +67,15 @@
 	.steamsignin{
 		margin-left:394px
 	}
-    
-    
+
+
 /*********************************************************************************/
 /* Tabs                                                                */
 /*********************************************************************************/
 #tabs > .active{
 	color:#fff;
 	/* IE10 Consumer Preview */
-	background-image: -ms-linear-gradient(top, #AEAEAE 40%, #A4A4A4 60%);           
+	background-image: -ms-linear-gradient(top, #AEAEAE 40%, #A4A4A4 60%);
 	/* Mozilla Firefox */
 	background-image: -moz-linear-gradient(top, #AEAEAE 40%, #A4A4A4 60%);
 	/* Webkit (Safari/Chrome 10) */
@@ -91,7 +91,7 @@
 	color:#838383;
 	cursor:pointer;
 	/* IE10 Consumer Preview */
-	background-image: -ms-linear-gradient(top, #D7D7D7 40%, #CCCCCC 60%);          
+	background-image: -ms-linear-gradient(top, #D7D7D7 40%, #CCCCCC 60%);
 	/* Mozilla Firefox */
 	background-image: -moz-linear-gradient(top, #D7D7D7 40%, #CCCCCC 60%);
 	/* Webkit (Safari/Chrome 10) */
@@ -100,9 +100,9 @@
 	background-image: -webkit-linear-gradient(top, #D7D7D7 40%, #CCCCCC 60%);
 	/* IE 6-9  */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D7D7D7', endColorstr='#CCCCCC',GradientType=0 );
-    background: #1B1B1B url(image_path('bg01.png')) repeat;
+    background: #1B1B1B image-url('bg01.png') repeat;
 }
- 
+
 .tab{
 	font-size:18px;
 	font-weight:bold;
@@ -110,7 +110,7 @@
 	border-top-right-radius:6px;
 	padding:8px 16px;
 }
- 
+
 .tab_mini{
 	font-size:12px;
 	font-weight:bold;
@@ -158,7 +158,7 @@
 		font-size: 2em;
 		color: #FFF;
 	}
-	
+
 	.title .byline
 	{
 		color: #6F6F6F;
@@ -181,48 +181,48 @@
 	{
 		display: inline-block;
 	}
-	
+
 	.image img
 	{
 		display: block;
 		width: 100%;
 	}
-	
+
 	.image-full
 	{
 		display: block;
 		width: 100%;
 		margin: 0 0 2em 0;
 	}
-	
+
 	.image-left
 	{
 		float: left;
 		margin: 0 2em 2em 0;
 	}
-	
+
 	.image-centered
 	{
 		display: block;
 		margin: 0 0 2em 0;
 	}
-	
+
 	.image-centered img
 	{
 		margin: 0 auto;
 		width: auto;
 	}
     .steamsignin{
-        cursor:pointer;        
+        cursor:pointer;
 	}
     .redspinner{
         margin-bottom: -8px;
         width: 32px;
-        display: none;        
+        display: none;
     }
     .bootfromteam{
         float: right;
-        cursor: pointer;              
+        cursor: pointer;
     }
     .s3logo{
     	width:11%
@@ -231,7 +231,7 @@
     	width:30%;
     	margin-left:50px;
     }
-    .logout{    
+    .logout{
 		font-size: 10px;
 		color: #BC1414;
 		float: right;
@@ -246,21 +246,21 @@
 		padding: 0px;
 		list-style: none;
 	}
-	
+
 	ul.style1 li {
 		padding: 10px 0px 15px 0px;
 		border-top: 1px solid #363636;
 	}
-	
+
 	ul.style1 a {
 		text-decoration: none;
 		color: #919191;
 	}
-	
+
 	ul.style1 a:hover {
 		text-decoration: underline;
 	}
-	
+
 	ul.style1 .first {
 		padding-top: 0px;
 		border-top: none;
@@ -271,31 +271,31 @@
 		padding: 0px;
 		list-style: none;
 	}
-	
+
 	ul.style2 li {
 		padding: 25px 0px 15px 0px;
 		border-top: 1px solid #363636;
 	}
-	
+
 	ul.style2 .first {
 		padding-top: 0px;
 		border-top: none;
 	}
-	
+
 	ul.style2 h3 {
 		padding: 0px 0px 10px 0px;
 		letter-spacing: 0.10em;
 	}
-	
+
 	ul.style2 h3 a {
 		color: #FFF;
 	}
-	
+
 	ul.style2 a {
 		text-decoration: none;
 		color: #919191;
 	}
-	
+
 	ul.style2 a:hover {
 		text-decoration: underline;
 	}
@@ -310,26 +310,26 @@
 		padding: 2em 0em 0em 0em;
 		list-style: none;
 	}
-	
+
 	ul.contact li
 	{
 		display: inline-block;
 		padding: 0em 0.30em;
 		font-size: 1em;
 	}
-	
+
 	ul.contact li span
 	{
 		display: none;
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	ul.contact li a
 	{
 		color: #FFF;
 	}
-	
+
 	ul.contact li a:before
 	{
 		display: inline-block;
@@ -341,7 +341,7 @@
 		text-align: center;
 		color: #FFFFFF;
 	}
-	
+
 	ul.contact li a.icon-twitter:before { background: #2DAAE4; }
 	ul.contact li a.icon-facebook:before { background: #39599F; }
 	ul.contact li a.icon-dribbble:before { background: #C4376B;	}
@@ -385,7 +385,7 @@
 		-o-transition: all .25s ease-in-out;
 		transition: all .25s ease-in-out;
 	}
-	
+
 	.button:active
 	{
 		background: #B41313;
@@ -395,7 +395,7 @@
 		-o-transition: all .25s ease-in-out;
 		transition: all .25s ease-in-out;
 	}
-		
+
 /*********************************************************************************/
 /* Header                                                                        */
 /*********************************************************************************/
@@ -446,13 +446,13 @@
         float: left;
         padding: 3px;
         font-size: 14px;
-        color: white;        
+        color: white;
     }
     .twitchlink{
         float: left;
         padding: 3px;
-        font-size: 14px;  
-        color: white;     
+        font-size: 14px;
+        color: white;
     }
 /*********************************************************************************/
 /* Logo                                                                          */
@@ -463,19 +463,19 @@
 		padding: 3em 0em;
 		text-transform: uppercase;
 	}
-	
+
 	#logo h1 a
 	{
 		text-decoration: none;
 		font-size: 1.5em;
 		color: #FFF;
 	}
-	
+
 	#logo span
 	{
 		color: #BC1414;
 	}
-	
+
 	#logo p
 	{
 		margin: 0;
@@ -496,10 +496,10 @@
 
 	#menu
 	{
-		background: #1B1B1B url(image_path('bg01.png')) repeat;
+		background: #1B1B1B image-url('bg01.png') repeat;
 		border-bottom: 4px solid #BC1414;
 	}
-	
+
 	#menu ul
 	{
 		margin: 0;
@@ -508,12 +508,12 @@
 		line-height: normal;
 		text-align: center;
 	}
-	
+
 	#menu li
 	{
 		display: inline-block;
 	}
-	
+
 	#menu a
 	{
 		display: block;
@@ -526,13 +526,13 @@
 		font-weight: 700;
 		color: #838383;
 	}
-	
+
 	#menu .current_page_item a
 	{
 		background: #BC1414;
 		color: #FFF;
 	}
-	
+
 	#menu a:hover
 	{
 		text-decoration: none;
@@ -578,7 +578,7 @@
 		float: right;
 		width: 300px;
 	}
-	
+
 	#sidebar .title
 	{
 		letter-spacing: 0.10em;
@@ -595,7 +595,7 @@
 		padding: 6em 0em 4em 0em;
 		border-bottom: 1px solid #363636;
 	}
-	
+
 	#footer .title
 	{
 		letter-spacing: 0.10em;
@@ -608,12 +608,12 @@
 		width: 400px;
 		margin-right: 50px;
 	}
-	
+
 	#footer #fbox2 {
 		float: left;
 		width: 400px;
 	}
-	
+
 	#footer #fbox3 {
 		float: right;
 		width: 300px;
@@ -632,7 +632,7 @@
 		text-transform: uppercase;
 		color: #6A6A6A;
 	}
-	
+
 	#copyright a
 	{
 		color: #747474;
@@ -650,7 +650,7 @@
 		border-bottom: 4px solid #BC1414;
 		color: #525252;
 	}
-	
+
 	#three-column h2
 	{
 		margin: 1em 0em;
@@ -659,7 +659,7 @@
 		font-weight: 700;
 		color: #454445;
 	}
-	
+
 	#three-column #tbox1,
 	#three-column #tbox2,
 	#three-column #tbox3
@@ -677,7 +677,7 @@
     #fullbox{
         margin: 50px;
         padding: 20px;
-        
+
 	}
     .teammembername{
         margin-left: 5px
@@ -700,7 +700,7 @@ table td, table th {
   padding: 5px
 }
 table td{
-  font-size:13px;        
+  font-size:13px;
 }
 
 
