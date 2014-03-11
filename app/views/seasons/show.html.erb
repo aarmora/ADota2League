@@ -2,9 +2,7 @@
 <div id="three-column" class="container">
     <div id="fullbox">
         <div id="tabs">
-            <div class="tab active" id="tab3">Thursday Open (Starts 03/06)</div>
-            <div style="float: right;margin-right: 20px" class="tab nonactive" id="tab4">Thursday Playoffs</div>
-            <div style="float: right;" class="tab nonactive" id="tab5">Tuesday Playoffs</div>
+            <div class="tab active" id="tab3">Season 3 Open</div>
             <div style="clear: both"></div>
             <div class="TabsContainer">
                 <div class="tabbody3 active">
@@ -18,12 +16,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                <%@teams.each do |team|%>
-                                 <tr>
-                                    <td><%= link_to team.teamname, team %></td>
-                                    <td></td>
-                                 </tr>
-                <%end%>
+                                <%@teams.each do |team|%>
+                                     <tr>
+                                        <td><%= link_to team.teamname, team %></td>
+                                        <td></td>
+                                     </tr>
+                                <%end%>
                             </tbody>
                         </table>
 
@@ -41,7 +39,7 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <td></td>
+                                <td><%=@matches%></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -49,12 +47,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="tabbody4 nonactive">
-                    <iframe src="http://challonge.com/ge6kjaip/module" width="1000px" height="550" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
-                </div>
-                <div class="tabbody5 nonactive">
-                    <iframe src="http://challonge.com/31ep6uzm/module" width="1000px" height="550" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
                 </div>
             </div>
         </div>

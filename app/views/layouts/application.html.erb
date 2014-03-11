@@ -12,36 +12,37 @@
 	    <div id="closedlivegames">Games are live right now!</div>
 		<h1>
 			<a href="/">Amateur <span>Dota</span> 2 League</a>
+			<% if @current_user %>
+				<div style="float: right; margin-top: 15px"><%= image_tag session[:current_user][:image], :id => 'steampic'  %>
+					<span style="margin-left: 5px; font-size: 20px" id="steamname"><%= session[:current_user][:nickname] %></span>
+				</div>
+			<%else%>
+				<%= link_to image_tag("http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png"), '/auth/steam', :class => 'steamsignin' %>
+			<% end %>
 		</h1>
-        <div style="font-size: 10px; color:##919191; float:left; font-weight: bold; ">For those of us not as good as [A]lliance.</div>
+        <div style="font-size: 10px; color:##919191; float:left; font-weight: bold; ">For those of us not as good as [A]lliance.</div>	
 		<% if @current_user %>
-			<div style="float: right; margin-top: 15px"><%= image_tag session[:current_user][:image] %>
-				<span style="margin-left: 5px; font-size: 20px" id="steamname"><%= session[:current_user][:nickname] %></span>
-			</div>
-			<span style="font-size: 10px; color:#BC1414; float: right; "><%= link_to 'Logout', logout_url %></span>
-		<%else%>
-			<p style="margin-left:290px"><%= link_to image_tag("http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_large_noborder.png"), '/auth/steam' %></p>
-		<% end %>
-		
+			<%= link_to 'Logout', logout_url, :class => 'logout' %>
+		<%end%>
 	</div>
 	<div id="menu" class="container">
 		<ul>
-			<li class="current_page_item" ><a href="Index.asp" accesskey="1" title="">Home</a></li>
-			<li  class="current_page_item" ><a href="Schedule.asp" accesskey="2" title="">Schedule</a></li>
-            <li class="current_page_item" ><%= link_to "Team Page", controller: 'teams' %></li>
-			<li class="current_page_item"><a href="freeagent.asp" accesskey="3" title="">Free Agents</a></li>
-	        <li id="entry"class="current_page_item" ><a href="entry.asp" accesskey="4" title="">Sign up!</a></li>
-			<li class="current_page_item"><a href="community.asp" accesskey="5" title="">Community</a></li>
-	        <li  class="current_page_item" ><a href="contact.asp" accesskey="5" title="">Contact</a></li>
+			<li <%if @current_tab == 'welcome'%> class="current_page_item" <%end%> ><a href="Index.asp" accesskey="1" title="">Home</a></li>
+			<li <%if @current_tab == 'seasons'%> class="current_page_item" <%end%>  ><%= link_to "Schedule", controller: 'seasons' %></li>
+            <li<%if @current_tab == 'teams'%> class="current_page_item" <%end%>  ><%= link_to "Team Page", controller: 'teams' %></li>
+			<li <%if @current_tab == 'players'%> class="current_page_item" <%end%> ><a href="freeagent.asp" accesskey="3" title="">Free Agents</a></li>
+	        <li id="entry"<%if @current_tab == 'players'%> class="current_page_item" <%end%>  ><a href="entry.asp" accesskey="4" title="">Sign up!</a></li>
+			<li <%if @current_tab == 'welcome'%> class="current_page_item" <%end%> ><a href="community.asp" accesskey="5" title="">Community</a></li>
+	        <li  <%if @current_tab == 'welcome'%> class="current_page_item" <%end%>  ><a href="contact.asp" accesskey="5" title="">Contact</a></li>
 		</ul>
 	</div>
 	<div id="sponsors" class="container">
 	    <div id="sponsorholder">
 	        <a style="margin-left:15px;" href="http://www.dota2.com/store/itemdetails/15548?r=1f4" target="_blank">
-	            <%= image_tag "AD2LS3.png" %>
+	            <%= image_tag "AD2LS3.png", :class => 's3logo' %>
 	        </a>
 	        <a style="margin-left:215px;" href="https://probuiltsystems.com/" target="_blank">    
-	            <%= image_tag "Probuilt2.png" %>        
+	            <%= image_tag "Probuilt2.png", :class => 'probuilt' %>        
 	        </a>
 	    </div>
 	</div>

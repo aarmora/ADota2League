@@ -6,7 +6,6 @@
 	<h3>Current user:</h3>
 	<%= image_tag session[:current_user][:image] %>
 	<p><%= session[:current_user][:nickname] %></p>
-	<p><%= session[:current_user][:uid] %></p>
 	<p><%= link_to 'Logout', logout_url %></p>
 <%else%>
 	<%= link_to image_tag("http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_large_noborder.png"), '/auth/steam' %>
