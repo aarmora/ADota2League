@@ -1,0 +1,12 @@
+<tr>
+	<td><%= match.date.strftime("%-m/%-d/%y %l:%M%p") %></td>
+	<td><%= link_to_if match.home_team != @team, match.home_team.teamname, match.home_team %>
+				vs 
+			<%= link_to_if match.away_team != @team, match.away_team.teamname, match.away_team %>
+	</td>
+	<td><%= match.home_score.to_i %>:<%= match.away_score.to_i %></td>
+	<% #NOTE: this is a hack for now, do not do this
+		 caster = Player.find_by_id(match.twitch) unless match.twitch.nil?
+	 %>
+	<td><%= link_to caster.name, caster.twitch if caster %></td>
+</tr>

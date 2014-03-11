@@ -1,2 +1,16 @@
-stuff here
-<%=@team.teamname%>
+<div id="fullbox">
+	<h2><%= @team.teamname %></h2>
+	<%= link_to "View Team on Dotabuff", "http://dotabuff.com/teams/#{@team.dotabuff_id}" unless @team.dotabuff_id.nil? %>
+	<br ><br >
+	<h3>Roster</h3>
+	<%- @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}.each do |player| %>
+		<%= link_to_if player.steam32id, player.name, "http://dotabuff.com/players/#{player.steam32id}" %> <%= "(Captain)" if player.id == @team.captain_id %><br>
+	<% end %>
+	<br><br>
+	
+	<h3>Schedule</h3>
+	<%- @team.team_seasons.each do |ts| %>
+		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.empty? %></h4>
+		<%= render :partial => "matches/match_table", :object => @team.matches.select{ |match| match.season_id == ts.season_id }.sort_by(&:date) %>
+	<% end %>
+</div>	

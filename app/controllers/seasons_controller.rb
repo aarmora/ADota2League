@@ -1,14 +1,15 @@
 class SeasonsController < ApplicationController
   def index
+  	# TODO: this is a hack, set it explicitly to prevent the DB call here
     params[:id] = Season.first.id
     show    
   end
   def show
-    @season = Season.find(params[:id])
-    @teams = @season.teams
-    @matches = @season.matches
+    @seasons = Season.all
+    @season = @seasons.detect {|season| season.id == params[:id].to_i}
+    @teams = @season.teams # TODO: optimize dual lookup with below?
+    @matches = @season.matches.includes(:home_team, :away_team)
     @current_tab = 'seasons'
-    @matches_refined = Match.includes(:home_team, :away_team).select{ |match| match.away_team && match.home_team && match.away_team.season && match.home_team.season}
 
     render :action => 'show' # explicitly needed because index calls this method and expects it to render
   end

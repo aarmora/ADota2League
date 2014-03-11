@@ -72,7 +72,7 @@
 /*********************************************************************************/
 /* Tabs                                                                */
 /*********************************************************************************/
-#tabs [id^="tab"].active{
+#tabs > .active{
 	color:#fff;
 	/* IE10 Consumer Preview */
 	background-image: -ms-linear-gradient(top, #AEAEAE 40%, #A4A4A4 60%);           
@@ -87,7 +87,7 @@
     background: #BC1414;
 }
 
-#tabs [id^="tab"].nonactive{
+#tabs > .nonactive{
 	color:#838383;
 	cursor:pointer;
 	/* IE10 Consumer Preview */
