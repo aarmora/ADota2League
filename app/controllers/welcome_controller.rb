@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
     auth = request.env['omniauth.auth']
     session[:current_user] = { 
     	:nickname => auth.info['nickname'],
-      :image => auth.info['image'],
+      :image => auth.extra.raw_info['avatar'],
       :uid => auth.uid
     }
     
