@@ -4,6 +4,16 @@ class WelcomeController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :auth_callback
 
   def index
+    @current_tab = "index"
+  end
+
+  def community
+    @current_tab = "community"
+    @casters = Player.where("role like :caster", {:caster => "%caster%"})
+  end
+
+  def contact
+    @current_tab = "contact"
   end
 
   def auth_callback

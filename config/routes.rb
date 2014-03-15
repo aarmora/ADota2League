@@ -5,6 +5,8 @@ Ad2l::Application.routes.draw do
   resources :teams
   resources :matches
   post 'auth/steam/callback' => 'welcome#auth_callback'
+  get 'welcome/contact' => 'welcome#contact'
+  get 'welcome/community' => 'welcome#community'
   get 'logout' => 'welcome#logout'
 
   # The priority is based upon order of creation:

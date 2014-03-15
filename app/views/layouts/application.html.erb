@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="<%= image_path("/favicon.ico") %>" rel="icon shortcut" type="image/x-icon" />
   <title>AD2L</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
@@ -27,13 +28,19 @@
 	</div>
 	<div id="menu" class="container">
 		<ul>
-			<li <%if @current_tab == 'welcome'%> class="current_page_item" <%end%> ><a href="Index.asp" accesskey="1" title="">Home</a></li>
+			<li <%if @current_tab == 'index'%> class="current_page_item" <%end%> >
+				<%= link_to "Home", welcome_index_path%>
+			</li>
 			<li <%if @current_tab == 'seasons'%> class="current_page_item" <%end%>  ><%= link_to "Schedule", controller: 'seasons' %></li>
             <li<%if @current_tab == 'teams'%> class="current_page_item" <%end%>  ><%= link_to "Team Page", controller: 'teams' %></li>
 			<li <%if @current_tab == 'players'%> class="current_page_item" <%end%> ><a href="freeagent.asp" accesskey="3" title="">Free Agents</a></li>
 	        <li id="entry"<%if @current_tab == 'players'%> class="current_page_item" <%end%>  ><a href="entry.asp" accesskey="4" title="">Sign up!</a></li>
-			<li <%if @current_tab == 'welcome'%> class="current_page_item" <%end%> ><a href="community.asp" accesskey="5" title="">Community</a></li>
-	        <li  <%if @current_tab == 'welcome'%> class="current_page_item" <%end%>  ><a href="contact.asp" accesskey="5" title="">Contact</a></li>
+			<li <%if @current_tab == 'community'%> class="current_page_item" <%end%> >
+				<%= link_to "Community", welcome_community_path%>
+			</li>
+	        <li  <%if @current_tab == 'contact'%> class="current_page_item" <%end%>  >
+	        	<%= link_to "Contact", welcome_contact_path%>
+	        </li>
 		</ul>
 	</div>
 	<div id="sponsors" class="container">

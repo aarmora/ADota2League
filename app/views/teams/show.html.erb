@@ -4,7 +4,7 @@
 	<br ><br >
 	<h3>Roster</h3>
 	<%- @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}.each do |player| %>
-		<%= link_to_if player.steam32id, player.name, "http://dotabuff.com/players/#{player.steam32id}" %> <%= "(Captain)" if player.id == @team.captain_id %><br>
+		<%= link_to_if player.steam32id, player.name, "http://dotabuff.com/players/#{player.steam32id}" %> <%= "(Captain)" if player.id == @team.captain_id %><%= link_to image_tag("plus.png"), "steam://friends/add/#{player.steamid}", :style => "margin-left:15px", :title => "Add on steam" %><br>
 	<% end %>
 	<br><br>
 	
