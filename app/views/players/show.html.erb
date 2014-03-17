@@ -1,0 +1,48 @@
+
+<div id="tbox1">
+    <div><h2>Free Agents </h2> </div>
+	<table>
+        <thead>
+            <tr>
+                <th><h3>Add on STEAM</h3></th>
+                <th style="width: 204px; text-align: left"><h3>Name</h3></th>
+                <th><h3>Role</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+            <%@freeagents.each do |freeagent|%>
+                <tr>
+                    <td>
+                    	<%= link_to image_tag("plus.png"), "steam://friends/add/#{freeagent.steamid}", :style => "margin-left:30px" %>
+                    </td>
+                    <td>
+                    	<%= link_to freeagent.name, "http://dotabuff.com/players/#{freeagent.steam32id}", :target => "_blank"%>
+                    </td>
+                    <%if @current_user.steamid == freeagent.steamid%>
+                        <td><input style="border: none" playerkey="<%=freeagent.id%>" id="role" value="<%=freeagent.role%>"/></td>
+                    <%else%>
+                    	<td><%=freeagent.role%></td>                    	
+                    <%end%>                   
+                </tr>
+            <%end%>
+        </tbody>
+    </table>
+</div>
+<div id="tbox2">
+    <div style="float: left;">
+        <div><h2>Don't have a team yet? Sign up as a free agent</h3></div>
+        <div style="margin-bottom: 25px">
+            Email address : 
+            <input id="agentemail" class="inputbox"  />
+        </div>
+        <div style="margin-bottom: 25px">
+            Desired role(s) : 
+            <input id="agentrole" maxlength="100" class="inputbox"  />
+        </div>
+    </div>
+    <div style="clear: both">
+        <div id="agentsubmit" class="button">Become a free agent!</div> 
+    </div>
+</div>
+<div style="float: right">
+</div>
