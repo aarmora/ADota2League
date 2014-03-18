@@ -17,7 +17,7 @@ class SeasonsController < ApplicationController
       @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
     end
 
-    @teams.sort_by!{|t| [@total_scores[t.id] * -1, t.teamname]}
+    @teams.sort_by!{|t| [@total_scores[t.id].to_i * -1, t.teamname]}
 
     @current_tab = 'seasons'
 
