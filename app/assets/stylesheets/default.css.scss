@@ -1,4 +1,30 @@
 
+
+
+	.formholder{
+		width:500px
+	}
+
+	.formdivs{
+		margin-bottom:50px;
+	}
+
+	.formdivs input{
+		float:right;
+		margin-top:3px;
+	}
+	.formdivs label{
+		vertical-align:middle;
+	}
+
+	.rosterholder{
+		width:300px;
+	} 
+
+	.rosterholder .pluslink{
+		float:right;
+		margin-top:-5px;
+	} 
     html, body
 	{
 		height: 100%;

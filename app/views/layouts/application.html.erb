@@ -35,13 +35,15 @@
             <li<%if @current_tab == 'teampage'%> class="current_page_item" <%end%>><%= link_to "Team Page", teams_path %></li>
 			<li <%if @current_tab == 'freeagents'%> class="current_page_item" <%end%>>
 				<%= link_to "Free Agents", players_path %></li>
-	        <li id="entry"<%if @current_tab == 'players'%> class="current_page_item" <%end%>  >
 	        	<% if @current_user %>
-	        		<%= link_to "My Info", edit_player_path(@current_user) %>
+			        <li id="entry"<%if @current_tab == 'myinfo'%> class="current_page_item" <%end%>  >
+			        		<%= link_to "My Info", edit_player_path(@current_user) %>
+		        	</li>	
 	        	<% else %>
-	        		<%= link_to "Sign up!", new_player_path %>
+			        <li id="entry"<%if @current_tab == 'signup'%> class="current_page_item" <%end%>  >
+	        			<%= link_to "Sign up!", new_player_path %>
+		        	</li>	
 	        	<% end %>
-	        </li>
 			<li <%if @current_tab == 'community'%> class="current_page_item" <%end%> >
 				<%= link_to "Community", welcome_community_path%>
 			</li>

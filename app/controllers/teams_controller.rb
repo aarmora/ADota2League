@@ -1,11 +1,12 @@
 class TeamsController < ApplicationController
 	def index
+		@player = @current_user.is_admin? ? Player.find(params[:id]) : @current_user
 	end
 	def show
 		# TODO: Is this mess ok?
 		@team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_team, :home_team], :home_matches => [:away_team, :home_team]}).find(params[:id])
 		@captain_viewing = @current_user && @current_user.id == @team.captain_id
-		@current_user.team.each do |team|
+		@current_user.teams.each do |team|
 			if @team.id == team.id
 				@casters = Player.where("role like '%caster%'")
 				@current_tab = "teampage"
