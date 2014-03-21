@@ -32,7 +32,7 @@
 				<%= link_to "Home", welcome_index_path%>
 			</li>
 			<li <%if @current_tab == 'seasons'%> class="current_page_item" <%end%>><%= link_to "Schedule", seasons_path %></li>
-            <li<%if @current_tab == 'teams'%> class="current_page_item" <%end%>><%= link_to "Team Page", teams_path %></li>
+            <li<%if @current_tab == 'teampage'%> class="current_page_item" <%end%>><%= link_to "Team Page", teams_path %></li>
 			<li <%if @current_tab == 'freeagents'%> class="current_page_item" <%end%>>
 				<%= link_to "Free Agents", players_path %></li>
 	        <li id="entry"<%if @current_tab == 'players'%> class="current_page_item" <%end%>  >
