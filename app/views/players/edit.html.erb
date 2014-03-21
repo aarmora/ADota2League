@@ -1,0 +1,66 @@
+<h2>Your teams</h2>
+<% @player.teams.each do |team| %>
+	<%= link_to team.teamname, team %> <%= "(Captain - view team page to manage)" if team.captain_id == @current_user.id %>
+<% end %>
+
+
+<h2>Create a team</h2>
+<p> 
+	If you are already on a team above, and wish to register for a new season. Please select the team above
+	and register for the new season from your team page instead.
+</p>
+
+<p> 
+	NOTE: you will be automatically registered for the current open season. 
+	Please make sure that you are positive you will be able to field 5 players each week
+	before submitting this
+</p>
+
+<%= form_for Team.new do |f| %>
+	<div>
+	  <%= f.label(:teamname, "Team Name") %>
+	  <%= f.text_field :teamname %>
+  </div>
+  <%= f.submit "Create team", :confirm => "Are you sure you will participate at the listed times? Please ensure you and your team can make it before proceeding!" %>
+<% end %>
+
+
+
+
+<h2>Update Your Information and Free Agent Status</h2>
+
+<%= form_for @player do |f| %>
+	<div>
+	  <%= f.label(:email, "Email address (So people can contact you):") %>
+	  <%= f.email_field :email %>
+  </div>
+  <div>
+	  <%= f.label(:role, "Desired role(s) :") %>
+  	<%= f.text_field :role %>
+  </div>
+  <div>
+  	<%= f.label(:freeagentflag, "List me as a Free Agent") %>
+  	<%= f.check_box :freeagentflag %>
+  </div>
+  
+  <% if @current_user.is_admin? || @current_user.caster %>
+	  <div>
+	  	<%= f.label(:twitch, "Twitch url:") %>
+	  	<%= f.text_field :twitch %>
+	  </div>
+	  
+	  <div>
+	  	<%= f.label(:region, "Casting Region") %>
+	  	<%= f.text_field :region %>
+	  </div>
+	<% end %>
+  
+  <% if @current_user.is_admin? %>
+	  <div>
+	  	<%= f.label(:caster, "Verified Caster?") %>
+	  	<%= f.check_box :caster %>
+	  </div>
+  <% end %>
+  
+  <%= f.submit "Update" %>
+<% end %>

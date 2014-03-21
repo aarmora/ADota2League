@@ -3,6 +3,8 @@ class Match < ActiveRecord::Base
   belongs_to :home_team, :class_name => "Team"
   belongs_to :away_team, :class_name => "Team"
   belongs_to :season
-  # coerce_sqlserver_date :date
-  # attr_accessible :title, :body
+  
+  # Lambda so it evaluates every call, not just at compile time
+  # TODO: This is wrong since date should be UTC or whatever
+  scope :future, lambda {where("date > ?", Time.zone.now) }
 end
