@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
   def index
   	@current_tab = "freeagents"
     @freeagents = Player.where(:freeagentflag => true)
+    @player = Player.find(@current_user.id)    
   end
   
   def new
@@ -20,7 +21,7 @@ class PlayersController < ApplicationController
   	@player.update_attributes!(params[:player], :as => @current_user.role)
   	
   	# TODO: Maybe we'll have a player page to go to by default eventually, for now we have to do a page that exists
-  	redirect_to root_path
+  	redirect_to players_path
   end
 
 end

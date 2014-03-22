@@ -24,7 +24,7 @@ class WelcomeController < ApplicationController
       :uid => auth.uid
     }
     
-    redirect_to teams_url
+    redirect_to seasons_url
   end
 
   def logout

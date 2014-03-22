@@ -18,31 +18,29 @@
                     <td>
                     	<%= link_to freeagent.name, "http://dotabuff.com/players/#{freeagent.steam32id}", :target => "_blank"%>
                     </td>
-                    <%if @current_user.steamid == freeagent.steamid%>
-                        <td><input style="border: none" playerkey="<%=freeagent.id%>" id="role" value="<%=freeagent.role%>"/></td>
-                    <%else%>
-                    	<td><%=freeagent.role%></td>                    	
-                    <%end%>                   
+                	<td><%=freeagent.role%></td>  
                 </tr>
             <%end%>
         </tbody>
     </table>
 </div>
-<div id="tbox2">
-    <div style="float: left;">
-        <div><h2>Don't have a team yet? Sign up as a free agent</h3></div>
-        <div style="margin-bottom: 25px">
-            Email address : 
-            <input id="agentemail" class="inputbox"  />
-        </div>
-        <div style="margin-bottom: 25px">
-            Desired role(s) : 
-            <input id="agentrole" maxlength="100" class="inputbox"  />
-        </div>
+<%if @current_user.freeagentflag == false%>
+    <div id="tbox2">
+        <%= form_for @player do |f| %>
+            <div style="float: left;">
+                <div><h2>Don't have a team yet? Sign up as a free agent</h3></div>
+                <div style="margin-bottom: 25px">
+                    <%= f.label(:email, "Email address :") %>
+                    <%= f.text_field :email, :class => "inputbox"%>
+                </div>
+                <div style="margin-bottom: 25px">
+                    <%= f.label(:role, "Desired role(s) :") %>
+                    <%= f.text_field :role, :class => "inputbox", :maxlength => "100"%>
+                </div>
+            </div>
+            <div style="clear: both">
+                <%= f.submit "Become a free agent!", :class => "button", :style => "margin-left:-3px"%>
+            </div>
+        <%end%>
     </div>
-    <div style="clear: both">
-        <div id="agentsubmit" class="button">Become a free agent!</div> 
-    </div>
-</div>
-<div style="float: right">
-</div>
+<%end%>
