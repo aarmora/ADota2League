@@ -9,6 +9,7 @@
                 <th><h3>Role</h3></th>
             </tr>
         </thead>
+        <%=@freeagents%>
         <tbody>
             <%@freeagents.each do |freeagent|%>
                 <tr>
@@ -37,6 +38,7 @@
                     <%= f.label(:role, "Desired role(s) :") %>
                     <%= f.text_field :role, :class => "inputbox", :maxlength => "100"%>
                 </div>
+                <%= f.check_box :freeagentflag, :style => "display:none", :checked => "checked"%>
             </div>
             <div style="clear: both">
                 <%= f.submit "Become a free agent!", :class => "button", :style => "margin-left:-3px"%>

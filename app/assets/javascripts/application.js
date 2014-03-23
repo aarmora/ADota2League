@@ -19,17 +19,6 @@ function IsEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
 }
-$.getJSON('apitalker.asp', {action:3}, function(data){
-    if(data._total > 0){
-        $('#closedlivegames').css({'display':'block'});
-        var livegamesstuff = "";
-        total = parseInt(data._total * 40) + "px";
-        $.each(data.streams, function(index, streams){
-            livegamesstuff = livegamesstuff +  "<div class='twitchtitle'>" + streams.channel.status + "</div><a href="+ streams.channel.url +" target='_blank' class='twitchlink'>" + streams.channel.name +"</a><div style='clear:both'></div>";
-        })
-        $('#livegamescontent').html(livegamesstuff);
-    }
-});
 $(document).on('click', '#closedlivegames', function(){
     $(this).animate({'top':total});
     $('#livegamescontent').css({'display':'block'}).animate({'height':total});

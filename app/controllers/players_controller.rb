@@ -18,7 +18,7 @@ class PlayersController < ApplicationController
   
   def update
   	@player = @current_user.is_admin? ? Player.find(params[:id]) : @current_user
-  	@player.update_attributes!(params[:player], :as => @current_user.role)
+  	@player.update_attributes!(params[:player], :as => @current_user.permission_role)
   	
   	# TODO: Maybe we'll have a player page to go to by default eventually, for now we have to do a page that exists
   	redirect_to players_path

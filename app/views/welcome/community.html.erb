@@ -19,7 +19,11 @@
                 <%@casters.each do |caster|%>
                     <tr>
                         <td><%=caster.name%></td>
-                        <td><%= link_to caster.twitch, caster.twitch, :target => "_blank"%></td>
+                        <td>
+                            <%if caster.twitch%>
+                                <%= link_to caster.twitch, caster.twitch, :target => "_blank"%>
+                            <%end%>
+                        </td>
                         <td>
                             <%= link_to image_tag("plus.png"), "steam://friends/add/#{caster.steamid}" %>
                         </td>

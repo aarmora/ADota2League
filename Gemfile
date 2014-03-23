@@ -18,6 +18,7 @@ gem 'figaro'
 
 gem 'dota', :git => 'git://github.com/nashby/dota.git'
 
+gem 'kappa', '~> 1.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,6 +1,5 @@
 class TeamsController < ApplicationController
 	def index
-		@player = @current_user.is_admin? ? Player.find(params[:id]) : @current_user
 	end
 	def show
 		# TODO: Is this mess ok?

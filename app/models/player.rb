@@ -13,7 +13,7 @@ class Player < ActiveRecord::Base
   	steam_ids.include? self.steamid
   end
   
-  def role
+  def permission_role
   	if self.is_admin? 
   		:admin 
   	elsif self.caster

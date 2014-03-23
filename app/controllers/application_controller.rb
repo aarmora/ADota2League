@@ -12,4 +12,5 @@ class ApplicationController < ActionController::Base
   		redirect_to edit_player_path(@current_user)
   	end
   end
+
 end
