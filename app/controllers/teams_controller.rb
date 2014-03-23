@@ -26,7 +26,7 @@ class TeamsController < ApplicationController
 	def update
 		@team = Team.find(params[:id])
 		raise unless @team.captain_id == @current_user.id || @current_user.is_admin?
-		@team.update_attributes!(params[:team], :as => @current_user.role)
+		@team.update_attributes!(params[:team], :as => @current_user.permission_role)
 		redirect_to @team
 	end
 	
