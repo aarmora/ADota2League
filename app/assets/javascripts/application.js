@@ -14,6 +14,8 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require best_in_place
 
 function IsEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -21,10 +23,12 @@ function IsEmail(email) {
 }
 
 $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
 
     // Handle the live games slide out. Size it on page load, and add the click handler
     var pulloutZeroOffset =  $("#LiveGames").outerHeight() - $("#LiveGames-Callout").outerHeight();
-    
+
     $("#LiveGames").css("top", pulloutZeroOffset * -1);
 
     $("#LiveGames-Callout").on('click', function() {

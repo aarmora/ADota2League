@@ -4,7 +4,7 @@ Ad2l::Application.routes.draw do
   get "schedule" => 'seasons#index'
   resources :teams
   resources :matches
-  resources :players, :only => [:new, :index, :edit, :update]
+  resources :players, :only => [:new, :index, :show, :update]
   post 'auth/steam/callback' => 'welcome#auth_callback'
   get 'welcome/contact' => 'welcome#contact'
   get 'welcome/community' => 'welcome#community'
