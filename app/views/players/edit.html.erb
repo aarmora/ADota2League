@@ -30,9 +30,9 @@
 		  	</div>
 			<div class="formdivs">
 				Preferred region?
-			  <%= f.label(:region, "EU") %>
+			  <%= f.label(:region, "EU", :style => "float:right") %>
 			  <%= f.radio_button :region, 'EU' %>
-			  <%= f.label(:region, "NA") %>
+			  <%= f.label(:region, "NA", :style => "float:right") %>
 			  <%= f.radio_button :region, 'NA' %>
 		  	</div>
 		  <%= f.submit "Create team", :confirm => "Are you sure you will participate at the listed times? Please ensure you and your team can make it before proceeding!", :class => "button" %>
