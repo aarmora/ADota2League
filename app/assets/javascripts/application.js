@@ -19,18 +19,24 @@ function IsEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
 }
-$(document).on('click', '#closedlivegames', function(){
-    $(this).animate({'top':total});
-    $('#livegamescontent').css({'display':'block'}).animate({'height':total});
-    $(this).attr('id', 'openlivegames');
+
+$(document).ready(function() {
+
+    // Handle the live games slide out. Size it on page load, and add the click handler
+    var pulloutZeroOffset =  $("#LiveGames").outerHeight() - $("#LiveGames-Callout").outerHeight();
+    
+    $("#LiveGames").css("top", pulloutZeroOffset * -1);
+
+    $("#LiveGames-Callout").on('click', function() {
+        if ($("#LiveGames").css("top") == "0px") {
+            $("#LiveGames").css("top", pulloutZeroOffset * -1);
+        } else {
+            $("#LiveGames").css("top", 0);
+        }
+    });
 });
-$(document).on('click', '#openlivegames', function(){
-    $(this).animate({'top':'-1px'});
-    $('#livegamescontent').animate({'height':'0px'}, function(){
-        $('#livegamescontent').css({'display':'none'});
-    })
-    $(this).attr('id', 'closedlivegames');
-});
+
+
 //tabs js
 $(document).on('click', '#tabs .nonactive[id^="tab"]', function(){
     var tabname = $(this).attr('id').replace('tab', '');

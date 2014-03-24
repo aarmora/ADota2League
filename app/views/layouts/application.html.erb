@@ -9,8 +9,20 @@
 </head>
 <body>
 	<div id="logo" class="container">
-	    <div id="livegamescontent"></div>
-	    <div id="closedlivegames">Games are live right now!</div>
+		<% unless @active_streams.empty? %>
+		    <div id="LiveGames" style="top: -<%= @active_streams.count * 55%>px">
+		    	<table>
+		    	<% @active_streams.each do |stream| %>
+		    		<tr>
+		    			<td class="twitchtitle"><%= stream.channel.status %></td>
+		    			<td class="twitchlink"><%= link_to stream.channel.display_name, stream.channel.url %></td>
+		    		</tr>
+			    <% end %>
+			    </table>
+		    	<div id="LiveGames-Callout">Games are live right now!</div>
+		    </div>
+	    <% end %>
+
 		<h1>
 			<a href="/">Amateur <span>Dota</span> 2 League</a>
 			<% if @current_user %>
