@@ -18,6 +18,7 @@ class SeasonsController < ApplicationController
     end
 
     @teams.sort_by!{|t| [@total_scores[t.id].to_i * -1, t.teamname]}
+    @matches.sort_by!(&:date).reverse
 
     @current_tab = 'seasons'
 
