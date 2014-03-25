@@ -38,6 +38,14 @@ $(document).ready(function() {
             $("#LiveGames").css("top", 0);
         }
     });
+
+    // handle the admin adaptive forms
+    $("form.adaptive").on('submit', function() {
+        var $el = $(this).find("[name=id]");
+        if ($el) {
+            $(this).attr("action", $(this).attr("action").replace("/id", "/" + $el.val()));
+        }
+    });
 });
 
 

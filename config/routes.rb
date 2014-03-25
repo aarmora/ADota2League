@@ -10,6 +10,11 @@ Ad2l::Application.routes.draw do
   get 'welcome/community' => 'welcome#community'
   get 'logout' => 'welcome#logout'
 
+  scope '/admin' do
+    root :to => "admin#index"
+    get "manage_seasons(/:season(/:week))" => 'admin#manage_seasons'
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

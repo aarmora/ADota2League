@@ -1,0 +1,24 @@
+<h2>Player Management</h2>
+
+<h2>Team Management</h2>
+
+<div>
+	<h5>View / Edit Team:</h5>
+</div>
+
+<div>
+	<h5>Assign New Captain to Exisiting Team:</h5>
+	<%= form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
+		<%= select_tag(:id, options_for_select(@teams.map{|team| [team.teamname, team.id]})) %>
+		
+		<%= collection_select(:team, :captain_id, @players.select(&:name).sort_by(&:name), :id, :name) %>
+		<%= submit_tag "Assign Captain", :class => "button" %>
+	<% end %>
+</div>
+
+<div>
+	<h5>Mark team active / inactive:</h5>
+</div>
+
+<h2>Season / Schedule Management</h2>
+<p>Choose a season and week to manage</p>	
