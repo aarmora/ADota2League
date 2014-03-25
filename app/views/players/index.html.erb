@@ -1,7 +1,7 @@
 
 <div id="tbox1">
     <div><h2>Free Agents </h2> </div>
-	<table>
+	<table class="table table-hover table-bordered" >
         <thead>
             <tr>
                 <th><h3>Add on STEAM</h3></th>
@@ -9,7 +9,6 @@
                 <th><h3>Role</h3></th>
             </tr>
         </thead>
-        <%=@freeagents%>
         <tbody>
             <%@freeagents.each do |freeagent|%>
                 <tr>
@@ -17,15 +16,21 @@
                     	<%= link_to image_tag("plus.png"), "steam://friends/add/#{freeagent.steamid}", :style => "margin-left:30px" %>
                     </td>
                     <td>
-                    	<%= link_to freeagent.name, "http://dotabuff.com/players/#{freeagent.steam32id}", :target => "_blank"%>
+                        <%= link_to freeagent.name, freeagent%>
                     </td>
-                	<td><%=freeagent.role%></td>  
+                	<td>
+                        <%if @current_user && (@current_user.id == freeagent.id)%>
+                            <%= best_in_place @player, :role, :type => :input%>
+                        <%else%>
+                            <%=freeagent.role%>
+                        <%end%>
+                    </td>  
                 </tr>
             <%end%>
         </tbody>
     </table>
 </div>
-<%if @current_user.freeagentflag == false%>
+<%if @current_user && @current_user.freeagentflag == false%>
     <div id="tbox2">
         <%= form_for @player do |f| %>
             <div style="float: left;">

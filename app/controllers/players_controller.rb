@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   def index
   	@current_tab = "freeagents"
     @freeagents = Player.where(:freeagentflag => true)
-    @player = Player.find(@current_user.id)
+    @player = @current_user ? Player.find(@current_user.id) : nil
   end
 
   def new

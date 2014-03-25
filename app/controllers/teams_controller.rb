@@ -5,12 +5,16 @@ class TeamsController < ApplicationController
 		# TODO: Is this mess ok?
 		@team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_team, :home_team], :home_matches => [:away_team, :home_team]}).find(params[:id])
 		@captain_viewing = @current_user && @current_user.id == @team.captain_id
-		@current_user.teams.each do |team|
-			if @team.id == team.id
-				@casters = Player.where("role like '%caster%'")
-				@current_tab = "teampage"
+		@can_edit = @current_user && (@captain_viewing || @current_user.is_admin?)
+		if @current_user
+			@current_user.teams.each do |team|
+				if @team.id == team.id
+					@casters = Player.where("role like '%caster%'")
+					@current_tab = "teampage"
+				end
 			end
 		end
+		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
 	end
 	
 	def create
@@ -26,8 +30,15 @@ class TeamsController < ApplicationController
 	def update
 		@team = Team.find(params[:id])
 		raise unless @team.captain_id == @current_user.id || @current_user.is_admin?
-		@team.update_attributes!(params[:team], :as => @current_user.permission_role)
-		redirect_to @team
+		respond_to do |format|
+			if @team.update_attributes(params[:team], :as => @current_user.permission_role)
+		        format.html { redirect_to(@team, :notice => 'Player was successfully updated.') }
+		        format.json { respond_with_bip(@team) }
+		    else
+		        format.html { render :action => "show" }
+		        format.json { respond_with_bip(@team) }
+		   	end
+		end
 	end
 	
 	def destroy
