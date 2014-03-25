@@ -33,7 +33,7 @@
 
 	.rosterholder{
 		width:300px;
-	} 
+	}
 
 	.rosterholder .pluslink{
 		float:right;
@@ -431,10 +431,10 @@
     #LiveGames {
         background-color: #1B1B1B;
         border-radius: 0 0 6px 6px;
-        width: 700px;
+        width: 60%;
         margin: 0 auto;
         top: -300px; /* It should never be this big, set by layout for saftey, JS will move it on screen */
-        left: 24%;
+        left: 20%;
         padding-top: 10px;
         position: absolute;
         transition: top 0.7s ease-in-out;

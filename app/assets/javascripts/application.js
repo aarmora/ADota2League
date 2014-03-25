@@ -27,13 +27,15 @@ $(document).ready(function() {
     jQuery(".best_in_place").best_in_place();
 
     // Handle the live games slide out. Size it on page load, and add the click handler
-    var pulloutZeroOffset =  $("#LiveGames").outerHeight() - $("#LiveGames-Callout").outerHeight();
+    function pulloutZeroOffset() {
+        return $("#LiveGames").outerHeight() - $("#LiveGames-Callout").outerHeight();
+    }
 
-    $("#LiveGames").css("top", pulloutZeroOffset * -1);
+    $("#LiveGames").css("top", pulloutZeroOffset() * -1);
 
     $("#LiveGames-Callout").on('click', function() {
         if ($("#LiveGames").css("top") == "0px") {
-            $("#LiveGames").css("top", pulloutZeroOffset * -1);
+            $("#LiveGames").css("top", pulloutZeroOffset() * -1);
         } else {
             $("#LiveGames").css("top", 0);
         }

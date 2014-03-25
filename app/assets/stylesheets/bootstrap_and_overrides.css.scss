@@ -31,6 +31,7 @@ body {
 /*********************************************************************************/
 
 	#logo {
+		position: relative;
 		padding: 30px 25px;
 		background: rgba(0,0,0,.6);
 		text-transform: uppercase;
@@ -64,9 +65,61 @@ body {
 	    }
 	}
 
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+
+#LiveGames-Callout {
+    text-decoration:none;
+    font-size: 20px;
+    background-color: #BB1717;
+    border-radius: 0 0 6px 6px;
+    padding: 7px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+ }
+
+#LiveGames {
+    background-color: #1B1B1B;
+    border-radius: 0 0 6px 6px;
+    width: 60%;
+    margin: 0 auto;
+    top: -300px; /* It should never be this big, set by layout for saftey, JS will move it on screen */
+    left: 20%;
+    padding-top: 10px;
+    position: absolute;
+    transition: top 0.7s ease-in-out;
+    font-size: 14px;
+    color: white;
+    text-transform: none;
+
+    a {
+    	color: white;
+    }
+    table { width: 100%; }
+    td {
+    	border: none;
+    	padding: 10px 5px;
+    }
+    tr + tr td {
+			border-top: 1px solid #ddd;
+    }
+    .twitchtitle {
+      width: 75%;
+      padding-left: 20px
+  }
+
+  .twitchlink {
+      width: 25%;
+  }
+}
+
+
 /* 768px -  @screen-sm-min */
 @media (min-width: 768px) {
 	html {
 		background: url(/assets/dota2background.png) no-repeat center center fixed;
+		background-size: cover;
 	}
 }
