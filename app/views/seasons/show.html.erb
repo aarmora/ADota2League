@@ -6,8 +6,8 @@
         <div style="clear: both"></div>
         <div class="TabsContainer">
             <div class="tabbody3 active">
-                <div style="width: 400px" id="tbox1">
-                    <div><h2>Rankings</h2></div>
+                <div class="col-sm-6">
+                    <h2>Rankings</h2>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
@@ -24,10 +24,9 @@
                             <%end%>
                         </tbody>
                     </table>
-
                 </div>
-                <div style="width: 400px" id="tbox2">
-                    <div><h2>Schedule</h2></div>
+                <div class="col-sm-6">
+                    <h2>Schedule</h2>
                     <%= render :partial => "matches/match_table", :object => @matches %>
                 </div>
             </div>
