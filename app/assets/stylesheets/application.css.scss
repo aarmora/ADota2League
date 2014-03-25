@@ -38,13 +38,10 @@
 	.rosterholder .pluslink{
 		float:right;
 		margin-top:-5px;
-	} 
-    html, body
-	{
-		height: 100%;
 	}
+
     html{
-      background: image-url('dota2background.png') no-repeat center center fixed;
+      background: #000;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -85,10 +82,6 @@
 		line-height: 180%;
 	}
 
-	strong
-	{
-	}
-
 	a
 	{
 		color: #747474;
@@ -99,11 +92,6 @@
 		text-decoration: none;
 	}
 
-	.container
-	{
-		margin: 0px auto;
-		width: 1200px;
-	}
 	.steamsignin{
 		margin-left:394px
 	}
@@ -271,11 +259,6 @@
     .probuilt{
     	width:30%;
     	margin-left:50px;
-    }
-    .logout{
-		font-size: 10px;
-		color: #BC1414;
-		float: right;
     }
 
 /*********************************************************************************/
@@ -487,43 +470,6 @@
     }
 
 
-
-/*********************************************************************************/
-/* Logo                                                                          */
-/*********************************************************************************/
-
-	#logo
-	{
-		padding: 3em 0em;
-		text-transform: uppercase;
-	}
-
-	#logo h1 a
-	{
-		text-decoration: none;
-		font-size: 1.5em;
-		color: #FFF;
-	}
-
-	#logo span
-	{
-		color: #BC1414;
-	}
-
-	#logo p
-	{
-		margin: 0;
-		padding: 0;
-		letter-spacing: 0.10em;
-		font-size: 0.90em;
-	}
-
-	#logo p a
-	{
-		text-decoration: none;
-	}
-
-
 /*********************************************************************************/
 /* Menu                                                                          */
 /*********************************************************************************/
@@ -672,56 +618,6 @@
 		color: #747474;
 	}
 
-/*********************************************************************************/
-/* Three Columns                                                                 */
-/*********************************************************************************/
-
-	#three-column
-	{
-		overflow: hidden;
-		margin-bottom: 2em;
-		background: #FFF;
-		border-bottom: 4px solid #BC1414;
-		color: #525252;
-	}
-
-	#three-column h2
-	{
-		margin: 1em 0em;
-		text-transform: uppercase;
-		font-size: 1.5em;
-		font-weight: 700;
-		color: #454445;
-	}
-
-	#three-column #tbox1,
-	#three-column #tbox2,
-	#three-column #tbox3
-	{
-		float: left;
-		width: 500px;
-		padding: 25px 50px 80px 50px;
-	}
-    .inputbox{
-	    border-radius:6px;
-	    padding:5px;
-	    margin:5px;
-	    width: 250px;
-    }
-    #fullbox{
-        margin: 50px;
-        padding: 20px;
-
-	}
-    .teammembername{
-        margin-left: 5px
-    }
-    #sponsors{
-    	background: #FFF;
-    }
-    #sponsorholder{
-    	padding: 10px 10px 0 10px;
-    }
 /*********************************************************************************/
 /* Table Styles                                                                 */
 /*********************************************************************************/

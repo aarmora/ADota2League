@@ -1,0 +1,69 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Use Font Awesome icons (default)
+  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
+  =require twitter-bootstrap-static/fontawesome
+  */
+
+/* These are Charlie Approved Bootstrap overrides only */
+body {
+  background-color: transparent;
+}
+
+#main {
+	background-color: white;
+	padding: 0px 30px 30px 30px;
+}
+
+#sponsors {
+	background-color: white;
+	padding: 15px;
+}
+
+
+
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+
+	#logo {
+		padding: 30px 25px;
+		background: rgba(0,0,0,.6);
+		text-transform: uppercase;
+
+		span {
+			color: #BC1414;
+		}
+		a {
+			text-decoration: none;
+		}
+		h1 a
+		{
+			text-decoration: none;
+			font-size: 1.5em;
+			color: #FFF;
+		}
+
+
+	    .logout{
+			font-size: 10px;
+			color: #BC1414;
+	    }
+
+	    #current-user {
+	    	line-height: 25px;
+	    	float: right;
+	    	margin-top: 15px;
+	    	img { float: left;}
+	    	span, a { margin-left: 5px; }
+	    	span { font-size: 20px; }
+	    }
+	}
+
+/* 768px -  @screen-sm-min */
+@media (min-width: 768px) {
+	html {
+		background: url(/assets/dota2background.png) no-repeat center center fixed;
+	}
+}

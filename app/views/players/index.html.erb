@@ -1,19 +1,18 @@
-
-<div id="tbox1">
+<div class="col-md-6">
     <div><h2>Free Agents </h2> </div>
 	<table class="table table-hover table-bordered" >
         <thead>
             <tr>
-                <th><h3>Add on STEAM</h3></th>
-                <th style="width: 204px; text-align: left"><h3>Name</h3></th>
-                <th><h3>Role</h3></th>
+                <th>Add on Steam</th>
+                <th>Name</th>
+                <th>Role</th>
             </tr>
         </thead>
         <tbody>
             <%@freeagents.each do |freeagent|%>
                 <tr>
-                    <td>
-                    	<%= link_to image_tag("plus.png"), "steam://friends/add/#{freeagent.steamid}", :style => "margin-left:30px" %>
+                    <td class="text-center">
+                    	<%= link_to image_tag("plus.png"), "steam://friends/add/#{freeagent.steamid}" %>
                     </td>
                     <td>
                         <%= link_to freeagent.name, freeagent%>
@@ -31,9 +30,9 @@
     </table>
 </div>
 <%if @current_user && @current_user.freeagentflag == false%>
-    <div id="tbox2">
+    <div class="col-md-6">
         <%= form_for @player do |f| %>
-            <div style="float: left;">
+            <div>
                 <div><h2>Don't have a team yet? Sign up as a free agent</h3></div>
                 <div style="margin-bottom: 25px">
                     <%= f.label(:email, "Email address :") %>
@@ -41,7 +40,7 @@
                 </div>
                 <div style="margin-bottom: 25px">
                     <%= f.label(:role, "Desired role(s) :") %>
-                    <%= f.text_field :role, :class => "inputbox", :maxlength => "100"%>
+                    <%= f.text_field :role, :class => "inputbox", :maxlength => "60"%>
                 </div>
                 <%= f.hidden_field :freeagentflag, :value => true %>
             </div>
