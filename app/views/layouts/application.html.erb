@@ -14,7 +14,7 @@
 		    	<table>
 		    	<% @active_streams.each do |stream| %>
 		    		<tr>
-		    			<td class="twitchtitle"><%= stream.channel.status %></td>
+		    			<td class="twitchtitle"><%= link_to stream.channel.status, stream.channel.url %></td>
 		    			<td class="twitchlink"><%= link_to stream.channel.display_name, stream.channel.url %></td>
 		    		</tr>
 			    <% end %>
@@ -73,7 +73,7 @@
 		    <div class="col-md-3 col-sm-3 col-xs-3 text-center">
 		        <%= link_to image_tag("AD2L_S3_Invitational_Ticket_664x362.png", :alt => "Season 3 Invitational Ticket"), 'http://www.dota2.com/store/itemdetails/20428?r=ce/', :target => "_blank" %>
 		    </div>
-			
+
 	    </div>
 	</div>
 	<div id="main" class="container">
