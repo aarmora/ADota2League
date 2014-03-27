@@ -1,11 +1,21 @@
 class MatchesController < ApplicationController
 	def index
-		@leaguematches = Dota.history(:league_id => 158)
-
-		#@matchdetails = Dota.match(22345678)
 	end
+
   def update
+    raise ActionController::RoutingError.new('Not Found') unless @current_user && @current_user.is_admin?
   	@match = Match.find(params[:id])
+
+    if params[:match][:home_team]
+      params[:match][:home_team_id] = params[:match][:home_team]
+      params[:match][:home_team] = nil
+    end
+
+    if params[:match][:away_team]
+      params[:match][:away_team_id] = params[:match][:away_team]
+      params[:match][:away_team] = nil
+    end
+
 
     respond_to do |format|
       if @match.update_attributes(params[:match], :as => @current_user.permission_role)
