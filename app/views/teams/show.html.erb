@@ -7,7 +7,7 @@
 					<div class="form-group">
 				    <label class="col-sm-2 control-label">Team Name</label>
 				    <div class="col-sm-10">
-				      <%= best_in_place_if @can_edit, @team, :teamname, :type => :input %>
+				      <%= best_in_place_if @can_edit_player, @team, :teamname, :type => :input %>
 				    </div>
 			  	</div>
 				  <% if @current_user && @current_user.is_admin? %>
@@ -44,7 +44,7 @@
 						</div>
 					</div>
 			
-			<% if @team.matches.count == 0 && @can_edit %>
+			<% if @team.matches.count == 0 && @can_edit_player %>
 				<%= form_for @team, :method => "delete" do |f| %>
 				  <%= f.submit "Disband Team", :confirm => "Are you sure? This is NOT reversable!", :class => "button", :style => "margin-left:-3px" %>
 				<% end %>

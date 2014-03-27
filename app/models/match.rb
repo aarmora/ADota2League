@@ -6,5 +6,6 @@ class Match < ActiveRecord::Base
   
   # Lambda so it evaluates every call, not just at compile time
   # TODO: This is wrong since date should be UTC or whatever
-  scope :future, lambda {where("date > ?", Time.zone.now) }
+  scope :future, lambda {where("date > ?", Time.zone.now) }  
+  attr_accessible :twitch, :as => [:admin]
 end

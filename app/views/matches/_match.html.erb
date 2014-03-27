@@ -8,5 +8,24 @@
 	<% #NOTE: this is a hack for now, do not do this
 		 caster = Player.find_by_id(match.twitch) unless match.twitch.nil?
 	 %>
-	<td><%= link_to caster.name, caster.twitch if caster %></td>
+	<td>
+		<%if caster 
+			#Note: think I need to make this only visible to admin as the icon shouldn't be there
+			#TODO: Model isn't updating the name without a refresh
+			#Bug:  Link isn't showing up until first BIP click.  Why?
+			%>
+			<%= best_in_place_if @can_edit, match, 
+			  :twitch,
+			  :display_with => lambda { 
+			    |something| link_to caster.name, caster.twitch, :target => "blank"
+			  }, 
+			  :activator => ".glyphicon-warning-sign.#{match.id}", 
+	      	  :type => :select, 
+	      	  collection: @casters.collect {|player| ["#{player.id}", "#{player.name}"]} 
+			%>
+			<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>"></span>
+		<%else%>
+		<%end%>
+
+	</td>
 </tr>

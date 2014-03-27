@@ -12,8 +12,8 @@ class PlayersController < ApplicationController
 
   def show
     @player = Player.find(params[:id])
-    @can_edit = @current_user && (@current_user.id == @player.id || @current_user.is_admin?)
     @current_tab = @current_user && @player.id == @current_user.id ? "myinfo" : ""
+    @can_edit_player = @current_user && (@current_user.id == @player.id || @current_user.is_admin?)
   end
 
   def update
