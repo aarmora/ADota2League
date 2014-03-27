@@ -1,7 +1,7 @@
 <tr>
 	<td><%= match.date.strftime("%-m/%-d/%y %l:%M%p") %></td>
 	<td><%= link_to_if match.home_team != @team, match.home_team.teamname, match.home_team %>
-				vs 
+				vs
 			<%= link_to_if match.away_team != @team, match.away_team.teamname, match.away_team %>
 	</td>
 	<td><%= match.home_score.to_i %>:<%= match.away_score.to_i %></td>
@@ -9,22 +9,23 @@
 		 caster = Player.find_by_id(match.twitch) unless match.twitch.nil?
 	 %>
 	<td>
-		<%if caster 
+		<%-
 			#Note: think I need to make this only visible to admin as the icon shouldn't be there
 			#TODO: Model isn't updating the name without a refresh
 			#Bug:  Link isn't showing up until first BIP click.  Why?
 			%>
-			<%= best_in_place_if @can_edit, match, 
+			<%= best_in_place_if @can_edit, match,
 			  :twitch,
-			  :display_with => lambda { 
-			    |something| link_to caster.name, caster, :target => "blank"
-			  }, 
-			  :activator => ".glyphicon-warning-sign.#{match.id}", 
-	      	  :type => :select, 
-	      	  collection: @casters.collect {|player| ["#{player.id}", "#{player.name}"]} 
+			  :display_with => (lambda do |caster_id|
+			    caster = Player.find_by_id(caster_id)
+			    link_to caster.name, caster, :target => "blank"
+			  end),
+			  :activator => ".glyphicon-warning-sign.#{match.id}",
+	      	  :type => :select,
+	      	  collection: @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 			%>
+		<% if @can_edit %>
 			<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>"></span>
-		<%else%>
 		<%end%>
 
 	</td>
