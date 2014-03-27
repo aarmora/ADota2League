@@ -18,7 +18,7 @@
         <tbody>
                 <%@casters.each do |caster|%>
                     <tr>
-                        <td><%=caster.name%></td>
+                        <td><%= link_to caster.name, caster%></td>
                         <td>
                             <%if caster.twitch%>
                                 <%= link_to caster.twitch, caster.twitch, :target => "_blank"%>

@@ -9,7 +9,7 @@ class SeasonsController < ApplicationController
     @season = @seasons.detect {|season| season.id == params[:id].to_i}
     @teams = @season.teams # TODO: optimize dual lookup with below?
     @matches = @season.matches.includes(:home_team, :away_team)
-    @casters = Player.where("role like :caster", {:caster => "%caster%"})
+    @casters = Player.where(:caster => true)
 
     # compute the scores using the pieces we already have so we don't need to re-fetch them again
     @total_scores = {}

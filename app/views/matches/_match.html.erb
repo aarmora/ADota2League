@@ -17,7 +17,7 @@
 			<%= best_in_place_if @can_edit, match, 
 			  :twitch,
 			  :display_with => lambda { 
-			    |something| link_to caster.name, caster.twitch, :target => "blank"
+			    |something| link_to caster.name, caster, :target => "blank"
 			  }, 
 			  :activator => ".glyphicon-warning-sign.#{match.id}", 
 	      	  :type => :select, 
