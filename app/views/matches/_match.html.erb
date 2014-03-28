@@ -4,7 +4,7 @@
 				vs
 			<%= link_to_if match.away_team != @team, match.away_team.teamname, match.away_team %>
 	</td>
-	<td><%= match.home_score.to_i %>:<%= match.away_score.to_i %></td>
+	<td><%= link_to "#{match.home_score.to_i} : #{match.away_score.to_i}", match %> </td>
 	<% #NOTE: this is a hack for now, do not do this
 		 caster = Player.find_by_id(match.twitch) unless match.twitch.nil?
 	 %>

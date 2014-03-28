@@ -4,6 +4,10 @@ class MatchesController < ApplicationController
 
 		#@matchdetails = Dota.match(22345678)
 	end
+  def show 
+    @match = Match.find(params[:id])
+  end
+
   def update
   	@match = Match.find(params[:id])
 
