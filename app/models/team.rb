@@ -20,7 +20,7 @@ class Team < ActiveRecord::Base
     @result_map ||= {}
     cache_key = season_id.to_s + "-" + week.to_s
     @result_map[cache_key] ||= begin
-      playing_ids = Match.where(:season_id => season_id, :week => week).pluck(:away_team_id) + Match.where(:season_id => season_id, :week => week).pluck(:home_team_id)
+      playing_ids = (Match.where(:season_id => season_id, :week => week).pluck(:away_team_id) + Match.where(:season_id => season_id, :week => week).pluck(:home_team_id)).compact
       Team.joins(:team_seasons).where(Team.arel_table[:id].not_in(playing_ids)).where(:team_seasons => {:season_id => season_id})
     end
   end

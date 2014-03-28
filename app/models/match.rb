@@ -7,7 +7,7 @@ class Match < ActiveRecord::Base
   # Lambda so it evaluates every call, not just at compile time
   # TODO: This is wrong since date should be UTC or whatever
   scope :future, lambda {where("date > ?", Time.zone.now) }
-  attr_accessible :home_team_id, :away_team_id, :home_team, :away_team, :date, :twitch, :as => [:admin]
+  attr_accessible :home_team_id, :away_team_id, :home_score, :away_score, :date, :twitch, :as => [:admin]
 
   # We could use a uniqueness validator, but since we have home and away, it wouldn't work so well
   validates_each :home_team_id, :away_team_id do |record, attr, value|
@@ -18,4 +18,13 @@ class Match < ActiveRecord::Base
 
   # TODO: This might break migrations, enable once live
   # validates :date, :week, :season, :presence => true
+
+  # in the DB, these can be nil, which sort of sucks...so let's fix that
+  def home_score
+    super.to_i
+  end
+
+  def away_score
+    super.to_i
+  end
 end

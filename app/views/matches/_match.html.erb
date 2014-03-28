@@ -11,16 +11,17 @@
 				<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-date"></span>
 			<%end%>
 		</td>
-	<td><%=
+	<td>
+			<%=
 				if @can_edit
 					best_in_place match,
 					  :home_team_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-home",
 			      	  :type => :select,
 			      	  # this is terrible and I should be shot for doing it
-			      	  collection: (Team.available_for_season_and_week(match.season_id, match.week) << match.home_team).uniq.sort_by(&:teamname).collect {|team| ["#{team.id}", "#{team.teamname}"]}
+			      	  collection: ["", "None"] + (Team.available_for_season_and_week(match.season_id, match.week) << match.home_team).compact.uniq.sort_by(&:teamname).collect {|team| ["#{team.id}", "#{team.teamname}"]}
 			  else
-			  	link_to_if match.home_team != @team, match.home_team.teamname, match.home_team
+			  	link_to_if match.home_team && match.home_team != @team, match.home_team ? match.home_team.teamname : "TBD", match.home_team
 			  end
 			%>
 				<% if @can_edit %>
@@ -34,16 +35,19 @@
 					  :activator => ".glyphicon-warning-sign.#{match.id}-away",
 			      	  :type => :select,
 			      	  # this is terrible and I should be shot for doing it
-			      	  collection: (Team.available_for_season_and_week(match.season_id, match.week) << match.away_team).uniq.sort_by(&:teamname).collect {|team| ["#{team.id}", "#{team.teamname}"]}
+			      	  collection: ["", "None"] + (Team.available_for_season_and_week(match.season_id, match.week) << match.away_team).compact.uniq.sort_by(&:teamname).collect {|team| ["#{team.id}", "#{team.teamname}"]}
 			  else
-			  	link_to_if match.home_team != @team, match.home_team.teamname, match.home_team
+			  	link_to_if match.away_team && match.away_team != @team, match.away_team ? match.away_team.teamname : "TBD", match.away_team
 			  end
 			%>
 				<% if @can_edit %>
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-away"></span>
 				<%end%>
 	</td>
-	<td><%= match.home_score.to_i %>:<%= match.away_score.to_i %></td>
+	<td>
+	<%= best_in_place_if @can_edit, match, :home_score, :type => :input %>
+	:
+	<%= best_in_place_if @can_edit, match, :away_score, :type => :input %></td>
 	<% #NOTE: this is a hack for now, do not do this
 		 caster = Player.find_by_id(match.twitch) unless match.twitch.nil?
 	 %>
