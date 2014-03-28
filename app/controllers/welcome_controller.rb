@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
 
   def community
     @current_tab = "community"
-    @casters = Player.where("role like :caster", {:caster => "%caster%"})
+    @casters = Player.where(:caster => true)
   end
 
   def contact
