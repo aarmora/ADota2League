@@ -44,13 +44,7 @@
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-away"></span>
 				<%end%>
 	</td>
-<<<<<<< HEAD
-<<<<<<< HEAD
 	<td><%= match.home_score.to_i %>:<%= match.away_score.to_i %></td>
-=======
->>>>>>> 8463822c723186753c27a0cce46ce622627d44d8
-=======
->>>>>>> 8463822c723186753c27a0cce46ce622627d44d8
 	<td>
 	<%= best_in_place_if @can_edit, match, :home_score, :type => :input %>
 	:
