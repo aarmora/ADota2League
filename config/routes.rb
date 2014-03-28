@@ -15,6 +15,7 @@ Ad2l::Application.routes.draw do
     get "manage_seasons(/:season(/:week))" => 'admin#manage_seasons'
   end
 
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
