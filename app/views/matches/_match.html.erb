@@ -49,11 +49,11 @@
 	:
 	<%= best_in_place_if @can_edit, match, :away_score, :type => :input %></td>
 	<% #NOTE: this is a hack for now, do not do this
-		 caster = Player.find_by_id(match.twitch) unless match.twitch.nil?
+		 caster = Player.find_by_id(match.caster_id) unless match.caster_id.nil?
 	 %>
 	<td>
 		<%= best_in_place_if @can_edit, match,
-		  :twitch,
+		  :caster_id,
 		  :display_with => (lambda do |caster_id|
 		    caster = Player.find_by_id(caster_id)
 		    link_to caster.name, caster, :target => "blank"

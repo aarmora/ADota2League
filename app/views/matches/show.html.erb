@@ -26,7 +26,7 @@
 	form_for "Player" do |f|%>
 	  <div class="form-group">
 	  	<%= f.label(:name, "Comment")%>
-	  	<%= f.text_area :name, :placeholder => "matchcomments go here"%>
+	  	<%= f.cktext_area :name, :placeholder => "matchcomments go here"%>
 	  </div>
 	  <%= f.submit "Submit", :class => "button"%>
 	<%end%>

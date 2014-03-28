@@ -5,14 +5,15 @@ class ChangeColumnNamesAddInactiveTeamColumn < ActiveRecord::Migration
   	add_column :teams, :active, :boolean
   	add_column :seasons, :registration_open, :boolean
   	add_column :posts, :author_id, :integer
-  	add_column :posts, :create_date, :datetime
+  	add_column :players, :created_at, :datetime
+    add_column :players, :updated_at, :datetime
     add_column :matches, :forfeit, :boolean    
 
 	create_table :MatchComments do |t|
 	  t.integer :match_id
 	  t.integer :player_id
 	  t.text :comment
-	  t.datetime :create_date
+	  t.timestamps :create_date
 	end
 
   end

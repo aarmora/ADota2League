@@ -23,7 +23,11 @@ gem 'kappa', '~> 1.0'
 # gem 'rest_in_place'
 gem 'best_in_place'
 
+#gem ck editor
 gem 'ckeditor'
+
+#gem paperclip for ActiveRecord PaperClip
+gem 'paperclip'
 
 # Gems used only for assets and not required
 # in production environments by default.

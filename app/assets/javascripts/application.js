@@ -18,6 +18,7 @@
 //= require twitter/bootstrap
 //= require best_in_place
 //= require best_in_place_datetime
+//= require ckeditor/init
 
 function IsEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
