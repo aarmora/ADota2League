@@ -23,6 +23,8 @@ gem 'kappa', '~> 1.0'
 # gem 'rest_in_place'
 gem 'best_in_place'
 
+gem 'ckeditor'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
