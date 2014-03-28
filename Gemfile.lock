@@ -55,6 +55,9 @@ GEM
       jquery-rails
       rails (~> 3.1)
     builder (3.0.4)
+    ckeditor (4.0.11)
+      mime-types
+      orm_adapter (~> 0.5.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -103,6 +106,7 @@ GEM
     omniauth-steam (1.0.3)
       multi_json
       omniauth-openid
+    orm_adapter (0.5.0)
     polyglot (0.3.4)
     rack (1.4.5)
     rack-cache (1.2)
@@ -162,6 +166,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-sqlserver-adapter
   best_in_place
+  ckeditor
   coffee-rails (~> 3.2.1)
   dota!
   execjs

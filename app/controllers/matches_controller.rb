@@ -1,6 +1,11 @@
 class MatchesController < ApplicationController
 	def index
 	end
+  def show
+    @match = Match.find(params[:id])
+    @home_team_roster = @match.home_team.players
+    @away_team_roster = @match.away_team.players
+  end
 
   def update
     raise ActionController::RoutingError.new('Not Found') unless @current_user && @current_user.is_admin?
