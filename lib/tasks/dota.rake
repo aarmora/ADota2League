@@ -69,4 +69,48 @@ namespace :dota do
   task :mmr => :environment do
     puts "Adjusting MMRs!"
   end
+
+  desc "Do RPI ranking and output people"
+  task :rpi => :environment do
+    puts "First pass, finding teams and calculating wins"
+
+    puts "Season?"
+    season_id = STDIN.gets.chomp.to_i
+    season = Season.find(season_id)
+    teams = season.teams # TODO: optimize dual lookup with below?
+    matches = season.matches.includes(:home_team, :away_team)
+
+    @total_scores = {}
+    @total_matches = {}
+    matches.each do |match|
+      next if match.home_score.to_i == 0 && match.away_score.to_i == 0
+      @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
+      @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
+      @total_matches[match.home_team_id] = @total_matches[match.home_team_id].to_i + match.home_score.to_i + match.away_score.to_i
+      @total_matches[match.away_team_id] = @total_matches[match.away_team_id].to_i + match.home_score.to_i + match.away_score.to_i
+    end
+
+    @win_percents = @total_scores.map do |team_id, wins|
+      [team_id, wins.to_f / @total_matches[team_id].to_f]
+    end
+
+    puts @win_percents.inspect
+
+    # @win_percents.sort_by!{|k,v| v}.reverse
+
+    # @win_percents.each do |k,v|
+    #   puts "#{teams.find(k).teamname}: #{v}"
+    # end
+
+    @opponent_win_percents = @win_percents.map do |team_id, win_pct|
+      # calculated as the opponent's winning percentage ignoring ANY games against the current team
+
+      # Find each match this team had and calculate the winning percentage for their opponent
+      teams_matches = matches.select {|m| m.away_team_id == team_id || m.home_team_id == team_id }
+      teams_matches.each do |match|
+        
+      end
+    end
+  end
+
 end
