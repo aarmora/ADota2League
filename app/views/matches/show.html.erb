@@ -31,3 +31,9 @@
 	  <%= f.submit "Submit", :class => "button"%>
 	<%end%>
 </div>
+<div class="container-fluid">
+  <%= form_for Post.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
+    <%=f.cktext_area :text%>
+    <%=f.submit "Post", :class => "button"%>
+  <%end%>
+</div>

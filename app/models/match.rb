@@ -1,5 +1,6 @@
 class Match < ActiveRecord::Base
   has_many :games, :dependent => :destroy
+  has_many :matchcomments, :dependent => :destroy
   belongs_to :home_team, :class_name => "Team"
   belongs_to :away_team, :class_name => "Team"
   belongs_to :season
