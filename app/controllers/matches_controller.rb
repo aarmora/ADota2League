@@ -5,6 +5,7 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
     @home_team_roster = @match.home_team.players
     @away_team_roster = @match.away_team.players
+    @matchcomments = Matchcomment.where(:match_id => params[:id]).order("created_at desc")
   end
 
   def update
@@ -32,4 +33,19 @@ class MatchesController < ApplicationController
       end
     end
   end
+
+  def create_match_comment
+    @match_comment = Matchcomment.new
+    @match_comment.player_id = @current_user.id
+    @match_comment.attributes = params[:matchcomment]
+    @match_comment.save!
+    @matchcomments = Matchcomment.where(:match_id => params[:matchcomment][:match_id]).order("created_at desc")
+    render :partial => 'match_comment', :object => @matchcomments
+  end
+
+  def match_comments_partial
+    @matchcomments = Matchcomment.where(:match_id => params[:match_id]).order("created_at desc")
+    render :partial => 'match_comment', :object => @matchcomments
+  end
+
 end

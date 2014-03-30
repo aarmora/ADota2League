@@ -1,0 +1,7 @@
+
+	<%@matchcomments.each do |matchcomment|%>
+		<blockquote style="font-size:10.5px; padding: 5px 20px; margin: 0 0 10px;">
+		  <%=raw matchcomment.comment%>
+		  <footer><%= link_to matchcomment.player.name, matchcomment.player%> <%= matchcomment.created_at.strftime ("%m/%d/%Y")%></footer>
+		</blockquote>
+	<%end%>

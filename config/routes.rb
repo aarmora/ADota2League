@@ -12,6 +12,8 @@ Ad2l::Application.routes.draw do
   get 'welcome/contact' => 'welcome#contact'
   get 'welcome/community' => 'welcome#community'
   get 'logout' => 'welcome#logout'
+  post 'matchcomment' => 'matches#create_match_comment'
+  get 'matchcommentspartial' => 'matches#match_comments_partial'
 
   scope '/admin' do
     root :to => "admin#index"

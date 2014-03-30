@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-5">
@@ -19,21 +21,13 @@
 </div>
 <br>
 <br>
-<%=@mytest%>
-<div class="container-fluid">
-	<%
-	#Note: form_for matches is a PH only.  It will be matchcomments
-	form_for "Player" do |f|%>
-	  <div class="form-group">
-	  	<%= f.label(:name, "Comment")%>
-	  	<%= f.cktext_area :name, :placeholder => "matchcomments go here"%>
-	  </div>
-	  <%= f.submit "Submit", :class => "button"%>
-	<%end%>
+<div class="container-fluid" id="matchcommentspartial">
+	<%= render :partial => "matches/match_comment", :object => @matches%>	
 </div>
 <div class="container-fluid">
-  <%= form_for Post.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
-    <%=f.cktext_area :text%>
-    <%=f.submit "Post", :class => "button"%>
+  <%= form_for Matchcomment.new, :remote => true, :url => matchcomment_path, :html => { :method => :post, :class => "form-horizontal", :role => "form"} do |f| %>
+    <%=f.cktext_area :comment%>
+    <%= f.hidden_field :match_id, :value => @match.id %>
+    <%=f.submit "Post", :class => "button", :id => "publish"%>
   <%end%>
 </div>
