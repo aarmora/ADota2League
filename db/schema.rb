@@ -66,16 +66,17 @@ ActiveRecord::Schema.define(:version => 20140328110938) do
 
   create_table "players", :force => true do |t|
     t.integer  "team_id"
-    t.string   "name",          :limit => 100
-    t.string   "email",         :limit => 50
-    t.string   "steamid",       :limit => 50
+    t.string   "name",            :limit => 100
+    t.string   "email",           :limit => 50
+    t.string   "steamid",         :limit => 50
     t.boolean  "cptflag"
     t.boolean  "freeagentflag"
-    t.string   "role",          :limit => 100
-    t.string   "steam32id",     :limit => 50
+    t.string   "role",            :limit => 100
+    t.string   "steam32id",       :limit => 50
     t.boolean  "caster"
-    t.string   "region",        :limit => 50
-    t.string   "twitch",        :limit => 50
+    t.string   "region",          :limit => 50
+    t.string   "twitch",          :limit => 50
+    t.integer  "clickedprobuilt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
