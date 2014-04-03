@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   	if @current_user && @current_user.new_record?
   		@current_user.save!
   		redirect_to edit_player_path(@current_user)
+    elsif @current_user
+      Player.find(@current_user.id).update_attributes(:name => session[:current_user][:nickname])
   	end
 
     @can_edit = @current_user && @current_user.is_admin?

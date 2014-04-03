@@ -55,10 +55,7 @@
 	<br ><br >
 	<h3>Roster</h3>
 	<div class="rosterholder">
-		<%- @roster.each do |player| %>
-			<%= link_to player.name, player%> <%= "(Captain)" if player.id == @team.captain_id %>
-			<%= link_to image_tag("plus.png"), "steam://friends/add/#{player.steamid}", :style => "margin-left:15px", :title => "Add on steam", :class => "pluslink" %><br>
-		<% end %>
+		<%= render :partial => "teams/roster", :locals => {:roster => @roster, :team => @team}%>
 	</div>
 	<br><br>
 	

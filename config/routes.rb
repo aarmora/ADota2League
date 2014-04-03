@@ -1,14 +1,19 @@
 Ad2l::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+
   get "welcome/index"
   resources :seasons, :only => [:index, :show]
   get "schedule" => 'seasons#index'
   resources :teams
   resources :matches
+  resources :posts
   resources :players, :only => [:new, :index, :show, :update]
   post 'auth/steam/callback' => 'welcome#auth_callback'
   get 'welcome/contact' => 'welcome#contact'
   get 'welcome/community' => 'welcome#community'
   get 'logout' => 'welcome#logout'
+  post 'matchcomment' => 'matches#create_match_comment'
+  get 'matchcommentspartial' => 'matches#match_comments_partial'
 
   scope '/admin' do
     root :to => "admin#index"

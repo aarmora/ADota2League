@@ -23,6 +23,12 @@ gem 'kappa', '~> 1.0'
 # gem 'rest_in_place'
 gem 'best_in_place'
 
+#gem ck editor
+gem 'ckeditor'
+
+#gem paperclip for ActiveRecord PaperClip
+gem 'paperclip'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -39,6 +45,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

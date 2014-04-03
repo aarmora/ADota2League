@@ -5,17 +5,23 @@
         <div class="tab nonactive" id="tab2">The Why</div>
         <div class="tab nonactive" id="tab3">Rules</div>
         <div style="clear: both"></div>
-        <div class="TabsContainer">
-            <div class="tabbody1 active">
-            	<div>
-                    <p>We created this league because we love to play Dota.  We are busy adults but want to have at least one dedicated night a week to play games as an organized team.  We want this league to be as simple and user friendly as possible.  Most of all we want to have fun and enjoy Dota!</p>
-
-                    <p>Please, go and sign up.  It's as simple as signing with your steam account and submitting your team name and email.</p>
-
-                    <p>Don't have a team?  Sign up as a free agent!  We can't guarantee to find you a spot but we will do everything we can to try and find you a team.</p>
+        <div class="TabsContainer" style="width:100%">
+            <div class="tabbody1 active">   
+                <div class="container-fluid" style="width:100%">
+                    <%@posts.each do |post|%>
+                        <div>
+                            <h3>
+                                <span><%= post.author.name%></span>
+                                <span><%= post.created_at.strftime ("%m/%d/%Y")%></span>
+                            </h3>
+                        </div>
+                        <br>
+                    	<div>
+                            <%=raw post.text%>
+                        </div>
+                    <%end%>
                 </div>
-            	</div>
-            </div>                    
+        	</div>                   
             <div class="tabbody2 nonactive">
                 <div>
                     <p>We created this league because we love to play Dota.  We are busy adults but want to have at least one dedicated night a week to play games as an organized team.  We want this league to be as simple and user friendly as possible.  Most of all we want to have fun and enjoy Dota!</p>

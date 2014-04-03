@@ -69,4 +69,109 @@ namespace :dota do
   task :mmr => :environment do
     puts "Adjusting MMRs!"
   end
+
+  desc "Do RPI ranking and output people"
+  task :rpi => :environment do
+    puts "First pass, finding teams and calculating wins"
+
+    puts "Season?"
+    season_id = STDIN.gets.chomp.to_i
+    season = Season.find(season_id)
+    teams = season.teams # TODO: optimize dual lookup with below?
+    matches = season.matches.scored.includes(:home_team, :away_team) # TODO: scored scope added, should remove code below
+
+    @total_scores = {}
+    @total_matches = {}
+    matches.each do |match|
+      next if match.home_score.to_i == 0 && match.away_score.to_i == 0
+      @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
+      @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
+      @total_matches[match.home_team_id] = @total_matches[match.home_team_id].to_i + match.home_score.to_i + match.away_score.to_i
+      @total_matches[match.away_team_id] = @total_matches[match.away_team_id].to_i + match.home_score.to_i + match.away_score.to_i
+    end
+
+    @win_percents = @total_scores.map do |team_id, wins|
+      [team_id, wins.to_f / @total_matches[team_id].to_f]
+    end
+
+    # Turn this back into a hash
+    @win_percents = Hash[@win_percents.map {|k, v| [k, v] }]
+
+    puts @win_percents.inspect
+
+    # @win_percents.sort_by!{|k,v| v}.reverse
+
+    # @win_percents.each do |k,v|
+    #   puts "#{teams.find(k).teamname}: #{v}"
+    # end
+
+    @opponent_opponent_win_percents = {}
+    @opponent_win_percents = {}
+
+    @win_percents.each do |team_id, win_pct|
+      # puts "TEAM: #{team_id}"
+
+      # Find each match this team had and calculate the winning percentage for their opponent
+      teams_matches = matches.select {|m| m.away_team_id == team_id || m.home_team_id == team_id }
+      opp_opp_win_pcts = []
+      opp_win_pcts = teams_matches.map do |match|
+        # exclude games not yet played or scored...TODO: exclude forfeit?
+        next if match.away_score.to_i == 0 && match.home_score.to_i == 0
+
+        # puts "working match #{match.id}: #{match.home_team_id} - #{match.away_team_id}"
+
+        opponent_id = match.away_team_id == team_id ? match.home_team_id : match.away_team_id
+        # puts "opp: #{opponent_id}"
+
+        # Compute this opponent's OWP (for OOWP). All teams are valid for this (including self) so do it separate from the check below
+        opponent_matches_all = matches.select {|m| (m.away_team_id == opponent_id || m.home_team_id == opponent_id )}
+        opp_opp_win_pct = opponent_matches_all.map { |m| m.away_team_id == opponent_id ? @win_percents[m.home_team_id] : @win_percents[m.away_team_id] }
+        # puts "opp_opp_pct:"
+        # puts opp_opp_win_pct.inspect
+        opp_opp_win_pcts << opp_opp_win_pct.inject{ |sum, el| sum + el }.to_f / opp_opp_win_pct.size
+
+        # OWP calculated as the opponent's winning percentage ignoring ANY games against the current team
+        opponent_matches = matches.select {|m| (m.away_team_id == opponent_id || m.home_team_id == opponent_id) && m.away_team_id != team_id && m.home_team_id != team_id }
+        # puts "opp match count: #{opponent_matches.size}"
+        opponent_game_count = opponent_matches.sum{ |m| m.away_score.to_i } + opponent_matches.sum{ |m| m.home_score.to_i }
+        # puts "opp game count: #{opponent_game_count}"
+        opponent_wins = opponent_matches.sum{ |m| m.away_team_id == opponent_id ? m.away_score.to_i : m.home_score.to_i }
+        # puts "opp wins: #{opponent_wins}"
+        opponent_game_count == 0 ? nil : opponent_wins / opponent_game_count
+      end
+      # puts "opp win pcts"
+      opp_win_pcts.inspect
+
+      opp_win_pcts.compact!
+      opp_win_pct = opp_win_pcts.inject{ |sum, el| sum + el }.to_f / opp_win_pcts.size unless opp_win_pcts.empty?
+      @opponent_win_percents[team_id] = opp_win_pct if opp_win_pct
+
+      # finally, calculate final OOWP
+      @opponent_opponent_win_percents[team_id] = opp_opp_win_pcts.compact.inject{ |sum, el| sum + el }.to_f / opp_opp_win_pcts.size
+    end
+
+    puts "------------"
+    puts @opponent_win_percents.inspect
+    puts "------------"
+    puts @opponent_opponent_win_percents.inspect
+
+    # compute the final RPIs?
+    @rpis = {}
+    @win_percents.each do |team_id, wp|
+      if wp.nil? || @opponent_win_percents[team_id].nil? || @opponent_opponent_win_percents[team_id].nil?
+        puts "Skipping team: #{team_id} as a needed value was nil"
+        next
+      end
+      @rpis[team_id] = wp * 0.25 + @opponent_win_percents[team_id] * 0.50 + @opponent_opponent_win_percents[team_id] * 0.25
+    end
+
+    # Output
+    @rpis.sort_by { |k,v| v * -1}.each do |k, v|
+      next if k.nil?
+      puts "#{teams.find(k).teamname}: #{v}"
+    end
+
+
+  end
+
 end

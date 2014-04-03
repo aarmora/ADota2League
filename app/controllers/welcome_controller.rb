@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
 
   def index
     @current_tab = "index"
+    @posts = Post.all
   end
 
   def community

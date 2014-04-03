@@ -55,6 +55,13 @@ GEM
       jquery-rails
       rails (~> 3.1)
     builder (3.0.4)
+    ckeditor (4.0.11)
+      mime-types
+      orm_adapter (~> 0.5.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -81,6 +88,8 @@ GEM
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.2.0)
+      railties (>= 3.2.16)
     json (1.8.1)
     kappa (1.0.2)
       addressable (~> 2.3.5)
@@ -101,6 +110,12 @@ GEM
     omniauth-steam (1.0.3)
       multi_json
       omniauth-openid
+    orm_adapter (0.5.0)
+    paperclip (4.1.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     polyglot (0.3.4)
     rack (1.4.5)
     rack-cache (1.2)
@@ -160,13 +175,16 @@ PLATFORMS
 DEPENDENCIES
   activerecord-sqlserver-adapter
   best_in_place
+  ckeditor
   coffee-rails (~> 3.2.1)
   dota!
   execjs
   figaro
   jquery-rails
+  jquery-ui-rails
   kappa (~> 1.0)
   omniauth-steam
+  paperclip
   rails (= 3.2.17)
   sass-rails (~> 3.2.3)
   tiny_tds

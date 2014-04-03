@@ -5,17 +5,17 @@ class TeamsController < ApplicationController
 		# TODO: Is this mess ok?
 		@team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_team, :home_team], :home_matches => [:away_team, :home_team]}).find(params[:id])
 		@captain_viewing = @current_user && @current_user.id == @team.captain_id
+		@casters = @can_edit ? Player.where("role like '%caster%'") : []
 		if @current_user
 			@current_user.teams.each do |team|
 				if @team.id == team.id
-					@casters = Player.where("role like '%caster%'")
 					@current_tab = "teampage"
 				end
 			end
 		end
 		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
 	end
-	
+
 	def create
 		raise unless @current_user
 		@team = Team.new
@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
 		@team.save!
 		redirect_to @team
 	end
-	
+
 	def update
 		@team = Team.find(params[:id])
 		raise unless @team.captain_id == @current_user.id || @current_user.is_admin?
@@ -39,18 +39,18 @@ class TeamsController < ApplicationController
 		   	end
 		end
 	end
-	
+
 	def destroy
 		@team = Team.find(params[:id])
 		raise unless @team.captain_id == @current_user.id || @current_user.is_admin?
-		
+
 		if @team.matches.count == 0
 			@team.destroy
 		else
 			# TODO: Alright, so here's the deal...we probably want to keep a ghost record of this team
 			# what exactly that looks like I'm not sure. I think we'd remove the captain and flag the team as inactive
 			# this would prevent them from being scheduled into games
-			
+
 			# @team.captain_id = nil
 			# @team.active = false
 			# @team.matches.future # mark each as forfeit?

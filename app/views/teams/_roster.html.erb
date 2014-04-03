@@ -1,0 +1,5 @@
+
+<%- roster.each do |player| %>
+	<%= link_to player.name, player%> <%= "(Captain)" if player.id == team.captain_id %>
+	<%= link_to image_tag("plus.png"), "steam://friends/add/#{player.steamid}", :style => "margin-left:15px", :title => "Add on steam", :class => "pluslink" %><br>
+<% end %>

@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140308014849) do
+ActiveRecord::Schema.define(:version => 20140328110938) do
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "games", :force => true do |t|
     t.integer "match_id"
@@ -24,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20140308014849) do
     t.integer "game_code"
   end
 
+  create_table "matchcomments", :force => true do |t|
+    t.integer  "match_id"
+    t.integer  "player_id"
+    t.text     "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "matches", :force => true do |t|
     t.integer  "home_team_id"
     t.integer  "away_team_id"
@@ -33,24 +57,28 @@ ActiveRecord::Schema.define(:version => 20140308014849) do
     t.integer  "away_score"
     t.boolean  "is_disputed"
     t.boolean  "is_live"
-    t.integer  "twitch"
+    t.integer  "caster_id"
     t.integer  "week"
     t.integer  "season"
     t.integer  "season_id"
+    t.boolean  "forfeit"
   end
 
   create_table "players", :force => true do |t|
-    t.integer "team_id"
-    t.string  "name",          :limit => 100
-    t.string  "email",         :limit => 50
-    t.string  "steamid",       :limit => 50
-    t.boolean "cptflag"
-    t.boolean "freeagentflag"
-    t.string  "role",          :limit => 100
-    t.string  "steam32id",     :limit => 50
-    t.boolean "caster"
-    t.string  "region",        :limit => 50
-    t.string  "twitch",        :limit => 50
+    t.integer  "team_id"
+    t.string   "name",            :limit => 100
+    t.string   "email",           :limit => 50
+    t.string   "steamid",         :limit => 50
+    t.boolean  "cptflag"
+    t.boolean  "freeagentflag"
+    t.string   "role",            :limit => 100
+    t.string   "steam32id",       :limit => 50
+    t.boolean  "caster"
+    t.string   "region",          :limit => 50
+    t.string   "twitch",          :limit => 50
+    t.integer  "clickedprobuilt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "players_teams", :force => true do |t|
@@ -63,13 +91,15 @@ ActiveRecord::Schema.define(:version => 20140308014849) do
     t.text     "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "author_id"
   end
 
   create_table "seasons", :force => true do |t|
     t.integer  "league_id"
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.boolean  "registration_open"
   end
 
   create_table "team_seasons", :force => true do |t|
@@ -87,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20140308014849) do
     t.integer "dotabuff_id"
     t.integer "originalmmr"
     t.integer "mmr"
+    t.boolean "active"
   end
 
   create_table "userprofile", :primary_key => "userid", :force => true do |t|

@@ -14,8 +14,12 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require twitter/bootstrap
 //= require best_in_place
+//= require best_in_place_datetime
+//= require ckeditor/init
+//= require_tree .
 
 function IsEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
