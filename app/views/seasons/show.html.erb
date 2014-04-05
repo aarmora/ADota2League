@@ -17,10 +17,10 @@
                         </thead>
                         <tbody>
                             <%@teams.each do |team|%>
-                                 <tr>
+                                <tr>
                                     <td><%= link_to team.teamname, team %></td>
                                     <td><%= @total_scores[team.id].to_i %></td>
-                                 </tr>
+                                </tr>
                             <%end%>
                         </tbody>
                     </table>

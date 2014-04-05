@@ -9,12 +9,12 @@ class ChangeColumnNamesAddInactiveTeamColumn < ActiveRecord::Migration
     add_column :players, :updated_at, :datetime
     add_column :matches, :forfeit, :boolean    
 
-	create_table :MatchComments do |t|
-	  t.integer :match_id
-	  t.integer :player_id
-	  t.text :comment
-	  t.timestamps :create_date
-	end
+  	create_table :MatchComments do |t|
+  	  t.integer :match_id
+  	  t.integer :player_id
+  	  t.text :comment
+  	  t.timestamps :create_date
+  	end
 
   end
 end

@@ -14,6 +14,11 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     @current_tab = @current_user && @player.id == @current_user.id ? "myinfo" : ""
     @can_edit_player = @current_user && (@current_user.id == @player.id || @current_user.is_admin?)
+    Season.all.each do |season|
+      if season.registration_open == true
+        @open_season = true
+      end
+    end
   end
 
   def update
