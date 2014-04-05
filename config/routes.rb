@@ -13,6 +13,7 @@ Ad2l::Application.routes.draw do
   get 'welcome/community' => 'welcome#community'
   get 'logout' => 'welcome#logout'
   post 'matchcomment' => 'matches#create_match_comment'
+  post 'matchcomment_delete' => 'matches#delete_match_comment'
   get 'matchcommentspartial' => 'matches#match_comments_partial'
 
   scope '/admin' do

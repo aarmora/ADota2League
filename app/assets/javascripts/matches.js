@@ -6,7 +6,10 @@ $(document).ready(function(){
 			$('.cke_wysiwyg_frame').html("");
 		});	
 	});
-	$('.matchrow').on('click', function(){
-		window.location.replace("/matches/"+$(this).attr('matchid'));
+	$('.delete').on('click', function(){
+		var $this = $(this)
+		$.post('/matchcomment_delete', {comment_id:$(this).attr('commentid')}, function(){
+			$($this).closest('blockquote').remove();
+		})
 	})
-})
+});

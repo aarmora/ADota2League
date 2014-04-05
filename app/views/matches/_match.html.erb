@@ -1,3 +1,9 @@
+<%if @current_user && ((@current_user.id == match.home_team.captain_id) || (@current_user.id == match.away_team.captain_id) || @current_user.is_admin?)
+	@can_edit_captain = true
+end
+
+%>
+
 <tr class="matchrow" matchid="<%=match.id%>">
 	<td>
 		<%= best_in_place_if @can_edit, match,
@@ -53,7 +59,7 @@
 			 caster = Player.find_by_id(match.caster_id) unless match.caster_id.nil?
 		 %>
 	<td>
-		<%= best_in_place_if @can_edit, match,
+		<%= best_in_place_if @can_edit_captain, match,
 		  :caster_id,
 		  :display_with => (lambda do |caster_id|
 		    caster = Player.find_by_id(caster_id)
@@ -63,9 +69,12 @@
       	  :type => :select,
       	  collection: @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 		%>
-		<% if @can_edit %>
+		<% if @can_edit_captain %>
 			<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-caster"></span>
 		<%end%>
 
+	</td>
+	<td>
+		<%= link_to "Details icon here maybe", match%>
 	</td>
 </tr>

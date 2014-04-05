@@ -1,14 +1,25 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-5 rosterholder">
+		<div class="col-md-8">
+			<h4><%=@match.date.strftime ("%m/%d/%Y")%></h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 rosterholder">
 			<h3><%= link_to @match.home_team.teamname, @match.home_team%></h3>
 			<%= render :partial => "teams/roster", :locals => {:roster => @home_team_roster, :team => @match.home_team}%>
 		</div>
 		<div class="col-md-2">
+			<h3><%=@match.home_score%></h3>
+		</div>
+		<div class="col-md-2">
 			<h3>vs</h3>
 		</div>
-		<div class="col-md-5 rosterholder">
-			<h3><%=@match.away_team.teamname, @match.home_team%></h3>
+		<div class="col-md-2">
+			<h3><%=@match.away_score%></h3>
+		</div>
+		<div class="col-md-3 rosterholder">
+			<h3><%= link_to @match.away_team.teamname, @match.home_team%></h3>
 			<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_team}%>
 		</div>
 	</div> 
@@ -17,10 +28,12 @@
 <div class="container-fluid" id="matchcommentspartial">
 	<%= render :partial => "matches/match_comment", :object => @matches%>	
 </div>
-<div class="container-fluid">
-  <%= form_for Matchcomment.new, :remote => true, :url => matchcomment_path, :html => { :method => :post, :class => "form-horizontal", :role => "form"} do |f| %>
-    <%=f.cktext_area :comment%>
-    <%= f.hidden_field :match_id, :value => @match.id %>
-    <%=f.submit "Post", :class => "button", :id => "publish"%>
-  <%end%>
-</div>
+<%if @current_user%>
+	<div class="container-fluid">
+	  <%= form_for Matchcomment.new, :remote => true, :url => matchcomment_path, :html => { :method => :post, :class => "form-horizontal", :role => "form"} do |f| %>
+	    <%=f.cktext_area :comment%>
+	    <%= f.hidden_field :match_id, :value => @match.id %>
+	    <%=f.submit "Post", :class => "button", :id => "publish"%>
+	  <%end%>
+	</div>
+<%end%>

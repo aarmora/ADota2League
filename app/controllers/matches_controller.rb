@@ -43,6 +43,11 @@ class MatchesController < ApplicationController
     render :partial => 'match_comment', :object => @matchcomments
   end
 
+  def delete_match_comment
+    Matchcomment.find(params[:comment_id]).destroy
+    render :nothing => true
+  end
+
   def match_comments_partial
     @matchcomments = Matchcomment.where(:match_id => params[:match_id]).order("created_at desc")
     render :partial => 'match_comment', :object => @matchcomments
