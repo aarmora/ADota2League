@@ -7,54 +7,34 @@
         <% cache("seasonPage-" + @season.id.to_s) do %>
             <div class="TabsContainer">
                 <div class="tabbody3 active">
-                    <% if @season.id == 1 %>
-                        <div class="col-sm-4">
-                            <h2>Rankings</h2>
+                    <div class="col-sm-4">
+                        <h2>Rankings</h2>
+                        <% @teams_by_division.each do |division, team_seasons| %>
                             <table class="table table-hover table-bordered">
                                 <thead>
+                                    <% if @teams_by_division.size > 1 %>
+                                        <tr>
+                                            <th colspan=3>Division <%= division %></th>
+                                        </tr>
+                                    <% end %>
                                     <tr>
-                                        <th style="width: 204px; text-align: left">Name</th>
-                                        <th>Total Points</th>
+                                        <th>Place</th>
+                                        <th>Name</th>
+                                        <th>Wins</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%@teams.each do |team|%>
+                                    <% team_seasons.sort_by{|ts| @total_scores[ts.team_id] }.reverse.each_with_index do |team_season, index| %>
                                         <tr>
-                                            <td><%= link_to team.teamname, team %></td>
-                                            <td><%= @total_scores[team.id].to_i %></td>
+                                            <td><%= index + 1 %></td>
+                                            <td><%= link_to team_season.team.teamname, team_season.team %></td>
+                                            <td><%= @total_scores[team_season.team_id].to_i %></td>
                                         </tr>
                                     <%end%>
                                 </tbody>
                             </table>
-                        </div>
-                    <% elsif @season.id == 2 %>
-                        <div class="col-sm-4">
-                            <h2>Rankings</h2>
-                            <% @teams_by_division.each do |division, team_seasons| %>
-                                <table class="table table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th colspan=3>Division <%= division %></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Place</th>
-                                            <th>Name</th>
-                                            <th>Wins</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% team_seasons.sort_by{|ts| @total_scores[ts.team_id] }.reverse.each do |team_season| %>
-                                            <tr>
-                                                <td></td>
-                                                <td><%= link_to team_season.team.teamname, team_season.team %></td>
-                                                <td><%= @total_scores[team_season.team_id].to_i %></td>
-                                            </tr>
-                                        <%end%>
-                                    </tbody>
-                                </table>
-                            <%end%>
-                        </div>
-                    <%end%>
+                        <%end%>
+                    </div>
                     <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
                         <h2>Schedule</h2>
                         <%= render :partial => "matches/match_table", :object => @matches %>

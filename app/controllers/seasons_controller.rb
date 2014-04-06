@@ -19,6 +19,8 @@ class SeasonsController < ApplicationController
 
     # compute the scores using the pieces we already have so we don't need to re-fetch them again
     if params[:id] == "1"
+      # don't display the divisions here
+      @teams_by_division = {"" => @teams_by_division.collect {|div, teams| teams}.flatten}
       @total_scores = {}
       @matches.each do |match|
         @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
@@ -32,7 +34,7 @@ class SeasonsController < ApplicationController
       end
     end
 
-    @teams.sort_by!{|t| [@total_scores[t.id].to_i * -1, t.teamname]}
+    # @teams.sort_by!{|t| [@total_scores[t.id].to_i * -1, t.teamname]}
     @matches.sort_by!{|m| m.date ? m.date : Time.now}.reverse
 
     @current_tab = 'seasons'

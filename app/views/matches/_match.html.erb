@@ -55,19 +55,16 @@ end
 		:
 		<%= best_in_place_if @can_edit, match, :away_score, :type => :input %>
 	</td>
-		<% #NOTE: this is a hack for now, do not do this
-			 caster = Player.find_by_id(match.caster_id) unless match.caster_id.nil?
-		 %>
 	<td>
 		<%= best_in_place_if @can_edit_captain, match,
 		  :caster_id,
 		  :display_with => (lambda do |caster_id|
 		    caster = Player.find_by_id(caster_id)
-		    link_to caster.name, caster, :target => "blank"
+		    caster.nil? ? "" : (link_to caster.name, caster, :target => "blank")
 		  end),
 		  :activator => ".glyphicon-warning-sign.#{match.id}-caster",
       	  :type => :select,
-      	  collection: @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
+      	  collection: ["", "None"] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 		%>
 		<% if @can_edit_captain %>
 			<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-caster"></span>
