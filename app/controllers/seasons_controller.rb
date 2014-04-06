@@ -1,7 +1,7 @@
 class SeasonsController < ApplicationController
   def index
   	# TODO: this is a hack, set it explicitly to prevent the DB call here
-    params[:id] = Season.first.id
+    params[:id] = "2"
     show
   end
   def show
@@ -10,13 +10,12 @@ class SeasonsController < ApplicationController
     @teams = @season.teams # TODO: optimize dual lookup with below?
     @matches = @season.matches.includes(:home_team, :away_team)
     @casters = Player.where(:caster => true)
-    @ths = ["Not quite Gallifrey", "Careless Whisper", "Take off, you hoser", "California Love"]
-    @division = {}
-    #I'm sure there's a way I could do this better
-    @division[0] = @season.team_seasons.where(:division => 1).collect { | ts| ts.team}
-    @division[1] = @season.team_seasons.where(:division => 2).collect { | ts| ts.team}
-    @division[2] = @season.team_seasons.where(:division => 3).collect { | ts| ts.team}
-    @division[3] = @season.team_seasons.where(:division => 4).collect { | ts| ts.team}
+
+    # TODO: This should really be on the team season record, change it there and remove this
+    # @division_names = {"1" => "Not quite Gallifrey", "2" => "Careless Whisper", "3" => "Take off, you hoser", "4" => "California Love"]
+
+    # I'm sure there's a way I could do this better
+    @teams_by_division = @season.team_seasons.where("division IS NOT NULL").group_by(&:division)
 
     # compute the scores using the pieces we already have so we don't need to re-fetch them again
     if params[:id] == "1"

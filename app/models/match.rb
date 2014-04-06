@@ -12,6 +12,9 @@ class Match < ActiveRecord::Base
   scope :scored, where("(home_score IS NOT NULL AND home_score > 0) OR (away_score IS NOT NULL AND away_score > 0)")
   attr_accessible :home_team_id, :away_team_id, :home_score, :away_score, :date, :caster_id, :as => [:admin]
 
+  # AR Callbacks
+  after_save :reset_season_page
+
   # We could use a uniqueness validator, but since we have home and away, it wouldn't work so well
   validates_each :home_team_id, :away_team_id do |record, attr, value|
     if Match.where("id != :match AND season_id = :season AND week = :week AND (home_team_id = :id OR away_team_id = :id)", {:id => value, :match => record.id, :season => record.season_id, :week => record.week}).count > 0
@@ -29,5 +32,10 @@ class Match < ActiveRecord::Base
 
   def away_score
     super.to_i
+  end
+
+  def reset_season_page
+    # This will reset the season page associated with this match
+    expire_fragment("seasonPage-" + self.season_id.to_s) unless self.season_id.nil?
   end
 end
