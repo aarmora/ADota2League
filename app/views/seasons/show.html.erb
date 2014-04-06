@@ -18,7 +18,9 @@
                                         </tr>
                                     <% end %>
                                     <tr>
-                                        <th>Place</th>
+                                        <%if @teams_by_division.size > 1 %>
+                                            <th>Place</th>
+                                        <%end%>
                                         <th>Name</th>
                                         <th>Wins</th>
                                     </tr>
@@ -26,7 +28,9 @@
                                 <tbody>
                                     <% team_seasons.sort_by{|ts| @total_scores[ts.team_id] }.reverse.each_with_index do |team_season, index| %>
                                         <tr>
-                                            <td><%= index + 1 %></td>
+                                            <%if @teams_by_division.size > 1 %>
+                                                <td><%= index + 1 %></td>
+                                            <%end%>
                                             <td><%= link_to team_season.team.teamname, team_season.team %></td>
                                             <td><%= @total_scores[team_season.team_id].to_i %></td>
                                         </tr>
