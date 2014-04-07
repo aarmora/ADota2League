@@ -18,7 +18,6 @@
 //= require twitter/bootstrap
 //= require best_in_place
 //= require best_in_place_datetime
-//= require ckeditor/init
 //= require_tree .
 
 function IsEmail(email) {
