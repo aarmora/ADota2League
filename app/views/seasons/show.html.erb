@@ -1,10 +1,10 @@
 <div id="fullbox">
     <div id="tabs">
-    		<%- @seasons.each do |season| %>
-        	<%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
-        <% end %>
-        <div style="clear: both"></div>
         <% cache("seasonPage-" + @season.id.to_s) do %>
+    		<%- @seasons.each do |season| %>
+            	<%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
+            <% end %>
+            <div style="clear: both"></div>
             <div class="TabsContainer">
                 <div class="tabbody3 active">
                     <div class="col-sm-4">
