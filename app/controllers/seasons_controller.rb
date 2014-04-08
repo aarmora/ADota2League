@@ -5,9 +5,9 @@ class SeasonsController < ApplicationController
     show
   end
   def show
+    @seasons = Season.all
+    @season = @seasons.detect {|season| season.id == params[:id].to_i}
     unless fragment_exist?("seasonPage-" + params[:id].to_s)
-      @seasons = Season.all
-      @season = @seasons.detect {|season| season.id == params[:id].to_i}
       @teams = @season.teams # TODO: optimize dual lookup with below?
       @matches = @season.matches.includes(:home_team, :away_team)
       @casters = Player.where(:caster => true)
