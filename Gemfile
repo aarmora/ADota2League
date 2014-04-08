@@ -24,7 +24,7 @@ gem 'kappa', '~> 1.0'
 gem 'best_in_place'
 
 #gem ck editor
-gem 'ckeditor'
+#gem 'ckeditor'
 
 #gem paperclip for ActiveRecord PaperClip
 gem 'paperclip'
@@ -34,6 +34,7 @@ gem 'paperclip'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  #gem 'turbo-sprockets-rails3'
 
   # gem "less-rails"
   gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
