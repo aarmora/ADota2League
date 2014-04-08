@@ -4,7 +4,6 @@ class TeamsController < ApplicationController
 	def show
 		# TODO: Is this mess ok?
 		@team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_team, :home_team], :home_matches => [:away_team, :home_team]}).find(params[:id])
-		@captain_viewing = @current_user && @current_user.id == @team.captain_id
 		@casters = @can_edit ? Player.where("role like '%caster%'") : []
 		if @current_user
 			@current_user.teams.each do |team|
@@ -14,6 +13,7 @@ class TeamsController < ApplicationController
 			end
 		end
 		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
+    	@can_edit_captain = @current_user && (@current_user.is_admin? || @current_user.id == @team.captain_id)
 	end
 
 	def create
