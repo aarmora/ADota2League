@@ -1,5 +1,4 @@
 Ad2l::Application.routes.draw do
-  mount Ckeditor::Engine => '/ckeditor'
 
   get "welcome/index"
   resources :seasons, :only => [:index, :show]
