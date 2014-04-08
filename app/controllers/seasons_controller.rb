@@ -8,11 +8,10 @@ class SeasonsController < ApplicationController
     @seasons = Season.all
     @season = @seasons.detect {|season| season.id == params[:id].to_i}
     unless fragment_exist?("seasonPage-" + params[:id].to_s)
-      @teams = @season.teams # TODO: optimize dual lookup with below?
-      @matches = @season.matches.includes(:home_team, :away_team)
+      @matches = @season.matches.includes(:home_team, :away_team, :caster)
       @casters = Player.where(:caster => true)
 
-      @teams_by_division = @season.team_seasons.where("division IS NOT NULL").group_by(&:division)
+      @teams_by_division = @season.team_seasons.includes(:team).where("division IS NOT NULL").group_by(&:division)
 
       # compute the scores using the pieces we already have so we don't need to re-fetch them again
       if params[:id] == "1"
