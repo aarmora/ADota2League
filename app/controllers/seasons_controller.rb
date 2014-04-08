@@ -7,7 +7,9 @@ class SeasonsController < ApplicationController
   def show
     @seasons = Season.all
     @season = @seasons.detect {|season| season.id == params[:id].to_i}
-    unless fragment_exist?("seasonPage-" + params[:id].to_s)
+
+    # we always need the above, only run all the queries if we need to rebuild the cache or it's an admin
+    if (@current_user && @current_user.is_admin?) || !fragment_exist?("seasonPage-" + params[:id].to_s)
       @matches = @season.matches.includes(:home_team, :away_team, :caster)
       @casters = Player.where(:caster => true)
 

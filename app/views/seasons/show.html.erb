@@ -1,6 +1,6 @@
 <div id="fullbox">
     <div id="tabs">
-        <% cache("seasonPage-" + @season.id.to_s) do %>
+        <% cache_unless_admin(@current_user, "seasonPage-" + @season.id.to_s) do %>
     		<%- @seasons.each do |season| %>
             	<%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
             <% end %>
