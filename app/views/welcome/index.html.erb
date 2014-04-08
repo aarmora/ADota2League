@@ -11,7 +11,7 @@
                     <%@posts.each do |post|%>
                         <div>
                             <h3>
-                                <span><%= post.author.name%></span>
+                                <span><%= post.title%></span>
                                 <span><%= post.created_at.strftime ("%m/%d/%Y")%></span>
                             </h3>
                         </div>
@@ -19,6 +19,7 @@
                     	<div>
                             <%=raw post.text%>
                         </div>
+                        <div><%=post.author.name%></div>
                     <%end%>
                 </div>
         	</div>                   
