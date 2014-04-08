@@ -8,7 +8,7 @@ class UpdateColumnsToRailsFormat < ActiveRecord::Migration
   end
 
   def change
-    with_table_name_prefix("AD2Ltest.aarmora.") do
+    with_table_name_prefix("ad2lrails.aarmora.") do
       rename_column :teams, :teamkey, :id
       rename_column :teams, :cptkey, :captain_id
       rename_column :teams, :teamid, :dotabuff_id

@@ -8,7 +8,7 @@ class AddSessionTable < ActiveRecord::Migration
   end
 
   def up
-  	with_table_name_prefix("AD2Ltest.aarmora.") do
+  	with_table_name_prefix("ad2lrails.aarmora.") do
 	  	create_table :seasons do |t|
 			  t.integer :league_id
 			  t.string :title
@@ -64,7 +64,7 @@ class AddSessionTable < ActiveRecord::Migration
 
   def down
   	# NOTE: this was untested, be nice to it if you need it!
-  	with_table_name_prefix("AD2Ltest.aarmora.") do
+  	with_table_name_prefix("ad2lrails.aarmora.") do
 	  	# re-create columns
 	  	add_column :teams, :season, :integer
 			# add_column :teams, :region, :string

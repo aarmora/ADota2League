@@ -18,7 +18,7 @@ class PlayersController < ApplicationController
       if season.registration_open == true
         @open_season = true
       end
-    end
+    end    
   end
 
   def update
