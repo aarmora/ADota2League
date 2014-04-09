@@ -43,6 +43,19 @@
 				      	 %>
 						</div>
 					</div>
+				<%if @can_edit_captain%>
+
+					<div class="form-group">
+				    <label class="col-sm-2 control-label">Add Player</label>
+					    <div class="col-sm-10">
+					    	<select>
+					    		<option></option>
+					    	</select>
+
+						</div>
+					</div>
+
+				<%end%>
 
 			<% if @team.matches.count == 0 && @can_edit_player %>
 				<%= form_for @team, :method => "delete" do |f| %>
