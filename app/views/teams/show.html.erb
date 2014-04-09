@@ -1,5 +1,5 @@
 <div id="fullbox">
-	<h2><%= @team.teamname %></h2>
+	<h2><%= @team.teamname %><%= " (INACTIVE)" if !@team.active %></h2>
 
 	<div class="form-horizontal" role="form">
 		<% # If the current user is the captain or admin, they can change the team name...but that's all! %>
@@ -17,40 +17,40 @@
 					      <%= best_in_place @team, :mmr, :type => :input %>
 							</div>
 						</div>
-		  			
+
 						<div class="form-group">
 					    <label class="col-sm-2 control-label">Dotabuff ID</label>
 					    <div class="col-sm-10">
 					      <%= best_in_place @team, :dotabuff_id, :type => :input %>
 							</div>
 						</div>
-		  	
+
 						<div class="form-group">
 					    <label class="col-sm-2 control-label">Region</label>
 					    <div class="col-sm-10">
 					      <%= best_in_place @team, :region, :type => :input %>
 							</div>
 						</div>
-				  <% end %>	
+				  <% end %>
 
 					<div class="form-group">
 				    <label class="col-sm-2 control-label">Captain</label>
 				    <div class="col-sm-10">
-				      <%= best_in_place_if @can_edit_captain, @team, 
-				      	:captain_id, 
-				      	:type => :select, 
-				      	collection: @roster.collect {|player| ["#{player.id}", "#{player.name}"]} 
+				      <%= best_in_place_if @can_edit_captain, @team,
+				      	:captain_id,
+				      	:type => :select,
+				      	collection: @roster.collect {|player| ["#{player.id}", "#{player.name}"]}
 				      	 %>
 						</div>
 					</div>
-			
+
 			<% if @team.matches.count == 0 && @can_edit_player %>
 				<%= form_for @team, :method => "delete" do |f| %>
 				  <%= f.submit "Disband Team", :confirm => "Are you sure? This is NOT reversable!", :class => "button", :style => "margin-left:-3px" %>
 				<% end %>
 			<% end %>
 	</div>
-	
+
 	<%= link_to "View Team on Dotabuff", "http://dotabuff.com/teams/#{@team.dotabuff_id}" unless @team.dotabuff_id.nil? %>
 	<br ><br >
 	<h3>Roster</h3>
@@ -58,15 +58,15 @@
 		<%= render :partial => "teams/roster", :locals => {:roster => @roster, :team => @team}%>
 	</div>
 	<br><br>
-	
+
 	<% if @current_user && @current_user.id == @team.captain_id  %>
 		<h3>Register for a new season</h3>
 		<p>Coming soon! When the next season is up, you'll be able to re-register your team here</p>
 	<% end %>
-	
+
 	<h3>Schedule</h3>
 	<%- @team.team_seasons.each do |ts| %>
-		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.empty? %></h4>
+		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
 		<%= render :partial => "matches/match_table", :object => @team.matches.select{ |match| match.season_id == ts.season_id }.sort_by(&:date) %>
 	<% end %>
-</div>	
+</div>

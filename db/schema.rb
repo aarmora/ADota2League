@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20140409185148) do
     t.integer  "season"
     t.integer  "season_id"
     t.boolean  "forfeit"
-    t.boolean  "mmr_processed",                :default => false
+    t.boolean  "mmr_processed",                :default => false, :null => false
   end
 
   create_table "players", :force => true do |t|
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(:version => 20140409185148) do
     t.integer "dotabuff_id"
     t.integer "originalmmr"
     t.integer "mmr"
-    t.boolean "active",                      :default => true
+    t.boolean "active",                      :default => true, :null => false
   end
 
   create_table "userprofile", :primary_key => "userid", :force => true do |t|
