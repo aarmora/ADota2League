@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140405005216) do
+ActiveRecord::Schema.define(:version => 20140409185148) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20140405005216) do
     t.integer  "season"
     t.integer  "season_id"
     t.boolean  "forfeit"
+    t.boolean  "mmr_processed",                :default => false
   end
 
   create_table "players", :force => true do |t|
