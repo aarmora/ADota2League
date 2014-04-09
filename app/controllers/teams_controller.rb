@@ -13,7 +13,7 @@ class TeamsController < ApplicationController
 			end
 		end
 		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
-    @can_edit_captain = @current_user && (@current_user.is_admin? || @current_user.id == @team.captain_id)
+    	@can_edit_captain = @current_user && (@current_user.is_admin? || @current_user.id == @team.captain_id)
 	end
 
 	def create
