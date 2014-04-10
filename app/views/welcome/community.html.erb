@@ -4,39 +4,41 @@
     }
     
 </style>
-<div style="width: 450px;padding: 25px 0px 80px 50px;" id="tbox1">
-    <div><h2>Our amazing Casters!</h2></div>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Twitch Channel</th>
-                <th>Add on steam</th>
-                <th>Region</th>
-            </tr>
-        </thead>
-        <tbody>
-                <%@casters.each do |caster|%>
-                    <tr>
-                        <td><%= link_to caster.name, caster%></td>
-                        <td>
-                            <%if caster.twitch%>
-                                <%= link_to caster.twitch, caster.twitch, :target => "_blank"%>
-                            <%end%>
-                        </td>
-                        <td>
-                            <%= link_to image_tag("plus.png"), "steam://friends/add/#{caster.steamid}" %>
-                        </td>
-                        <td><%=caster.region%></td>
-                    </tr>
-                <%end%>
-        </tbody>
-    </table>
-</div>
-<div style="width: 400px" id="tbox2">
-    <div><h2>Our Community!</h2></div>
-    <div><h4>Our friends</h4></div>
-    <p>Looking for an awesome two day tournament?  Check our friends at League of Dota <a href="http://leagueofdota.com" target="_blank">here.</a></p>
-    <div><h4>Our community created subreddit</h4></div>
-    <p><a href="http://reddit.com/r/ad2l">Visit it here!</a>  We will be posting rescheduled games here and hopefully just some great game discussions can also happen here!  Please feel free to hop in and participate!</p>
+<div class="container">
+    <div class="col-md-6">
+        <div><h2>Our amazing Casters!</h2></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Twitch Channel</th>
+                    <th>Add on steam</th>
+                    <th>Region</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <%@casters.each do |caster|%>
+                        <tr>
+                            <td><%= link_to caster.name, caster%></td>
+                            <td>
+                                <%if caster.twitch%>
+                                    <%= link_to caster.twitch, caster.twitch, :target => "_blank"%>
+                                <%end%>
+                            </td>
+                            <td>
+                                <%= link_to image_tag("plus.png"), "steam://friends/add/#{caster.steamid}" %>
+                            </td>
+                            <td><%=caster.region%></td>
+                        </tr>
+                    <%end%>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <div><h2>Our Community!</h2></div>
+        <div><h4>Our friends</h4></div>
+        <p>Looking for an awesome tournament?  Check our friends at League of Dota <a href="http://leagueofdota.com" target="_blank">here.</a></p>
+        <div><h4>Our community created subreddit</h4></div>
+        <p><a href="http://reddit.com/r/ad2l">Visit it here!</a>  We will be posting rescheduled games here and hopefully just some great game discussions can also happen here!  Please feel free to hop in and participate!</p>
+    </div>
 </div>
