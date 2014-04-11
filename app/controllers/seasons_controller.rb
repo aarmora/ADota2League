@@ -25,7 +25,7 @@ class SeasonsController < ApplicationController
           @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
         end
         #Week has to be adjusted after scores are calculated
-        @matches = @season.matches.includes(:home_team, :away_team, :caster).where("week > 4").sort_by!{|m| m.date ? m.date : Time.now}.reverse
+        @matches = @season.matches.includes(:home_team, :away_team, :caster).where("week > 5").sort_by!{|m| m.date ? m.date : Time.now}.reverse
       elsif params[:id] == "2"
         @total_scores = {}
         @matches.each do |match|
