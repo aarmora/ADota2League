@@ -3,7 +3,7 @@
   <%= form_for Post.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
     <%=f.label(:title, "Title")%>
     <%=f.text_field :title, :class => "form-control", :style => "margin-bottom:10px"%>
-    <%=f.cktext_area :text%>
+    <%=f.text_area :text%>
     <%=f.submit "Post", :class => "button"%>
   <%end%>
 </div>

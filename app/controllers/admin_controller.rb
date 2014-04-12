@@ -15,6 +15,10 @@ class AdminController < ApplicationController
     redirect_to admin_path
   end
 
+  def players
+    @players = Player.includes(:teams).all
+  end
+
   def manage_season
     # Get weeks or something?
 

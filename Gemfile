@@ -29,6 +29,9 @@ gem 'best_in_place'
 #gem paperclip for ActiveRecord PaperClip
 gem 'paperclip'
 
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -14,6 +14,7 @@ Ad2l::Application.routes.draw do
   post 'matchcomment' => 'matches#create_match_comment'
   post 'matchcomment_delete' => 'matches#delete_match_comment'
   get 'matchcommentspartial' => 'matches#match_comments_partial'
+  get 'admin/players' => 'admin#players'
 
   scope '/admin' do
     root :to => "admin#index"

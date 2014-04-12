@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 		@post.attributes = params[:post]
 		@post.author_id = @current_user.id
 		@post.save!
-		redirect_to @post
+		redirect_to root_path
 	end
 
 
