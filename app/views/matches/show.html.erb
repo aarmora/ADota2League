@@ -19,7 +19,7 @@
 			<h3><%=@match.away_score%></h3>
 		</div>
 		<div class="col-md-3 rosterholder">
-			<h3><%= link_to @match.away_team.teamname, @match.home_team%></h3>
+			<h3><%= link_to @match.away_team.teamname, @match.away_team%></h3>
 			<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_team}%>
 		</div>
 	</div> 
