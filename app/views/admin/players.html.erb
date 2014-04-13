@@ -1,0 +1,23 @@
+<%= javascript_include_tag "jquery.tablesorter.min" %>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Steam</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Teams</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%@players.each do |player|%>
+				<tr>
+					<td><%= link_to "Add", "steam://friends/add/#{player.steamid}"%></td>
+					<td><%= link_to player.name, player%></td>
+					<td><%=player.email%></td>
+					<td><%=raw(player.teams.map{|team| raw(link_to( team.teamname, team))}.join(", "))%></td>
+				</tr>
+			<%end%>
+		</tbody>	
+	</table>
+</div>
