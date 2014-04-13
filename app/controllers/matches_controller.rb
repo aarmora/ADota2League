@@ -41,16 +41,16 @@ class MatchesController < ApplicationController
     @match_comment.save!
     @matchcomments = Matchcomment.where(:match_id => params[:matchcomment][:match_id]).order("created_at desc")
     respond_to do |format|
-        # Tell the UserMailer to send a welcome email after save
-        UserMailer.welcome_email(@user).deliver
- 
-        format.html { redirect_to(@user, notice: 'User was successfully created.') }
-        format.json { render json: @user, status: :created, location: @user }
+      # Tell the UserMailer to send a welcome email after save
+      UserMailer.match_comment_email(params[:matchcomment][:match_id]).deliver
+
+      format.html { render :partial => 'match_comment', :object => @matchcomments }
+      #format.json { render :partial => 'match_comment', :object => @matchcomments }
+      
     end
     
 
 
-    render :partial => 'match_comment', :object => @matchcomments
   end
 
   def delete_match_comment
