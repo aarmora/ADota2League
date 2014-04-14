@@ -45,15 +45,14 @@
 					</div>
 				<%if @can_edit_captain%>
 
-					<div class="form-group">
-				    <label class="col-sm-2 control-label">Add Player</label>
+					<div class="form-group" id="addplayers">
+				   		<label class="col-sm-2 control-label">Add Player</label>
 					    <div class="col-sm-10">
-					    	<select id="addplayer" team="<%=@team.id%>">
+					    	<select class="addplayer" team="<%=@team.id%>">
 					    		<%@players.each do |player|%>
 					    			<option value="<%=player.id%>"><%=player.name%></option>
 					    		<%end%>
 					    	</select>
-
 						</div>
 					</div>
 
