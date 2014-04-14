@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
 		end
 		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
     	@can_edit_captain = @current_user && (@current_user.is_admin? || @current_user.id == @team.captain_id)
-    	@players = Player.all
+    	@players = Player.order(:name).all
 	end
 
 	def create
@@ -39,6 +39,10 @@ class TeamsController < ApplicationController
 		        format.json { respond_with_bip(@team) }
 		   	end
 		end
+	end
+
+	def add_player
+		#add player to team here
 	end
 
 	def destroy

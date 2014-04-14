@@ -13,6 +13,7 @@ Ad2l::Application.routes.draw do
   get 'logout' => 'welcome#logout'
   post 'matchcomment' => 'matches#create_match_comment'
   post 'matchcomment_delete' => 'matches#delete_match_comment'
+  post 'add_player' => 'teams#add_player'
   get 'matchcommentspartial' => 'matches#match_comments_partial'
   get 'admin/players' => 'admin#players'
 

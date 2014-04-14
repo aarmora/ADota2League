@@ -48,8 +48,10 @@
 					<div class="form-group">
 				    <label class="col-sm-2 control-label">Add Player</label>
 					    <div class="col-sm-10">
-					    	<select>
-					    		<option></option>
+					    	<select id="addplayer" team="<%=@team.id%>">
+					    		<%@players.each do |player|%>
+					    			<option value="<%=player.id%>"><%=player.name%></option>
+					    		<%end%>
 					    	</select>
 
 						</div>
