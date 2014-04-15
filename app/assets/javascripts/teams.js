@@ -4,9 +4,9 @@ $(document).ready(function(){
 
 	$(document).on('change', '.addplayer', function() {
 
-    // Only add another if it was the last one in the list
-    if ($(this).closest(".form-group").index() == $("#add_players_form .form-group").length - 1) {
-      another.clone().removeAttr('id').insertBefore($("#add_players_form .button"));
+    // Only add another if it was the last one in the list - don't count the hidden field above this el
+    if ($(this).closest(".form-group").index() == $("#add_players_form .form-group").length) {
+      another.clone().removeAttr('id').insertBefore($("#add_players_form button"));
       $("select.addplayer").select2();
     }
 	});
