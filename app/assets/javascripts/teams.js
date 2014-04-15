@@ -1,10 +1,13 @@
 $(document).ready(function(){
-	//Select2 isn't working and it really is needed to be able to search through the names
-	//$('select').select2();
-	another = $('#addplayers').clone();
-	$(document).on('change', '.addplayer', function(){
-		another.clone().removeAttr('id').appendTo($(this).closest('.form-horizontal'));
-		$(this).closest('.form-group').find('.button').remove();
-		//weird stuff happening if you select nothing
+  var another = $('#addplayers').clone();
+  $("select.addplayer").select2();
+
+	$(document).on('change', '.addplayer', function() {
+
+    // Only add another if it was the last one in the list
+    if ($(this).closest(".form-group").index() == $("#add_players_form .form-group").length - 1) {
+      another.clone().removeAttr('id').insertBefore($("#add_players_form .button"));
+      $("select.addplayer").select2();
+    }
 	});
 });

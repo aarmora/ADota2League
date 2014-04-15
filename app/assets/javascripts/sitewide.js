@@ -8,8 +8,6 @@ $(document).ready(function() {
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();
 
-    $("select.select2").select2();
-
     // Handle the live games slide out. Size it on page load, and add the click handler
     function pulloutZeroOffset() {
         return $("#LiveGames").outerHeight() - $("#LiveGames-Callout").outerHeight();
