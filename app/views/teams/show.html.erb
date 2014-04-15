@@ -48,7 +48,7 @@
 					<div class="form-group" id="addplayers">
 				   		<label class="col-sm-2 control-label">Add Player</label>
 					    <div class="col-sm-10">
-					    	<select class="addplayer" team="<%=@team.id%>">
+					    	<select class="addplayer select2" team="<%=@team.id%>" width="600">
 					    		<%@players.each do |player|%>
 					    			<option value="<%=player.id%>"><%=player.name%></option>
 					    		<%end%>

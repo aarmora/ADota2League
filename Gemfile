@@ -33,7 +33,8 @@ gem 'paperclip'
 gem 'jbuilder', '~> 1.2'
 
 #gem select2
-gem "select2-rails"
+# remove when main gem updated
+gem "select2-rails", :git => 'git://github.com/chilian/select2-rails.git'
 
 # Gems used only for assets and not required
 # in production environments by default.

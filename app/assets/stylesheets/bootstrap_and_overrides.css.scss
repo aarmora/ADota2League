@@ -28,6 +28,10 @@ body {
   src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
+.select2 {
+  min-width: 250px;
+}
+
 
 /*********************************************************************************/
 /* Logo                                                                          */
