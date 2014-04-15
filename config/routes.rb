@@ -3,7 +3,12 @@ Ad2l::Application.routes.draw do
   get "welcome/index"
   resources :seasons, :only => [:index, :show]
   get "schedule" => 'seasons#index'
-  resources :teams
+  resources :teams do
+    member do
+      match 'players' => 'teams#add_players', :via => :post
+      match 'players'  => 'teams#remove_players', :via => :delete
+    end
+  end
   resources :matches
   resources :posts
   resources :players, :only => [:new, :index, :show, :update]

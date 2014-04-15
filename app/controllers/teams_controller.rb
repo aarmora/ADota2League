@@ -41,10 +41,6 @@ class TeamsController < ApplicationController
 		end
 	end
 
-	def add_player
-		#add player to team here
-	end
-
 	def destroy
 		@team = Team.find(params[:id])
 		raise unless @team.captain_id == @current_user.id || @current_user.is_admin?
@@ -56,11 +52,27 @@ class TeamsController < ApplicationController
 			# what exactly that looks like I'm not sure. I think we'd remove the captain and flag the team as inactive
 			# this would prevent them from being scheduled into games
 
-			# @team.captain_id = nil
-			# @team.active = false
+			@team.captain_id = nil
+			@team.active = false
 			# @team.matches.future # mark each as forfeit?
-			# @team.save!
+			@team.save!
 		end
 		redirect_to root_path
 	end
+
+	# Endpoints used for handling associating players with teams
+  def add_players
+    @team = Team.find(params[:id])
+    raise ActionController::RoutingError.new('Not Found') unless @current_user && (@team.captain_id == @current_user.id || @current_user.is_admin?)
+    @team.players << Player.find(params[:players])
+    redirect_to @team
+  end
+
+  def remove_players
+  	@team = Team.find(params[:id])
+    raise ActionController::RoutingError.new('Not Found') unless @current_user && (@team.captain_id == @current_user.id || @current_user.is_admin?)
+  	@team.players.delete(Player.find(params[:players]))
+  	redirect_to @team
+  end
+
 end

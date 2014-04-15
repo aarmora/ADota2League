@@ -43,26 +43,26 @@
 				      	 %>
 						</div>
 					</div>
-				<%if @can_edit_captain%>
-					<form id="add_players_form">
+				<%if @can_edit_captain %>
+					<%= form_tag(players_team_url(@team), :method => "POST", :id => "add_players_form") do %>
 						<div class="form-group" id="addplayers">
 				   		<label class="col-sm-2 control-label">Add Player</label>
 					    <div class="col-sm-10">
-					    	<select class="addplayer select2" name="player[]" team="<%=@team.id%>" width="600">
+					    	<select class="addplayer select2" name="players[]" team="<%=@team.id%>" width="600">
 					    		<%@players.each do |player|%>
 					    			<option value="<%=player.id%>"><%=player.name%></option>
 					    		<%end%>
 					    	</select>
 							</div>
 						</div>
-						<div class="button col-sm-offset-2">Add them!</div>
-					</form>
+						<button class="btn btn-primary col-sm-offset-2">Add them!</button>
+					<% end %>
 
 				<%end%>
 
-			<% if @team.matches.count == 0 && @can_edit_player %>
+			<% if @can_edit_captain %>
 				<%= form_for @team, :method => "delete" do |f| %>
-				  <%= f.submit "Disband Team", :confirm => "Are you sure? This is NOT reversable!", :class => "button", :style => "margin-left:-3px" %>
+				  <%= f.submit "Disband Team", :confirm => "Are you sure? This is NOT easily reversable!", :class => "btn btn-danger", :style => "margin-left:-3px" %>
 				<% end %>
 			<% end %>
 	</div>
