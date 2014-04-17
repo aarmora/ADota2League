@@ -1,0 +1,8 @@
+<% # NOTE: Do NOT use many of these on a page, it will check it's own data. So preload them on current user if you MUST %>
+<% if @current_user %>
+	<% if @current_user.endorsed_players.exists? user %>
+		<span data-user-id="<%= user.id %>" class="glyphicon glyphicon-heart endorsed js-endorsement"></span>
+	<% else %>
+		<span data-user-id="<%= user.id %>" class="glyphicon glyphicon-heart js-endorsement"></span>
+	<% end %>
+<% end %>

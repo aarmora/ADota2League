@@ -8,6 +8,14 @@ $(document).ready(function() {
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();
 
+    // Intercept all AJAX requests to add in rails auth token where needed
+    jQuery(document).ajaxSend(function(event, request, settings) {
+      if (typeof(AUTH_TOKEN) == "undefined") return;
+      if (settings.type == 'GET') return; // Don't add anything to a get request let IE turn it into a POST.
+      settings.data = settings.data || "";
+      settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
+    });
+
     // Handle the live games slide out. Size it on page load, and add the click handler
     function pulloutZeroOffset() {
         return $("#LiveGames").outerHeight() - $("#LiveGames-Callout").outerHeight();

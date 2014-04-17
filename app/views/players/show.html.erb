@@ -1,8 +1,14 @@
 
 <div id="fullbox">
-<h2><%= @player.name %></h2>
+<h2><%= @player.name %> <%= render :partial => "players/endorsement_icon", :locals => {:user => @player} %></h2>
 
 	<div class="form-horizontal" role="form">
+		<div class="form-group">
+		    <label class="col-sm-2 control-label">Bio:</label>
+		    <div class="col-sm-10">
+		      <%= best_in_place_if @can_edit_player, @player, :bio, :type => :textarea %>
+		    </div>
+	  	</div>
 		<% if @can_edit_player %>
 			<div class="form-group">
 		    <label class="col-sm-2 control-label">Email</label>
@@ -60,7 +66,7 @@
 <br />
 <h2>Teams</h2>
 	<% @player.teams.each do |team| %>
-		<%= link_to team.teamname, team %><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= "(Active)" if team.active == true%><br><br>
+		<%= link_to team.teamname, team %><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
 	<% end %>
 
 	<%if @open_season%>

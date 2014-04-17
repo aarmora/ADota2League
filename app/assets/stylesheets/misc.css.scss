@@ -1,0 +1,8 @@
+
+/* Endorsement heart icons */
+.glyphicon-heart {
+  cursor: pointer;
+  color: #999;
+  &:hover { text-shadow: #333 1px 1px 5px; }
+  &.endorsed { color: #BB1717; }
+}

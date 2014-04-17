@@ -5,8 +5,14 @@ class Player < ActiveRecord::Base
   has_many :casted_matches, :class_name => "Match", :foreign_key => "caster_id"
   has_many :matches_commented, :class_name => "Matchcomment", :foreign_key => "player_id"
 
+  # Endorsers are people who "voted" for this person. Endorsed players are people this user voted for
+  has_and_belongs_to_many :endorsers, :class_name => "Player", :join_table => "player_votes", 
+      :foreign_key => "recepient_id", :association_foreign_key => "voter_id"
+  has_and_belongs_to_many :endorsed_players, :class_name => "Player", :join_table => "player_votes", 
+    :foreign_key => "voter_id", :association_foreign_key => "recepient_id"
+
   
-  attr_accessible :name, :email, :freeagentflag, :role, :as => [:default, :caster, :admin]
+  attr_accessible :name, :bio, :email, :freeagentflag, :role, :as => [:default, :caster, :admin]
   attr_accessible :twitch, :region, :as => [:admin, :caster]
   attr_accessible :caster, :admin, :as => :admin
   

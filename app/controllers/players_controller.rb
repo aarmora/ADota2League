@@ -30,4 +30,20 @@ class PlayersController < ApplicationController
       end
     end
   end
+
+  def endorse
+    if @current_user
+      @player = Player.find(params[:id])
+      if params[:endorse].to_i == 1
+        @player.endorsers << @current_user
+      else
+        @player.endorsers.delete(@current_user)
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to(@player) }
+      format.json { render :json => {:endorsed => params[:endorse].to_i == 1} }
+    end
+  end
 end

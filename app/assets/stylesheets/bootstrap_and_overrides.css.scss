@@ -6,6 +6,9 @@
   =require twitter-bootstrap-static/fontawesome
   */
 /* These are Charlie Approved Bootstrap overrides only */
+
+
+
 body {
   background-color: transparent;
 }
@@ -22,6 +25,8 @@ body {
 		width: 75%;
 	}
 }
+
+
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('/assets/glyphicons-halflings-regular.eot');
@@ -30,6 +35,12 @@ body {
 
 .select2 {
   min-width: 250px;
+}
+
+/* Fix the alignment of BIP when it's text only on forms. This isn't great, but meh */
+.form-group .col-sm-2 + .col-sm-10 {
+  padding-top: 7px;
+  & > .best_in_place { margin-top: 0px; }
 }
 
 
