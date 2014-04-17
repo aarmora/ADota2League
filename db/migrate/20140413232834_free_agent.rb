@@ -9,6 +9,7 @@ class FreeAgent < ActiveRecord::Migration
     add_column :seasons, :active, :integer   
     #Is this going to be the same as role?
     add_column :players, :bio, :text   
+    add_column :players, :admin, :boolean   
 
   end
 end

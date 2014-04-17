@@ -8,7 +8,7 @@ class Player < ActiveRecord::Base
   
   attr_accessible :name, :email, :freeagentflag, :role, :as => [:default, :caster, :admin]
   attr_accessible :twitch, :region, :as => [:admin, :caster]
-  attr_accessible :caster, :as => :admin
+  attr_accessible :caster, :admin, :as => :admin
   
   def is_admin?
   	# TODO: Move into an ENV config?

@@ -39,7 +39,7 @@
 				      <%= best_in_place_if @can_edit_captain, @team,
 				      	:captain_id,
 				      	:type => :select,
-				      	collection: @roster.collect {|player| ["#{player.id}", "#{player.name}"]}
+				      	collection: @roster.collect {|player| ["#{player.name}", "#{player.id}"]}
 				      	 %>
 						</div>
 					</div>
