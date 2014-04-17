@@ -4,7 +4,7 @@ class Team < ActiveRecord::Base
   # TODO: I think I can make this a straight association by writing custom select / join code...
   has_many :home_matches, :class_name => 'Match', :foreign_key => "home_team_id"
   has_many :away_matches, :class_name => 'Match', :foreign_key => "away_team_id"
-  has_one :captain, :class_name => "Player"
+  belongs_to :captain, :class_name => "Player"
   has_many :team_seasons, :dependent => :delete_all
 
   attr_accessible :teamname, :region, :originalmmr, :as => [:default, :admin]

@@ -15,6 +15,7 @@ class WelcomeController < ApplicationController
 
   def contact
     @current_tab = "contact"
+    @admins = Player.where(:admin => true)
   end
 
   def auth_callback

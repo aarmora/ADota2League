@@ -23,22 +23,8 @@
         </p>
          <p>
             <div><b>Our awesome admins!</b></div>
-            <div>Triforce206 --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198116602969" %></div>
-            <div>-SFG- Lex X --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198080680921" %></div>
-            <div>Sektor --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561197992248063" %></div>
-            <div>=CKA= Storm --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198080680921" %></div>
-            <div>wojciech_jaruzelski --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561197970846795" %></div>
-            <div>Moon --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198030167345" %></div>
-            <div>[DWT] Trenza --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198100664947" %></div>
-            <div>Jaybe --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561197988063113" %></div>
-            <div>JesusC --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561197961355926" %></div>
-            <div>AffinityforSTFU --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198062137050" %></div>
-            <div>@voodoodota --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198018977699" %></div>
-            <div>Fishmoose --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561197991059497" %></div>
-            <div>«[LP]» Boycey --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198053416306" %></div>
-            <div>Leskin_Suk --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561197995664257" %></div>
-            <div>N.W.A --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198082339004" %></div>
-            <div>A3P --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198046824892" %></div>
-            <div>Cr4zE --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198045285557" %></div>
+            <%@admins.each do |admin|%>
+                <div><%= link_to admin.name, admin%> --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/#{admin.steamid}" %></div>
+            <%end%>
         </p>
     </div>
