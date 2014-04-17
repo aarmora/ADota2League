@@ -36,6 +36,9 @@ gem 'jbuilder', '~> 1.2'
 # remove when main gem updated
 gem "select2-rails", :git => 'git://github.com/chilian/select2-rails.git'
 
+
+gem 'rails_12factor', group: :production
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
