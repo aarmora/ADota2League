@@ -15,8 +15,6 @@ bg01.png: bg01-ab7a01c6eb59708d62bc7cdef7d76b6f.png
 bg01/index.png: bg01-ab7a01c6eb59708d62bc7cdef7d76b6f.png
 checkmark.jpg: checkmark-79ff895a91459bc216ccca1de5f3434f.jpg
 checkmark/index.jpg: checkmark-79ff895a91459bc216ccca1de5f3434f.jpg
-dota2background.jpg: dota2background-9ad5ade378286e08e472657c98e4b8f6.jpg
-dota2background/index.jpg: dota2background-9ad5ade378286e08e472657c98e4b8f6.jpg
 dota2background.png: dota2background-0c44feea5b6d0962241aa9d352120820.png
 dota2background/index.png: dota2background-0c44feea5b6d0962241aa9d352120820.png
 dotabuff-icon.png: dotabuff-icon-43a935d15a12122140474751a4c679e1.png
@@ -29,10 +27,10 @@ sits_small.png: sits_small-7a498f5d6682f4f3c705d2c1c2816860.png
 sits_small/index.png: sits_small-7a498f5d6682f4f3c705d2c1c2816860.png
 view_outline_detail.png: view_outline_detail-377e866b0a767ed591c4fe79d379d1d6.png
 view_outline_detail/index.png: view_outline_detail-377e866b0a767ed591c4fe79d379d1d6.png
-application.js: application-1b2630f218ccf90366e77f40a6a5d490.js
-application/index.js: application-1b2630f218ccf90366e77f40a6a5d490.js
-application.css: application-1a72fb0891baec81fa9034d2db99d8ce.css
-application/index.css: application-1a72fb0891baec81fa9034d2db99d8ce.css
+application.js: application-3a46df10a6c989618ab32d93c4a92df6.js
+application/index.js: application-3a46df10a6c989618ab32d93c4a92df6.js
+application.css: application-ef847168a6bf56b73c71dbd09bd358c5.css
+application/index.css: application-ef847168a6bf56b73c71dbd09bd358c5.css
 jquery-ui/animated-overlay.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
 jquery-ui/animated-overlay/index.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif
 jquery-ui/ui-bg_flat_0_aaaaaa_40x100.png: jquery-ui/ui-bg_flat_0_aaaaaa_40x100-7d1197a52442bc56fcad60d0390f4b32.png
@@ -83,9 +81,3 @@ twitter/bootstrap/glyphicons-halflings-white.png: twitter/bootstrap/glyphicons-h
 twitter/bootstrap/glyphicons-halflings-white/index.png: twitter/bootstrap/glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 twitter/bootstrap/glyphicons-halflings.png: twitter/bootstrap/glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
 twitter/bootstrap/glyphicons-halflings/index.png: twitter/bootstrap/glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
-select2-spinner.gif: select2-spinner-efec87a6e4d665ab02c27f9049095490.gif
-select2-spinner/index.gif: select2-spinner-efec87a6e4d665ab02c27f9049095490.gif
-select2.png: select2-dd52d2a9fb1c9fa4a36a773d90c1a549.png
-select2/index.png: select2-dd52d2a9fb1c9fa4a36a773d90c1a549.png
-select2x2.png: select2x2-3433af868bf93f068bda1dbe96a5c9de.png
-select2x2/index.png: select2x2-3433af868bf93f068bda1dbe96a5c9de.png
