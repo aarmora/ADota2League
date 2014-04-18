@@ -64,14 +64,14 @@ class TeamsController < ApplicationController
   def add_players
     @team = Team.find(params[:id])
     raise ActionController::RoutingError.new('Not Found') unless @current_user && (@team.captain_id == @current_user.id || @current_user.is_admin?)
-    @team.players << Player.find(params[:players])
+    @team.players << Player.find(params[:players].select{|i| i.to_i > 0})
     redirect_to @team
   end
 
   def remove_players
   	@team = Team.find(params[:id])
     raise ActionController::RoutingError.new('Not Found') unless @current_user && (@team.captain_id == @current_user.id || @current_user.is_admin?)
-  	@team.players.delete(Player.find(params[:players]))
+  	@team.players.delete(Player.find(params[:players].select{|i| i.to_i > 0}))
   	redirect_to @team
   end
 
