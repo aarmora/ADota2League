@@ -3,7 +3,7 @@ $(document).ready(function(){
 		//This is a hack.  Not sure of a better way to do it.
 		$.get('/matchcommentspartial', {match_id:$('#matchcomment_match_id').val()}, function(data){
 			$('#matchcommentspartial').html(data);
-			$('.cke_wysiwyg_frame').html("");
+			$('textarea').val("");
 			deleteComment();
 		});	
 	});

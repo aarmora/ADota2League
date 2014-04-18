@@ -15,6 +15,23 @@ Ad2l::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
+  #ActionMailer::Base.smtp_settings = {
+  #  :address        => "smtp.gmail.com",
+  #  :port           => "587",
+  #  :authentication => 'plain',
+  #  :user_name      => 'amateurdota2league@gmail.com',
+  #  :password       => ENV["GMAIL_PASSWORD"],
+  #  :domain         => 'gmail.com'
+  #}
+
+
+  ActionMailer::Base.smtp_settings = {
+    :address        => "smtp.mandrillapp.com",
+    :port           => "587",
+    :authentication => 'plain',
+    :user_name      => ENV["MANDRILL_USERNAME"],
+    :password       => ENV["MANDRILL_API_KEY"]
+  }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

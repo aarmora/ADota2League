@@ -66,17 +66,16 @@ namespace :dota do
 
 
 
-
-
-
   desc "Generate Matches for a given league and week"
   task :make_matches => :environment do
     puts "Making matches!"
   end
 
 
-
-
+  desc "Mail stuff here"
+  task :mailer => :environment do  
+    #UserMailer.match_comment_email("892").deliver
+  end
 
 
 

@@ -49,7 +49,15 @@ Ad2l::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  #config.action_mailer.default_url_options = { :host => 'amateurdota2league.com' }
+  ActionMailer::Base.smtp_settings = {
+    :address        => "smtp.gmail.com",
+    :port           => "587",
+    :authentication => :plain,
+    :user_name      => 'amateurdota2league@gmail.com',
+    :password       => 'passhere',
+    :domain         => 'gmail.com'
+  }
 
   # Enable threaded mode
   # config.threadsafe!

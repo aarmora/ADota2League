@@ -74,6 +74,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     erubis (2.7.0)
+    excon (0.33.0)
     execjs (2.0.2)
     faraday (0.8.9)
       multipart-post (~> 1.2.0)
@@ -104,6 +105,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill-api (1.0.51)
+      excon (>= 0.16.0, < 1.0)
+      json (>= 1.7.7, < 2.0)
     mime-types (1.25.1)
     multi_json (1.8.4)
     multi_xml (0.5.5)
@@ -194,6 +198,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kappa (~> 1.0)
+  mandrill-api
   omniauth-steam
   paperclip
   rails (= 3.2.17)
