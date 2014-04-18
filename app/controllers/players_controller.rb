@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   def index
   	@current_tab = "freeagents"
-    @freeagents = Player.where(:freeagentflag => true)
+    @freeagents = Player.includes(:endorsers).where(:freeagentflag => true)
     @player = @current_user ? Player.find(@current_user.id) : nil
   end
 

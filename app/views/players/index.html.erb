@@ -6,6 +6,8 @@
                 <th>Add on Steam</th>
                 <th>Name</th>
                 <th>Role</th>
+                <th>Region</th>
+                <th>Endorsements</th>
             </tr>
         </thead>
         <tbody>
@@ -24,29 +26,14 @@
                             <%=freeagent.role%>
                         <%end%>
                     </td>  
+                    <td>
+                        <%= freeagent.region%>
+                    </td>
+                    <td>
+                        <%#= freeagent.endorsers.count%>
+                    </td>
                 </tr>
             <%end%>
         </tbody>
     </table>
 </div>
-<%if @current_user && @current_user.freeagentflag == false%>
-    <div class="col-md-6">
-        <%= form_for @player do |f| %>
-            <div>
-                <div><h2>Don't have a team yet? Sign up as a free agent</h3></div>
-                <div style="margin-bottom: 25px">
-                    <%= f.label(:email, "Email address :") %>
-                    <%= f.text_field :email, :class => "inputbox"%>
-                </div>
-                <div style="margin-bottom: 25px">
-                    <%= f.label(:role, "Desired role(s) :") %>
-                    <%= f.text_field :role, :class => "inputbox", :maxlength => "60"%>
-                </div>
-                <%= f.hidden_field :freeagentflag, :value => true %>
-            </div>
-            <div style="clear: both">
-                <%= f.submit "Become a free agent!", :class => "button", :style => "margin-left:-3px"%>
-            </div>
-        <%end%>
-    </div>
-<%end%>
