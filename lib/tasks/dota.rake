@@ -60,27 +60,6 @@ namespace :dota do
   	end while last_seen_id <= last_start_id
   end
 
-
-
-
-
-
-
-  desc "Generate Matches for a given league and week"
-  task :make_matches => :environment do
-    puts "Making matches!"
-  end
-
-
-  desc "Mail stuff here"
-  task :mailer => :environment do  
-    #UserMailer.match_comment_email("892").deliver
-  end
-
-
-
-
-
   desc "Adjust MMR for a given league and week based on results"
   task :mmr => :environment do
 
@@ -260,23 +239,5 @@ namespace :dota do
       team = teams.find(k)
       puts "#{team.teamname}: #{team.mmr * v} (#{v}) (#{team.mmr})"
     end
-
-
   end
-
-  task :ckeditor => :environment do
-
-    require 'fileutils'
-
-      desc "Create nondigest versions of all ckeditor digest assets"
-      task "assets:precompile" do
-        fingerprint = /\-[0-9a-f]{32}\./
-        for file in Dir["public/assets/ckeditor/**/*"]
-          next unless file =~ fingerprint
-          nondigest = file.sub fingerprint, '.'
-          FileUtils.cp file, nondigest, verbose: true
-        end
-      end
-  end
-
 end
