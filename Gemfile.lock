@@ -14,6 +14,14 @@ GIT
       faraday_middleware (~> 0.9.0)
 
 GIT
+  remote: git://github.com/rweng/jquery-datatables-rails.git
+  revision: 788a7b24caf8fe58a5493aa3f6a065879a9f752a
+  specs:
+    jquery-datatables-rails (1.12.2)
+      jquery-rails
+      sass-rails
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: cdc2facf19c9a08d2a72fa281b4be3ed72fbee03
   branch: bootstrap3
@@ -195,6 +203,7 @@ DEPENDENCIES
   execjs
   figaro
   jbuilder (~> 1.2)
+  jquery-datatables-rails!
   jquery-rails
   jquery-ui-rails
   kappa (~> 1.0)
