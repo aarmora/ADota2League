@@ -27,7 +27,7 @@ Ad2l::Application.routes.draw do
 
   post 'add_player' => 'teams#add_player'
 
-  get 'playercommentspartial' => 'players#player_comments_partial'
+  get 'player_comments_partial' => 'players#player_comments_partial'
   post 'player_comment' => 'players#create_player_comment'
   post 'player_comment_delete' => 'players#delete_player_comment'
 

@@ -47,10 +47,7 @@ class MatchesController < ApplicationController
       format.html { render :partial => 'match_comment', :object => @matchcomments }
       #format.json { render :partial => 'match_comment', :object => @matchcomments }
       
-  end
-    
-
-
+    end
   end
 
   def delete_match_comment
