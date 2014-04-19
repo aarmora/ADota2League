@@ -6,14 +6,13 @@ $(function() {
 	});
 	$("form").bind('ajax:complete', function(data){
 		//This is a hack.  Not sure of a better way to do it.
-		$.get('/player_comments_partial', {player_id:$('#matchcomment_match_id').val()}, function(data){
+		$.get('/player_comments_partial', {player_id:$('#player_id').val()}, function(data){
 			$('#player_comments_partial').html(data);
 			$('textarea').val("");
 			deleteComment();
 		});	
 	});
 	deleteComment();
-});
 });
 function deleteComment(){
 	$('.delete').on('click', function(){

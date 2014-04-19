@@ -42,21 +42,21 @@ class PlayersController < ApplicationController
       # Possibly email the player when a comment is made
       #UserMailer.match_comment_email(params[:matchcomment][:match_id]).deliver
 
-     format.html { render :partial => 'player_comment', :object => @player_comments }
+     format.html { render :partial => 'player_comments', :object => @player_comments }
       #format.json { render :partial => 'match_comment', :object => @matchcomments }
       
     end
   end
 
-  def delete_match_comment
+  def delete_player_comment
     Player_comment.find(params[:comment_id]).destroy
     render :nothing => true
   end
 
 
   def player_comments_partial
-    @player_comments = Player_comment.where(:recipient_id => params[:id]).order("created_at desc")
-    render :partial => 'player_comment', :object => @player_comments
+    @player_comments = Player_comment.where(:recipient_id => params[:player_id]).order("created_at desc")
+    render :partial => 'player_comments', :object => @player_comments
   end
 
   def endorse

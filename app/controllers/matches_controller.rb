@@ -44,7 +44,7 @@ class MatchesController < ApplicationController
       # Possibly email the team or captain when a comment is made
       #UserMailer.match_comment_email(params[:matchcomment][:match_id]).deliver
 
-      format.html { render :partial => 'match_comment', :object => @matchcomments }
+      format.html { render :partial => 'match_comments', :object => @matchcomments }
       #format.json { render :partial => 'match_comment', :object => @matchcomments }
       
     end
@@ -57,7 +57,7 @@ class MatchesController < ApplicationController
 
   def match_comments_partial
     @matchcomments = Matchcomment.where(:match_id => params[:match_id]).order("created_at desc")
-    render :partial => 'match_comment', :object => @matchcomments
+    render :partial => 'match_comments', :object => @matchcomments
   end
 
 end
