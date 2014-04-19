@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   def index
   	@current_tab = "freeagents"
-    @freeagents = Player.includes(:endorsers).where(:freeagentflag => true)
+    @freeagents = Player.where(:freeagentflag => true)
     @player = @current_user ? Player.find(@current_user.id) : nil
   end
 
@@ -38,13 +38,13 @@ class PlayersController < ApplicationController
     @player_comment.attributes = params[:player_comment]
     @player_comment.save!
     @player_comments = Player_comment.where(:recipient_id => params[:player_comment][:recipient_id]).order("created_at desc")
-    respond_to do |format| 
+    respond_to do |format|
       # Possibly email the player when a comment is made
       #UserMailer.match_comment_email(params[:matchcomment][:match_id]).deliver
 
      format.html { render :partial => 'player_comments', :object => @player_comments }
       #format.json { render :partial => 'match_comment', :object => @matchcomments }
-      
+
     end
   end
 

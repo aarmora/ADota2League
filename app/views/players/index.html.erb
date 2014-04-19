@@ -25,12 +25,12 @@
                         <%else%>
                             <%=freeagent.role%>
                         <%end%>
-                    </td>  
+                    </td>
                     <td>
                         <%= freeagent.region%>
                     </td>
                     <td>
-                        <%#= freeagent.endorsers.count%>
+                        <%= freeagent.endorsements.size %>
                     </td>
                 </tr>
             <%end%>

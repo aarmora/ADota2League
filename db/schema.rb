@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140419190205) do
+ActiveRecord::Schema.define(:version => 20140419230504) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -80,21 +80,22 @@ ActiveRecord::Schema.define(:version => 20140419190205) do
 
   create_table "players", :force => true do |t|
     t.integer  "team_id"
-    t.string   "name",            :limit => 100
-    t.string   "email",           :limit => 50
-    t.string   "steamid",         :limit => 50
+    t.string   "name",               :limit => 100
+    t.string   "email",              :limit => 50
+    t.string   "steamid",            :limit => 50
     t.boolean  "cptflag"
     t.boolean  "freeagentflag"
-    t.string   "role",            :limit => 100
-    t.string   "steam32id",       :limit => 50
+    t.string   "role",               :limit => 100
+    t.string   "steam32id",          :limit => 50
     t.boolean  "caster"
-    t.string   "region",          :limit => 50
-    t.string   "twitch",          :limit => 50
+    t.string   "region",             :limit => 50
+    t.string   "twitch",             :limit => 50
     t.integer  "clickedprobuilt"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "bio"
     t.boolean  "admin"
+    t.integer  "endorsements_count",                :default => 0, :null => false
   end
 
   create_table "players_teams", :force => true do |t|

@@ -1,6 +1,6 @@
-<% # NOTE: Do NOT use many of these on a page, it will check it's own data. So preload them on current user if you MUST %>
+<% # NOTE: Do NOT use many of these on a page, it will check it's own data. So preload outgoing_endorsements on current user if you MUST %>
 <% if @current_user %>
-	<% if @current_user.endorsed_players.exists? user %>
+	<% if @current_user.outgoing_endorsements.where(:recipient_id => user.id).exists? %>
 		<span data-user-id="<%= user.id %>" title="Endorse this player" class="glyphicon glyphicon-heart endorsed js-endorsement"></span>
 	<% else %>
 		<span data-user-id="<%= user.id %>" title="Endorse this player" class="glyphicon glyphicon-heart js-endorsement"></span>
