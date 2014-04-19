@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140417054233) do
+ActiveRecord::Schema.define(:version => 20140419190205) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -65,9 +65,17 @@ ActiveRecord::Schema.define(:version => 20140417054233) do
     t.boolean  "mmr_processed",                :default => false, :null => false
   end
 
+  create_table "player_comments", :force => true do |t|
+    t.integer  "commenter_id"
+    t.integer  "recipient_id"
+    t.text     "comment"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "player_votes", :force => true do |t|
-    t.integer  "voter_id"
-    t.integer  "recepient_id"
+    t.integer "endorser_id"
+    t.integer "recipient_id"
   end
 
   create_table "players", :force => true do |t|

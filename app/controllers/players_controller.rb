@@ -31,6 +31,32 @@ class PlayersController < ApplicationController
     end
   end
 
+
+  def create_player_comment
+    @player_comment = Player_comment.new
+    @player_comment.attributes = params[:player_comment]
+    @player_comment.save!
+    #@matchcomments = Player_comment.where(:match_id => params[:matchcomment][:match_id]).order("created_at desc")
+    #respond_to do |format|
+      # Possibly email the player when a comment is made
+      #UserMailer.match_comment_email(params[:matchcomment][:match_id]).deliver
+
+    #  format.html { render :partial => 'match_comment', :object => @matchcomments }
+      #format.json { render :partial => 'match_comment', :object => @matchcomments }
+      
+  end
+
+  def delete_match_comment
+    Player_comment.find(params[:comment_id]).destroy
+    render :nothing => true
+  end
+
+
+  def player_comments_partial
+    @player_comments = Player_comment.where(:recipient_id => 205)#.order("created_at desc")
+    render :partial => 'player_comment', :object => @player_comments
+  end
+
   def endorse
     if @current_user
       @player = Player.find(params[:id])

@@ -7,9 +7,9 @@ class Player < ActiveRecord::Base
 
   # Endorsers are people who "voted" for this person. Endorsed players are people this user voted for
   has_and_belongs_to_many :endorsers, :class_name => "Player", :join_table => "player_votes", 
-      :foreign_key => "recepient_id", :association_foreign_key => "voter_id"
+      :foreign_key => "recipient_id", :association_foreign_key => "endorser_id"
   has_and_belongs_to_many :endorsed_players, :class_name => "Player", :join_table => "player_votes", 
-    :foreign_key => "voter_id", :association_foreign_key => "recepient_id"
+    :foreign_key => "endorser_id", :association_foreign_key => "recipient_id"
 
   
   attr_accessible :name, :bio, :email, :freeagentflag, :role, :as => [:default, :caster, :admin]

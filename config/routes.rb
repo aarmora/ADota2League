@@ -20,10 +20,17 @@ Ad2l::Application.routes.draw do
   get 'welcome/contact' => 'welcome#contact'
   get 'welcome/community' => 'welcome#community'
   get 'logout' => 'welcome#logout'
+
+  get 'matchcommentspartial' => 'matches#match_comments_partial'
   post 'matchcomment' => 'matches#create_match_comment'
   post 'matchcomment_delete' => 'matches#delete_match_comment'
+
   post 'add_player' => 'teams#add_player'
-  get 'matchcommentspartial' => 'matches#match_comments_partial'
+
+  get 'playercommentspartial' => 'players#player_comments_partial'
+  post 'player_comment' => 'players#create_player_comment'
+  post 'player_comment_delete' => 'players#delete_player_comment'
+
   get 'admin/players' => 'admin#players'
 
   scope '/admin' do
