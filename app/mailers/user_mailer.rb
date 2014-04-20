@@ -17,11 +17,11 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def free_agent_page
-    @players = Player.where(:freeagentflag => true)
+  def free_agent_page(player_id)
+    @players = Player.all
     @players.each do |player| 
-      @player = player
-      mail(to: player.email, subject: 'Someone has commented on your match!')      
+      @player = player    
+      mail(to: player.email, subject: 'A brand new free agent page!') 
     end
   end
 

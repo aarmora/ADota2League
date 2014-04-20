@@ -242,6 +242,6 @@ namespace :dota do
   end
 
   task :mail => :environment do
-    UserMailer.free_agent_page.deliver
+    UserMailer.free_agent_page(205).deliver
   end
 end
