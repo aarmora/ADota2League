@@ -240,8 +240,4 @@ namespace :dota do
       puts "#{team.teamname}: #{team.mmr * v} (#{v}) (#{team.mmr})"
     end
   end
-
-  task :mail => environment do
-    UserMailer.free_agent_page.deliver
-  end
 end

@@ -17,11 +17,5 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def free_agent_page
-    @player = Player.find(205)
-    @player.each do |player| 
-      mail(to: player.email, subject: 'Someone has commented on your match!')      
-    end
-  end
 
 end
