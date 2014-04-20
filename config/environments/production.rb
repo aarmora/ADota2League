@@ -50,13 +50,13 @@ Ad2l::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   #config.action_mailer.default_url_options = { :host => 'amateurdota2league.com' }
+
   ActionMailer::Base.smtp_settings = {
-    :address        => "smtp.gmail.com",
+    :address        => "smtp.mandrillapp.com",
     :port           => "587",
-    :authentication => :plain,
-    :user_name      => 'amateurdota2league@gmail.com',
-    :password       => 'passhere',
-    :domain         => 'gmail.com'
+    :authentication => 'plain',
+    :user_name      => ENV["MANDRILL_USERNAME"],
+    :password       => ENV["MANDRILL_API_KEY"]
   }
 
   # Enable threaded mode
