@@ -4,7 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h2>Hey <%=@player.name%>!</h2>
+    <%unless @player.name.nil?%>
+      <h2>Hey <%=@player.name%>!</h2>
+    <%end%>
     <p>
       We've worked hard on a new free agent page and it is up and ready to go!  With this new page you'll be able to sort by region, name, role, endorsements (more on this later) and search by all of those things!  Check it out <%=link_to "here", "http://amateurdota2league.com/players"%>.  In doing this, we cleared the current free agent list.  So, if you're interested in being a free agent and joining a team or even standing in, please go to your <%=link_to "player page", "http://amateurdota2league.com/players/#{@player.id}"%> and toggle your free agent status on.
     </p>

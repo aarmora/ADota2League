@@ -242,7 +242,7 @@ namespace :dota do
   end
 
   task :mail => :environment do
-    @players = Player.find(:all, :conditions => ["id != ?", 4961]
+    @players = Player.all
     @players.each do |player|
       UserMailer.free_agent_page(player).deliver
     end
