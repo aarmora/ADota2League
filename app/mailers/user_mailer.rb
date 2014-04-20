@@ -17,5 +17,12 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def free_agent_page
+    @players = Player.where(:freeagentflag => true)
+    @players.each do |player| 
+      @player = player
+      mail(to: player.email, subject: 'Someone has commented on your match!')      
+    end
+  end
 
 end
