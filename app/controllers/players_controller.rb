@@ -15,7 +15,7 @@ class PlayersController < ApplicationController
     @current_tab = @current_user && @player.id == @current_user.id ? "myinfo" : ""
     @can_edit_player = @current_user && (@current_user.id == @player.id || @current_user.is_admin?)
     @open_season = Season.where(:registration_open => true).exists?
-    @player_comments = Player_comment.where(:recipient_id => params[:id]).order("created_at desc")
+    @player_comments = PlayerComment.where(:recipient_id => params[:id]).order("created_at desc")
   end
 
   def update
@@ -34,10 +34,10 @@ class PlayersController < ApplicationController
 
 
   def create_player_comment
-    @player_comment = Player_comment.new
+    @player_comment = PlayerComment.new
     @player_comment.attributes = params[:player_comment]
     @player_comment.save!
-    @player_comments = Player_comment.where(:recipient_id => params[:player_comment][:recipient_id]).order("created_at desc")
+    @player_comments = PlayerComment.where(:recipient_id => params[:player_comment][:recipient_id]).order("created_at desc")
     respond_to do |format|
       # Possibly email the player when a comment is made
       #UserMailer.match_comment_email(params[:matchcomment][:match_id]).deliver
@@ -49,13 +49,13 @@ class PlayersController < ApplicationController
   end
 
   def delete_player_comment
-    Player_comment.find(params[:comment_id]).destroy
+    PlayerComment.find(params[:comment_id]).destroy
     render :nothing => true
   end
 
 
   def player_comments_partial
-    @player_comments = Player_comment.where(:recipient_id => params[:player_id]).order("created_at desc")
+    @player_comments = PlayerComment.where(:recipient_id => params[:player_id]).order("created_at desc")
     render :partial => 'player_comments', :object => @player_comments
   end
 
