@@ -62,6 +62,9 @@
 			<li <%if @current_tab == 'community'%> class="current_page_item" <%end%> >
 				<%= link_to "Community", welcome_community_path%>
 			</li>
+			<li <%if @current_tab == 'faq'%> class="current_page_item" <%end%> >
+				<%= link_to "FAQ", welcome_faq_path%>
+			</li>
 	        <li  <%if @current_tab == 'contact'%> class="current_page_item" <%end%>  >
 	        	<%= link_to "Contact", welcome_contact_path%>
 	        </li>

@@ -19,6 +19,7 @@ Ad2l::Application.routes.draw do
   post 'auth/steam/callback' => 'welcome#auth_callback'
   get 'welcome/contact' => 'welcome#contact'
   get 'welcome/community' => 'welcome#community'
+  get 'welcome/faq' => 'welcome#faq'
   get 'logout' => 'welcome#logout'
 
   get 'matchcommentspartial' => 'matches#match_comments_partial'
