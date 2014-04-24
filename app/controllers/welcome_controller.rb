@@ -13,6 +13,10 @@ class WelcomeController < ApplicationController
     @casters = Player.where(:caster => true)
   end
 
+  def faq
+    @current_tab = "faq"
+  end
+
   def contact
     @current_tab = "contact"
     @admins = Player.where(:admin => true)

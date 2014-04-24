@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140419230504) do
+ActiveRecord::Schema.define(:version => 20140423030607) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20140419230504) do
     t.text     "bio"
     t.boolean  "admin"
     t.integer  "endorsements_count",                :default => 0, :null => false
+    t.integer  "mmr"
+    t.integer  "hours_played"
   end
 
   create_table "players_teams", :force => true do |t|

@@ -8,6 +8,8 @@
                 <th>Role</th>
                 <th>Region</th>
                 <th>Endorsements</th>
+                <th>MMR</th>
+                <th>Hours Played</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +33,12 @@
                     </td>
                     <td>
                         <%= freeagent.endorsements.size %>
+                    </td>
+                    <td>
+                        <%= freeagent.mmr %>
+                    </td>
+                    <td>
+                        <%= freeagent.hours_played %>
                     </td>
                 </tr>
             <%end%>
