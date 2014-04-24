@@ -153,7 +153,7 @@
 	padding:4px 12px;
 }
 
-#tabs [class^="tab"]{
+#tabs > .tab {
 	float:left;
 	margin-left:5px;
 }
@@ -164,6 +164,7 @@
 	padding:0px;
 	background:#FFFFFF;
   float: left;
+  width: 100%;
 }
 
 [class^="tabbody"].active{
