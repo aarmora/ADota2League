@@ -1,6 +1,6 @@
 <div id="fullbox">
     <div id="tabs">
-        <% cache_unless_admin(@current_user, "seasonPage-" + @season.id.to_s) do %>
+        <% cache_unless_admin(@current_user, "seasonPage-" + @season.id.to_s + "-" + @weeK_num.to_s) do %>
     		<%- @seasons.each do |season| %>
             	<%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
             <% end %>
@@ -45,10 +45,16 @@
                         <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
                             <h2>Schedule</h2>
                             <h3>Weeks:</h3>
+                            <ul class="list-inline week-selector">
+                                <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
+                                    <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
+                                <% end %>
+                            </ul>
                             <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
-                                <%= link_to_if @week_num != week_num, week_num, :week => week_num %>
+                                <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
+                                    <%= render :partial => "matches/match_table", :object => @matches.select{|m| m.week == week_num } %>
+                                </div>
                             <% end %>
-                            <%= render :partial => "matches/match_table", :object => @matches %>
                         </div>
                     <%end%>
                 </div>

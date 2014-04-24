@@ -1,0 +1,9 @@
+.week-selector {
+  a.active {
+    color: #747474; /* Default */
+    &:hover, &:focus {
+      text-decoration: none;
+      cursor: text;
+    }
+  }
+}

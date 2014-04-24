@@ -7,15 +7,14 @@ class SeasonsController < ApplicationController
   def show
     @seasons = Season.all
     @season = @seasons.detect {|season| season.id == params[:id].to_i}
+    @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
 
     # we always need the above, only run all the queries if we need to rebuild the cache or it's an admin
-    if (@current_user && @current_user.is_admin?) || !fragment_exist?("seasonPage-" + params[:id].to_s)
+    if (@current_user && @current_user.is_admin?) || !fragment_exist?("seasonPage-" + params[:id].to_s + "-" + @week_num.to_s)
       @matches = @season.matches.includes(:home_team, :away_team, :caster)
       @casters = Player.where(:caster => true)
 
       @teams_by_division = @season.team_seasons.includes(:team).where("division IS NOT NULL").group_by(&:division)
-
-      @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
 
       # compute the scores using the pieces we already have so we don't need to re-fetch them again
       if params[:id] == "1"
@@ -37,8 +36,6 @@ class SeasonsController < ApplicationController
         @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
         end
       end
-
-      @matches.select! {|m| m.week == @week_num} unless @week_num.nil?
 
       # @teams.sort_by!{|t| [@total_scores[t.id].to_i * -1, t.teamname]}
     end
