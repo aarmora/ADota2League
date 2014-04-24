@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140423030607) do
+ActiveRecord::Schema.define(:version => 20140424175227) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -116,16 +116,22 @@ ActiveRecord::Schema.define(:version => 20140423030607) do
   create_table "seasons", :force => true do |t|
     t.integer  "league_id"
     t.string   "title"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.boolean  "registration_open"
     t.integer  "active"
+    t.datetime "late_fee_start"
+    t.integer  "price_cents",       :default => 0, :null => false
+    t.integer  "late_price_cents",  :default => 0, :null => false
+    t.integer  "exclusive_group"
   end
 
   create_table "team_seasons", :force => true do |t|
     t.integer "team_id"
     t.integer "season_id"
     t.string  "division"
+    t.boolean "paid",             :default => false, :null => false
+    t.integer "price_paid_cents", :default => 0,     :null => false
   end
 
   create_table "teams", :force => true do |t|

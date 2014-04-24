@@ -6,6 +6,7 @@ class Team < ActiveRecord::Base
   has_many :away_matches, :class_name => 'Match', :foreign_key => "away_team_id"
   belongs_to :captain, :class_name => "Player"
   has_many :team_seasons, :dependent => :delete_all
+  has_many :seasons, :through => :team_seasons
 
   attr_accessible :teamname, :region, :originalmmr, :as => [:default, :admin]
   attr_accessible :dotabuff_id, :captain_id, :mmr, :active, :as => :admin
@@ -23,5 +24,16 @@ class Team < ActiveRecord::Base
       playing_ids = (Match.where(:season_id => season_id, :week => week).pluck(:away_team_id) + Match.where(:season_id => season_id, :week => week).pluck(:home_team_id)).compact
       Team.joins(:team_seasons).where(Team.arel_table[:id].not_in(playing_ids)).where(:team_seasons => {:season_id => season_id})
     end
+  end
+
+  def seasons_available_for_registration
+    current_season_groups = self.seasons.where("exclusive_group IS NOT NULL").pluck(:exclusive_group)
+    result = Season.where(:registration_open => true).where("id NOT IN (:seasons)", {:seasons => self.seasons.pluck(:id)}) unless self.seasons.empty?
+    result = result.where("exclusive_group IS NULL OR exclusive_group NOT IN (:used_groups)", {:used_groups => current_season_groups}) unless current_season_groups.empty?
+    result
+  end
+
+  def can_register_for_new_season?
+    seasons_available_for_registration.exists?
   end
 end

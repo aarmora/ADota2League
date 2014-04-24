@@ -9,6 +9,7 @@ Ad2l::Application.routes.draw do
       match 'players'  => 'teams#remove_players', :via => :delete
     end
   end
+  resources :team_seasons, :only => [:create, :destroy]
   resources :matches
   resources :posts
   resources :players, :only => [:new, :index, :show, :update] do

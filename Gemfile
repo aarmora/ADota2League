@@ -29,6 +29,8 @@ gem 'mandrill-api'
 #gem ck editor
 #gem 'ckeditor'
 
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
 #gem paperclip for ActiveRecord PaperClip
 gem 'paperclip'
 

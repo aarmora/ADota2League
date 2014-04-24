@@ -32,6 +32,15 @@ GIT
       rails (>= 3.1)
       railties (>= 3.1)
 
+GIT
+  remote: https://github.com/stripe/stripe-ruby
+  revision: 48f76057f425ab5c3bb147f3d71c3d36d951159f
+  specs:
+    stripe (1.11.0)
+      json (~> 1.8.1)
+      mime-types (~> 1.25)
+      rest-client (~> 1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -168,6 +177,8 @@ GEM
     rake (10.1.1)
     rdoc (3.12.2)
       json (~> 1.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     ruby-openid (2.5.0)
     sass (3.2.14)
     sass-rails (3.2.6)
@@ -214,6 +225,7 @@ DEPENDENCIES
   rails_12factor
   sass-rails (~> 3.2.3)
   select2-rails!
+  stripe!
   tiny_tds
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)

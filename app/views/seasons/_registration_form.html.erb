@@ -1,0 +1,14 @@
+<h3>Register for a new season</h3>
+<p>Registration is now open for upcoming seasons. You may register your team below. Please ensure that you have read and understand all the rules of the league before registering. Payment (if applicable) is non-refundable. If payment is required and we do not accept it in your country, please contact the admins directly and we can work out an alternate method.</p>
+
+<%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
+  <label>Select season:</label>
+  <% @team.seasons_available_for_registration.each do |season| %>
+    <div class="radio">
+      <%= f.radio_button(:season_id, season.id) %>
+      <%= label_tag("season_id_" + season.id.to_s, season.title + " (#{season.price_string})") %>
+    </div>
+  <% end %>
+  <%= f.hidden_field :team_id, :value => @team.id %>
+  <%= submit_tag "Register!", :class => "btn btn-primary", :confirm => "Please make sure you are committed to playing before registering!" %>
+<% end %>
