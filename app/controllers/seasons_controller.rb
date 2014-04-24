@@ -25,17 +25,15 @@ class SeasonsController < ApplicationController
           @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
           @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
         end
-        #Week has to be adjusted after scores are calculated
-        @matches = @season.matches.includes(:home_team, :away_team, :caster).where("week > 5").sort_by!{|m| m.date ? m.date : Time.now}.reverse
       elsif params[:id] == "2"
         @total_scores = {}
         @matches.each do |match|
           @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + (match.home_score.to_i == 2 ? 1 : 0)
           @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + (match.away_score.to_i == 2 ? 1 : 0)
-        #Less weeks in invitational
-        @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
         end
       end
+
+      @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
 
       # @teams.sort_by!{|t| [@total_scores[t.id].to_i * -1, t.teamname]}
     end
