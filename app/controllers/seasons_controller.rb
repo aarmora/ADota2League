@@ -15,6 +15,8 @@ class SeasonsController < ApplicationController
 
       @teams_by_division = @season.team_seasons.includes(:team).where("division IS NOT NULL").group_by(&:division)
 
+      @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
+
       # compute the scores using the pieces we already have so we don't need to re-fetch them again
       if params[:id] == "1"
         # don't display the divisions here
@@ -35,6 +37,8 @@ class SeasonsController < ApplicationController
         @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
         end
       end
+
+      @matches.select! {|m| m.week == @week_num} unless @week_num.nil?
 
       # @teams.sort_by!{|t| [@total_scores[t.id].to_i * -1, t.teamname]}
     end

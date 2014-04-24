@@ -44,6 +44,10 @@
                         </div>
                         <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
                             <h2>Schedule</h2>
+                            <h3>Weeks:</h3>
+                            <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
+                                <%= link_to_if @week_num != week_num, week_num, :week => week_num %>
+                            <% end %>
                             <%= render :partial => "matches/match_table", :object => @matches %>
                         </div>
                     <%end%>
