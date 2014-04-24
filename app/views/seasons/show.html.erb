@@ -11,7 +11,7 @@
                         <iframe src="http://challonge.com/ec24l8q4/module" width="1100px" height="1000px" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
                     <%else%>
                         <div class="col-sm-4">
-                            <h2>Rankings</h2>
+                            <h2 class="rankings">Rankings</h2>
                             <% @teams_by_division.each do |division, team_seasons| %>
                                 <table class="table table-hover table-bordered">
                                     <thead>
@@ -44,7 +44,6 @@
                         </div>
                         <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
                             <h2>Schedule</h2>
-                            <h3>Weeks:</h3>
                             <ul class="list-inline week-selector">
                                 <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
                                     <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
