@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hey Emre!</h1>
+    <p>
+      <%=@name == "" ?  "Somebody" : @name  %> submitted a top play!<br>
+    </p>
+    <p>
+      Match ID is <%=@match_id%>.
+    </p>
+    <p>
+      Time is <%=@time%>.
+    </p>
+    <%unless @comments == ""%>
+      <p>
+        Their comments are:
+        <br> "<%=@comments%>"
+      </p>
+    <%end%>
+    <%unless @email == ""%>
+      <p>
+        If you have further questions you can contact them here <%=@email%>.
+      </p>
+    <%end%>
+  </body>
+</html>

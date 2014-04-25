@@ -22,6 +22,16 @@ class WelcomeController < ApplicationController
     @admins = Player.where(:admin => true)
   end
 
+  def top_plays_email
+    name = params[:name]
+    email = params[:email]
+    time = params[:time]
+    match_id = params[:match_id]
+    comments = params[:comments]
+    UserMailer.top_plays_email(name, email, time, match_id, comments).deliver
+    render :nothing => true
+  end
+
   def auth_callback
     auth = request.env['omniauth.auth']
     session[:current_user] = { 
@@ -34,7 +44,7 @@ class WelcomeController < ApplicationController
   end
 
   def logout
-      reset_session
-      redirect_to :controller => 'welcome'
+    reset_session
+    redirect_to :controller => 'welcome'
   end
 end

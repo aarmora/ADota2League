@@ -24,4 +24,14 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def top_plays_email(name, email, time, match_id, comments)
+    @name = name
+    @email = email
+    @time = time
+    @match_id = match_id
+    @comments = comments
+    mail(to: ENV['TOP_PLAY_EMAIL'], cc: ENV['GMAIL_ACCOUNT'], subject: "AD2L top play!")
+
+  end
+
 end

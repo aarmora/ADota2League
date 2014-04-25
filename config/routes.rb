@@ -21,6 +21,7 @@ Ad2l::Application.routes.draw do
   get 'welcome/community' => 'welcome#community'
   get 'welcome/faq' => 'welcome#faq'
   get 'logout' => 'welcome#logout'
+  post 'top_plays_email' => 'welcome#top_plays_email'
 
   get 'matchcommentspartial' => 'matches#match_comments_partial'
   post 'matchcomment' => 'matches#create_match_comment'

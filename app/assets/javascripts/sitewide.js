@@ -51,6 +51,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-46030946-1', 'amateurdota2league.com');
 ga('send', 'pageview');
 
+//Reset ajax forms on ajax:complete
+$(document).ready(function(){
+    $("#top_plays_form").bind('ajax:complete', function(){
+        $('#top_plays_form').trigger('reset');
+        alert('Thanks for submitting this play!')
+    });
+});
 
 
 //tabs js
