@@ -59,6 +59,18 @@ $(document).ready(function(){
     });
 });
 
+//Accordion js
+$('.header').on('click', function(){
+    if($(this).hasClass('nonActive')){
+        $(this).removeClass('nonActive').addClass('active');
+        $(this).closest('.accordionContainer').find('.accordionBody').css('display', 'block');
+        $(this).find('.icon-secondary[class*="arrow"]').removeClass('arrowright').addClass('arrowdown');        
+    }   else{
+        $(this).removeClass('active').addClass('nonActive');
+        $(this).closest('.accordionContainer').find('.accordionBody').hide();
+        $(this).find('.icon-secondary[class*="arrow"]').removeClass('arrowdown').addClass('arrowright');
+    }
+});
 
 //tabs js
 $(document).on('click', '#tabs .nonactive[id^="tab"]', function(){
