@@ -4,7 +4,7 @@ $(function() {
   	"iDisplayLength": 25,
   	"aaSorting": [[ 4, "desc" ]]
 	});
-	$("#player_comments_form").bind('ajax:complete', function(data){
+	$("form").bind('ajax:complete', function(data){
 		//This is a hack.  Not sure of a better way to do it.
 		$.get('/player_comments_partial', {player_id:$('#player_id').val()}, function(data){
 			$('#player_comments_partial').html(data);
