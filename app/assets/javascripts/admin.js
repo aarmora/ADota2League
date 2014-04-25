@@ -6,3 +6,6 @@ $('input.filter').on('keyup', function() {
         return rex.test($(this).text());
     }).show();
 });
+$(document).ready(function(){
+	$('select').select2();
+});
