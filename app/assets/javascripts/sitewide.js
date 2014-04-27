@@ -25,9 +25,11 @@ $(document).ready(function() {
 
     $("#LiveGames-Callout").on('click', function() {
         if ($("#LiveGames").css("top") == "0px") {
+            $(this).find(".glyphicon").removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
             $("#LiveGames").css("top", pulloutZeroOffset() * -1);
         } else {
             $("#LiveGames").css("top", 0);
+            $(this).find(".glyphicon").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
         }
     });
 
