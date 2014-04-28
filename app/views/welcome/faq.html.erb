@@ -1,58 +1,115 @@
-<%if 1 == 2%>
-	<div class="panel-group" id="accordion">
-	  <div class="panel panel-default">
-	    <div class="panel-heading">
-	      <h4 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Registration</a>
-	      </h4>
-	    </div>
-	    <div id="collapseOne" class="panel-collapse collapse in">
-	      <div class="panel-body">
-	      	<p>During our registration period you can sign up your team to compete in AD2L.</p></br>
-				<p>To sign up for AD2L complete the following steps:</p>
-					<ol>
-						<li>Sign into steam</li>
-						<li>Click the Sign Up! tab</li>
-						<li>Find the team section</li>
-						<li>Complete the input box with your team name and email</li>
-						<li>Select the region you would like to compete in. NA = North America, EU=Europe</li>
-						<li>Click Submit.</li>
-					<ol>
-				<p>
-				<p>Afer you are registered you can go to your team page and add people to your team. Give you teammates the team key and they can join your team.</p></br>
-				<p>Follow us on Twitter and Facebook to get the latest announcements on registration periods and season start dates.</p>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="panel panel-default">
-	    <div class="panel-heading">
-	      <h4 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-	          Collapsible Group Item #2
-	        </a>
-	      </h4>
-	    </div>
-	    <div id="collapseTwo" class="panel-collapse collapse">
-	      <div class="panel-body">
-	        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-	      </div>
-	    </div>
-	  </div>
-	  <div class="panel panel-default">
-	    <div class="panel-heading">
-	      <h4 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-	          Collapsible Group Item #3
-	        </a>
-	      </h4>
-	    </div>
-	    <div id="collapseThree" class="panel-collapse collapse">
-	      <div class="panel-body">
-	        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-	      </div>
-	    </div>
-	  </div>
-	</div>
-<%else%>
-	<p>Seth needs to get this stuff going, huh.  C'mon, Seth!  You should email him at sethad2l@gmail.com and say that you want your FAQ page!  Or just add him on <%= link_to "steam", "steam://friends/add/76561198096413824" %>. He says he'll have it ready by this weekend (no later than April 27th!).</p>
-<%end%>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">When does Season 4 start?</a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+      	<p>Season 4 will being the first week of June, 2014.</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Registration</a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+      	<p>During our registration period you can sign up your team to compete in AD2L.</p></br>
+		<p>To sign up for AD2L complete the following steps:</p>
+			<ol>
+				<li>Sign into steam</li>
+				<li>Click the "My info/Teams" tab</li>
+				<li>Find the team section</li>
+				<li>Complete the input box with your team name</li>
+				<li>Select the region you would like to compete in and estimated MMR. NA = North America, EU=Europe</li>
+				<li>Click Submit.</li>
+			<ol>
+		<p>Afer you are registered you can go to your team page and add people to your team. </p></br>
+		<p>Follow us on Twitter and Facebook to get the latest announcements on registration periods and season start dates.<b>Please note that until registration is open for the next season you will be able to register a new team.</b></p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          How do I add members to my team or join a team?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+		<p>In Season 4 the captain will be responsible for adding any team members to his team.  There will be no way for a player to join a team without the captain.  However, in order to be added to a team you will have to be in our system.</p>
+		<p>To get into our system you'll simply need to sign in through steam!.</p>
+		<p>If you are a captain and want to add a player you do the following:</p>
+			<ol>
+				<li>Select desired player from the "add player" section</li>
+				<li>When the desired players are listed, click "add them!"</li>
+				<li>Smile and send a maple bar to <%=link_to "Leskin", "/players/1808"%>.  He deserves it.</li>
+			<ol>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+          Can I sign up if I do not have a team?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse">
+      <div class="panel-body">
+		<p><b>Please do!</b>  We really want AD2L to be a community where teams can find players and players can find teams.  In order to get on the free agent list do the following:</p>
+		<ol>
+			<li>Sign in through Steam</li>
+			<li>Set your free agent status to "Yes".</li>
+			<li>Find teams.  Make teams.  Make friends.  Play.  Win.</li>
+		<ol>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+          How do I use the free agent page?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse">
+      <div class="panel-body">
+		<p>Each player on our site has their own page where they can put something about themselves in their bio, list their desired roles, their MMR and total hours played. Please use these so that teams can recruit you and you can easily recruit others.  You can sort by any of these statistics on our free agent page.  We also have a few additional pretty cool tools that you can use.</p>
+		<h4>Endorsements</h4>
+		<p>Each player's page has a heart right next to their name.  If you click this heart, you endorse that player as a good player or someone worth playing with.  If you enjoyed playing with a player even a little, we encourage you to endorse this person.  This doesn't necessarily mean the player is going to be professional by any means.  It's just a little something saying that someone real believes this player has value.</p>
+		<h4>Comments</h4>
+		<p>Comments are like one step beyond an endorsement.  If you feel that soemone was especially worthwhile, leave a comment!  This should help others know a little more about the player and their skills.  This is NOT a place for flames or criticisms.  Comments are not anonymous and if we will take further action.</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+          Can I cast matches for AD2L?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseSix" class="panel-collapse collapse">
+      <div class="panel-body">
+		<p>Almost always yes!  Our premier league has contracted casters but the rest of our groups almost always needs casters and we love the games to be cast!  In order to be able to cast for AD2L please do the following:</p>
+		<ol>
+			<li>Sign in through Steam</li>
+			<li>Email the url of your player page to amateurdota2league@gmail.com requesting that you'd like to cast</li>
+			<li>Pick a game that you want to cast and tell and admin to schedule it for you!  Done!</li>
+			<li><b>Side note:</b> We REALLY want the AD2L community to grow.  We encourage you to add the captains on steam and let them know that you want to cast their game.  Get to know people!  Almost all teams would love to have their game cast!</li>
+		<ol>
+      </div>
+    </div>
+  </div>
+</div>
