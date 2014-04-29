@@ -7,8 +7,12 @@ class Season < ActiveRecord::Base
     self.late_fee_start && self.late_fee_start < Time.now ? self.late_price_cents : self.price_cents
   end
 
+  def late_fee_applies
+    self.late_fee_start && self.late_fee_start < Time.now
+  end
+
   def price_string
-    if self.late_fee_start && self.late_fee_start < Time.now
+    if self.late_fee_applies
       self.late_price_cents == 0 ? "Free!" : "$" + "%.2f" % (self.late_price_cents / 100.0) + " incl. Late Fee"
     else
       self.price_cents == 0 ? "Free!" : "$" + "%.2f" % (self.price_cents / 100.0)

@@ -9,4 +9,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def format_price(price_cents)
+    price_cents == 0 ? "Free!" : "$" + "%.2f" % (price_cents / 100.0)
+  end
 end

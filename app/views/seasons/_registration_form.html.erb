@@ -6,7 +6,7 @@
   <% @team.seasons_available_for_registration.each do |season| %>
     <div class="radio">
       <%= f.radio_button(:season_id, season.id) %>
-      <%= label_tag("season_id_" + season.id.to_s, season.title + " (#{season.price_string})") %>
+      <%= label_tag("season_id_" + season.id.to_s, season.title + " (#{format_price(season.current_price)})") %>
     </div>
   <% end %>
   <%= f.hidden_field :team_id, :value => @team.id %>

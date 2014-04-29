@@ -1,0 +1,29 @@
+<% if @ts.paid %>
+  <h3>Oops!</h3>
+  Looks like you've already paid for the entry fee for <%= @ts.season.title %>. Good Luck!
+<% else %>
+  <%= form_for @ts do |f| %>
+    <h3><%= @ts.season.title %> Payment</h3>
+
+    <p>To complete your signup, you'll need to pay the registration fee by clicking on the nifty little button below. If you are unable to pay using a credit card, please contact one of the admins and we'll see what alternate methods might be available to you.</p>
+
+    <p>If you don't have a card handy at the moment, you can always return to pay later by logging in and returning to this URL!</p>
+
+    <% if @ts.season.late_fee_start && @ts.season.late_fee_start >= Time.now %>
+      <div class="alert alert-info"><strong>Note:</strong> there is a late fee associated with this tournament, if you choose not to pay now, make sure you do it before <%= @ts.season.late_fee_start.strftime ("%m/%d/%Y") %> when the price will become <%= format_price(@ts.season.late_price_cents) %></div>
+    <% end %>
+
+    <div class="amount">
+      <strong>Amount: <%= format_price(@ts.season.current_price) %></strong>
+    </div>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-image="<%= path_to_image "AD2LS3.png" %>"
+            data-name="Amateur Dota 2 League"
+            <%= "data-email='#{@current_user.email}'" unless @current_user.email.nil? %>
+            data-description="<%= @ts.season.title %> Entry Fee"
+            data-amount="<%= @ts.season.current_price %>"
+            data-allow-remember-me="false"></script>
+  <% end %>
+<% end %>
