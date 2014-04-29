@@ -94,6 +94,9 @@
 	<%- @team.team_seasons.each do |ts| %>
 		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
 		<% if @can_edit_captain %>
+			<% if ts.paid == false && ts.season.current_price.to_i > 0 %>
+				<%= link_to "Pay Registration Fee", ts, :class => "btn btn-primary" %>
+			<% end %>
 			<%= form_for ts, :html => {:method => :delete} do |f|  %>
 			  <%= f.submit "Withdraw", :confirm => "Are you sure you want to withdraw from this season? This is NOT easily reversable!", :class => "btn btn-danger" %>
 			<% end %>
