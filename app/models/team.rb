@@ -28,7 +28,8 @@ class Team < ActiveRecord::Base
 
   def seasons_available_for_registration
     current_season_groups = self.seasons.where("exclusive_group IS NOT NULL").pluck(:exclusive_group)
-    result = Season.where(:registration_open => true).where("id NOT IN (:seasons)", {:seasons => self.seasons.pluck(:id)}) unless self.seasons.empty?
+    result = Season
+    result = result.where(:registration_open => true).where("id NOT IN (:seasons)", {:seasons => self.seasons.pluck(:id)}) unless self.seasons.empty?
     result = result.where("exclusive_group IS NULL OR exclusive_group NOT IN (:used_groups)", {:used_groups => current_season_groups}) unless current_season_groups.empty?
     result
   end
