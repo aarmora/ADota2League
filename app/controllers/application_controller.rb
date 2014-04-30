@@ -21,7 +21,11 @@ class ApplicationController < ActionController::Base
   def check_active_streams
     @active_streams = Rails.cache.fetch("active_twitch_streams", :expires_in => 90.seconds) do
       twitch_accounts = ["amateurdota2league","amateurdota2league1"] + Player.where(:caster => true).select{|p| p.twitch}.map {|p| p.twitch.split('/').last }.compact
-      Twitch.streams.find(:channel => twitch_accounts).select {|stream| stream.channel.status.downcase.include? "ad2l"}
+      begin
+        Twitch.streams.find(:channel => twitch_accounts).select {|stream| stream.channel.status.downcase.include? "ad2l"}
+      rescue
+        []
+      end
     end
   end
 
