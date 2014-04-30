@@ -19,7 +19,7 @@
 
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-image="<%= path_to_image "AD2LS3.png" %>"
+            data-image="<%= path_to_image "AD2L.png" %>"
             data-name="Amateur Dota 2 League"
             <%= "data-email='#{@current_user.email}'" unless @current_user.email.nil? %>
             data-description="<%= @ts.season.title %> Entry Fee"
