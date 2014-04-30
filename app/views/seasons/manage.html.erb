@@ -1,0 +1,2 @@
+<h3>Season Management Page</h3>
+<%= render :partial => "seasons/edit_form", :locals => {:season => @season} if @current_user && @current_user.is_admin? %>

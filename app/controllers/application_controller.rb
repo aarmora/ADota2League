@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
       Twitch.streams.find(:channel => twitch_accounts).select {|stream| stream.channel.status.downcase.include? "ad2l"}
     end
   end
+
+  def verify_admin
+    raise ActionController::RoutingError.new('Not Found') unless @current_user && @current_user.is_admin?
+  end
 end

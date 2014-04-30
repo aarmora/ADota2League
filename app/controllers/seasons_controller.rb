@@ -1,4 +1,6 @@
 class SeasonsController < ApplicationController
+  before_filter :verify_admin, :only => [:create, :update, :manage]
+
   def index
   	# TODO: this is a hack, set it explicitly to prevent the DB call here
     params[:id] = "2"
@@ -41,6 +43,28 @@ class SeasonsController < ApplicationController
     @current_tab = 'seasons'
 
     render :action => 'show' # explicitly needed because index calls this method and expects it to render
+  end
+
+  def create
+    s = Season.create
+    redirect_to manage_season_path(s)
+  end
+
+  def update
+    @season = Season.find(params[:id])
+    respond_to do |format|
+      if @season.update_attributes(params[:season], :as => @current_user.permission_role)
+        format.html { redirect_to(@season, :notice => 'Season was successfully updated.') }
+        format.json { respond_with_bip(@season) }
+      else
+        format.html { render :action => "show" }
+        format.json { respond_with_bip(@season) }
+      end
+    end
+  end
+
+  def manage
+    @season = Season.find(params[:id])
   end
 
 end

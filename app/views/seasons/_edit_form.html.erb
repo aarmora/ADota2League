@@ -1,0 +1,69 @@
+<div class="col-sm-6">
+  <h5>Basics</h5>
+  <div class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="col-sm-6 control-label">Name</label>
+      <div class="col-sm-6">
+        <%= best_in_place season, :title, :type => :input %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-6 control-label">Dota 2 Ticket League Id</label>
+      <div class="col-sm-6">
+        <%= best_in_place season, :league_id, :type => :input %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-6 control-label">Registration Open Now?</label>
+      <div class="col-sm-6">
+        <%= best_in_place season, :league_id, :type => :checkbox %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-6 control-label">Active?</label>
+      <div class="col-sm-6">
+        <%= best_in_place season, :league_id, :type => :checkbox %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-horizontal" role="form">
+    <h5>Registration</h5>
+    <div class="form-group">
+      <div class="col-sm-6 control-label">
+        <label>Cost in cents</label>
+        <p class="help-block">e.g. 500 -> $5.00, 0 -> Free!</p>
+      </div>
+      <div class="col-sm-6">
+        <%= best_in_place season, :price_cents, :type => :input %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-6 control-label">
+        <label>Late Fee Start Time</label>
+        <p class="help-block">Date on which late fee price starts...blank for never</p>
+      </div>
+      <div class="col-sm-6">
+
+        <%= best_in_place season, :late_fee_start, :type => :datetime %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-6 control-label">Late price in cents</label>
+      <div class="col-sm-6">
+        <%= best_in_place season, :late_price_cents, :type => :input %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-6 control-label">
+        <label>Season Group #</label>
+        <p class="help-block">Teams may only register for ONE season in each group...blank if you don't conflict</p>
+      </div>
+      <div class="col-sm-6">
+        <%= best_in_place season, :exclusive_group, :type => :input %>
+      </div>
+    </div>
+  </div>
+</div>

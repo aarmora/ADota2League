@@ -10,8 +10,7 @@
 			  :date,
 			  :display_with => lambda { |date| date.strftime("%-m/%-d/%y %l:%M%p")},
 			  :activator => ".glyphicon-warning-sign.#{match.id}-date",
-	      	  :type => :datetime,
-	      	  collection: @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
+	      :type => :datetime
 			%>
 			<% if @can_edit %>
 				<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-date"></span>

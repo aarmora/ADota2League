@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
 	def index
 	end
+
 	def create
 		@post = Post.new
 		@post.attributes = params[:post]
@@ -13,6 +14,6 @@ class PostsController < ApplicationController
 
 
   def verify_admin
-  	raise ActionController::RoutingError.new('Not Found') unless @current_user && @current_user.is_admin? 
+  	raise ActionController::RoutingError.new('Not Found') unless @current_user && @current_user.is_admin?
   end
 end

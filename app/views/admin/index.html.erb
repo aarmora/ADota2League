@@ -39,6 +39,16 @@
 <h2>Season / Schedule Management</h2>
 <p>Choose a season and week to manage</p>
 
+<%- #Create a new season by clickign the button, then edit! %>
+<%= form_for Season.new do |f| %>
+  <%= f.submit "Create new season", :class => "btn btn-primary" %>
+<% end %>
+
+
+<% Season.all.each do |s| %>
+  <h3><%= link_to s.title, manage_season_path(s) %></h3>
+<% end %>
+
 <%= link_to "Posts", posts_path, :class => "button"%>
 
 

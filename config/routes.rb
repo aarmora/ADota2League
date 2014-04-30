@@ -1,22 +1,31 @@
 Ad2l::Application.routes.draw do
 
   get "welcome/index"
-  resources :seasons, :only => [:index, :show]
+  resources :seasons, :only => [:create, :update, :index, :show] do
+    member do
+      match 'manage' => "seasons#manage"
+    end
+  end
+
   get "schedule" => 'seasons#index'
+
   resources :teams do
     member do
       match 'players' => 'teams#add_players', :via => :post
       match 'players'  => 'teams#remove_players', :via => :delete
     end
   end
+
   resources :team_seasons, :only => [:create, :show, :update, :destroy]
   resources :matches
   resources :posts
+
   resources :players, :only => [:new, :index, :show, :update] do
     member do
       match 'endorse' => 'players#endorse', :via => :post
     end
   end
+
   post 'auth/steam/callback' => 'welcome#auth_callback'
   get 'welcome/contact' => 'welcome#contact'
   get 'welcome/community' => 'welcome#community'
