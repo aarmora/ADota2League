@@ -81,14 +81,27 @@
 	</div>
 	<br><br>
 
-	<% if @current_user && @current_user.id == @team.captain_id  %>
-		<h3>Register for a new season</h3>
-		<p>Coming soon! When the next season is up, you'll be able to re-register your team here</p>
+	<% if @current_user && @current_user.id == @team.captain_id %>
+		<% if @team.can_register_for_new_season? %>
+			<%= render :partial => "seasons/registration_form" %>
+		<% else %>
+			<h3>Register for a new season</h3>
+			<p>Coming soon! When the next season is up, you'll be able to register your team for it here</p>
+		<% end %>
 	<% end %>
 
 	<h3>Schedule</h3>
 	<%- @team.team_seasons.each do |ts| %>
 		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
+		<% if @can_edit_captain %>
+			<% if ts.paid == false && ts.season.current_price.to_i > 0 %>
+				<%= link_to "Pay Registration Fee", ts, :class => "btn btn-primary" %>
+			<% end %>
+			<%= form_for ts, :html => {:method => :delete} do |f|  %>
+			  <%= f.submit "Withdraw", :confirm => "Are you sure you want to withdraw from this season? This is NOT easily reversable!", :class => "btn btn-danger" %>
+			<% end %>
+		<% end %>
+
 		<%= render :partial => "matches/match_table", :object => @team.matches.select{ |match| match.season_id == ts.season_id }.sort_by(&:date) %>
 	<% end %>
 </div>
