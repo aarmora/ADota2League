@@ -228,15 +228,17 @@ namespace :dota do
     # Output
     @rpis.sort_by { |k,v| v * -1}.each do |k, v|
       next if k.nil?
-      puts "#{teams.find(k).teamname}: #{v}"
+      puts "#{teams.find(k).teamname}: #{v}" rescue next
     end
 
     puts "------------------"
 
     # Output
-    @rpis.sort_by { |k,v| teams.find(k).mmr * v * -1}.each do |k, v|
+    @rpis.sort_by do |k,v|
+      teams.find(k).mmr * v * -1 rescue -1
+    end.each do |k, v|
       next if k.nil?
-      team = teams.find(k)
+      team = teams.find(k) rescue next
       puts "#{team.teamname}: #{team.mmr * v} (#{v}) (#{team.mmr})"
     end
   end
