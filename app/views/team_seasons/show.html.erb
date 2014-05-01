@@ -10,7 +10,7 @@
     <p>If you don't have a card handy at the moment, you can always return to pay later by logging in and returning to this URL!</p>
 
     <% if @ts.season.late_fee_start && @ts.season.late_fee_start >= Time.now %>
-      <div class="alert alert-info"><strong>Note:</strong> there is a late fee associated with this tournament, if you choose not to pay now, make sure you do it before <%= @ts.season.late_fee_start.strftime ("%m/%d/%Y") %> when the price will become <%= format_price(@ts.season.late_price_cents) %></div>
+      <div class="alert alert-info"><strong>Note:</strong> there is a late fee associated with this tournament, if you choose not to pay now, make sure you do it before <%= format_date(@ts.season.late_fee_start) %> when the price will become <%= format_price(@ts.season.late_price_cents) %></div>
     <% end %>
 
     <div class="amount">

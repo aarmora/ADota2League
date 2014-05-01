@@ -20,4 +20,8 @@ class Season < ActiveRecord::Base
       self.price_cents == 0 ? "Free!" : "$" + "%.2f" % (self.price_cents / 100.0)
     end
   end
+
+  def challonge_tournament
+    @challonge_tournament ||= self.challonge_id.nil? ? nil : Challonge::Tournament.find(self.challonge_id)
+  end
 end

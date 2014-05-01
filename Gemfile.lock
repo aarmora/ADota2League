@@ -79,6 +79,8 @@ GEM
       jquery-rails
       rails (~> 3.1)
     builder (3.0.4)
+    challonge-api (0.2.0)
+      activeresource
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -209,6 +211,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-sqlserver-adapter
   best_in_place
+  challonge-api
   coffee-rails (~> 3.2.1)
   dota!
   execjs

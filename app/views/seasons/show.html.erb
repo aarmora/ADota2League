@@ -2,16 +2,16 @@
     <div id="tabs">
         <% cache_unless_admin(@current_user, "seasonPage-" + @season.id.to_s + "-" + @weeK_num.to_s) do %>
     		<%- @seasons.each do |season| %>
-                <%unless season.active.nil?%>
+                <% unless season.active.nil? %>
             	   <%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
                 <%end%>
             <% end %>
             <div style="clear: both"></div>
             <div class="TabsContainer">
                 <div class="tabbody3 active">
-                    <%if @season.challonge_url != nil %>
+                    <% if (@season.challonge_url && !@season.challonge_tournament) || (@season.challonge_tournament && @season.challonge_tournament.state != "pending") %>
                         <iframe src="http://challonge.com/<%=@season.challonge_url%>/module" width="1100px" height="1000px" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
-                    <%else%>
+                    <% else %>
                         <div class="col-sm-4">
                             <h2 class="rankings">Rankings</h2>
                             <% @teams_by_division.each do |division, team_seasons| %>
@@ -46,15 +46,19 @@
                         </div>
                         <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
                             <h2>Schedule</h2>
-                            <ul class="list-inline week-selector">
+                            <% if @season.challonge_tournament %>
+                                <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
+                            <% else %>
+                                <ul class="list-inline week-selector">
+                                    <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
+                                        <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
+                                    <% end %>
+                                </ul>
                                 <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
-                                    <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
+                                    <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
+                                        <%= render :partial => "matches/match_table", :object => @matches.select{|m| m.week == week_num } %>
+                                    </div>
                                 <% end %>
-                            </ul>
-                            <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
-                                <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
-                                    <%= render :partial => "matches/match_table", :object => @matches.select{|m| m.week == week_num } %>
-                                </div>
                             <% end %>
                         </div>
                     <%end%>

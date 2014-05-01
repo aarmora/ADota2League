@@ -6,13 +6,14 @@
   <% @team.seasons_available_for_registration.each do |season| %>
     <div class="radio">
       <%= f.radio_button(:season_id, season.id) %>
-      <%= label_tag("season_id_" + season.id.to_s, season.title + " (#{format_price(season.current_price)})") %>
+      <%= label_tag("team_season_season_id_" + season.id.to_s, season.title + " (#{format_price(season.current_price)})") %>
       <%if season.title.include? "weekend"%>
-      	<span>Begins <%=season.start_date.strftime("%-m/%-d/%y %l:%M%p")%> EDT</span>
-      <%else%>
-      	<span>Begins <%=season.start_date.strftime("%-m/%-d/%y")%></span>
-      <%end%>
-    </div>    
+      	(Weekend Tournament Series!)
+      	<span>Begins <%= format_datetime(formatseason.start_date) %> EDT</span>
+      <% else %>
+      	<span>Begins <%= format_date(season.start_date)%></span>
+      <% end %>
+    </div>
   <% end %>
   <span class="btn btn-info btn-xs" data-toggle="modal" data-target="#WTS">
   	Learn more about the Weekend Tournament Series
