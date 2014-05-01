@@ -66,5 +66,4 @@ class SeasonsController < ApplicationController
   def manage
     @season = Season.find(params[:id])
   end
-
 end
