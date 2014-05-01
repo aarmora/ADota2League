@@ -1,2 +1,46 @@
 <h3>Season Management Page</h3>
 <%= render :partial => "seasons/edit_form", :locals => {:season => @season} if @current_user && @current_user.is_admin? %>
+
+<h4>Teams</h4>
+  <table class="table table-bordered">
+    <tr><th>Team</th><th>Captain</th><th>Division</th><th>Paid?</th></tr>
+    <% @season.team_seasons.each do |ts| %>
+    <tr>
+      <td><%= ts.team.teamname %></td>
+      <td><%= ts.team.captain.name if ts.team.captain %></td>
+      <td><%= best_in_place ts, :division, :type => :input %></td>
+      <td><%= best_in_place ts, :paid, :type => :checkbox %></td>
+    </tr>
+    <% end %>
+  </table>
+
+<h4>Challonge</h4>
+<p>Use the settings below to sync the tournament to Challonge and back</p>
+
+<strong>Current Challonge Settings:</strong>
+<div class="col-sm-8">
+  <% if @season.challonge_id.nil? %>
+    <p>Not Setup</p>
+  <% else %>
+    <label class="col-sm-6 control-label">Link</label>
+    <div class="col-sm-6">
+      <%= link_to "http://challonge.com/#{@season.challonge_url}" %>
+    </div>
+    <label class="col-sm-6 control-label">Participants</label>
+    <div class="col-sm-6">
+      <%= self.challonge_tournament.participants.count %>
+    </div>
+    <label class="col-sm-6 control-label">Matches</label>
+    <div class="col-sm-6">
+      <%= self.challonge_tournament.matches.count %>
+    </div>
+  <% end %>
+</div>
+<div class="col-sm-4">
+  <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn" %>
+  <%= link_to "Sync matches", sync_challonge_matches_season_path(@season), :class => "btn" %>
+  <%= # link_to "Start Challonge!", start_challonge_season_path(@season)
+      # Rebuild tournament (WARN)
+  %>
+</div>
+

@@ -1,9 +1,13 @@
 class ChallongeController < ApplicationController
   before_filter :verify_admin
+  before_filter :load_season
 
   # does a full sync of the tournament to challonge
   def setup
-    @season = Season.find(params[:id])
+    if @season.registration_open
+      flash[:error] = "You must close registration before setting up the challonge tournament"
+      redirect_to manage_season_path(@season)
+    end
 
     #########
     # update tournament
@@ -46,6 +50,15 @@ class ChallongeController < ApplicationController
       end
     end
 
+    # Write everything back to the database
+    @season.challonge_id = t.id
+    @season.challonge_url = t.url # just the extension, we'll format this client side
+    @season.challonge_type = t.tournament_type
+    @season.save!
+  end
+
+  def sync_matches
+    t = Challonge::Tournament.find(@season.challonge_id)
     #########
     # sync matches
     #########
@@ -67,16 +80,13 @@ class ChallongeController < ApplicationController
       match.away_score = scores[1] if scores.size == 2
       match.save
     end
-
-
-    # Write everything back to the database
-    @season.challonge_id = t.id
-    @season.challonge_url = t.url # just the extension, we'll format this client side
-    @season.challonge_type = t.tournament_type
-    @season.save!
   end
 
   def team_id_from_player(p)
     ActiveSupport::JSON.decode(p.misc)["team_id"]
+  end
+
+  def load_season
+    @season = Season.find(params[:id])
   end
 end

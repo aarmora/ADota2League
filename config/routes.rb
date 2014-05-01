@@ -5,6 +5,7 @@ Ad2l::Application.routes.draw do
     member do
       match 'manage' => "seasons#manage"
       match 'setup_challonge' => "challonge#setup"
+      match 'sync_challonge_matches' => "challonge#sync_matches"
     end
   end
 

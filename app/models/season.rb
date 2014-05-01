@@ -1,4 +1,5 @@
 class Season < ActiveRecord::Base
+  extend ActiveSupport::Memoizable
 	has_many :team_seasons, :dependent => :delete_all
 	has_many :teams, :through => :team_seasons
 	has_many :matches
@@ -20,4 +21,9 @@ class Season < ActiveRecord::Base
       self.price_cents == 0 ? "Free!" : "$" + "%.2f" % (self.price_cents / 100.0)
     end
   end
+
+  def challonge_tournament
+    self.challonge_id.nil? ? nil : Challonge::Tournament.find(self.challonge_id)
+  end
+  memoize :challonge_tournament
 end
