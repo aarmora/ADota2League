@@ -50,6 +50,7 @@ class SeasonsController < ApplicationController
     @season = Season.find(params[:id])
     respond_to do |format|
       if @season.update_attributes(params[:season], :as => @current_user.permission_role)
+        expire_fragment("seasonPage-" + @season.id.to_s)
         format.html { redirect_to(@season, :notice => 'Season was successfully updated.') }
         format.json { respond_with_bip(@season) }
       else
