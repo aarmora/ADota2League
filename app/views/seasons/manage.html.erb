@@ -26,6 +26,12 @@
   <h5>Current Challonge Settings:</h5>
   <% if @season.challonge_id.nil? %>
     <p>Not Setup</p>
+    <div class="form-group">
+      <label class="col-sm-6 control-label">Manually set challonge URL (just the extension)</label>
+      <div class="col-sm-6">
+        <%= best_in_place @season, :challonge_url, :type => :input %>
+      </div>
+    </div>
   <% else %>
     <div class="row">
       <label class="col-sm-4 control-label">Link</label>

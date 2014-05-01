@@ -9,7 +9,7 @@
             <div style="clear: both"></div>
             <div class="TabsContainer">
                 <div class="tabbody3 active">
-                    <% if @season.challonge_tournament && @season.challonge_tournament.state != "pending" %>
+                    <% if (@season.challonge_url && !@season.challonge_tournament) || (@season.challonge_tournament && @season.challonge_tournament.state != "pending") %>
                         <iframe src="http://challonge.com/<%=@season.challonge_url%>/module" width="1100px" height="1000px" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
                     <% else %>
                         <div class="col-sm-4">
