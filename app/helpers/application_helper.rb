@@ -11,11 +11,11 @@ module ApplicationHelper
   end
 
   def format_date(t)
-    t.strftime("%-m/%-d/%y")
+    t ? t.strftime("%-m/%-d/%y") : ""
   end
 
   def format_datetime(t)
-    t.strftime("%-m/%-d/%y %l:%M%p")
+    t ? t.strftime("%-m/%-d/%y %l:%M%p") : ""
   end
 
   def format_price(price_cents)

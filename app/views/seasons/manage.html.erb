@@ -15,32 +15,50 @@
   </table>
 
 <h4>Challonge</h4>
-<p>Use the settings below to sync the tournament to Challonge and back</p>
+<p>Use the settings below to sync the tournament to Challonge and back. A few notes:</p>
+<ul>
+  <li>Divisions have no meaning for Challonge, they will be ignored</li>
+  <li>Only teams marked as "Paid" will be synced to challonge</li>
+  <li>If a team withdrawns on AD2L (including becoming unpaid), they will be withdrawn on Challonge</li>
+</ul>
 
-<strong>Current Challonge Settings:</strong>
 <div class="col-sm-8">
+  <h5>Current Challonge Settings:</h5>
   <% if @season.challonge_id.nil? %>
     <p>Not Setup</p>
   <% else %>
-    <label class="col-sm-6 control-label">Link</label>
-    <div class="col-sm-6">
-      <%= link_to "http://challonge.com/#{@season.challonge_url}" %>
+    <div class="row">
+      <label class="col-sm-4 control-label">Link</label>
+      <div class="col-sm-8">
+        <%= link_to "http://challonge.com/#{@season.challonge_url}", "http://challonge.com/#{@season.challonge_url}" %>
+      </div>
     </div>
-    <label class="col-sm-6 control-label">Participants</label>
-    <div class="col-sm-6">
-      <%= self.challonge_tournament.participants.count %>
+    <div class="row">
+      <label class="col-sm-4 control-label">Participants</label>
+      <div class="col-sm-8">
+        <%= @season.challonge_tournament.participants.count %>
+      </div>
     </div>
-    <label class="col-sm-6 control-label">Matches</label>
-    <div class="col-sm-6">
-      <%= self.challonge_tournament.matches.count %>
+    <div class="row">
+      <label class="col-sm-4 control-label">Matches</label>
+      <div class="col-sm-8">
+        <%= @season.challonge_tournament.matches.count %>
+      </div>
     </div>
   <% end %>
 </div>
 <div class="col-sm-4">
-  <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn" %>
-  <%= link_to "Sync matches", sync_challonge_matches_season_path(@season), :class => "btn" %>
-  <%= # link_to "Start Challonge!", start_challonge_season_path(@season)
-      # Rebuild tournament (WARN)
-  %>
+  <h5>Available Actions:</h5>
+  <p>Actions are available depending on the state of the tournament. It must not be active to sync data to challonge. It must be finished (with all scores reported) to sync back to AD2L</p>
+  <% if !@season.challonge_tournament %>
+    <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn btn-primary btn-block" %>
+  <% elsif @season.challonge_tournament && @season.challonge_tournament.state == 'pending' %>
+    <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn btn-primary btn-block" %>
+    <%= link_to "Launch tournament", launch_challonge_season_path(@season), :class => "btn btn-success btn-block" %>
+  <% elsif @season.challonge_tournament && @season.challonge_tournament.state == 'complete' %>
+    <%= link_to "Sync matches", sync_challonge_matches_season_path(@season), :class => "btn btn-success btn-block" %>
+  <% elsif @season.challonge_tournament %>
+    <%= link_to "Rebuild Challonge", rebuild_challonge_season_path(@season), :class => "btn btn-danger btn-block", :confirm => "This will reset all data on challonge and rebuild the tournament from scratch...are you sure?" %>
+  <% end %>
 </div>
 

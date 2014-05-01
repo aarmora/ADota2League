@@ -16,6 +16,9 @@ class Team < ActiveRecord::Base
      home_matches + away_matches
   end
 
+  def default_mmr
+    3000
+  end
 
   def self.available_for_season_and_week(season_id, week)
     @result_map ||= {}
