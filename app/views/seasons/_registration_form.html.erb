@@ -7,8 +7,7 @@
     <div class="radio">
       <%= f.radio_button(:season_id, season.id) %>
       <%= label_tag("season_id_" + season.id.to_s, season.title + " (#{format_price(season.current_price)})") %>
-      <%unless season.challonge_url.nil?%>
-      	(Weekend Tournament Series!)
+      <%if season.title.include? "weekend"%>
       	<span>Begins <%=season.start_date.strftime("%-m/%-d/%y %l:%M%p")%> EDT</span>
       <%else%>
       	<span>Begins <%=season.start_date.strftime("%-m/%-d/%y")%></span>
