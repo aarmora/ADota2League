@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140429054739) do
+ActiveRecord::Schema.define(:version => 20140501114646) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20140429054739) do
     t.integer  "season_id"
     t.boolean  "forfeit"
     t.boolean  "mmr_processed",                :default => false, :null => false
+    t.integer  "challonge_id"
   end
 
   create_table "player_comments", :force => true do |t|
@@ -125,6 +126,11 @@ ActiveRecord::Schema.define(:version => 20140429054739) do
     t.integer  "price_cents",       :default => 0, :null => false
     t.integer  "late_price_cents",  :default => 0, :null => false
     t.integer  "exclusive_group"
+    t.integer  "challonge_id"
+    t.string   "challonge_url"
+    t.string   "challonge_type"
+    t.datetime "start_date"
+    t.text     "description"
   end
 
   create_table "team_seasons", :force => true do |t|
