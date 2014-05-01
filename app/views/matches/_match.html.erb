@@ -9,11 +9,11 @@
 		<%= best_in_place_if @can_edit, match,
 			  :date,
 			  :display_with => lambda { |date| date.strftime("%-m/%-d/%y %l:%M%p")},
-			  :activator => ".glyphicon-warning-sign.#{match.id}-date",
+			  :activator => ".fa-calendar.#{match.id}-date",
 	      :type => :datetime
 			%>
 			<% if @can_edit %>
-				<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-date"></span>
+				<span class="fa fa-calendar form-control-feedback <%=match.id%>-date"></span>
 			<%end%>
 		</td>
 	<td>

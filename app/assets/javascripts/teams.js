@@ -10,4 +10,10 @@ $(document).ready(function(){
       $("select.addplayer").select2();
     }
 	});
+	$('.fa-question-circle').popover();
+	$('.fa-question-circle').on('shown.bs.popover', function(){
+		setTimeout(function(){
+			$('.fa-question-circle').popover('hide');		
+		}, 2500);
+	})
 });
