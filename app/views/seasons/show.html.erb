@@ -2,7 +2,9 @@
     <div id="tabs">
         <% cache_unless_admin(@current_user, "seasonPage-" + @season.id.to_s + "-" + @weeK_num.to_s) do %>
     		<%- @seasons.each do |season| %>
-            	<%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
+                <%unless season.active.nil?%>
+            	   <%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
+                <%end%>
             <% end %>
             <div style="clear: both"></div>
             <div class="TabsContainer">
