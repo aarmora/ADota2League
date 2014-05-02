@@ -20,7 +20,7 @@ class UserMailer < ActionMailer::Base
   def free_agent_page(player)
     unless player.email.nil?
       @player = player    
-      mail(to: player.email, subject: 'A brand new free agent page!') 
+      mail(to: player.email, subject: 'Weekend Tournament') 
     end
   end
 
