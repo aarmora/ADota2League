@@ -27,7 +27,7 @@ class SeasonsController < ApplicationController
           @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
           @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
         end
-      else params[:id] == "2"
+      else
         @total_scores = {}
         @matches.each do |match|
           @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + (match.home_score.to_i == 2 ? 1 : 0)

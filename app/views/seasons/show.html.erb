@@ -33,7 +33,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% team_seasons.sort_by{|ts| @total_scores[ts.team_id] }.each_with_index do |team_season, index| %>
+                                        <% team_seasons.sort_by do |ts|
+                                            if @season.start_date && @season.start_date > Time.now
+                                                ts.id
+                                            else
+                                                @total_scores[ts.team_id]
+                                            end
+                                        end.each_with_index do |team_season, index| %>
                                             <tr>
                                                 <%if @teams_by_division.size > 1 %>
                                                     <td><%= index + 1 %></td>
