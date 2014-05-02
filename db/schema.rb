@@ -144,15 +144,17 @@ ActiveRecord::Schema.define(:version => 20140502225410) do
   end
 
   create_table "teams", :force => true do |t|
-    t.string  "teamname",     :limit => 300
-    t.integer "captain_id"
-    t.boolean "tuesdayflag"
-    t.boolean "thursdayflag"
-    t.string  "region",       :limit => 50
-    t.integer "dotabuff_id"
-    t.integer "originalmmr"
-    t.integer "mmr"
-    t.boolean "active",                      :default => true, :null => false
+    t.string   "teamname",     :limit => 300
+    t.integer  "captain_id"
+    t.boolean  "tuesdayflag"
+    t.boolean  "thursdayflag"
+    t.string   "region",       :limit => 50
+    t.integer  "dotabuff_id"
+    t.integer  "originalmmr"
+    t.integer  "mmr"
+    t.boolean  "active",                      :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "userprofile", :primary_key => "userid", :force => true do |t|

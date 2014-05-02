@@ -1,0 +1,18 @@
+<div class="container">
+  	<span class="btn btn-info btn-xs" data-toggle="modal" data-target="#WTS">
+  		Learn more about the Weekend Tournament Series
+	</span>
+	<%if 1==2%>
+	  <span class="btn btn-info btn-xs" data-toggle="modal" data-target="#Season4">
+	  	Learn more about the Season 4 format
+		</span>
+	<%end%>
+	<% if @current_user && @current_user.id == @team.captain_id %>
+		<% if @team.can_register_for_new_season? %>
+			<%= render :partial => "seasons/registration_form" %>
+		<% else %>
+			<h3>Register for a new season</h3>
+			<p>Coming soon! When the next season is up, you'll be able to register your team for it here</p>
+		<% end %>
+	<% end %>
+</div>
