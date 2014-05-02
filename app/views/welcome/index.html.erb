@@ -1,13 +1,13 @@
 
 <div id="fullbox">
-    <div id="tabs">
+    <div data-no-transition-cache id="tabs">
         <div class="tab active" id="tab1">News</div>
         <div class="tab nonactive" id="tab2">The Why</div>
         <div class="tab nonactive" id="tab3">Rules</div>
         <div class="tab nonactive" id="tab4">Submit Top Plays!</div>
         <div style="clear: both"></div>
         <div class="TabsContainer" style="width:100%">
-            <div class="tabbody1 active">   
+            <div class="tabbody1 active">
                 <div class="container-fluid" style="width:100%">
                     <%@posts.each do |post|%>
                         <div>
@@ -23,7 +23,7 @@
                         <div><%=post.author.name%></div>
                     <%end%>
                 </div>
-        	</div>                   
+        	</div>
             <div class="tabbody2 nonactive">
                 <div>
                     <p>We created this league because we love to play Dota.  We are busy adults but want to have at least one dedicated night a week to play games as an organized team.  We want this league to be as simple and user friendly as possible.  Most of all we want to have fun and enjoy Dota!</p>
@@ -35,14 +35,14 @@
             </div>
             <div class="tabbody3 nonactive">
                 <div>
-                    <h3>Schedule and match reporting</h3>  
-    
+                    <h3>Schedule and match reporting</h3>
+
                     <p>There will be six weeks of best of two matches every Tuesday or Thursday at 9:00pm EST.  Each separate league will have a maximum of 49 teams.  If teams can come to agreement on a different time that works for BOTH teams, that would also be acceptable.  If no agreement can be made, the games will be played at 9:00 est on the proper league night. The schedule found <%= link_to "here", seasons_path%> and on your team page will outline the six week schedule before the season begins.  After the six weeks, the top ranked teams will compete in a few weeks of play-offs.</p>
                     <p>After each game you report the match results by submitting your match ids on your team page.</p>
 
                     <h3>Stand ins</h3>
                     <p>Stand ins are totally allowed.  We want the games to be played!  If you are having trouble filling your roster for the season or just one night, please check the free agent page <a href="freeagent.asp">here</a> or contact us and we'll make sure that you have a full team.</p>
-    
+
                     <h3>Game Settings</h3>
                     <p>Game Mode: Captains Mode</p>
                     <p>Home team gets choice between either first pick or side.</p>
@@ -66,7 +66,7 @@
             </div>
             <div class="tabbody4 nonactive">
               <div class="container-fluid">
-                <h3>Submit your top plays!</h3>                   
+                <h3>Submit your top plays!</h3>
                 <%= form_tag (top_plays_email_path), :remote => true, :html => { :class => "form-horizontal", :role => "form"}, :id => "top_plays_form" do %>
                   <div class="form-group">
                     <%= label_tag 'name', 'Name' %>

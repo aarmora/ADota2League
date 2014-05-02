@@ -46,6 +46,8 @@ gem 'jbuilder', '~> 1.2'
 gem "select2-rails", :git => 'git://github.com/chilian/select2-rails.git'
 
 gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-turbolinks'
+gem 'turbolinks'
 
 
 gem 'rails_12factor', group: :production
