@@ -1,3 +1,7 @@
+
+<%if params[:id] == "1688"%>
+	<%=image_tag ("brushfire.jpg"), :style => "width:83%; cursor:pointer; position:absolute; z-index:1", :id => "brushfire"%>
+<%end%>
 <div id="container">
 	<h2><%= @player.name %> <%= render :partial => "players/endorsement_icon", :locals => {:user => @player} %></h2>
 	<div class="col-md-7">

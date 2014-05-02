@@ -13,6 +13,9 @@ $(function() {
 		});	
 	});
 	deleteComment();
+	$(document).on('click', '#brushfire', function(){
+		$(this).fadeOut('slow')
+	});
 });
 function deleteComment(){
 	$('.delete').on('click', function(){

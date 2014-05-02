@@ -6,6 +6,7 @@ class SeasonsController < ApplicationController
     params[:id] = "2"
     show
   end
+  
   def show
     @seasons = Season.where(:active => true).all
     @season = @seasons.detect {|season| season.id == params[:id].to_i}

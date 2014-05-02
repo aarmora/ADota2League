@@ -6,7 +6,7 @@ class PlayersController < ApplicationController
   end
 
   def new
-  	redirect_to edit_player_path(@current_user) if @current_user
+  	redirect_to @current_user if @current_user
     @current_tab = "signup"
   end
 

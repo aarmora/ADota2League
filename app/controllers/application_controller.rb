@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   	if @current_user && @current_user.new_record?
       @current_user.steam32id = @current_user.steamid.to_i - 76561197960265728.to_i
   		@current_user.save!
-  		redirect_to @current_user
+      flash[:notice] = "Welcome to AD2L!  Your account has been created.  If you want to register a team, please click the register tab above.  If you would like to sign up as a free agent, just toggle your free agent status below!  Play on!"      
+      redirect_to @current_user
     elsif @current_user
       Player.find(@current_user.id).update_attributes(:name => session[:current_user][:nickname])
   	end

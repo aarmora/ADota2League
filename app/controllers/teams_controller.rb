@@ -23,7 +23,7 @@ class TeamsController < ApplicationController
 		@team.captain_id = @current_user.id
 		@team.attributes = params[:team]
 		@team.players << @current_user
-    @team.mmr = @team.originalmmr || @team.default_mmr
+    	@team.mmr = @team.originalmmr || @team.default_mmr
 		@team.save!
 		redirect_to @team
 	end
