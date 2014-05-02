@@ -17,7 +17,7 @@ gem 'omniauth-steam'
 gem 'figaro'
 
 gem 'dota', :git => 'git://github.com/nashby/dota.git'
-
+gem 'challonge-api'
 gem 'kappa', '~> 1.0'
 
 # gem 'rest_in_place'

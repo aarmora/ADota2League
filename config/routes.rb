@@ -4,6 +4,10 @@ Ad2l::Application.routes.draw do
   resources :seasons, :only => [:create, :update, :index, :show] do
     member do
       match 'manage' => "seasons#manage"
+      match 'setup_challonge' => "challonge#setup"
+      match 'sync_challonge_matches' => "challonge#sync_matches"
+      match 'launch_challonge' => "challonge#launch"
+      match 'rebuild_challonge' => "challonge#rebuild"
     end
   end
 

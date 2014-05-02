@@ -4,4 +4,6 @@ class TeamSeason < ActiveRecord::Base
 	belongs_to :team
 
   validates :team_id, :uniqueness => {:scope => :season_id, :message => "may only register for a season once"}
+
+  attr_accessible :paid, :division, :as => :admin
 end
