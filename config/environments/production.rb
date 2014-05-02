@@ -58,6 +58,12 @@ Ad2l::Application.configure do
     :user_name      => ENV["MANDRILL_USERNAME"],
     :password       => ENV["MANDRILL_API_KEY"]
   }
+  config.middleware.use ExceptionNotification::Rack,
+    :email => { 
+    :email_prefix => "[AD2L Site] ",
+    :sender_address => %{"AD2L Bug Notifier" <amateurdota2league@gmail.com>},
+    :exception_recipients => %w{charlie.croom@gmail.com, jbhansen84@gmail.com}
+    }
 
   # Enable threaded mode
   # config.threadsafe!
