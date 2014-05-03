@@ -18,13 +18,13 @@
         <div style="margin-bottom: 22px"><a href="sms:amateurdota2league@gmail.com">You can also iMessage us at amateurdota2league@gmail.com!</a></div>
          <p>
             <div><b>Us</b></div>
-            <div>Shadowkiller --<%= link_to "sethad2l@gmail.com", "mailto:sethad2l@gmail.com"%> or add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198096413824" %></div>
-            <div>Rasputin --<%= link_to "amateurdota2league@gmail.com", "mailto:amateurdota2league@gmail.com"%> or add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/76561198040889152" %></div>
+            <div>Shadowkiller --<%= link_to "sethad2l@gmail.com", "mailto:sethad2l@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198096413824", :class => "fa fa-plus" %></div>
+            <div>Rasputin --<%= link_to "amateurdota2league@gmail.com", "mailto:amateurdota2league@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198040889152", :class => "fa fa-plus" %></div>
         </p>
          <p>
             <div><b>Our awesome admins!</b></div>
             <%@admins.each do |admin|%>
-                <div><%= link_to admin.name, admin%> --add him on steam <%= link_to image_tag("plus.png"), "steam://friends/add/#{admin.steamid}" %></div>
+                <div><%= link_to admin.name, admin%> --add him on steam <%= link_to "", "steam://friends/add/#{admin.steamid}", :class => "fa fa-plus" %></div>
             <%end%>
         </p>
     </div>

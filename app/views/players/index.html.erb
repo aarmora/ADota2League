@@ -16,7 +16,7 @@
             <%@freeagents.each do |freeagent|%>
                 <tr>
                     <td class="text-center">
-                    	<%= link_to image_tag("plus.png"), "steam://friends/add/#{freeagent.steamid}" %>
+                    	<%= link_to "", "steam://friends/add/#{freeagent.steamid}", :class => "fa fa-plus" %>
                     </td>
                     <td>
                         <%= link_to freeagent.name, freeagent%>

@@ -1,7 +1,7 @@
 
 <%- roster.each do |player| %>
 	<%= link_to player.name, player%> <%= "(Captain)" if player.id == team.captain_id %>
-	<%= link_to image_tag("plus.png"), "steam://friends/add/#{player.steamid}", :style => "margin-left:15px", :title => "Add on steam", :class => "pluslink" %><br>
+	<%= link_to "", "steam://friends/add/#{player.steamid}", :style => "margin-left:15px", :title => "Add on steam", :class => "pluslink fa fa-plus" %><br>
 
   <% if @can_edit_captain %>
     <%= form_tag(players_team_url(@team), :method => "DELETE", :id => "remove_players_form") do %>
