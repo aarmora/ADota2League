@@ -11,13 +11,17 @@ class TeamSeasonsController < ApplicationController
     @ts.team = @team
 
     # we're going to skip all the payment stuff if it's free!
-    if @season.current_price == 0
+    # If the user is an admin, we'll assume he's adding them as paid too (redo this later if you want)
+    if @season.current_price == 0 || @current_user.is_admin?
       @ts.price_paid_cents = @season.current_price
       @ts.paid = true
     end
     @ts.save!
 
-    if @season.current_price == 0
+    if @current_user.is_admin?
+      flash[:notice] = "Added #{@team.teamname} to #{@season.title}"
+      redirect_to manage_season_path(@ts.season_id)
+    elsif @season.current_price == 0
       flash[:notice] = "You have been registered for " + @season.title
       redirect_to @team
     else

@@ -3,16 +3,25 @@
 
 <h4>Teams</h4>
   <table class="table table-bordered">
-    <tr><th>Team</th><th>Captain</th><th>Division</th><th>Paid?</th></tr>
+    <tr><th>Team</th><th>Captain</th><th>Division</th><th>Registered On (UTC)</th><th>Paid?</th></tr>
     <% @season.team_seasons.each do |ts| %>
     <tr>
       <td><%= ts.team.teamname %></td>
       <td><%= ts.team.captain.name if ts.team.captain %></td>
       <td><%= best_in_place ts, :division, :type => :input %></td>
+      <td><%= format_datetime(ts.created_at) if ts.created_at %>
       <td><%= best_in_place ts, :paid, :type => :checkbox %></td>
     </tr>
     <% end %>
   </table>
+
+  <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
+  <label>Select team to add:</label>
+
+  <%= f.select(:team_id, options_for_select(Team.where(:active => false).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), :style => "width: 400px;" ) %>
+  <%= f.hidden_field :season_id, :value => @season.id %>
+  <%= submit_tag "Add Team", :class => "btn btn-primary" %>
+<% end %>
 
 <h4>Challonge</h4>
 <p>Use the settings below to sync the tournament to Challonge and back. A few notes:</p>
