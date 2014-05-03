@@ -59,6 +59,10 @@ Ad2l::Application.routes.draw do
     get "manage_seasons(/:season(/:week))" => 'admin#manage_seasons'
   end
 
+  # Legacy routes for old deep links
+  get '/Schedule.asp' => redirect('/schedule')
+  get '/community.asp' => redirect('/community')
+  get '/Index.asp' => redirect('/')
 
 
   # You can have the root of your site routed with "root"
