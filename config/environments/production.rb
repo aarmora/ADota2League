@@ -43,7 +43,7 @@ Ad2l::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = "http://d2oiplpb7rk92t.cloudfront.net"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
@@ -59,10 +59,10 @@ Ad2l::Application.configure do
     :password       => ENV["MANDRILL_API_KEY"]
   }
   config.middleware.use ExceptionNotification::Rack,
-    :email => { 
-    :email_prefix => "[AD2L Site] ",
-    :sender_address => %{"AD2L Bug Notifier" <amateurdota2league@gmail.com>},
-    :exception_recipients => %w{charlie.croom@gmail.com, jbhansen84@gmail.com}
+    :email => {
+      :email_prefix => "[AD2L Site] ",
+      :sender_address => %{"AD2L Bug Notifier" <amateurdota2league@gmail.com>},
+      :exception_recipients => %w{charlie.croom@gmail.com, jbhansen84@gmail.com}
     }
 
   # Enable threaded mode

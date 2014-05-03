@@ -6,7 +6,7 @@
     <tr><th>Team</th><th>Captain</th><th>Division</th><th>Registered On (UTC)</th><th>Paid?</th></tr>
     <% @season.team_seasons.each do |ts| %>
     <tr>
-      <td><%= ts.team.teamname %></td>
+      <td><%= link_to ts.team.teamname, ts.team %></td>
       <td><%= ts.team.captain.name if ts.team.captain %></td>
       <td><%= best_in_place ts, :division, :type => :input %></td>
       <td><%= format_datetime(ts.created_at) if ts.created_at %>

@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
                             <h2>Schedule</h2>
-                            <% if @season.challonge_tournament %>
+                            <% if @season.challonge_tournament || (@season.start_date && @season.start_date > Time.now) %>
                                 <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
                             <% else %>
                                 <ul class="list-inline week-selector">
