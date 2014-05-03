@@ -45,26 +45,28 @@
 							</div>
 						<%else%>
 							<div class="col-sm-10">
-								<%= link_to @team.captain.name, @team.captain%>
+								<% if @team.captain %>
+									<%= link_to @team.captain.name, @team.captain %>
+								<% end %>
 							</div>
 						<%end%>
-				<%if @can_edit_captain %>
+				<% if @can_edit_captain %>
 					<%= form_tag(players_team_url(@team), :method => "POST", :id => "add_players_form") do %>
 						<div class="form-group" id="addplayers">
 				   		<label class="col-sm-2 control-label">Add Player</label>
 					    <div class="col-sm-10">
 					    	<select class="addplayer select2" name="players[]" team="<%=@team.id%>" width="600">
 					    		<option value=""></option>
-					    		<%@players.reject{|p| p.name.blank?}.each do |player|%>
+					    		<% @players.reject{|p| p.name.blank?}.each do |player| %>
 					    			<option value="<%=player.id%>"><%=player.name%></option>
-					    		<%end%>
+					    		<% end %>
 					    	</select>
 							</div>
 						</div>
 						<button class="btn btn-primary col-sm-offset-2">Add them!</button>
 					<% end %>
 
-				<%end%>
+				< %end %>
 
 			<% if @can_edit_captain %>
 				<%= form_for @team, :method => "delete" do |f| %>
