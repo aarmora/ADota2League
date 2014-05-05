@@ -2,12 +2,15 @@
 <%= render :partial => "seasons/edit_form", :locals => {:season => @season} if @current_user && @current_user.is_admin? %>
 
 <h4>Teams</h4>
-  <table class="table table-bordered">
-    <tr><th>Team</th><th>Captain</th><th>Team Region</th><th>Division</th><th>Registered On (UTC)</th><th>Paid?</th></tr>
+  <table class="table table-bordered" id="admin-data-table">
+    <thead>
+      <tr><th>Team</th><th>Captain</th><th>MMR</th><th>Team Region</th><th>Division</th><th>Registered On (UTC)</th><th>Paid?</th></tr>
+    </thead>
     <% @season.team_seasons.each do |ts| %>
     <tr>
       <td><%= link_to ts.team.teamname, ts.team %></td>
       <td><%= link_to ts.team.captain.name, ts.team.captain if ts.team.captain %></td>
+      <td><%= ts.team.mmr %></td>
       <td><%= ts.team.region %></td>
       <td><%= best_in_place ts, :division, :type => :input %></td>
       <td><%= format_datetime(ts.created_at) if ts.created_at %>
@@ -19,7 +22,7 @@
   <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
   <label>Select team to add:</label>
 
-  <%= f.select(:team_id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), :style => "width: 700px;" ) %>
+  <%= f.select(:team_id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), {}, :style => "min-width: 300px;" ) %>
   <%= f.hidden_field :season_id, :value => @season.id %>
   <%= submit_tag "Add Team", :class => "btn btn-primary" %>
 <% end %>
@@ -66,7 +69,7 @@
     <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn btn-primary btn-block" %>
     <%= link_to "Launch tournament", launch_challonge_season_path(@season), :class => "btn btn-success btn-block" %>
   <% elsif @season.challonge_tournament && @season.challonge_tournament.state == 'complete' %>
-    <%= link_to "Sync matches", sync_challonge_matches_season_path(@season), :class => "btn btn-success btn-block" %>
+    <%= link_to "Sync from Challonge", sync_challonge_matches_season_path(@season), "data-toggle" => "tooltip", :title => "Remove all teams not on Challonge, and pull in matches and results", :class => "btn btn-success btn-block" %>
   <% elsif @season.challonge_tournament %>
     <%= link_to "Rebuild Challonge", rebuild_challonge_season_path(@season), :class => "btn btn-danger btn-block", :confirm => "This will reset all data on challonge and rebuild the tournament from scratch...are you sure?" %>
   <% end %>

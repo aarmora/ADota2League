@@ -72,10 +72,20 @@ class ChallongeController < ApplicationController
   def sync_matches
     t = @season.challonge_tournament
     unless t.state == "complete"
-      flash[:error] = "Please complete the tournament on Challonge before syncing matches."
+      flash[:error] = "Please complete the tournament on Challonge before syncing back to AD2L."
       redirect_to manage_season_path(@season)
       return
     end
+
+    #########
+    # remove participants not on challonge
+    #########
+
+    participants = t.participants.map { |p| { :challonge_id => p.id, :team_id => team_id_from_player(p) } }
+    participant_team_ids = participants.map{ |p| p[:team_id] }
+
+    # Intentionally skip callbacks so we don't refund them or anything. Team Season cannot orphan anything.
+    removed_teams_count = TeamSeason.where(:season_id => @season.id).where("team_id IN (:teams)", {:teams => participant_team_ids}).delete_all
 
     #########
     # sync matches
@@ -102,7 +112,7 @@ class ChallongeController < ApplicationController
       matches_added += 1
     end
 
-    flash[:notice] = "Pulled in #{matches_added} matches from Challonge; Removed #{missing_matches.count} stale ones"
+    flash[:notice] = "Pulled in #{matches_added} matches from Challonge; Removed #{missing_matches.count} stale ones; Removed #{removed_teams_count} teams"
     redirect_to manage_season_path(@season)
   end
 
