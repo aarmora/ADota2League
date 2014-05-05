@@ -3,7 +3,7 @@ class SeasonsController < ApplicationController
 
   def index
   	# TODO: this is a hack, set it explicitly to prevent the DB call here
-    params[:id] = "2"
+    params[:id] = Season.where(:active => true).first.id
     show
   end
   

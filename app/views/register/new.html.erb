@@ -7,13 +7,15 @@
 	  	Learn more about the Season 4 format
 		</span>
 	<%end%>
-	<h2>Register with one of your teams</h2>
-	<% @player.teams.each do |team| %>
-		<%= link_to team.teamname, "#{team.id}"%><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
-
-	<% end %>
 
 	<%if @open_season%>
+		<h2>Register with one of your teams (that you captain)</h2>
+		<% @player.teams.each do |team| %>
+			<%if team.captain_id == @current_user.id%>
+				<%= link_to team.teamname, "#{team.id}"%><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
+			<%end%>
+		<% end %>
+
 		<% if @current_user && @current_user.id == @player.id %>
 			<h2>Or create a team</h2>
 			<p>
@@ -61,6 +63,10 @@
 			  <%= f.submit "Create team", :confirm => "Are you sure you will participate at the listed times? Please ensure you and your team can make it before proceeding!", :class => "button" %>
 			<% end %>
 		<% end %>
+	<%else%>
+		<br>
+		<br>
+		No leagues or tournaments are currently open for registration.  Check back soon!
 	<%end%>
 
 	<div id="registration_form"></div>
