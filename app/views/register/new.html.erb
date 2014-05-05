@@ -8,12 +8,12 @@
 		</span>
 	<%end%>
 
-	<%if @open_season%>
+	<% if @open_season %>
 		<h2>Register with one of your teams (that you captain)</h2>
 		<% @player.teams.each do |team| %>
-			<%if team.captain_id == @current_user.id%>
+			<% if @current_user.id == team.captain_id %>
 				<%= link_to team.teamname, "#{team.id}"%><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
-			<%end%>
+			<% end %>
 		<% end %>
 
 		<% if @current_user && @current_user.id == @player.id %>
