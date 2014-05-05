@@ -19,7 +19,7 @@
   <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
   <label>Select team to add:</label>
 
-  <%= f.select(:team_id, options_for_select(Team.all.sort_by(&:teamname).map{|team| [(team.active == true ? team.teamname + " (Active)" : team.teamname + " (Inactive)"), team.id]}), :style => "width: 700px;" ) %>
+  <%= f.select(:team_id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), :style => "width: 700px;" ) %>
   <%= f.hidden_field :season_id, :value => @season.id %>
   <%= submit_tag "Add Team", :class => "btn btn-primary" %>
 <% end %>
