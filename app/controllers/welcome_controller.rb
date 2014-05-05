@@ -2,6 +2,8 @@
 class WelcomeController < ApplicationController
   # auth callback POST comes from Steam so we can't attach CSRF token
   skip_before_filter :verify_authenticity_token, :only => :auth_callback
+  skip_before_filter :load_user, :only => :auth_callback
+  skip_before_filter :check_active_streams, :only => :auth_callback
 
   def index
     @current_tab = "index"
@@ -34,13 +36,13 @@ class WelcomeController < ApplicationController
 
   def auth_callback
     auth = request.env['omniauth.auth']
-    session[:current_user] = { 
+    session[:current_user] = {
     	:nickname => auth.info['nickname'],
       :image => auth.extra.raw_info['avatar'],
       :uid => auth.uid
     }
-    
-    redirect_to seasons_url
+
+    redirect_to root_url
   end
 
   def logout
