@@ -17,7 +17,7 @@ class TeamSeasonsController < ApplicationController
     # we're going to skip all the payment stuff if it's free!
     # If the user is an admin, we'll assume he's adding them as paid too (redo this later if you want)
     if @season.current_price == 0 || @current_user.is_admin?
-      @ts.price_paid_cents = @season.current_price
+      @ts.price_paid_cents = 0 # If admins added them, they technically didn't pay
       @ts.paid = true
     end
     @ts.save!
