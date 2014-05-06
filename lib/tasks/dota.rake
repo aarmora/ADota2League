@@ -245,9 +245,9 @@ namespace :dota do
 
   task :mail => :environment do
     @players = Player.all
-    @players.each do |player|
-      #player = Player.find(205)
+    #@players.each do |player|
+      player = Player.find(205)
       UserMailer.free_agent_page(player).deliver
-    end
+    #end
   end
 end
