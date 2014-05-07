@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(:version => 20140507185243) do
     t.integer  "price_paid_cents", :default => 0,     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "checked_in",       :default => false
+    t.boolean  "checked_in",       :default => false, :null => false
   end
 
   create_table "teams", :force => true do |t|
