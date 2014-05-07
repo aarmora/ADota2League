@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8">
-			<h4><%=@match.date.strftime ("%m/%d/%Y")%></h4>
+			<h4><%= format_datetime(@match.date) %></h4>
 		</div>
 	</div>
 	<div class="row">
@@ -22,11 +22,11 @@
 			<h3><%= link_to @match.away_team.teamname, @match.away_team%></h3>
 			<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_team}%>
 		</div>
-	</div> 
+	</div>
 <br>
 <br>
 <div class="container-fluid" id="matchcommentspartial">
-	<%= render :partial => "matches/match_comments"%>	
+	<%= render :partial => "matches/match_comments"%>
 </div>
 <%if @current_user%>
 	<div class="container-fluid">

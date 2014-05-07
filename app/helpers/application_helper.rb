@@ -11,11 +11,15 @@ module ApplicationHelper
   end
 
   def format_date(t)
-    t ? t.strftime("%-m/%-d/%y") : ""
+    tz = @current_user.time_zone if @current_user
+    tz ||= "Eastern Time (US & Canada)"
+    t ? t.in_time_zone(tz).strftime("%-m/%-d/%y") : ""
   end
 
   def format_datetime(t)
-    t ? t.strftime("%-m/%-d/%y %l:%M%p") : ""
+    tz = @current_user.time_zone if @current_user
+    tz ||= "Eastern Time (US & Canada)"
+    t ? t.in_time_zone(tz).strftime("%-m/%-d/%y %l:%M%p %Z") : ""
   end
 
   def format_price(price_cents)

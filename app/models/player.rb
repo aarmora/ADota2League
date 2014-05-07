@@ -11,7 +11,7 @@ class Player < ActiveRecord::Base
   has_many :outgoing_endorsements, :class_name => "PlayerVote", :foreign_key => "endorser_id", :dependent => :delete_all
 
 
-  attr_accessible :name, :bio, :email, :freeagentflag, :role, :mmr, :hours_played, :as => [:default, :caster, :admin]
+  attr_accessible :name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :as => [:default, :caster, :admin]
   attr_accessible :twitch, :region, :as => [:admin, :caster]
   attr_accessible :caster, :admin, :as => :admin
 

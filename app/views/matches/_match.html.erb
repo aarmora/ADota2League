@@ -8,7 +8,7 @@
 	<td>
 		<%= best_in_place_if @can_edit, match,
 			  :date,
-			  :display_with => lambda { |date| date.strftime("%-m/%-d/%y %l:%M%p")},
+			  :display_with => lambda { |date| format_datetime(date)},
 			  :activator => ".fa-calendar.#{match.id}-date",
 	      :type => :datetime
 			%>

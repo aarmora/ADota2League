@@ -3,7 +3,7 @@
 		<blockquote style="font-size:10.5px; padding: 5px 20px; margin: 0 0 10px;">
 		  <%=raw player_comment.comment%>
 		  <footer>
-		  	<%= link_to player_comment.commenter.name, player_comment.commenter%> <%= player_comment.created_at.strftime ("%m/%d/%Y")%>
+		  	<%= link_to player_comment.commenter.name, player_comment.commenter%> <%= format_date(player_comment.created_at) %>
 		  	<%if @current_user && player_comment.commenter.id == @current_user.id%>
 		  		<button type="button" class="btn-xs btn-warning delete" commentid="<%=player_comment.id%>">Delete</button>
 		  	<%end%>
