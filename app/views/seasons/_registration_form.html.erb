@@ -3,15 +3,14 @@
 
 <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
   <label>Select season:</label>
-  <% @team.seasons_available_for_registration.each do |season| %>
+  <% @team.seasons_available_for_registration.each do |season, i| %>
     <div class="radio">
       <%= f.radio_button(:season_id, season.id) %>
       <%= label_tag("team_season_season_id_" + season.id.to_s, season.title + " (#{format_price(season.current_price)})") %>
-      <%if season.title.include? "weekend"%>
-      	(Weekend Tournament Series!)
-      	<span>Begins <%= format_datetime(formatseason.start_date) %> EDT</span>
+      <%if season.title.include? "WTS"%>
+      	<span><%= format_datetime_month(season.start_date) %></span>
       <% else %>
-      	<span>Begins <%= format_date(season.start_date)%></span>
+      	<span>Begins <%= format_date_month(season.start_date)%></span>
       <% end %>
     </div>
   <% end %>

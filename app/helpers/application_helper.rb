@@ -16,10 +16,22 @@ module ApplicationHelper
     t ? t.in_time_zone(tz).strftime("%-m/%-d/%y") : ""
   end
 
+  def format_date_month(t)
+    tz = @current_user.time_zone if @current_user
+    tz ||= "Eastern Time (US & Canada)"
+    t ? t.in_time_zone(tz).strftime("%-B %-d, %Y") : ""
+  end
+
   def format_datetime(t)
     tz = @current_user.time_zone if @current_user
     tz ||= "Eastern Time (US & Canada)"
     t ? t.in_time_zone(tz).strftime("%-m/%-d/%y %l:%M%p %Z") : ""
+  end
+
+  def format_datetime_month(t)
+    tz = @current_user.time_zone if @current_user
+    tz ||= "Eastern Time (US & Canada)"
+    t ? t.in_time_zone(tz).strftime("%-B %-d, %Y %l:%M%p %Z") : ""
   end
 
   def format_price(price_cents)
