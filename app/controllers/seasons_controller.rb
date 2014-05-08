@@ -8,10 +8,8 @@ class SeasonsController < ApplicationController
   end
   
   def show
-    if Season.find(params[:id]).active == false
-      redirect_to action: "index"
-    else
-      @seasons = Season.where(:active => true).all
+  
+      @seasons = Season.all
       @season = @seasons.detect {|season| season.id == params[:id].to_i}
       @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
 
@@ -43,7 +41,6 @@ class SeasonsController < ApplicationController
       @current_tab = 'seasons'
 
       render :action => 'show' # explicitly needed because index calls this method and expects it to render
-    end
   end
 
   def create

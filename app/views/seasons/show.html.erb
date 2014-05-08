@@ -7,7 +7,7 @@
 <div id="fullbox">
     <div id="tabs">
 		<%- @seasons.each do |season| %>
-            <% unless season.active.nil? %>
+            <% unless season.active == false %>
         	   <%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
             <%end%>
         <% end %>
@@ -36,9 +36,11 @@
                                             <%end%>
                                             <th>Name</th>
                                             <th>Wins</th>
-                                            <%unless @teams_by_division.size > 1%>
-                                                <th>Checked in?</th>
-                                            <%end%>
+                                            <% unless (@season.start_date - 20*60) > Time.now %>
+                                                <%unless (@season.start_date + 20*60) > Time.now%>
+                                                    <th>Checked in?</th>
+                                                <%end%>
+                                            <% end %>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,16 +52,16 @@
                                             end
                                         end.each_with_index do |team_season, index| %>
                                             <tr>
-                                                <%if @teams_by_division.size > 1 %>
-                                                    <td><%= index + 1 %></td>
-                                                <%else%>
-                                                    <td><%= index + 1 %></td>
-                                                <%end%>
+                                                <td><%= index + 1 %></td>
                                                 <td><%= link_to team_season.team.teamname, team_season.team %></td>
                                                 <td><%= @total_scores[team_season.team_id].to_i %></td>
-                                                <%unless @teams_by_division.size > 1%>
-                                                    <th><%=team_season.checked_in%></th>
-                                                <%end%>
+                                                <% unless (@season.start_date - 20*60) > Time.now %>
+                                                    <%unless (@season.start_date + 20*60) > Time.now%>
+                                                        <th>
+                                                            <%= best_in_place_if @current_user && @current_user.id == team_season.team.captain_id, team_season, :checked_in, :type => :checkbox %>
+                                                        </th>
+                                                    <%end%>
+                                                <% end %>
                                             </tr>
                                         <%end%>
                                     </tbody>

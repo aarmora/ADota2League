@@ -15,14 +15,14 @@
         <h4 class="headerunderline">When</h4>
         <p>10 MAY 2014, @5:00pm EDT. Registration begins right away</p>
         <h4 class="headerunderline">Where</h4>
-        <p>Check-in where you registered by clicking the ‘Check-in’ button that appears on your teampage, @4:45pm. <%=link_to "Affinity", "players/140"%> will be in the guild chat and <%=link_to "steam group", "steam://friends/joinchat/103582791435143521"%> to assist you.  Brackets will be built from those who check in, so make sure to check in on time!</p>
+        <p>Check-in where you registered by clicking the ‘Check-in’ button that appears on the WTS tab <%=link_to "here", seasons_path%>, @4:45pm. <%=link_to "Affinity", "players/140"%> will be in the guild chat and <%=link_to "steam group", "steam://friends/joinchat/103582791435143521"%> to assist you.  Brackets will be built from those who check in, so make sure to check in on time!</p>
         <h4 class="headerunderline">Why</h4>
         <p>For those of us not as good as DK, we play amateur tournaments.</p>
         <h4 class="headerunderline">How</h4>
         <ol>
           <li>1. Register from your teampage or <%=link_to "here", "register"%>.  (Can be found from the <%=link_to "My Info", (@current_user ? @current_user : "players/new")%>)</li>
-          <li>2. Check-in 15 minutes before the tournament from your teampage. </li>
-          <li>3. Use the guild lobby chat or <%=link_to "steam group", "steam://friends/joinchat/103582791435143521"%> to find your opponent</li>
+          <li>2. Check-in 15 minutes before the tournament from the WTS tab <%=link_to "here", seasons_path%>. </li>
+          <li>3. Use the <%=link_to "steam group chat", "steam://friends/joinchat/103582791435143521"%> to find your opponent</li>
             <ol class="sublist">
               <li>a. For example, if I’m on team APE, and my opponents are Cheat Commandos, I’ll type into the chat: APE vs Cheat Commandos, join lobby ad2l123</li>
               <li>b. As a general rule, ask for a caster if you want your game on Dota TV (ticketed). Casters might be calling your team, if so, go join their lobby!</li>
@@ -33,23 +33,25 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">RaidCall Walkthrough</a>
-      </h4>
-    </div>
-    <div id="collapseEleven" class="panel-collapse collapse">
-      <div class="panel-body">
-        <ol>
-          <li>1. <%=link_to "Download RaidCall", "http://www.raidcall.com/download-raidcall.html"%> (100% free)</li>
-          <li>2. Create an account</li>
-          <li>3. Follow this <%=link_to "link", "http://www.raidcall.com/go.php?sid=8675445&cid=1"%> or search for group [8675445], and talk to <%=link_to "Affinity", "players/140"%> in the Lounge</li>
-          <li>4. DISABLE RAIDCALL’S OVERLAY FEATURE. It is incompatible with Steam’s overlay. To do this, go to > click on RaidCall icon in the top left corner > System Settings > Overlay > Change the hotkey to something you’ll never press by accident (e.g. mine is Shift+F8).</li>
-        <ol>
+  <% if false %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">RaidCall Walkthrough</a>
+        </h4>
+      </div>
+      <div id="collapseEleven" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ol>
+            <li>1. <%=link_to "Download RaidCall", "http://www.raidcall.com/download-raidcall.html"%> (100% free)</li>
+            <li>2. Create an account</li>
+            <li>3. Follow this <%=link_to "link", "http://www.raidcall.com/go.php?sid=8675445&cid=1"%> or search for group [8675445], and talk to <%=link_to "Affinity", "players/140"%> in the Lounge</li>
+            <li>4. DISABLE RAIDCALL’S OVERLAY FEATURE. It is incompatible with Steam’s overlay. To do this, go to > click on RaidCall icon in the top left corner > System Settings > Overlay > Change the hotkey to something you’ll never press by accident (e.g. mine is Shift+F8).</li>
+          <ol>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">

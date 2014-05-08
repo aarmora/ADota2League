@@ -6,4 +6,5 @@ class TeamSeason < ActiveRecord::Base
   validates :team_id, :uniqueness => {:scope => :season_id, :message => "may only register for a season once"}
 
   attr_accessible :paid, :division, :as => :admin
+  attr_accessible :checked_in, :as => [:default, :caster, :admin]
 end

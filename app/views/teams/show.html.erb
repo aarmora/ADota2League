@@ -91,12 +91,7 @@
 			<p>Coming soon! When the next season is up, you'll be able to register your team for it here</p>
 		<% end %>
 	<% end %>
-  	<span class="btn btn-info btn-xs" data-toggle="modal" data-target="#WTS">
-  		Learn more about the Weekend Tournament Series
-	</span>
-	<span class="btn btn-info btn-xs" data-toggle="modal" data-target="#Season4">
-  		Learn more about the Season 4 format
-	</span>
+	<%= render :partial => "welcome/learn_more" %>
 
 	<h3>Schedule</h3>
 	<%- @team.team_seasons.each do |ts| %>
@@ -107,11 +102,6 @@
 			<% end %>
 			<%= form_for ts, :html => {:method => :delete} do |f|  %>
 			  <%= f.submit "Withdraw", :confirm => "Are you sure you want to withdraw from this season? This is NOT easily reversable!", :class => "btn btn-danger btn-sm fa fa-trash-o" %>
-			<% end %>
-			<% if false %>
-			  	<span class="btn btn-info btn-xs" data-toggle="modal" data-target="#WTS">
-			  		Check in!
-				</span>
 			<% end %>
 		<% end %>
 		<br>

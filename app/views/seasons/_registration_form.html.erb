@@ -8,7 +8,7 @@
       <%= f.radio_button(:season_id, season.id) %>
       <%= label_tag("team_season_season_id_" + season.id.to_s, season.title + " (#{format_price(season.current_price)})") %>
       <%if season.title.include? "WTS"%>
-      	<span><%= format_datetime_month(season.start_date) %></span>
+      	<span>Begins <%= format_datetime_month(season.start_date) %></span>
       <% else %>
       	<span>Begins <%= format_date_month(season.start_date)%></span>
       <% end %>

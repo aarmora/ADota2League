@@ -4,7 +4,7 @@
 <h4>Teams</h4>
   <table class="table table-bordered" id="admin-data-table">
     <thead>
-      <tr><th>Team</th><th>Captain</th><th>MMR</th><th>Team Region</th><th>Division</th><th>Registered On (UTC)</th><th>Paid?</th></tr>
+      <tr><th>Team</th><th>Captain</th><th>MMR</th><th>Team Region</th><th>Division</th><th>Registered On (UTC)</th><th>Paid?</th><th>Checked in?</th></tr>
     </thead>
     <% @season.team_seasons.each do |ts| %>
     <tr>
@@ -15,6 +15,7 @@
       <td><%= best_in_place ts, :division, :type => :input %></td>
       <td><%= format_datetime(ts.created_at) if ts.created_at %>
       <td><%= best_in_place ts, :paid, :type => :checkbox %></td>
+      <td><%= best_in_place ts, :checked_in, :type => :checkbox %></td>
     </tr>
     <% end %>
   </table>

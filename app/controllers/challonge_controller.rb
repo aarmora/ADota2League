@@ -46,7 +46,7 @@ class ChallongeController < ApplicationController
     participants = t.participants.map { |p| { :challonge_id => p.id, :team_id => team_id_from_player(p) } }
 
     # If there's no difference, assume we are OK
-    db_team_ids = @season.team_seasons.where(:paid => true).pluck(:team_id)
+    db_team_ids = @season.team_seasons.where(:paid => true).where(:checked_in => true).pluck(:team_id)
     participant_team_ids = participants.map{ |p| p[:team_id] }
     synced = db_team_ids & participant_team_ids == db_team_ids && participant_team_ids & db_team_ids == participant_team_ids
 
