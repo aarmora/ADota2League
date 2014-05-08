@@ -6,12 +6,15 @@ class RegisterController < ApplicationController
 
 	def new
 		@player = Player.find(params[:id])
-    	@open_season = Season.where(:registration_open => true).exists?
-	    @current_tab = "register"
+		redirect_to register_index_path unless @current_user
+    @open_season = Season.where(:registration_open => true).exists?
+	  @current_tab = "register"
 	end
+
 	def show
+		redirect_to register_index_path unless @current_user
 		@team = Team.find(params[:id])
-	    @current_tab = "register"
+	  @current_tab = "register"
 	end
 
 end
