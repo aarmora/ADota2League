@@ -67,6 +67,7 @@
 
             </div>
             <div class="tabbody4 nonactive">
+              <% if @current_user %>
                 <div class="container-fluid">
                   <h3>Submit your top plays!</h3>
                   <%= form_tag (top_plays_email_path), :remote => true, :html => { :class => "form-horizontal", :role => "form"}, :id => "top_plays_form" do %>
@@ -93,6 +94,9 @@
                     <%= submit_tag 'Submit', class: 'button' %>
                   <%end%>
                 </div>
+              <% else %>
+                <%= render :partial => "register/sign_in" %>
+              <% end %>
             </div>
         </div>
     </div>
