@@ -44,7 +44,7 @@ class TeamSeasonsController < ApplicationController
   def update
     @ts = TeamSeason.find(params[:id])
     if params[:team_season]
-      render :status => :forbidden and return unless @current_user && @current_user.is_admin?
+      render :status => :forbidden and return unless @current_user && (@current_user.is_admin? || @current_user.captained_teams.include?(@ts.team))
       respond_to do |format|
         if @ts.update_attributes(params[:team_season], :as => @current_user.permission_role)
           format.html { redirect_to(manage_season_path(@ts.season_id), :notice => 'TeamSeason was successfully updated.') }

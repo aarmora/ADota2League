@@ -51,8 +51,8 @@
                                                 <td><%= index + 1 %></td>
                                                 <td><%= link_to team_season.team.teamname, team_season.team %></td>
                                                 <td><%= @total_scores[team_season.team_id].to_i %></td>
-                                                <th>
-                                                    <% if (@season.start_date - 20.minutes..@season.start_date + 20.minutes).cover? Time.now %>
+                                                <th><%#=format_datetime(@season.start_date)%>
+                                                    <% unless (@season.start_date - 20*60) > Time.now  #if (@season.start_date - 20.minutes..@season.start_date).cover? Time.now %>
                                                         <%= best_in_place_if @current_user && @current_user.id == team_season.team.captain_id, team_season, :checked_in, :type => :checkbox %>
                                                     <% end %>
                                                 </th>
