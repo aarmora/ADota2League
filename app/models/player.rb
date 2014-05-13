@@ -17,8 +17,8 @@ class Player < ActiveRecord::Base
 
   def is_admin?
   	# TODO: Move into an ENV config?
-  	#                  Havoc                 Kered              ShadowKiller         Rasputin
-  	steam_ids = ["76561197969226815", "76561198064440065", "76561198096413824", "76561198040889152"]
+  	#                  Havoc                 Kered              ShadowKiller         Rasputin             Affinity
+  	steam_ids = ["76561197969226815", "76561198064440065", "76561198096413824", "76561198040889152", "76561198062137050"]
   	steam_ids.include? self.steamid
   end
 
