@@ -85,7 +85,7 @@ class ChallongeController < ApplicationController
     participant_team_ids = participants.map{ |p| p[:team_id] }
 
     # Intentionally skip callbacks so we don't refund them or anything. Team Season cannot orphan anything.
-    removed_teams_count = TeamSeason.where(:season_id => @season.id).where("team_id IN (:teams)", {:teams => participant_team_ids}).delete_all
+    removed_teams_count = TeamSeason.where(:season_id => @season.id).where("team_id NOT IN (:teams)", {:teams => participant_team_ids}).delete_all
 
     #########
     # sync matches
