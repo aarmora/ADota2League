@@ -63,25 +63,34 @@ namespace :dota do
   desc "Adjust MMR for a given league and week based on results"
   task :mmr => :environment do
 
-    K = 225 # Adjust to allow more fluctuation
+    K = 150 # Adjust to allow more fluctuation
 
 
     ################ Run!!! ####################
     puts "What season id?"
     season_id = STDIN.gets.chomp.to_i
 
-    puts "What week are we adjusting the MMR based on matches for? "
-    week_number = STDIN.gets.chomp.to_i
-    if week_number < 1 || week_number > 15
-      raise "This appears to be an invalid week"
+    @season = Season.find(season_id)
+
+    if @season.challonge_id.blank?
+      puts "What week are we adjusting the MMR based on matches for? "
+      week_number = STDIN.gets.chomp.to_i
+      if week_number < 1 || week_number > 15
+        raise "This appears to be an invalid week"
+      end
     end
 
     # make sure there's actually results
-    @season = Season.find(season_id)
-    @matches = @season.matches.includes(:home_team, :away_team).where(:week => week_number, :mmr_processed => false).where("forfeit IS NULL OR forfeit = 0")
-    raise "No results for this week" unless @matches.exists?
+    @matches = if week_number
+      @season.matches.includes(:home_team, :away_team).where(:week => week_number, :mmr_processed => false).where("forfeit IS NULL OR forfeit = 0")
+    else
+      @season.matches.includes(:home_team, :away_team).where(:mmr_processed => false).where("forfeit IS NULL OR forfeit = 0")
+    end
+    raise "No results for this week/season" unless @matches.exists?
 
     elo_holder = []
+
+    @team_elos = {}
 
     @matches.each do |match|
       home_team = match.home_team
@@ -92,19 +101,42 @@ namespace :dota do
         puts "skipping match with no results: #{match.id}"
         next
       end
-      #                                                                      1200 is to spread out far apart MMRs, you do still have a chance!
-      exp_home_win = 1.0 / ( 10.0 ** ((away_team.mmr - home_team.mmr) / 1200.0) + 1) * 2.0 # Number of games = 2.0 TODO: maybe should be actual num games
-      exp_away_win = 2.0 - exp_home_win
 
-      # TODO: make K dynamic based on number of games we have for the teams
-      # if it was really unbalanced, punish them more for changes
+      home_mmr = @team_elos[home_team.id] || home_team.mmr
+      away_mmr = @team_elos[away_team.id] || away_team.mmr
+      #                                                                      1200 is to spread out far apart MMRs, you do still have a chance!
+      num_games_played = home_wins + away_wins
+      exp_home_win = 1.0 / ( 10.0 ** ((away_mmr - home_mmr) / 1200.0) + 1) * num_games_played # Number of games = 2.0 TODO: maybe should be actual num games
+      exp_away_win = num_games_played - exp_home_win
+
+      home_games_played = home_team.matches.count
+      away_games_played = away_team.matches.count
+
+      # Make K dynamic based on number of games we have for the teams
+      # TODO: if it was really unbalanced, punish them more for changes
+      home_bonus_k = away_bonus_k = 0
+      if home_games_played < 4
+        home_bonus_k = 100
+      elsif home_games_played < 8
+        home_bonus_k = 50
+      end
+
+      if away_games_played < 4
+        away_bonus_k = 100
+      elsif away_games_played < 8
+        away_bonus_k = 50
+      end
+
       this_k = K
 
-      newHomeELO = (home_team.mmr + this_k / 2 * (home_wins - exp_home_win) + 0).floor # Emphatic victor bonus = 0 for now
-      newAwayELO = (away_team.mmr + this_k / 2 * (away_wins - exp_away_win) + 0).floor # Emphatic victor bonus = 0 for now
-      puts "Home: #{home_team.teamname} ( #{home_team.mmr} --> #{newHomeELO} )   Expected: #{exp_home_win}  Actual: #{home_wins}"
-      puts "Away: #{away_team.teamname} ( #{away_team.mmr} --> #{newAwayELO} )   Expected: #{exp_away_win}  Actual: #{away_wins}"
+      newHomeELO = (home_mmr + (this_k + home_bonus_k) / num_games_played * (home_wins - exp_home_win) + 0).floor # Emphatic victor bonus = 0 for now
+      newAwayELO = (away_mmr + (this_k + away_bonus_k) / num_games_played * (away_wins - exp_away_win) + 0).floor # Emphatic victor bonus = 0 for now
+      puts "Home: #{home_team.teamname} ( #{home_mmr} --> #{newHomeELO} )   Expected: #{exp_home_win}  Actual: #{home_wins}"
+      puts "Away: #{away_team.teamname} ( #{away_mmr} --> #{newAwayELO} )   Expected: #{exp_away_win}  Actual: #{away_wins}"
+      puts "K: #{this_k + home_bonus_k} | #{this_k + away_bonus_k}"
       puts "-----------------"
+      @team_elos[home_team.id] = newHomeELO
+      @team_elos[away_team.id] = newAwayELO
       elo_holder << {:match => match, :new_home_ELO => newHomeELO, :new_away_ELO => newAwayELO}
     end
 
@@ -114,15 +146,15 @@ namespace :dota do
     raise "Later days!" if !ok_to_insert
 
     # commit the data
-    elo_holder.each do |info|
+    @team_elos.each do |team_id, mmr|
       match = info[:match]
 
       home = match.home_team
-      home.mmr = info{:new_home_ELO}
+      home.mmr = @team_elos[home.id]
       home.save!
 
       away = match.away_team
-      away.mmr = info{:new_away_ELO}
+      away.mmr = @team_elos[away.id]
       away.save!
 
       match.mmr_processed = true
