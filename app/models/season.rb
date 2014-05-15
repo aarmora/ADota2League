@@ -24,4 +24,8 @@ class Season < ActiveRecord::Base
   def challonge_tournament
     @challonge_tournament ||= self.challonge_id.nil? ? nil : Challonge::Tournament.find(self.challonge_id)
   end
+
+  def check_in_available?
+    Time.now > (self.start_date - 20.minutes) && !self.challonge_id.blank?
+  end
 end

@@ -16,7 +16,7 @@ class ChallongeController < ApplicationController
     t = @season.challonge_tournament
     t ||= Challonge::Tournament.new
     t.name = "AD2L:" + @season.title
-    t.url = "ad2l_dota_#{@season.id}"
+    t.url = "ad2l_dota_#{@season.id}" + (Rails.env.development? ? "_dev" : "")
     t.tournament_type = params[:eliminations].to_i == 2 || (@season.challonge_type && @season.challonge_type == 'double elimination') ? 'double elimination': 'single elimination'
     t.open_signup = false
     t.hold_third_place_match = true
@@ -122,6 +122,7 @@ class ChallongeController < ApplicationController
     @season.registration_open = false
     @season.active = true
     @season.save!
+    expire_fragment("seasonPage-" + @season.id.to_s) unless match.season_id.nil?
     flash[:notice] = "All systems go! Good luck!!!"
     redirect_to manage_season_path(@season)
   end

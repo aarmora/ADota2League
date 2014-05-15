@@ -1,7 +1,7 @@
 module ApplicationHelper
-  def cache_unless_admin *args
+  def cache_unless *args
     m = args.shift
-    if true
+    if m
       yield
     else
       cache args do

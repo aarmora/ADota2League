@@ -11,7 +11,7 @@
         	   <%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
             <%end%>
         <% end %>
-        <% cache_unless_admin(@current_user, "seasonPage-" + @season.id.to_s) do %>
+        <% cache_unless(@no_cache, "seasonPage-" + @season.id.to_s) do %>
             <div style="clear: both"></div>
             <div class="TabsContainer">
                 <div class="tabbody3 active">
@@ -51,8 +51,8 @@
                                                 <td><%= index + 1 %></td>
                                                 <td><%= link_to team_season.team.teamname, team_season.team %></td>
                                                 <td><%= @total_scores[team_season.team_id].to_i %></td>
-                                                <th><%#=format_datetime(@season.start_date)%>
-                                                    <% unless (@season.start_date - 20*60) > Time.now  #if (@season.start_date - 20.minutes..@season.start_date).cover? Time.now %>
+                                                <th>
+                                                    <% if @season.check_in_available? %>
                                                         <%= best_in_place_if @current_user && @current_user.id == team_season.team.captain_id, team_season, :checked_in, :type => :checkbox %>
                                                     <% end %>
                                                 </th>
