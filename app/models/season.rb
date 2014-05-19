@@ -22,7 +22,11 @@ class Season < ActiveRecord::Base
   end
 
   def challonge_tournament
-    @challonge_tournament ||= self.challonge_id.nil? ? nil : Challonge::Tournament.find(self.challonge_id)
+    begin
+      @challonge_tournament ||= self.challonge_id.nil? ? nil : Challonge::Tournament.find(self.challonge_id)
+    rescue
+      nil
+    end
   end
 
   def check_in_available?

@@ -58,7 +58,7 @@ class ChallongeController < ApplicationController
 
       # next add all participants from AD2L DB not on Challonge, only if not underway
       if t.state == "pending"
-        db_ids = db_team_ids.reject{|p| participants.map(&:team_id).include? p}
+        db_ids = db_team_ids.reject{|p| participant_team_ids.include? p}
         teams = Team.find(db_ids).sort_by{ |t| t.mmr ? t.mmr : t.default_mmr}.reverse
         teams.each_with_index do |team, i|
           Challonge::Participant.create(:name => team.teamname, :tournament => t, :seed => i + 1, :misc => {:team_id => team.id}.to_json)
