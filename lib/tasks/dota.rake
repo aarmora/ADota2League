@@ -146,7 +146,7 @@ namespace :dota do
     raise "Later days!" if !ok_to_insert
 
     # commit the data
-    @team_elos.each do |team_id, mmr|
+    elo_holder.each do |info|
       match = info[:match]
 
       home = match.home_team

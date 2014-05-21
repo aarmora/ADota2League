@@ -122,7 +122,7 @@ class ChallongeController < ApplicationController
     @season.registration_open = false
     @season.active = true
     @season.save!
-    expire_fragment("seasonPage-" + @season.id.to_s) unless match.season_id.nil?
+    expire_fragment("seasonPage-" + @season.id.to_s) unless @season.id.nil?
     flash[:notice] = "All systems go! Good luck!!!"
     redirect_to manage_season_path(@season)
   end
