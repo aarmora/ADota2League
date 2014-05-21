@@ -4,11 +4,6 @@ class ChallongeController < ApplicationController
 
   # does a full sync of the tournament to challonge
   def setup
-    if @season.registration_open
-      flash[:error] = "You must close registration before setting up the challonge tournament (keeps things cleaner)"
-      redirect_to manage_season_path(@season)
-      return
-    end
 
     #########
     # update tournament
@@ -117,6 +112,12 @@ class ChallongeController < ApplicationController
   end
 
   def launch
+    if @season.registration_open
+      flash[:error] = "You must close registration starting the challonge tournament. Don't forget to sync one more time before starting too!"
+      redirect_to manage_season_path(@season)
+      return
+    end
+
     t = Challonge::Tournament.find(@season.challonge_id)
     t.start!
     @season.registration_open = false
