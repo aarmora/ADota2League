@@ -13,6 +13,7 @@ class WelcomeController < ApplicationController
   def community
     @current_tab = "community"
     @casters = Player.where(:caster => true)
+    @admins = Player.where(:admin => true)
   end
 
   def faq

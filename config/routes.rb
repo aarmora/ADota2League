@@ -36,9 +36,9 @@ Ad2l::Application.routes.draw do
   end
 
   post 'auth/steam/callback' => 'welcome#auth_callback'
-  get 'contact', :to => 'welcome#contact', :as => 'contact'
+  get 'contact', :to => 'welcome#community', :as => 'contact'
   get 'community', :to => 'welcome#community', :as => 'community'
-  get 'faq', :to => 'welcome#faq', :as => 'faq'
+  get 'faq', :to => 'welcome#community', :as => 'faq'
   get 'logout' => 'welcome#logout'
   post 'top_plays_email' => 'welcome#top_plays_email'
 
