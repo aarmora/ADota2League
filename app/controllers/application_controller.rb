@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   	end
 
     @can_edit = @current_user && @current_user.is_admin?
+    @all_seasons = Season.all
   end
 
   def check_active_streams

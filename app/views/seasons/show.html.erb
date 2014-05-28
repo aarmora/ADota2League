@@ -65,7 +65,11 @@
                         <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
                             <h2>Schedule</h2>
                             <% if @season.challonge_tournament || (@season.start_date && @season.start_date > Time.now) %>
-                                <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
+                                <%if @season.challonge_id.nil?%>
+                                    <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
+                                <% else %>
+                                    <p>Schedule will be released when the tournament starts on <%= format_datetime_month(@season.start_date) %></p>
+                                <% end %>    
                             <% else %>
                                 <ul class="list-inline week-selector">
                                     <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
