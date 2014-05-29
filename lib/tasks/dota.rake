@@ -102,6 +102,11 @@ namespace :dota do
         next
       end
 
+      if !home_team || !away_team
+        puts "skipping match with missing team"
+        next
+      end
+
       home_mmr = @team_elos[home_team.id] || home_team.mmr
       away_mmr = @team_elos[away_team.id] || away_team.mmr
       #                                                                      1200 is to spread out far apart MMRs, you do still have a chance!
