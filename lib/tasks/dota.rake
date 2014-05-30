@@ -284,7 +284,9 @@ namespace :dota do
     @players = Player.all
     @players.each do |player|
       #player = Player.find(205)
-      UserMailer.season4_reminder(player).deliver
+      unless player.email.nil?
+        UserMailer.season4_reminder(player).deliver
+      end
     end
   end
 end
