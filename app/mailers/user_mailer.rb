@@ -17,10 +17,10 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def free_agent_page(player)
+  def season4_reminder(player)
     unless player.email.nil?
       @player = player    
-      mail(to: player.email, subject: 'Patreon and Season 4!') 
+      mail(to: player.email, subject: 'Season 4 starts soon!') 
     end
   end
 
