@@ -7,7 +7,7 @@ $('input.filter').on('keyup', function() {
     }).show();
 });
 $(document).ready(function(){
-	$('#admin-data-table').dataTable({
+	$('#admin-data-table, #perm-data-table').dataTable({
     "bPaginate": false,
     "aaSorting": [[ 5, "asc" ]]
   });

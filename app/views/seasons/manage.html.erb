@@ -10,8 +10,8 @@
     <tr>
       <td><%= link_to ts.team.teamname, ts.team %></td>
       <td><%= link_to ts.team.captain.name, ts.team.captain if ts.team.captain %></td>
-      <td><%= ts.team.mmr %></td>
-      <td><%= ts.team.region %></td>
+      <td><%= best_in_place ts.team, :mmr, :type => :input %></td>
+      <td><%= best_in_place ts.team, :region, :type => :input %></td>
       <td><%= best_in_place ts, :division, :type => :input %></td>
       <td><%= format_datetime(ts.created_at) if ts.created_at %>
       <td><%= best_in_place ts, :paid, :type => :checkbox %></td>
@@ -19,6 +19,30 @@
     </tr>
     <% end %>
   </table>
+
+  <h4>Permissions</h4>
+  <table class="table table-bordered" id="perm-data-table">
+    <thead>
+      <tr>
+        <th>Person</th><th>Level</th><th>Organization</th><th>Season</th><th>Division</th>
+      </tr>
+    </thead>
+    <% @season.permissions.each do |permission| %>
+    <tr>
+      <td><%= link_to permission.player.name, permission.player %></td>
+      <td>              
+        <%= best_in_place permission,
+        :permission_mode,
+        :type => :select,
+        collection: [["", "None"], ["site", "site"], ["organization","organization"], ["season", "season"], ["division","division"]] %>
+      </td>
+      <td><%= best_in_place permission, :organization_id, :type => :input%></td>
+      <td><%= best_in_place permission, :season_id, :type => :input%></td>
+      <td><%= best_in_place permission, :division, :type => :input%></td>
+    </tr>
+    <% end %>
+  </table>
+
 
   <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
   <label>Select team to add:</label>

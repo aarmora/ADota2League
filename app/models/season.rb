@@ -2,6 +2,7 @@ class Season < ActiveRecord::Base
 	has_many :team_seasons, :dependent => :delete_all
 	has_many :teams, :through => :team_seasons
 	has_many :matches
+  has_many :permissions, :class_name => "Permission", :foreign_key => "season_id"
 
   attr_accessible :title, :league_id, :registration_open, :active, :late_fee_start, :price_cents, :late_price_cents, :exclusive_group, :start_date, :challonge_url, :as => :admin
 
