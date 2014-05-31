@@ -72,6 +72,41 @@
 			      <%= best_in_place_if @current_user && @current_user.is_admin?, @player, :admin, :type => :checkbox %>
 			    </div>
 			  </div>
+		  	<%@player.permissions.each_with_index do |permission, index|%>
+			  	<div class="row">
+				  	<label class="col-sm-3">
+				  		Permission <%=index%>
+				  	</label>
+				  	<div class="col-sm-2">
+				  		<label>Perm</label>
+				  		<%=	best_in_place permission,
+					  			:permission_mode,
+			      	  	:type => :select,
+			      	  	collection: [["", "None"], ["site", "site"], ["organization","organization"], ["season", "season"], ["division","division"]] %>
+				  	</div>
+				  	<div class="col-sm-2">
+				  		<label>Org</label>
+				  		<%= best_in_place permission, :organization_id, :type => :input%>
+				  	</div>
+				  	<div class="col-sm-3">
+				  		<label>Season</label>
+				  		<%= best_in_place permission, :season_id, :type => :input%>
+				  	</div>
+				  	<div class="col-sm-2">
+				  		<label>Div</label>
+				  		<%= best_in_place permission, :division, :type => :input%>
+				  	</div>
+			  	</div>
+		  	<%end %>
+			  	
+			  <div class="form-group">
+			  	<div class="col-sm-12">
+						<%= form_for Permission.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
+							<%= f.hidden_field :player_id, :value => @player.id%>
+				  		<%= f.submit "Add permissions", :class => "button"%>
+				  	<%end%>
+				  </div>			  	
+			  </div>
 			<%end%>
 		</div>
 	<br />

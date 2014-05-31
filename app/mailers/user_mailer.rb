@@ -20,7 +20,7 @@ class UserMailer < ActionMailer::Base
   def season4_reminder(player)
     unless player.email.nil?
       @player = player    
-      mail(to: player.email, subject: 'Season 4 starts soon!') 
+      mail(to: player.email, subject: 'No more item drops in amateur tournaments') 
     end
   end
 

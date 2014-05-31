@@ -28,6 +28,7 @@ Ad2l::Application.routes.draw do
   resources :team_seasons, :only => [:create, :show, :update, :destroy]
   resources :matches
   resources :posts
+  resources :permissions
 
   resources :players, :only => [:new, :index, :show, :update] do
     member do
@@ -48,9 +49,11 @@ Ad2l::Application.routes.draw do
 
   post 'add_player' => 'teams#add_player'
 
+  #player comments
   get 'player_comments_partial' => 'players#player_comments_partial'
   post 'player_comment' => 'players#create_player_comment'
   post 'player_comment_delete' => 'players#delete_player_comment'
+
 
   get 'admin/players' => 'admin#players'
 

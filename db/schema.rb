@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140507185243) do
+ActiveRecord::Schema.define(:version => 20140530013612) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(:version => 20140507185243) do
     t.boolean  "mmr_processed",                :default => false, :null => false
     t.integer  "challonge_id"
   end
+
+  create_table "permissions", :force => true do |t|
+    t.integer "player_id"
+    t.string  "permission_mode"
+    t.integer "organization_id"
+    t.integer "season_id"
+    t.string  "division"
+  end
+
+  add_index "permissions", ["player_id"], :name => "index_permissions_on_player_id"
 
   create_table "player_comments", :force => true do |t|
     t.integer  "commenter_id"

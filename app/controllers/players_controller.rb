@@ -74,4 +74,6 @@ class PlayersController < ApplicationController
       format.json { render :json => {:endorsed => params[:endorse].to_i == 1} }
     end
   end
+
+
 end
