@@ -3,8 +3,12 @@ class MatchesController < ApplicationController
 	end
   def show
     @match = Match.find(params[:id])
-    @home_team_roster = @match.home_team.players.sort_by {|p| p.id == @match.home_team.captain_id ? 0 : 1}
-    @away_team_roster = @match.away_team.players.sort_by {|p| p.id == @match.away_team.captain_id ? 0 : 1}
+    unless @match.home_team.nil?
+      @home_team_roster = @match.home_team.players.sort_by {|p| p.id == @match.home_team.captain_id ? 0 : 1}
+    end
+    unless @match.away_team.nil?
+      @away_team_roster = @match.away_team.players.sort_by {|p| p.id == @match.away_team.captain_id ? 0 : 1}
+    end
     @matchcomments = Matchcomment.where(:match_id => params[:id]).order("created_at desc")
   end
 

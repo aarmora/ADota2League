@@ -282,11 +282,36 @@ namespace :dota do
 
   task :mail => :environment do
     @players = Player.all
-    @players.each do |player|
-      #player = Player.find(205)
+    #@players.each do |player|
+      player = Player.find(205)
       unless player.email.nil?
         UserMailer.season4_reminder(player).deliver
       end
+    #end
+  end
+
+
+  task :scheduler => :environment do
+
+    12.times do |i|
+      @match = Match.new
+      @match.season_id = 6
+      @match.week = 1
+      @match.save!
+    end
+
+  end
+
+  task :sched => :environment do
+    @season = Season.includes({:team_seasons => [:team], :matches => [:away_team, :home_team]}).find(6)
+    teams = @season.teams.
+
+    teams.map do |keys, team|
+      #if team.team_seasons.division == "1-2"
+        #puts team
+        puts keys.inspect
+        puts team.inspect
+      #end
     end
   end
 end

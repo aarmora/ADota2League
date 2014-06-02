@@ -36,7 +36,9 @@
                                             <%end%>
                                             <th>Name</th>
                                             <th>Wins</th>
-                                            <th>Checked in?</th>
+                                            <% if @season.check_in_available? %>
+                                                <th>Checked in?</th>
+                                            <% end %>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,11 +53,11 @@
                                                 <td><%= index + 1 %></td>
                                                 <td><%= link_to team_season.team.teamname, team_season.team %></td>
                                                 <td><%= @total_scores[team_season.team_id].to_i %></td>
-                                                <th>
-                                                    <% if @season.check_in_available? %>
+                                                <% if @season.check_in_available? %>
+                                                    <td>
                                                         <%= best_in_place_if @current_user && @current_user.id == team_season.team.captain_id, team_season, :checked_in, :type => :checkbox %>
-                                                    <% end %>
-                                                </th>
+                                                    </td>
+                                                <% end %>
                                             </tr>
                                         <%end%>
                                     </tbody>
@@ -64,7 +66,7 @@
                         </div>
                         <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
                             <h2>Schedule</h2>
-                            <% if @season.challonge_tournament || (@season.start_date && @season.start_date > Time.now) %>
+                            <% if @season.challonge_tournament || (@season.late_fee_start && @season.late_fee_start > Time.now) %>
                                 <%if @season.challonge_id.nil?%>
                                     <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
                                 <% else %>
