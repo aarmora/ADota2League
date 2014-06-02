@@ -68,6 +68,6 @@ class SeasonsController < ApplicationController
   end
 
   def manage
-    @season = Season.includes({:team_seasons => [:team], :matches => [:away_team, :home_team]}).find(params[:id])
+    @season = Season.includes({:team_seasons => [:team => [:captain]], :matches => [:away_team, :home_team]}).find(params[:id])
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140530013612) do
+ActiveRecord::Schema.define(:version => 20140602204224) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20140530013612) do
     t.integer "game_code"
   end
 
+  add_index "games", ["match_id"], :name => "index_games_on_match_id"
+
   create_table "matchcomments", :force => true do |t|
     t.integer  "match_id"
     t.integer  "player_id"
@@ -47,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20140530013612) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "matchcomments", ["match_id"], :name => "index_matchcomments_on_match_id"
 
   create_table "matches", :force => true do |t|
     t.integer  "home_team_id"
@@ -65,6 +69,10 @@ ActiveRecord::Schema.define(:version => 20140530013612) do
     t.boolean  "mmr_processed",                :default => false, :null => false
     t.integer  "challonge_id"
   end
+
+  add_index "matches", ["away_team_id"], :name => "index_matches_on_away_team_id"
+  add_index "matches", ["home_team_id"], :name => "index_matches_on_home_team_id"
+  add_index "matches", ["season_id"], :name => "index_matches_on_season_id"
 
   create_table "permissions", :force => true do |t|
     t.integer "player_id"
@@ -88,6 +96,9 @@ ActiveRecord::Schema.define(:version => 20140530013612) do
     t.integer "endorser_id"
     t.integer "recipient_id"
   end
+
+  add_index "player_votes", ["endorser_id"], :name => "index_player_votes_on_endorser_id"
+  add_index "player_votes", ["recipient_id"], :name => "index_player_votes_on_recipient_id"
 
   create_table "players", :force => true do |t|
     t.integer  "team_id"
@@ -117,6 +128,9 @@ ActiveRecord::Schema.define(:version => 20140530013612) do
     t.integer "player_id"
     t.integer "team_id"
   end
+
+  add_index "players_teams", ["player_id"], :name => "index_players_teams_on_player_id"
+  add_index "players_teams", ["team_id"], :name => "index_players_teams_on_team_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"
@@ -154,6 +168,9 @@ ActiveRecord::Schema.define(:version => 20140530013612) do
     t.datetime "updated_at"
     t.boolean  "checked_in",       :default => false, :null => false
   end
+
+  add_index "team_seasons", ["season_id", "division"], :name => "index_team_seasons_on_season_id_and_division"
+  add_index "team_seasons", ["team_id"], :name => "index_team_seasons_on_team_id"
 
   create_table "teams", :force => true do |t|
     t.string   "teamname",     :limit => 300
