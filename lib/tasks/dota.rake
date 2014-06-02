@@ -293,7 +293,7 @@ namespace :dota do
 
   task :scheduler => :environment do
 
-    12.times do |i|
+    11.times do |i|
       @match = Match.new
       @match.season_id = 6
       @match.week = 1
