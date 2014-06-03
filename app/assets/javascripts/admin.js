@@ -11,9 +11,9 @@ $(document).ready(function(){
     "bPaginate": false,
     "aaSorting": [[ 5, "asc" ]]
   });
-	$('#perm-data-table').dataTable({
-    "bPaginate": false,
-    "aaSorting": [[ 5, "asc" ]]
-  });
+	//$('#perm-data-table').dataTable({
+  //  "bPaginate": false,
+  //  "aaSorting": [[ 5, "asc" ]]
+  //});
   $('select').select2();
 });
