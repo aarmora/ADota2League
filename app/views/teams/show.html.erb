@@ -7,10 +7,10 @@
 					<div class="form-group">
 				    <label class="col-sm-2 control-label">Team Name</label>
 				    <div class="col-sm-10">
-				      <%= best_in_place_if @can_edit_captain, @team, :teamname, :type => :input %>
+				      <%= best_in_place_if Permissions.can_edit?(@team), @team, :teamname, :type => :input %>
 				    </div>
 			  	</div>
-				  <% if @current_user && @current_user.is_admin? %>
+				  <% if Permissions.user_is_site_admin? %>
 						<div class="form-group">
 					    <label class="col-sm-2 control-label">Current MMR</label>
 					    <div class="col-sm-10">
@@ -34,9 +34,9 @@
 				  <% end %>
 						<div class="form-group">
 					    <label class="col-sm-2 control-label">Captain</label>
-				  		<%if @can_edit_captain%>
+				  		<%if Permissions.can_edit?(@team)%>
 						    <div class="col-sm-10">
-						      <%= best_in_place_if @can_edit_captain, @team,
+						      <%= best_in_place_if Permissions.can_edit?(@team), @team,
 						      	:captain_id,
 						      	:type => :select,
 						      	collection: @roster.collect {|player| ["#{player.id}", "#{player.name}"]}
@@ -50,7 +50,7 @@
 								<% end %>
 							</div>
 						<%end%>
-				<% if @can_edit_captain %>
+				<% if Permissions.can_edit?(@team) %>
 					<%= form_tag(players_team_url(@team), :method => "POST", :id => "add_players_form") do %>
 						<div class="form-group" id="addplayers">
 				   		<label class="col-sm-2 control-label">Add Player</label>
@@ -68,7 +68,7 @@
 
 				<% end %>
 
-			<% if @can_edit_captain %>
+			<% if Permissions.can_edit?(@team) %>
 				<%= form_for @team, :method => "delete" do |f| %>
 				  <%= f.submit "Disband Team", :confirm => "Are you sure? This is NOT easily reversable!", :class => "btn btn-danger btn-sm fa fa-trash-o", :style => "margin-left:-3px" %>
 				<% end %>
@@ -83,7 +83,7 @@
 	</div>
 	<br><br>
 
-	<% if @current_user && @current_user.id == @team.captain_id %>
+	<% if Permissions.can_edit?(@team) %>
 		<% if @team.can_register_for_new_season? %>
 			<%= render :partial => "seasons/registration_form" %>
 		<% else %>
@@ -96,7 +96,7 @@
 	<h3>Schedule</h3>
 	<%- @team.team_seasons.each do |ts| %>
 		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
-		<% if @can_edit_captain %>
+		<% if Permissions.can_edit?(@team) %>
 			<% if ts.paid == false && ts.season.current_price.to_i > 0 %>
 				<%= link_to "Pay Registration Fee", ts, :class => "btn btn-primary" %>
 			<% end %>
