@@ -1,6 +1,9 @@
 <% if @ts.paid %>
   <h3>Oops!</h3>
   Looks like you've already paid for the entry fee for <%= @ts.season.title %>. Good Luck!
+<% elsif !@current_user %>
+  <h3>Oops!</h3>
+  You need to log in before you can view this. Log in from the top right corner then come back here.
 <% else %>
   <%= form_for @ts do |f| %>
     <h3><%= @ts.season.title %> Payment</h3>
