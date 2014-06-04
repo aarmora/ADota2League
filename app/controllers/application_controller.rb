@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def load_user
   	# In rails 4, this would be .find_or_create_by! (:steamid => session[:current_user][:uid])
+    Permissions.current_user = nil
 	  @current_user = Player.find_or_initialize_by_steamid(session[:current_user][:uid]) if session[:current_user]
   	# If they are a new user, ship them over to the profile page
   	if @current_user && @current_user.new_record?
@@ -34,6 +35,6 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_admin
-    raise ActionController::RoutingError.new('Not Found') unless @current_user && @current_user.is_admin?
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.user_has_permissions?
   end
 end

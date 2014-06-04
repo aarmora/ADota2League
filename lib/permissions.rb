@@ -29,6 +29,19 @@ module Permissions
     end
   end
 
+  # Niche case used only for seasons right now
+  def self.can_view?(object, user = nil)
+    user ||= @current_user
+    return false unless user && object
+    return true if self.user_is_site_admin?(user)
+
+    if object.is_a? Season
+      self.permissions_for_user(user).detect {|p| p.season_id == object.id && (p.permission_mode == "season" || p.permission_mode == "division")}
+    else
+      false # anything else only site admins can do
+    end
+  end
+
   def self.user_is_site_admin?(user = nil)
     user ||= @current_user
     self.permissions_for_user(user).detect {|p| p.permission_mode == "site"}
@@ -36,7 +49,12 @@ module Permissions
 
   def self.permissions_for_user(user = nil)
     user ||= @current_user
-    @permissions ||= user.permissions
+    user.permissions
+  end
+
+   def self.user_has_permissions?(user = nil)
+    user ||= @current_user
+    !self.permissions_for_user(user).empty?
   end
 
   def self.managed_teams
