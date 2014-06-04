@@ -4,19 +4,22 @@ namespace :dota do
   	# NOTE: This might need to be run while no games are going on. Unclear if it returns in-progress matches
   	# NOTE: Dota API "matches" are really just single games AFAIK. That convolutes the notation a bit.
 
-  	# For now assume the league id is 158...we may need multiple leagues later (get from std in)
-  	league_id = 158
+  	puts "What season id?"
+    season_id = STDIN.gets.chomp.to_i
+    @season = Season.find(season_id)
+  	league_id = @season.league_id
+    raise "Season does not have dota league id set" unless league_id
 
   	# Get the last game in our table from this league
   	# NOTE: We do not have this mapping right now, so we're looking at all games :(
-  	last_seen_id = Game.maximum(:steam_match_id)
+  	last_seen_id = Game.where(:match_id => @season.matches.pluck(:id)).maximum(:steam_match_id)
   	last_start_id = nil
 
   	puts "Working backwards from now to game #{last_seen_id}"
 
   	begin
   	 puts "Pulling a batch of games starting at #{last_start_id}"
-  	 history = Dota.history(:league_id => 158, :start_at_match_id => last_start_id)
+  	 history = Dota.history(:league_id => league_id, :start_at_match_id => last_start_id)
   	 matches = history.matches
   	 break if matches.empty?
   	 matches.each do |match|
@@ -45,16 +48,18 @@ namespace :dota do
   	 	dire_team = Team.find_by_dotabuff_id(game_entry.dire_team_id)
   	 	radiant_team = Team.find_by_dotabuff_id(game_entry.radiant_team_id)
   	 	if dire_team && radiant_team
-  	 		m = Match.where(:away_team_id => [dire_team.id, radiant_team.id], :home_team_id => [dire_team.id, radiant_team.id]).first
+  	 		m = Match.where(:season_id => @season.id, :away_team_id => [dire_team.id, radiant_team.id], :home_team_id => [dire_team.id, radiant_team.id]).first
   	 		# NOTE: This is time boxed, so the game should take place within a week of the scheduled match for auto-matching
   	 		if m && (Date.parse(m.start) - m.date.to_date).abs <= 8
   	 			game_entry.match_id = m.id
   	 			puts "Found matching match! #{m.id}"
   	 			# TODO: adjust MMR here based on results?
   	 		end
-  	 	end
+  	 	else
+        puts "Unable to find teams in DB for match. Got Dire: #{dire_team} Radiant: #{radiant_team}...skipping"
+      end
 
-  	 	game_entry.save!
+  	 	game_entry.save! # Save the game anyways as we might not be able to process it again, we can come back later and clean this up if needed
   	 end
 
   	end while last_seen_id <= last_start_id
@@ -98,8 +103,28 @@ namespace :dota do
       home_wins = match.home_score
       away_wins = match.away_score
       if away_wins == 0 && home_wins == 0
-        puts "skipping match with no results: #{match.id}"
-        next
+        puts "No wins detected for match: #{match.id} checking games"
+
+        # See if there are games we logged that might change the scores
+        match.games.each do |game|
+          if game.radiantwin === "true" || game.radiantwin === true
+            team = Team.find_by_dotabuff_id(game.radiant_team_id)
+          else
+            team = Team.find_by_dotabuff_id(game.dire_team_id)
+          end
+
+          if team == home_team
+            home_wins += 1
+          elsif team == away_team
+            away_wins += 1
+          end
+        end
+
+        # still no wins? then we skip it
+        if away_wins == 0 && home_wins == 0
+          puts "skipping match with no results: #{match.id}"
+          next
+        end
       end
 
       if !home_team || !away_team
@@ -292,26 +317,79 @@ namespace :dota do
 
 
   task :scheduler => :environment do
+    puts "What season id?"
+    season_id = STDIN.gets.chomp.to_i
+    @season = Season.find(season_id)
 
-    11.times do |i|
-      @match = Match.new
-      @match.season_id = 6
-      @match.week = 1
-      @match.save!
+    puts "enter a division or 'all' to do all"
+    division = STDIN.gets.chomp
+    ts = TeamSeason.where(:season_id => @season.id, :paid => true)
+    ts = ts.where(:division => division) unless division == "all"
+    raise "no paid teams found" unless ts.count > 0
+
+    puts "what week are we generating?"
+    week = STDIN.gets.chomp.to_i
+    if week < 1 || week > 15
+      raise "This appears to be an invalid week"
     end
 
+    if Match.where(:season_id => @season.id, :week => week).where("away_team_id IN (:team_ids) OR home_team_id IN (:team_ids)", {:team_ids => ts.pluck(:team_id)}).exists?
+      raise "Teams that would be scheduled are already scheduled for this week"
+    end
+
+    puts "Now, need a date for these matches (i.e. 2014-03-06) in that EXACT format"
+    date = STDIN.gets.chomp
+
+    puts "Finally, timezone (i.e. -0400 for EDT, +0100 for CEST) in that EXACT format"
+    tz = STDIN.gets.chomp
+
+
+    teams_by_division = ts.all.group_by(&:division)
+    teams_by_division.each do |division, team_seasons|
+      puts "Creating matches for division #{division}"
+      schedule = Rubin.new(team_seasons.sort_by(&:id).map(&:team_id))
+      schedule.each_matchup do |home, away, round_num|
+        next unless round_num == week
+        time = rand(2) === 0 ? "20:30:00" : "22:00:00"
+        datetime = "#{date} #{time} #{tz}"
+        match = @season.matches.build
+        match.week = week
+        match.home_team_id = home
+        match.away_team_id = away
+        match.date = datetime
+        match.save!
+      end
+    end
   end
 
-  task :sched => :environment do
-    @season = Season.includes({:team_seasons => [:team], :matches => [:away_team, :home_team]}).find(6)
-    teams = @season.teams.
+  task :swap_teams => :environment do
+    puts "This tool allows you to handle dropped teams in a season"
+    puts "we'll remove the given team and swap another team into their divison in their place"
+    puts ""
+    puts "First, input the season we are doing surgery on"
+    season_id = STDIN.gets.chomp.to_i
+    @season = Season.find(season_id)
 
-    teams.map do |keys, team|
-      #if team.team_seasons.division == "1-2"
-        #puts team
-        puts keys.inspect
-        puts team.inspect
-      #end
-    end
+    puts "Next, input the team id which is being dropped from this season"
+    dropped_team_id = STDIN.gets.chomp.to_i
+    drop_ts = TeamSeason.find_by_season_id_and_team_id(season_id, dropped_team_id)
+    raise "Not Found" unless drop_ts
+
+    puts "Finally, give the team id that will be taking their place in the schedule and division: #{drop_ts.division}"
+    replace_team_id = STDIN.gets.chomp.to_i
+    replace_ts = TeamSeason.find_by_season_id_and_team_id(season_id, dropped_team_id)
+    raise "Not Found" unless replace_ts
+
+    # We are going to move over attributes to the stale TS, then delete
+    # This will keep the ts_id which means scheduling should keep them in the same order
+    drop_ts.paid = replace_ts.paid
+    drop_ts.price_paid_cents = replace.price_paid_cents
+    drop_ts.checked_in = replace_ts.checked_in
+    drop_ts.created_at = replace_ts.created_at
+    drop_ts.team_id = replace_ts.team_id
+    drop_ts.save!
+
+    replace_ts.destroy
+    puts "It is so"
   end
 end

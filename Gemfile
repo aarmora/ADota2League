@@ -20,14 +20,11 @@ gem 'dota', :git => 'git://github.com/nashby/dota.git'
 gem 'challonge-api'
 gem 'kappa', '~> 1.0'
 
-# gem 'rest_in_place'
 gem 'best_in_place'
 
-#gem mandrill
 gem 'mandrill-api'
 
-#gem ck editor
-#gem 'ckeditor'
+gem 'rubin' # round robin
 
 group :production do
 	gem 'exception_notification'
