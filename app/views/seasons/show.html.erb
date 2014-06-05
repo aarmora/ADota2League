@@ -55,7 +55,7 @@
                                                 <td><%= @total_scores[team_season.team_id].to_i %></td>
                                                 <% if @season.check_in_available? %>
                                                     <td>
-                                                        <%= best_in_place_if @current_user && @current_user.id == team_season.team.captain_id, team_season, :checked_in, :type => :checkbox %>
+                                                        <%= best_in_place_if @current_user && @current_user.id == team_season.team.captain_id, team_season, :checked_in, :type => :checkbox, :display_with => lambda { |v| v ? "Yes" : "No" } %>
                                                     </td>
                                                 <% end %>
                                             </tr>
@@ -71,7 +71,7 @@
                                     <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
                                 <% else %>
                                     <p>Schedule will be released when the tournament starts on <%= format_datetime_month(@season.start_date) %></p>
-                                <% end %>    
+                                <% end %>
                             <% else %>
                                 <ul class="list-inline week-selector">
                                     <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
