@@ -8,4 +8,19 @@ $(document).ready(function(){
     $(".week-holder").hide();
     $("#week_" + $(this).data("week")).show();
   });
+
+  // Check in button
+  $(".js-check-in").on("click", function(e, data) {
+    $.ajax({
+      type: "POST",
+      url: $(this).data("url") + ".json",
+      data: {
+        "_method": "put",
+        "team_season[checked_in]": true
+      },
+      success: function() {
+        $(this).replaceWith("Yes");
+      }.bind(this)
+    });
+  });
 });
