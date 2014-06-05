@@ -2,7 +2,7 @@ class TeamSeasonsController < ApplicationController
 
   def create
     @team = Team.find(params[:team_season][:team_id])
-    render :status => :forbidden and return unless @current_user && (@current_user.captained_teams.include?(@team) || @current_user.is_admin?)
+    head :forbidden and return unless @current_user && (@current_user.captained_teams.include?(@team) || @current_user.is_admin?)
 
     @season = Season.find(params[:team_season][:season_id])
     unless @team.seasons_available_for_registration.include?(@season) || @current_user.is_admin?
@@ -37,14 +37,14 @@ class TeamSeasonsController < ApplicationController
   # payment page
   def show
     @ts = TeamSeason.find(params[:id])
-    render :status => :forbidden and return unless @current_user && (@current_user.captained_teams.include?(@ts.team) || @current_user.is_admin?)
+    head :forbidden and return unless @current_user && (@current_user.captained_teams.include?(@ts.team) || @current_user.is_admin?)
   end
 
   # payment callback page and admin overrides
   def update
     @ts = TeamSeason.find(params[:id])
     if params[:team_season]
-      render :status => :forbidden and return unless @current_user && (@current_user.is_admin? || @current_user.captained_teams.include?(@ts.team))
+      head :forbidden and return unless @current_user && (@current_user.is_admin? || @current_user.captained_teams.include?(@ts.team))
       respond_to do |format|
         if @ts.update_attributes(params[:team_season], :as => @current_user.permission_role)
           format.html { redirect_to(manage_season_path(@ts.season_id), :notice => 'TeamSeason was successfully updated.') }
@@ -55,7 +55,7 @@ class TeamSeasonsController < ApplicationController
         end
       end
     else
-      render :status => :forbidden and return unless @current_user && (@current_user.captained_teams.include?(@ts.team) || @current_user.is_admin?)
+      head :forbidden and return unless @current_user && (@current_user.captained_teams.include?(@ts.team) || @current_user.is_admin?)
 
       #attempt to find them in the Stripe DB first
       if @current_user.stripe_customer_id.nil?
@@ -107,7 +107,7 @@ class TeamSeasonsController < ApplicationController
 
   def destroy
     @ts = TeamSeason.find(params[:id])
-    render :status => :forbidden and return unless @current_user && (@current_user.captained_teams.include?(@ts.team) || @current_user.is_admin?)
+    head :forbidden and return unless @current_user && (@current_user.captained_teams.include?(@ts.team) || @current_user.is_admin?)
 
     title = @ts.season.title
     # TODO: Think about refunds here
