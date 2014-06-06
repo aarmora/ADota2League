@@ -31,15 +31,6 @@ class PermissionsController < ApplicationController
 
   def destroy
     @permission = Permission.find(params[:id])
-
-    valid = false
-    if Permissions.user_is_site_admin?
-      valid = true
-    elsif mode == "season" || mode == "division"
-      Permissions.permissions_for_user.exists {|p| p.mode == "season" && p.season_id == season_id}
-    end
-    raise "Illegal Permission Access" unless valid
-
     @player = @permission.player
     @permission.destroy
 
@@ -61,7 +52,7 @@ class PermissionsController < ApplicationController
     if Permissions.user_is_site_admin?
       valid = true
     elsif (!@permission && mode == "season") || mode == "division" # Deleting requires site admin
-      Permissions.permissions_for_user.exists {|p| p.mode == "season" && p.season_id == season_id}
+      valid = Permissions.permissions_for_user.any? {|p| p.mode == "season" && p.season_id == season_id}
     end
     raise "Illegal Permission Access" unless valid
   end
