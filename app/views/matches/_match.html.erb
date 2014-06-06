@@ -6,19 +6,19 @@
 
 <tr class="matchrow" matchid="<%=match.id%>">
 	<td>
-		<%= best_in_place_if @can_edit, match,
+		<%= best_in_place_if Permissions.can_edit?(match), match,
 			  :date,
 			  :display_with => lambda { |date| format_datetime(date)},
 			  :activator => ".fa-calendar.#{match.id}-date",
 	      :type => :datetime
 			%>
-			<% if @can_edit %>
+			<% if Permissions.can_edit?(match) %>
 				<span class="fa fa-calendar form-control-feedback <%=match.id%>-date"></span>
 			<%end%>
 		</td>
 	<td>
 			<%=
-				if @can_edit
+				if Permissions.can_edit?(match)
 					best_in_place match,
 					  :home_team_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-home",
@@ -29,12 +29,12 @@
 			  	link_to_if match.home_team && match.home_team != @team, match.home_team ? match.home_team.teamname : "TBD", match.home_team
 			  end
 			%>
-				<% if @can_edit %>
+				<% if Permissions.can_edit?(match) %>
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-home"></span>
 				<%end%>
 			vs
 			<%=
-				if @can_edit
+				if Permissions.can_edit?(match)
 					best_in_place match,
 					  :away_team_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-away",
@@ -45,17 +45,17 @@
 			  	link_to_if match.away_team && match.away_team != @team, match.away_team ? match.away_team.teamname : "TBD", match.away_team
 			  end
 			%>
-				<% if @can_edit %>
+				<% if Permissions.can_edit?(match) %>
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-away"></span>
 				<%end%>
 	</td>
 	<td>
-		<%= best_in_place_if @can_edit, match, :home_score, :type => :input %>
+		<%= best_in_place_if Permissions.can_edit?(match), match, :home_score, :type => :input %>
 		:
-		<%= best_in_place_if @can_edit, match, :away_score, :type => :input %>
+		<%= best_in_place_if Permissions.can_edit?(match), match, :away_score, :type => :input %>
 	</td>
 	<td>
-		<%= best_in_place_if @can_edit, match,
+		<%= best_in_place_if Permissions.can_edit?(match), match,
 		  :caster_id,
 		  :display_with => (lambda do |caster_id|
 		    caster_id.nil? ? "" : (link_to match.caster.name, match.caster.twitch, :target => "blank")
@@ -64,7 +64,7 @@
       	  :type => :select,
       	  collection: ["", "None"] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 		%>
-		<% if @can_edit %>
+		<% if Permissions.can_edit?(match) %>
 			<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-caster"></span>
 		<%end%>
 

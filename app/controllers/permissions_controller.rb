@@ -1,10 +1,14 @@
 class PermissionsController < ApplicationController
 	def create
-	    @player_permission = Permission.new
-	    @player_permission.attributes = params[:permission]
-	    @player_permission.save!
+	    @permission = Permission.new
+	    @permission.attributes = params[:permission]
+	    @permission.save!
 
-	    redirect_to(@player_permission.player)
+      if @permission.player.nil?
+        redirect_to manage_season_path(@permission.season)
+      else
+	      redirect_to(@permission.player)
+      end
 	end
 
 
@@ -14,12 +18,20 @@ class PermissionsController < ApplicationController
     respond_to do |format|
       if @permission.update_attributes(params[:permission])
         format.html { redirect_to(@permission.player, :notice => 'Player was successfully updated.') }
-        format.json { respond_with_bip(@permission.player) }
+        format.json { respond_with_bip(@permission) }
       else
         format.html { render :action => "show" }
-        format.json { respond_with_bip(@permission.player) }
+        format.json { respond_with_bip(@permission) }
       end
     end
+  end
+
+  def destroy
+    @permission = Permission.find(params[:id])
+    @player = @permission.player
+    @permission.destroy
+
+    redirect_to @player
   end
 
 end
