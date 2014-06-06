@@ -1,20 +1,23 @@
 class PermissionsController < ApplicationController
-	def create
-	    @permission = Permission.new
-	    @permission.attributes = params[:permission]
-	    @permission.save!
+  before_filter :verify_admin
+  before_filter :check_permission_access
 
-      if @permission.player.nil?
-        redirect_to manage_season_path(@permission.season)
-      else
-	      redirect_to(@permission.player)
-      end
+	def create
+    @permission = Permission.new
+    @permission.attributes = params[:permission]
+    @permission.save!
+
+    if @permission.player.nil?
+      redirect_to manage_season_path(@permission.season)
+    else
+      redirect_to(@permission.player)
+    end
 	end
 
 
   def update
     @permission = Permission.find(params[:id])
-    # TODO: create some protection here to make sure the permissions beind added are below the person setting them
+
     respond_to do |format|
       if @permission.update_attributes(params[:permission])
         format.html { redirect_to(@permission.player, :notice => 'Player was successfully updated.') }
@@ -28,10 +31,39 @@ class PermissionsController < ApplicationController
 
   def destroy
     @permission = Permission.find(params[:id])
+
+    valid = false
+    if Permissions.user_is_site_admin?
+      valid = true
+    elsif mode == "season" || mode == "division"
+      Permissions.permissions_for_user.exists {|p| p.mode == "season" && p.season_id == season_id}
+    end
+    raise "Illegal Permission Access" unless valid
+
     @player = @permission.player
     @permission.destroy
 
     redirect_to @player
+  end
+
+  def check_permission_access
+    # Verify that we can actually create this specific permission
+    if params[:id]
+      @permission = Permission.find(params[:id])
+      mode = @permission.permission_mode
+      season_id = @permission.season_id
+    else
+      mode = params[:permission][:permission_mode]
+      season_id = params[:permission][:season_id]
+    end
+
+    valid = false
+    if Permissions.user_is_site_admin?
+      valid = true
+    elsif (!@permission && mode == "season") || mode == "division" # Deleting requires site admin
+      Permissions.permissions_for_user.exists {|p| p.mode == "season" && p.season_id == season_id}
+    end
+    raise "Illegal Permission Access" unless valid
   end
 
 end
