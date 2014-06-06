@@ -10,6 +10,7 @@ class PermissionsController < ApplicationController
 
   def update
     @permission = Permission.find(params[:id])
+    # TODO: create some protection here to make sure the permissions beind added are below the person setting them
     respond_to do |format|
       if @permission.update_attributes(params[:permission])
         format.html { redirect_to(@permission.player, :notice => 'Player was successfully updated.') }

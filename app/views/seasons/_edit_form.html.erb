@@ -4,31 +4,31 @@
     <div class="form-group">
       <label class="col-sm-6 control-label">Name</label>
       <div class="col-sm-6">
-        <%= best_in_place season, :title, :type => :input %>
+        <%= best_in_place_if Permissions.can_edit?(season), season, :title, :type => :input %>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-6 control-label">Dota 2 Ticket League Id</label>
       <div class="col-sm-6">
-        <%= best_in_place season, :league_id, :type => :input %>
+        <%= best_in_place_if Permissions.can_edit?(season), season, :league_id, :type => :input %>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-6 control-label">Registration Open Now?</label>
       <div class="col-sm-6">
-        <%= best_in_place season, :registration_open, :type => :checkbox %>
+        <%= best_in_place_if Permissions.can_edit?(season), season, :registration_open, :type => :checkbox %>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-6 control-label">Active?</label>
       <div class="col-sm-6">
-        <%= best_in_place season, :active, :type => :checkbox %>
+        <%= best_in_place_if Permissions.can_edit?(season), season, :active, :type => :checkbox %>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-6 control-label">Start date?</label>
       <div class="col-sm-6">
-        <%= best_in_place season,
+        <%= best_in_place_if Permissions.can_edit?(season), season,
         :start_date,
         :display_with => lambda { |date| format_datetime(date)},
         :activator => ".glyphicon-warning-sign.#{season.id}-date",
@@ -48,7 +48,7 @@
         <p class="help-block">e.g. 500 -> $5.00, 0 -> Free!</p>
       </div>
       <div class="col-sm-6">
-        <%= best_in_place season, :price_cents, :type => :input %>
+        <%= best_in_place_if Permissions.can_edit?(season), season, :price_cents, :type => :input %>
       </div>
     </div>
     <div class="form-group">
@@ -58,13 +58,13 @@
       </div>
       <div class="col-sm-6">
 
-        <%= best_in_place season, :late_fee_start, :type => :datetime %>
+        <%= best_in_place_if Permissions.can_edit?(season), season, :late_fee_start, :type => :datetime %>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-6 control-label">Late price in cents</label>
       <div class="col-sm-6">
-        <%= best_in_place season, :late_price_cents, :type => :input %>
+        <%= best_in_place_if Permissions.can_edit?(season), season, :late_price_cents, :type => :input %>
       </div>
     </div>
     <div class="form-group">
@@ -73,7 +73,7 @@
         <p class="help-block">Teams may only register for ONE season in each group...blank if you don't conflict</p>
       </div>
       <div class="col-sm-6">
-        <%= best_in_place season, :exclusive_group, :type => :input %>
+        <%= best_in_place_if Permissions.can_edit?(season), season, :exclusive_group, :type => :input %>
       </div>
     </div>
   </div>

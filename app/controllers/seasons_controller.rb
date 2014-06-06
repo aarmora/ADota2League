@@ -55,6 +55,7 @@ class SeasonsController < ApplicationController
 
   def update
     @season = Season.find(params[:id])
+    head :forbidden and return unless Permissions.can_edit? @season
     respond_to do |format|
       if @season.update_attributes(params[:season], :as => @current_user.permission_role)
         expire_fragment("seasonPage-" + @season.id.to_s)
@@ -68,6 +69,8 @@ class SeasonsController < ApplicationController
   end
 
   def manage
+    # custom permissions for this one
     @season = Season.includes({:team_seasons => [:team => [:captain]], :matches => [:away_team, :home_team]}).find(params[:id])
+    head :forbidden and return unless Permissions.can_view?(@season)
   end
 end

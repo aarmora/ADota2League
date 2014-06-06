@@ -2,8 +2,10 @@ class AdminController < ApplicationController
 	before_filter :verify_admin
 
   def index
-    @teams = Team.includes(:captain).all
-    @players = Player.all
+    if Permissions.user_is_site_admin?
+      @teams = Team.includes(:captain).all
+      @players = Player.all
+    end
     @seasons = Season.all
   end
 

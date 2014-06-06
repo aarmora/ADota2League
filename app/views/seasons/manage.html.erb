@@ -10,12 +10,12 @@
     <tr>
       <td><%= link_to ts.team.teamname, ts.team %></td>
       <td><%= link_to ts.team.captain.name, ts.team.captain if ts.team.captain %></td>
-      <td><%= best_in_place ts.team, :mmr, :type => :input %></td>
-      <td><%= best_in_place ts.team, :region, :type => :input %></td>
-      <td><%= best_in_place ts, :division, :type => :input %></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), ts.team, :mmr, :type => :input %></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), ts.team, :region, :type => :input %></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), ts, :division, :type => :input %></td>
       <td><%= format_datetime(ts.created_at) if ts.created_at %>
-      <td><%= best_in_place ts, :paid, :type => :checkbox %></td>
-      <td><%= best_in_place ts, :checked_in, :type => :checkbox %></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), ts, :paid, :type => :checkbox %></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), ts, :checked_in, :type => :checkbox %></td>
     </tr>
     <% end %>
   </table>
@@ -29,25 +29,27 @@
     <% @season.permissions.each do |permission| %>
     <tr>
       <td><%= link_to permission.player.name, permission.player %></td>
-      <td>              
-        <%= best_in_place permission,
+      <td>
+        <%= best_in_place_if Permissions.can_edit?(@season), permission,
         :permission_mode,
         :type => :select,
         collection: [["", "None"], ["site", "site"], ["organization","organization"], ["season", "season"], ["division","division"]] %>
       </td>
-      <td><%= best_in_place permission, :organization_id, :type => :input%></td>
-      <td><%= best_in_place permission, :season_id, :type => :input%></td>
-      <td><%= best_in_place permission, :division, :type => :input%></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), permission, :organization_id, :type => :input%></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), permission, :season_id, :type => :input%></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), permission, :division, :type => :input%></td>
     </tr>
     <% end %>
   </table>
 
-  <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
-  <label>Select team to add:</label>
+  <% if Permissions.can_edit?(@season) %>
+    <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
+    <label>Select team to add:</label>
 
-  <%= f.select(:team_id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), {}, :style => "min-width: 300px;" ) %>
-  <%= f.hidden_field :season_id, :value => @season.id %>
-  <%= submit_tag "Add Team", :class => "btn btn-primary" %>
+    <%= f.select(:team_id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), {}, :style => "min-width: 300px;" ) %>
+    <%= f.hidden_field :season_id, :value => @season.id %>
+    <%= submit_tag "Add Team", :class => "btn btn-primary" %>
+  <% end %>
 <% end %>
 
 <h4>Challonge</h4>
@@ -83,18 +85,20 @@
     </div>
   <% end %>
 </div>
-<div class="col-sm-4">
-  <h5>Available Actions:</h5>
-  <p>Actions are available depending on the state of the tournament. It must not be active to sync data to challonge. It must be finished (with all scores reported) to sync back to AD2L</p>
-  <% if !@season.challonge_tournament %>
-    <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn btn-primary btn-block" %>
-  <% elsif @season.challonge_tournament && @season.challonge_tournament.state == 'pending' %>
-    <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn btn-primary btn-block" %>
-    <%= link_to "Launch tournament", launch_challonge_season_path(@season), :class => "btn btn-success btn-block" %>
-  <% elsif @season.challonge_tournament && @season.challonge_tournament.state == 'complete' %>
-    <%= link_to "Sync from Challonge", sync_challonge_matches_season_path(@season), "data-toggle" => "tooltip", :title => "Remove all teams not on Challonge, and pull in matches and results", :class => "btn btn-success btn-block" %>
-  <% elsif @season.challonge_tournament %>
-    <%= link_to "Rebuild Challonge", rebuild_challonge_season_path(@season), :class => "btn btn-danger btn-block", :confirm => "This will reset all data on challonge and rebuild the tournament from scratch...are you sure?" %>
-  <% end %>
-</div>
+<% if Permissions.can_edit?(@season) %>
+  <div class="col-sm-4">
+    <h5>Available Actions:</h5>
+    <p>Actions are available depending on the state of the tournament. It must not be active to sync data to challonge. It must be finished (with all scores reported) to sync back to AD2L</p>
+    <% if !@season.challonge_tournament %>
+      <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn btn-primary btn-block" %>
+    <% elsif @season.challonge_tournament && @season.challonge_tournament.state == 'pending' %>
+      <%= link_to "Sync to Challonge", setup_challonge_season_path(@season), :class => "btn btn-primary btn-block" %>
+      <%= link_to "Launch tournament", launch_challonge_season_path(@season), :class => "btn btn-success btn-block" %>
+    <% elsif @season.challonge_tournament && @season.challonge_tournament.state == 'complete' %>
+      <%= link_to "Sync from Challonge", sync_challonge_matches_season_path(@season), "data-toggle" => "tooltip", :title => "Remove all teams not on Challonge, and pull in matches and results", :class => "btn btn-success btn-block" %>
+    <% elsif @season.challonge_tournament %>
+      <%= link_to "Rebuild Challonge", rebuild_challonge_season_path(@season), :class => "btn btn-danger btn-block", :confirm => "This will reset all data on challonge and rebuild the tournament from scratch...are you sure?" %>
+    <% end %>
+  </div>
+<% end %>
 
