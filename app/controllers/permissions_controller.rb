@@ -1,17 +1,17 @@
 class PermissionsController < ApplicationController
   before_filter :verify_admin
-  before_filter :check_permission_access
+  unless Permissions.user_is_site_admin?
+    before_filter :check_permission_access
+  end
 
 	def create
     @permission = Permission.new
     @permission.attributes = params[:permission]
     @permission.save!
 
-    if @permission.player.nil?
-      redirect_to manage_season_path(@permission.season)
-    else
-      redirect_to(@permission.player)
-    end
+    session[:return_to] ||= request.referer
+    redirect_to session.delete(:return_to)
+    
 	end
 
 
@@ -34,11 +34,13 @@ class PermissionsController < ApplicationController
     @player = @permission.player
     @permission.destroy
 
-    redirect_to @player
+    session[:return_to] ||= request.referer
+    redirect_to session.delete(:return_to)
   end
 
   def check_permission_access
     # Verify that we can actually create this specific permission
+
     if params[:id] && !params[:permission] # delete
       @permission = Permission.find(params[:id])
       mode = @permission.permission_mode

@@ -1,5 +1,5 @@
 <h3>Season Management Page</h3>
-<%= render :partial => "seasons/edit_form", :locals => {:season => @season} if @current_user && @current_user.is_admin? %>
+<%= render :partial => "seasons/edit_form", :locals => {:season => @season}  %>
 
 <h4>Teams</h4>
   <table class="table table-bordered" id="admin-data-table">
@@ -74,6 +74,7 @@
   </table>
   <%= form_for Permission.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
     <%= f.hidden_field :season_id, :value => @season.id%>
+    <%= f.hidden_field :permission_mode, :value => "division"%>
     <%= f.submit "Add permissions", :class => "btn btn-primary"%>
   <% end %>
 

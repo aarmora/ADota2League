@@ -5,7 +5,7 @@ class TeamSeasonsController < ApplicationController
     head :forbidden and return unless Permissions.can_edit? @team
 
     @season = Season.find(params[:team_season][:season_id])
-    unless @team.seasons_available_for_registration.include?(@season) || @current_user.is_admin?
+    unless @team.seasons_available_for_registration.include?(@season) || Permissions.user_is_site_admin?
       flash[:error] = "It looks like you've already registered for this tournament or another one in the same season. You may only register for ONE of the season four leagues. Please check below what you are already registered for and try again."
       redirect_to @team
       return
