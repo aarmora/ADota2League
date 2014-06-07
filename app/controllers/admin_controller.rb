@@ -7,6 +7,8 @@ class AdminController < ApplicationController
       @players = Player.all
     end
     @seasons = Season.all
+
+    @permissions = Permission.all
   end
 
   def players

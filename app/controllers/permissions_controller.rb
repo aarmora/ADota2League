@@ -52,7 +52,7 @@ class PermissionsController < ApplicationController
     if Permissions.user_is_site_admin?
       valid = true
     elsif (!@permission && mode == "season") || mode == "division" # Deleting requires site admin
-      valid = Permissions.permissions_for_user.any? {|p| p.mode == "season" && p.season_id == season_id}
+      valid = Permissions.permissions_for_user.any? {|p| p.permission_mode == "season" && p.season_id == season_id}
     end
     raise "Illegal Permission Access" unless valid
   end

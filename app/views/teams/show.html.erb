@@ -36,7 +36,7 @@
 					    <label class="col-sm-2 control-label">Captain</label>
 				  		<%if Permissions.can_edit?(@team)%>
 						    <div class="col-sm-10">
-						      <%= best_in_place_if Permissions.can_edit?(@team), @team,
+						      <%= best_in_place @team,
 						      	:captain_id,
 						      	:type => :select,
 						      	collection: @roster.collect {|player| ["#{player.id}", "#{player.name}"]}

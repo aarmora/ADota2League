@@ -37,11 +37,19 @@
     </thead>
     <% @season.permissions.each do |permission| %>
     <tr>
-      <td><%= best_in_place_if Permissions.can_edit?(@season), permission, :player_id, :type => :select, collection: @players.collect {|player| ["#{player.id}", "#{player.name}"]} %></td>
+      <td>
+        <% if Permissions.can_edit?(@season) %>
+          <%=best_in_place_if Permissions.can_edit?(@season), permission, :player_id, :type => :select, collection: @players.collect {|player| ["#{player.id}", "#{player.name}"]} %>
+        <% else %>
+          <% if permission.player %>
+            <%= permission.player.name%>
+          <% end %>
+        <% end %>
+      </td>
       <td>
         <%= 
         if Permissions.user_is_site_admin?
-          best_in_place_if Permissions.can_edit?(@season), permission,
+          best_in_place permission,
           :permission_mode,
           :type => :select,
           collection: [["", "None"], ["site", "site"], ["organization","organization"], ["season", "season"], ["division","division"]]

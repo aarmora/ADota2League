@@ -55,7 +55,7 @@
                                                 <td><%= @total_scores[team_season.team_id].to_i %></td>
                                                 <% if @season.check_in_available? %>
                                                     <td>
-                                                        <%= best_in_place_if @current_user && ((@current_user.id == team_season.team.captain_id) ||(Permissions.can_edit?(team_season))), team_season, :checked_in, :type => :checkbox %>
+                                                        <%= best_in_place_if Permissions.can_edit?(team_season.team) || Permissions.can_edit?(team_season), team_season, :checked_in, :type => :checkbox %>
                                                     </td>
                                                 <% end %>
                                             </tr>
