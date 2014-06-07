@@ -39,11 +39,11 @@ class PermissionsController < ApplicationController
 
   def check_permission_access
     # Verify that we can actually create this specific permission
-    if params[:id]
+    if params[:id] && !params[:permission] # delete
       @permission = Permission.find(params[:id])
       mode = @permission.permission_mode
       season_id = @permission.season_id
-    else
+    else # new / update
       mode = params[:permission][:permission_mode]
       season_id = params[:permission][:season_id]
     end
