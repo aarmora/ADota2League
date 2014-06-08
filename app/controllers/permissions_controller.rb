@@ -1,6 +1,6 @@
 class PermissionsController < ApplicationController
   before_filter :verify_admin
-  before_filter :check_permission_access :unless => Permissions.user_is_site_admin?
+  before_filter :check_permission_access, :unless => Permissions.user_is_site_admin?
 
 	def create
     @permission = Permission.new
