@@ -9,7 +9,7 @@ $('input.filter').on('keyup', function() {
 $(document).ready(function(){
 	$('#admin-data-table').dataTable({
     "bPaginate": false,
-    "aaSorting": [[ 5, "asc" ]]
+    "aaSorting": [[ 1, "desc" ]]
   });
 	//$('#perm-data-table').dataTable({
   //  "bPaginate": false,

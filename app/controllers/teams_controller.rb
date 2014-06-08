@@ -1,10 +1,11 @@
 class TeamsController < ApplicationController
-	def index
+
+  def index
 	end
+
 	def show
 		# TODO: Is this mess ok?
 		@team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_team, :home_team], :home_matches => [:away_team, :home_team]}).find(params[:id])
-		@casters = @can_edit ? Player.where(:caster => true) : []
 		if @current_user
 			@current_user.teams.each do |team|
 				if @team.id == team.id
@@ -13,8 +14,7 @@ class TeamsController < ApplicationController
 			end
 		end
 		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
-    	@can_edit_captain = @current_user && (@current_user.is_admin? || @current_user.id == @team.captain_id)
-    	@players = Player.order(:name).all
+    @players = Player.order(:name).all
 	end
 
 	def create
@@ -30,7 +30,7 @@ class TeamsController < ApplicationController
 
 	def update
 		@team = Team.find(params[:id])
-		raise unless @team.captain_id == @current_user.id || @current_user.is_admin?
+		raise unless Permissions.can_edit? @team
 		respond_to do |format|
 			if @team.update_attributes(params[:team], :as => @current_user.permission_role)
 		        format.html { redirect_to(@team, :notice => 'Player was successfully updated.') }
@@ -44,7 +44,7 @@ class TeamsController < ApplicationController
 
 	def destroy
 		@team = Team.find(params[:id])
-		raise unless @team.captain_id == @current_user.id || @current_user.is_admin?
+		raise unless Permissions.can_edit? @team
 
 		if @team.matches.count == 0
 			@team.destroy
@@ -64,14 +64,14 @@ class TeamsController < ApplicationController
 	# Endpoints used for handling associating players with teams
   def add_players
     @team = Team.find(params[:id])
-    raise ActionController::RoutingError.new('Not Found') unless @current_user && (@team.captain_id == @current_user.id || @current_user.is_admin?)
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @team
     @team.players << Player.find(params[:players].select{|i| i.to_i > 0})
     redirect_to @team
   end
 
   def remove_players
   	@team = Team.find(params[:id])
-    raise ActionController::RoutingError.new('Not Found') unless @current_user && (@team.captain_id == @current_user.id || @current_user.is_admin?)
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @team
   	@team.players.delete(Player.find(params[:players].select{|i| i.to_i > 0}))
   	redirect_to @team
   end

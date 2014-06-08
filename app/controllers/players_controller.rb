@@ -13,14 +13,13 @@ class PlayersController < ApplicationController
   def show
     @player = Player.find(params[:id])
     @current_tab = @current_user && @player.id == @current_user.id ? "myinfo" : ""
-    @can_edit_player = @current_user && (@current_user.id == @player.id || @current_user.is_admin?)
     @open_season = Season.where(:registration_open => true).exists?
     @player_comments = PlayerComment.where(:recipient_id => params[:id]).order("created_at desc")
   end
 
   def update
-    raise ActionController::RoutingError.new('Not Found') unless @current_user && (params[:id].to_i == @current_user.id || @current_user.is_admin?)
     @player = Player.find(params[:id])
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @player
     respond_to do |format|
       if @player.update_attributes(params[:player], :as => @current_user.permission_role)
         format.html { redirect_to(@player, :notice => 'Player was successfully updated.') }

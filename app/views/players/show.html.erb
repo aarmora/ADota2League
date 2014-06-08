@@ -6,83 +6,83 @@
 	<h2><%= @player.name %> <%= render :partial => "players/endorsement_icon", :locals => {:user => @player} %></h2>
 	<div class="col-md-7">
 		<div class="form-horizontal" role="form">
-			<% if @can_edit_player %>
+			<% if Permissions.can_edit?(@player) %>
 				<div class="form-group">
 			    <label class="col-sm-2 control-label">Email</label>
 			    <div class="col-sm-10">
-			      <%= best_in_place_if @can_edit_player, @player, :email, :type => :input %>
+			      <%= best_in_place_if Permissions.can_edit?(@player), @player, :email, :type => :input %>
 			    </div>
 			  </div>
 			<% end %>
 			<div class="form-group">
 		    <label class="col-sm-2 control-label">Desired Roles</label>
 		    <div class="col-sm-10">
-		      <%= best_in_place_if @can_edit_player, @player, :role, :type => :input %>
+		      <%= best_in_place_if Permissions.can_edit?(@player), @player, :role, :type => :input %>
 		    </div>
 	  	</div>
 	  	<div class="form-group">
 		    <label class="col-sm-2 control-label">Time Zone</label>
 		    <div class="col-sm-10">
-		      <%= best_in_place_if @can_edit_player, @player, :time_zone, :type => :select, :collection => ActiveSupport::TimeZone.zones_map.map {|k, v| [k, v.to_s]} %>
+		      <%= best_in_place_if Permissions.can_edit?(@player), @player, :time_zone, :type => :select, :collection => ActiveSupport::TimeZone.zones_map.map {|k, v| [k, v.to_s]} %>
 		    </div>
 	  	</div>
 	  	<div class="form-group">
 		    <label class="col-sm-2 control-label">Free Agent?</label>
 		    <div class="col-sm-10">
-		      <%= best_in_place_if @can_edit_player, @player, :freeagentflag, :type => :checkbox %>
+		      <%= best_in_place_if Permissions.can_edit?(@player), @player, :freeagentflag, :type => :checkbox %>
 		    </div>
 	  	</div>
 		  <div class="form-group">
 		    <label class="col-sm-2 control-label">AD2L Caster?</label>
 		    <div class="col-sm-10">
-		      <%= best_in_place_if @current_user && @current_user.is_admin?, @player, :caster, :type => :checkbox %>
+		      <%= best_in_place_if Permissions.user_is_site_admin?, @player, :caster, :type => :checkbox %>
 		    </div>
 		  </div>
-		  <%if @can_edit_player || @player.caster%>
+		  <%if Permissions.can_edit?(@player) || @player.caster%>
 			  <div class="form-group">
 			    <label class="col-sm-2 control-label">Twitch URL</label>
 			    <div class="col-sm-10">
-			      <%= best_in_place_if @can_edit_player, @player, :twitch, :type => :input %>
+			      <%= best_in_place_if Permissions.can_edit?(@player), @player, :twitch, :type => :input %>
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label class="col-sm-2 control-label">Region</label>
 			    <div class="col-sm-10">
-			      <%= best_in_place_if @can_edit_player, @player, :region, :type => :input %>
+			      <%= best_in_place_if Permissions.can_edit?(@player), @player, :region, :type => :input %>
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label class="col-sm-2 control-label">Estimated MMR?</label>
 			    <div class="col-sm-10">
 			    <p class="help-block">e.g. "3200", numeric only please!</p>
-			      <%= best_in_place_if @can_edit_player, @player, :mmr, :type => :input %>
+			      <%= best_in_place_if Permissions.can_edit?(@player), @player, :mmr, :type => :input %>
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label class="col-sm-2 control-label">Hours played</label>
 			    <div class="col-sm-10">
-			      <%= best_in_place_if @can_edit_player, @player, :hours_played, :type => :input %>
+			      <%= best_in_place_if Permissions.can_edit?(@player), @player, :hours_played, :type => :input %>
 			    </div>
 			  </div>
-			<%end%>
-			<%if @can_edit%>
+			<% end %>
+			<% if Permissions.user_is_site_admin? %>
 			  <div class="form-group">
 			    <label class="col-sm-2 control-label">Admin</label>
 			    <div class="col-sm-10">
-			      <%= best_in_place_if @current_user && @current_user.is_admin?, @player, :admin, :type => :checkbox %>
+			      <%= best_in_place_if Permissions.can_edit?(@player), @player, :admin, :type => :checkbox %>
 			    </div>
 			  </div>
 			   <h4>Permissions</h4>
 			  <table class="table table-bordered" id="perm-data-table">
 			    <thead>
 			      <tr>
-			        <th>Person</th><th>Level</th><th>Organization</th><th>Season</th><th>Division</th>
+			        <th>Person</th><th>Level</th><th>Organization</th><th>Season</th><th>Division</th><th>Remove</th>
 			      </tr>
 			    </thead>
 			    <% @player.permissions.each do |permission| %>
 			    <tr>
 			      <td><%= link_to permission.player.name, permission.player %></td>
-			      <td>              
+			      <td>
 			        <%= best_in_place permission,
 			        :permission_mode,
 			        :type => :select,
@@ -91,16 +91,21 @@
 			      <td><%= best_in_place permission, :organization_id, :type => :input%></td>
 			      <td><%= best_in_place permission, :season_id, :type => :input%></td>
 			      <td><%= best_in_place permission, :division, :type => :input%></td>
+			      <td>
+			      	<%= form_for permission, :method => "delete" do |f|%>
+			      		<%= f.submit "Remove", :class => "btn btn-danger btn-sm fa fa-trash-o"%>
+			      	<% end %>
+			      </td>
 			    </tr>
 			    <% end %>
-			  </table>			  	
+			  </table>
 			  <div class="form-group">
 			  	<div class="col-sm-12">
 						<%= form_for Permission.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
 							<%= f.hidden_field :player_id, :value => @player.id%>
-				  		<%= f.submit "Add permissions", :class => "button"%>
+				  		<%= f.submit "Add permissions", :class => "btn btn-primary"%>
 				  	<%end%>
-				  </div>			  	
+				  </div>
 			  </div>
 			<%end%>
 		</div>
@@ -169,7 +174,7 @@
 		<div class="form-group">
 		    <label class="col-sm-2 control-label">Bio:</label>
 		    <div class="col-sm-10">
-		      <%= best_in_place_if @can_edit_player, @player, :bio, :type => :textarea%>
+		      <%= best_in_place_if Permissions.can_edit?(@player), @player, :bio, :type => :textarea%>
 		    </div>
 	  	</div>
 		<div class="form-group">
