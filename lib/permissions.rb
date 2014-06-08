@@ -49,7 +49,7 @@ module Permissions
 
   def self.permissions_for_user(user = nil)
     user ||= @current_user
-    user.permissions
+    user ? user.permissions : []
   end
 
    def self.user_has_permissions?(user = nil)
