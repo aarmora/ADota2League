@@ -25,7 +25,14 @@
                                     <thead>
                                         <% if @teams_by_division.size > 1 %>
                                             <tr>
-                                                <th colspan=3>Division <%= division %></th>
+                                                <th colspan=3>
+                                                    Division <%= division %>
+                                                    <% matched_permission = @permissions.detect { |p| p.division == division }
+                                                    if matched_permission  %>
+                                                        Admin - 
+                                                        <%= link_to matched_permission.player.name, matched_permission.player%>
+                                                    <% end %>
+                                                </th>
                                             </tr>
                                         <% end %>
                                         <tr>

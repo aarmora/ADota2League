@@ -106,12 +106,10 @@
 		<% end %>
 		<br>
 		<%if ts.season.challonge_url.nil?%>
-			<%#How bad is this?%>
-			<% @permissions.each do |permission| %>
-				<% if permission.division == ts.division %>
-					<%= link_to permission.player.name, permission.player%>
-					is your admin for division <%= ts.division%>!  Contact them first with any questions! <br><br>
-				<% end %>
+			<% matched_permission = @permissions.detect { |p| p.division == ts.division }
+			if matched_permission  %>
+				<%= link_to matched_permission.player.name, matched_permission.player%>
+				is your admin for division <%= ts.division%>!  Contact them first with any questions! <br><br>
 			<% end %>
 			<%= render :partial => "matches/match_table", :object => @team.matches.select{ |match| match.season_id == ts.season_id }.sort_by(&:date) %>
 		<%end%>
