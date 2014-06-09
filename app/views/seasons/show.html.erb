@@ -29,8 +29,9 @@
                                                     Division <%= division %>
                                                     <% matched_permission = @permissions.detect { |p| p.division == division }
                                                     if matched_permission  %>
-                                                        Admin - 
-                                                        <%= link_to matched_permission.player.name, matched_permission.player%>
+                                                        <br/>
+                                                        <sub>Admin - 
+                                                        <%= link_to matched_permission.player.name, matched_permission.player%></sub>
                                                     <% end %>
                                                 </th>
                                             </tr>
