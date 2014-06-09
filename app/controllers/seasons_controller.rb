@@ -17,8 +17,8 @@ class SeasonsController < ApplicationController
         @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
 
         # we always need the above, only run all the queries if we need to rebuild the cache or it's an admin or users need to see their individual check in
-        @no_cache = Permissions.can_view?(@season) || !fragment_exist?("seasonPage-" + params[:id].to_s) || @season.check_in_available?
-        if @no_cache
+        @no_cache = Permissions.can_view?(@season) || @season.check_in_available?
+        if @no_cache || !fragment_exist?("seasonPage-" + params[:id].to_s)
           @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
           @casters = Player.where(:caster => true)
 
