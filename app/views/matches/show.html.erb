@@ -31,6 +31,23 @@
 			<% end %>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-12">
+			Caster: 
+			<%= best_in_place_if Permissions.can_edit?(@match), @match,
+			  :caster_id,
+			  :display_with => (lambda do |caster_id|
+			    caster_id.nil? ? "" : (link_to @match.caster.name, @match.caster.twitch, :target => "blank")
+			  end),
+			  :activator => ".glyphicon-warning-sign.#{@match.id}-caster",
+	      	  :type => :select,
+	      	  collection: ["", "None"] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
+			%>
+			<% if Permissions.can_edit?(@match) %>
+				<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=@match.id%>-caster"></span>
+			<%end%>
+		</div>
+	</div>
 <br>
 <br>
 <div class="container-fluid" id="matchcommentspartial">

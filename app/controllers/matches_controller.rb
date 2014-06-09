@@ -10,6 +10,7 @@ class MatchesController < ApplicationController
       @away_team_roster = @match.away_team.players.sort_by {|p| p.id == @match.away_team.captain_id ? 0 : 1}
     end
     @matchcomments = Matchcomment.where(:match_id => params[:id]).order("created_at desc")
+    @casters = Player.order("name ASC").where(:caster => true)
   end
 
   def update
