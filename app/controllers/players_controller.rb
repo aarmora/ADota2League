@@ -13,7 +13,6 @@ class PlayersController < ApplicationController
   def show
     @player = Player.find(params[:id])
     @current_tab = @current_user && @player.id == @current_user.id ? "myinfo" : ""
-    @can_edit_player = @current_user && (@current_user.id == @player.id || @current_user.is_admin?)
     @open_season = Season.where(:registration_open => true).exists?
     @player_comments = PlayerComment.where(:recipient_id => params[:id]).order("created_at desc")
   end

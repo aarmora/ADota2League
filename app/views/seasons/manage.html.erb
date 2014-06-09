@@ -1,5 +1,5 @@
 <h3>Season Management Page</h3>
-<%= render :partial => "seasons/edit_form", :locals => {:season => @season} if @current_user && @current_user.is_admin? %>
+<%= render :partial => "seasons/edit_form", :locals => {:season => @season}  %>
 
 <h4>Teams</h4>
   <table class="table table-bordered" id="admin-data-table">
@@ -19,38 +19,65 @@
     </tr>
     <% end %>
   </table>
+  <% if Permissions.can_edit?(@season) %>
+    <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
+      <label>Select team to add:</label>
+
+      <%= f.select(:team_id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), {}, :style => "min-width: 300px;" ) %>
+      <%= f.hidden_field :season_id, :value => @season.id %>
+      <%= submit_tag "Add Team", :class => "btn btn-primary" %>
+    <% end %>
+  <% end %>
   <h4>Permissions</h4>
   <table class="table table-bordered" id="perm-data-table">
     <thead>
       <tr>
-        <th>Person</th><th>Level</th><th>Organization</th><th>Season</th><th>Division</th>
+        <th>Person</th><th>Level</th><th>Organization</th><th>Season</th><th>Division</th><th>Remove</th>
       </tr>
     </thead>
     <% @season.permissions.each do |permission| %>
     <tr>
-      <td><%= link_to permission.player.name, permission.player %></td>
       <td>
-        <%= best_in_place_if Permissions.can_edit?(@season), permission,
-        :permission_mode,
-        :type => :select,
-        collection: [["", "None"], ["site", "site"], ["organization","organization"], ["season", "season"], ["division","division"]] %>
+        <% if Permissions.can_edit?(@season) %>
+          <%=best_in_place_if Permissions.can_edit?(@season), permission, :player_id, :type => :select, collection: @players.collect {|player| ["#{player.id}", "#{player.name}"]} %>
+        <% else %>
+          <% if permission.player %>
+            <%= permission.player.name%>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <%= 
+        if Permissions.user_is_site_admin?
+          best_in_place permission,
+          :permission_mode,
+          :type => :select,
+          collection: [["", "None"], ["site", "site"], ["organization","organization"], ["season", "season"], ["division","division"]]
+        else
+          best_in_place_if Permissions.can_edit?(@season), permission,
+          :permission_mode,
+          :type => :select,
+          collection: [["", "None"], ["season", "season"], ["division","division"]]
+        end 
+        %>
       </td>
       <td><%= best_in_place_if Permissions.can_edit?(@season), permission, :organization_id, :type => :input%></td>
       <td><%= best_in_place_if Permissions.can_edit?(@season), permission, :season_id, :type => :input%></td>
       <td><%= best_in_place_if Permissions.can_edit?(@season), permission, :division, :type => :input%></td>
+      <td>
+        <%= form_for permission, :method => "delete" do |f|%>
+          <%= f.submit "Remove", :class => "btn btn-danger btn-sm fa fa-trash-o"%>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </table>
-
-  <% if Permissions.can_edit?(@season) %>
-    <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
-    <label>Select team to add:</label>
-
-    <%= f.select(:team_id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), {}, :style => "min-width: 300px;" ) %>
-    <%= f.hidden_field :season_id, :value => @season.id %>
-    <%= submit_tag "Add Team", :class => "btn btn-primary" %>
+  <%= form_for Permission.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
+    <%= f.hidden_field :season_id, :value => @season.id%>
+    <%= f.hidden_field :permission_mode, :value => "division"%>
+    <%= f.submit "Add permissions", :class => "btn btn-primary"%>
   <% end %>
-<% end %>
+
 
 <h4>Challonge</h4>
 <p>Use the settings below to sync the tournament to Challonge and back. A few notes:</p>

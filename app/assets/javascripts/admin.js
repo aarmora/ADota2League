@@ -8,8 +8,9 @@ $('input.filter').on('keyup', function() {
 });
 $(document).ready(function(){
 	$('#admin-data-table').dataTable({
-    "bPaginate": false,
-    "aaSorting": [[ 5, "asc" ]]
+    "bPaginate": false,,
+    "iDisplayLength": 25,
+    "aaSorting": [[ 1, "desc" ]]
   });
 	//$('#perm-data-table').dataTable({
   //  "bPaginate": false,

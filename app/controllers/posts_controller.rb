@@ -14,6 +14,6 @@ class PostsController < ApplicationController
 
 
   def verify_admin
-  	raise ActionController::RoutingError.new('Not Found') unless @current_user && @current_user.is_admin?
+  	raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?
   end
 end

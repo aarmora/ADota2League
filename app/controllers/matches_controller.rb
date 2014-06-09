@@ -13,8 +13,8 @@ class MatchesController < ApplicationController
   end
 
   def update
-    raise ActionController::RoutingError.new('Not Found') unless @current_user && @current_user.is_admin?
-  	@match = Match.find(params[:id])
+    @match = Match.find(params[:id])
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @match
 
     if params[:match][:home_team]
       params[:match][:home_team_id] = params[:match][:home_team]
@@ -50,7 +50,7 @@ class MatchesController < ApplicationController
 
       format.html { render :partial => 'match_comments', :object => @matchcomments }
       #format.json { render :partial => 'match_comment', :object => @matchcomments }
-      
+
     end
   end
 

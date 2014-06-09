@@ -2,8 +2,42 @@
   <h2>Player Management</h2>
   <%= link_to "Players", admin_players_path, :class => "button"%>
 
-  <h2>Team Management</h2>
+  <h2>Permissions</h2>
+  <table class="table table-bordered" id="admin-data-table">
+    <thead>
+      <tr>
+        <th>Person</th><th>Level</th><th>Organization</th><th>Season</th><th>Division</th><th>Remove</th>
+      </tr>
+    </thead>
+    <% @permissions.each do |permission| %>
+    <tr>
+      <td>
+        <%=best_in_place permission, :player_id, :type => :select, collection: @players.collect {|player| ["#{player.id}", "#{player.name}"]} %>
+      </td>
+      <td>
+        <%= 
+          best_in_place permission,
+          :permission_mode,
+          :type => :select,
+          collection: [["", "None"], ["site", "site"], ["organization","organization"], ["season", "season"], ["division","division"]]
+        %>
+      </td>
+      <td><%= best_in_place permission, :organization_id, :type => :input%></td>
+      <td><%= best_in_place permission, :season_id, :type => :input%></td>
+      <td><%= best_in_place permission, :division, :type => :input%></td>
+      <td>
+        <%= form_for permission, :method => "delete" do |f|%>
+          <%= f.submit "Remove", :class => "btn btn-danger btn-sm fa fa-trash-o"%>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= form_for Permission.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
+    <%= f.submit "Add permissions", :class => "btn btn-primary"%>
+  <% end %>
 
+  <h2>Team Management</h2>
   <div>
   	<h5>View / Edit Team:</h5>
     <%= form_tag("/teams/id", :method => "get", :class => "adaptive") do %>

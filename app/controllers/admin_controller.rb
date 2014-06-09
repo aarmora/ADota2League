@@ -4,9 +4,11 @@ class AdminController < ApplicationController
   def index
     if Permissions.user_is_site_admin?
       @teams = Team.includes(:captain).all
-      @players = Player.all
+      @players = Player.order("name ASC").all
+      @permissions = Permission.all
     end
     @seasons = Season.all
+
   end
 
   def players
