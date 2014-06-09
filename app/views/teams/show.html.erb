@@ -94,7 +94,7 @@
 	<%= render :partial => "welcome/learn_more" %>
 
 	<h3>Schedule</h3>
-	<%- @team.team_seasons.each do |ts| %>
+	<%- @team.team_seasons.sort.reverse.each do |ts| %>
 		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
 		<% if Permissions.can_edit?(@team) %>
 			<% if ts.paid == false && ts.season.current_price.to_i > 0 %>
@@ -106,6 +106,13 @@
 		<% end %>
 		<br>
 		<%if ts.season.challonge_url.nil?%>
+			<%#How bad is this?%>
+			<% @permissions.each do |permission| %>
+				<% if permission.division == ts.division %>
+					<%= link_to permission.player.name, permission.player%>
+					is your admin for division <%= ts.division%>!  Contact them first with any questions! <br><br>
+				<% end %>
+			<% end %>
 			<%= render :partial => "matches/match_table", :object => @team.matches.select{ |match| match.season_id == ts.season_id }.sort_by(&:date) %>
 		<%end%>
 	<% end %>
