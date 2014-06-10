@@ -2,31 +2,30 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <script>
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-    </script>
   </head>
   <body>
     <%unless @player.name.nil?%>
-      <h2>Hey <%=@player.name%>!</h2>
+      <h2>Hello <%=@player.name%>!</h2>
     <%end%>
+    <h3>The Schedule is Live</h3>
     <p>
-      Sorry to spam your email so soon after our previous one.  I've received confirmation from Valve this morning that amateur leagues will no longer be having item drops for their tournaments.  I do expect this impact ticket sales pretty significantly and hence the reason for this email.  Without knowing exactly how our ticket sales will fare, I'm going to say with some certainly that they will be possibly much lower than they currently are.  Without any paying sponsor, we can't support the amount we were doing before (and we just announced it yesterday!).
+     We have released the schedule for Season 4 <%= link_to "here", "http://amateurdota2league.com/seasons/9"%>. Please visit our website and check out your match up. Captains please contact the other team's captain and make sure they are ready to go for Thursday the 12th of June. 
+    </p>
+    <h3>Each division has an Admin</h3>
+    <p> 
+    Each time is assigned a division and every division has an admin. Please be in contact with your admin. He will help you with reschedules and adjusting scores. Admins will also be able to help you with rules and answer any questions you may have.  We still could use some more volunteer admins.  If any of you are interested, please email me at sethad2l@gmail.com. 
     </p>
     <p>
-      I'll admit this is a bummer to us.  But I originally wanted to start AD2L without even knowing that we could get a ticket so it certainly won't stop me now.  Playing in our higher divisions are still amazing teams and playing at our lower divisions will be a lot of fun (I'll be playing there!) and I'm very excited for that!
+     We look forward to a fun Season 4 of AD2L. 
     </p>
     <p>
       Thanks,
     </p>
     <p>
-      Jordan
+      Seth(ShadowKiller)
     </p>
     <p>
       <a href="https://twitter.com/adota2l" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @Adota2l on twitter!</a>
-    </p>
-    <p>
-      <a href="https://twitter.com/aarmora" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow me on twitter!</a>
     </p>
   </body>
 </html>

@@ -8,7 +8,7 @@ $('input.filter').on('keyup', function() {
 });
 $(document).ready(function(){
 	$('#admin-data-table').dataTable({
-    "bPaginate": false,
+    "bPaginate": true,
     "iDisplayLength": 25,
     "aaSorting": [[ 1, "desc" ]]
   });

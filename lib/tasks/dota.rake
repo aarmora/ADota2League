@@ -307,12 +307,12 @@ namespace :dota do
 
   task :mail => :environment do
     @players = Player.all
-    #@players.each do |player|
-      player = Player.find(205)
+    @players.each do |player|
+      #player = Player.find(205)
       unless player.email.nil?
         UserMailer.season4_reminder(player).deliver
       end
-    #end
+    end
   end
 
 

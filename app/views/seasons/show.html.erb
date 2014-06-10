@@ -54,7 +54,7 @@
                                             if @season.start_date && @season.start_date > Time.now
                                                 ts.id
                                             else
-                                                @total_scores[ts.team_id]
+                                                @total_scores[ts.team_id.to_i]
                                             end
                                         end.each_with_index do |team_season, index| %>
                                             <tr>
