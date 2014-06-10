@@ -30,7 +30,7 @@
                                                     <% matched_permission = @permissions.detect { |p| p.division == division }
                                                     if matched_permission  %>
                                                         <br/>
-                                                        <sub>Admin - 
+                                                        <sub>Admin -
                                                         <%= link_to matched_permission.player.name, matched_permission.player%></sub>
                                                     <% end %>
                                                 </th>
@@ -54,7 +54,7 @@
                                             if @season.start_date && @season.start_date > Time.now
                                                 ts.id
                                             else
-                                                @total_scores[ts.team_id.to_i]
+                                                @total_scores[ts.team_id].to_i
                                             end
                                         end.each_with_index do |team_season, index| %>
                                             <tr>
