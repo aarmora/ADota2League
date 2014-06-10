@@ -16,5 +16,5 @@ $(document).ready(function(){
   //  "bPaginate": false,
   //  "aaSorting": [[ 5, "asc" ]]
   //});
-  $('select').select2();
+  //$('select').select2();
 });
