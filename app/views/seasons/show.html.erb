@@ -15,6 +15,9 @@
             <div style="clear: both"></div>
             <div class="TabsContainer">
                 <div class="tabbody3 active">
+                    <div class="steam_chat container-fluid">
+                        Can't find your opponent?  Join the <a href="steam://friends/joinchat/103582791435143521" class="btn btn-primary">STEAM group chat!</a>
+                    </div>
                     <% if (@season.challonge_url && !@season.challonge_tournament) || (@season.challonge_tournament && @season.challonge_tournament.state != "pending") %>
                         <iframe src="http://challonge.com/<%=@season.challonge_url%>/module" width="1100px" height="1000px" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
                     <% else %>
