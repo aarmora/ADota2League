@@ -74,6 +74,6 @@ class SeasonsController < ApplicationController
     @season = Season.includes({:team_seasons => [:team => [:captain]], :matches => [:away_team, :home_team]}).find(params[:id])
     head :forbidden and return unless Permissions.can_view?(@season)
 
-    @players = Player.order("name ASC").all
+    @players = Player.order("name ASC").pluck_all(:id, :name)
   end
 end

@@ -15,7 +15,7 @@
 					<td><%= link_to "Add", "steam://friends/add/#{player.steamid}"%></td>
 					<td><%= link_to player.name, player%></td>
 					<td><%=player.email%></td>
-					<td><%=raw(player.teams.map{|team| raw(link_to( team.teamname, team))}.join(", "))%></td>
+					<td><%#=raw(player.teams.map{|team| raw(link_to( team.teamname, team))}.join(", "))%></td>
 				</tr>
 			<%end%>
 		</tbody>	

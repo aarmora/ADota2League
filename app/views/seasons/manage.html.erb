@@ -39,7 +39,7 @@
     <tr>
       <td>
         <% if Permissions.can_edit?(@season) %>
-          <%=best_in_place_if Permissions.can_edit?(@season), permission, :player_id, :type => :select, collection: @players.collect {|player| ["#{player.id}", "#{player.name}"]} %>
+          <%=best_in_place_if Permissions.can_edit?(@season), permission, :player_id, :type => :select, collection: @players%>
         <% else %>
           <% if permission.player %>
             <%= permission.player.name%>
