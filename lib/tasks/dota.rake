@@ -3,6 +3,7 @@ namespace :dota do
   task :pull_games => :environment do
   	# NOTE: This might need to be run while no games are going on. Unclear if it returns in-progress matches
   	# NOTE: Dota API "matches" are really just single games AFAIK. That convolutes the notation a bit.
+    # TODO: we need to be able to come back and re-process for teams that we don't know about
 
   	puts "What season id?"
     season_id = STDIN.gets.chomp.to_i
@@ -10,11 +11,14 @@ namespace :dota do
   	league_id = @season.league_id
     raise "Season does not have dota league id set" unless league_id
 
+    @seen_games = Game.pluck(:steam_match_id)
+
   	# Get the last game in our table from this league
   	# NOTE: We do not have this mapping right now, so we're looking at all games :(
-  	last_seen_id = Game.where(:match_id => @season.matches.pluck(:id)).maximum(:steam_match_id)
+  	last_seen_id = Game.where(:match_id => @season.matches.pluck(:id)).maximum(:steam_match_id) || 0
   	last_start_id = nil
 
+    # Matches API starts with highest match id, so we go while matches are greater than our last seen
   	puts "Working backwards from now to game #{last_seen_id}"
 
   	begin
@@ -27,7 +31,7 @@ namespace :dota do
   	 	break if last_start_id <= last_seen_id
 
   	 	# Double check it doesn't exist, just in case...I don't think we'd want that
-  	 	next if Game.where(:steam_match_id => match.id).exists?
+  	 	next if @seen_games.include? match.id.to_i
 
   	 	# We haven't seen this match yet, let's fetch the details and insert it
   	 	dota_match = Dota.match(match.id)
@@ -42,7 +46,7 @@ namespace :dota do
   	 		:radiantwin => dota_match.raw_match["radiant_win"]
   	 	)
 
-  	 	puts "Processing #{game_entry[:radiant_team_name]} vs. #{game_entry[:dire_team_name]}"
+  	 	puts "Processing #{match.id}: #{game_entry[:radiant_team_name]} vs. #{game_entry[:dire_team_name]}"
 
   	 	# Try to match the team ids from steam to those in our database
   	 	dire_team = Team.find_by_dotabuff_id(game_entry.dire_team_id)
@@ -50,19 +54,18 @@ namespace :dota do
   	 	if dire_team && radiant_team
   	 		m = Match.where(:season_id => @season.id, :away_team_id => [dire_team.id, radiant_team.id], :home_team_id => [dire_team.id, radiant_team.id]).first
   	 		# NOTE: This is time boxed, so the game should take place within a week of the scheduled match for auto-matching
-  	 		if m && (Date.parse(m.start) - m.date.to_date).abs <= 8
+  	 		if m && (dota_match.start.to_date - m.date.to_date).abs <= 8
   	 			game_entry.match_id = m.id
   	 			puts "Found matching match! #{m.id}"
   	 			# TODO: adjust MMR here based on results?
+          game_entry.save!
+          @seen_games << match.id.to_i
   	 		end
   	 	else
-        puts "Unable to find teams in DB for match. Got Dire: #{dire_team} Radiant: #{radiant_team}...skipping"
+        puts "Unable to find teams in DB for match. Got Dire: #{dire_team}(#{dota_match.raw_match["dire_team_id"]}) Radiant: #{radiant_team}(#{dota_match.raw_match["radiant_team_id"]})...skipping"
       end
-
-  	 	game_entry.save! # Save the game anyways as we might not be able to process it again, we can come back later and clean this up if needed
   	 end
-
-  	end while last_seen_id <= last_start_id
+  	end while last_start_id > last_seen_id
   end
 
   desc "Adjust MMR for a given league and week based on results"
