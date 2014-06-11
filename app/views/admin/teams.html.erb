@@ -1,0 +1,34 @@
+<h2>Team Management</h2>
+  <div>
+    <h5>View / Edit Team:</h5>
+    <%= form_tag("/teams/id", :method => "get", :class => "adaptive") do %>
+      <%= select_tag(:id, options_for_select(@all_teams)) %>
+      <%= submit_tag "View Team", :class => "button" %>
+    <% end %>
+  </div>
+
+  <div>
+    <h5>Assign New Captain to Exisiting Team:</h5>
+    <p>Go to the team page above, add the desired user to the team, and then make them a captain</p>
+    <%=# form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
+      <%=# select_tag(:id, options_for_select(@teams.map{|team| [team.teamname, team.id]})) %>
+
+      <%=# collection_select(:team, :captain_id, @players.select(&:name).sort_by(&:name), :id, :name) %>
+      <%=# submit_tag "Assign Captain", :class => "button" %>
+    <% end %>
+  </div>
+
+  <div>
+    <h5>Mark team active / inactive:</h5>
+    <%= form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
+      <%= select_tag(:id, options_for_select(@inactive_teams)) %>
+      <%= hidden_field(:team, :active, :value => true) %>
+      <%= submit_tag "Make Active", :class => "button" %>
+    <% end %>
+    <%= form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
+      <% # NOTE: needs field added to filter...also above %>
+      <%= select_tag(:id, options_for_select(@active_teams)) %>
+      <%= hidden_field(:team, :active, :value => false) %>
+      <%= submit_tag "Make Inactive", :class => "button" %>
+    <% end %>
+  </div>

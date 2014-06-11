@@ -1,4 +1,8 @@
 <% if Permissions.user_is_site_admin? %>
+
+  <h2>Player Management</h2>
+  <%= link_to "Teams", admin_teams_path, :class => "button"%>
+
   <h2>Player Management</h2>
   <%= link_to "Players", admin_players_path, :class => "button"%>
 
@@ -12,10 +16,10 @@
     <% @permissions.each do |permission| %>
     <tr>
       <td>
-        <%=best_in_place permission, :player_id, :type => :select, collection: @players.collect {|player| ["#{player.id}", "#{player.name}"]} %>
+        <%=best_in_place permission, :player_id, :type => :select, :collection => @players %>
       </td>
       <td>
-        <%= 
+        <%=
           best_in_place permission,
           :permission_mode,
           :type => :select,
@@ -36,41 +40,8 @@
   <%= form_for Permission.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
     <%= f.submit "Add permissions", :class => "btn btn-primary"%>
   <% end %>
-
-  <h2>Team Management</h2>
-  <div>
-  	<h5>View / Edit Team:</h5>
-    <%= form_tag("/teams/id", :method => "get", :class => "adaptive") do %>
-      <%= select_tag(:id, options_for_select(@teams.map{|team| [team.teamname, team.id]})) %>
-      <%= submit_tag "View Team", :class => "button" %>
-    <% end %>
-  </div>
-
-  <div>
-  	<h5>Assign New Captain to Exisiting Team:</h5>
-  	<%= form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
-  		<%= select_tag(:id, options_for_select(@teams.map{|team| [team.teamname, team.id]})) %>
-
-  		<%= collection_select(:team, :captain_id, @players.select(&:name).sort_by(&:name), :id, :name) %>
-  		<%= submit_tag "Assign Captain", :class => "button" %>
-  	<% end %>
-  </div>
-
-  <div>
-  	<h5>Mark team active / inactive:</h5>
-    <%= form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
-      <%= select_tag(:id, options_for_select(Team.where(:active => false).sort_by(&:teamname).map{|team| [team.teamname, team.id]})) %>
-      <%= hidden_field(:team, :active, :value => true) %>
-      <%= submit_tag "Make Active", :class => "button" %>
-    <% end %>
-    <%= form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
-      <% # NOTE: needs field added to filter...also above %>
-      <%= select_tag(:id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]})) %>
-      <%= hidden_field(:team, :active, :value => false) %>
-      <%= submit_tag "Make Inactive", :class => "button" %>
-    <% end %>
-  </div>
 <% end %>
+
 <h2>Season / Schedule Management</h2>
 <p>Choose a season and week to manage</p>
 

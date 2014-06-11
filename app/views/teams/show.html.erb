@@ -57,8 +57,8 @@
 					    <div class="col-sm-10">
 					    	<select class="addplayer select2" name="players[]" team="<%=@team.id%>" width="600">
 					    		<option value=""></option>
-					    		<% @players.reject{|p| p.name.blank?}.each do |player| %>
-					    			<option value="<%=player.id%>"><%=player.name%></option>
+					    		<% @players.reject{|id, name| name.blank? }.each do |id, name| %>
+					    			<option value="<%= id %>"><%= name %></option>
 					    		<% end %>
 					    	</select>
 							</div>

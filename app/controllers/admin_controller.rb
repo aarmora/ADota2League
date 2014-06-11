@@ -3,16 +3,21 @@ class AdminController < ApplicationController
 
   def index
     if Permissions.user_is_site_admin?
-      @teams = Team.includes(:captain).all
-      @players = Player.order("name ASC").all
       @permissions = Permission.all
+      @players = Player.pluck_all(:id, :name)
     end
     @seasons = Season.all
-
   end
 
   def players
-    @players = Player.includes(:teams).all
+    @players = Player.order("name ASC").all
+  end
+
+  def teams
+    @all_teams = Team.order(:teamname).pluck_all(:teamname, :id)
+    @active_teams = Team.where(:active => false).order(:teamname).pluck_all(:teamname, :id)
+    @inactive_teams = Team.where(:active => false).order(:teamname).pluck_all(:teamname, :id)
+
   end
 
   def manage_season

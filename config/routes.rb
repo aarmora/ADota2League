@@ -54,11 +54,10 @@ Ad2l::Application.routes.draw do
   post 'player_comment' => 'players#create_player_comment'
   post 'player_comment_delete' => 'players#delete_player_comment'
 
-
-  get 'admin/players' => 'admin#players'
-
   scope '/admin' do
     root :to => "admin#index"
+    get 'teams' => 'admin#teams', :as => "admin_teams"
+    get 'players' => 'admin#players', :as => "admin_players"
     get "manage_seasons(/:season(/:week))" => 'admin#manage_seasons'
   end
 
