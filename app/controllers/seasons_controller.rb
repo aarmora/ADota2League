@@ -26,7 +26,7 @@ class SeasonsController < ApplicationController
           @teams_by_division = @season.team_seasons.includes(:team).group_by {|ts| ts.division.to_s}
 
           # compute the scores using the pieces we already have so we don't need to re-fetch them again
-          if params[:id] == "1" || params[:id] == "8" || params[:id] == "9"
+          if params[:id] == "1"
             # don't display the divisions here
             @teams_by_division = {"" => @teams_by_division.collect {|div, teams| teams}.flatten}
             @total_scores = {}
@@ -34,6 +34,13 @@ class SeasonsController < ApplicationController
               @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
               @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
             end
+          elsif params[:id] == "8" || params[:id] == "9"
+            #display divisions herr
+            @total_scores = {}
+            @matches.each do |match|
+              @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
+              @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
+            end            
           else
             @total_scores = {}
             @matches.each do |match|

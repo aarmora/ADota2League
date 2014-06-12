@@ -59,7 +59,7 @@
                                             else
                                                 @total_scores[ts.team_id].to_i
                                             end
-                                        end.each_with_index do |team_season, index| %>
+                                        end.reverse.each_with_index do |team_season, index| %>
                                             <tr>
                                                 <td><%= index + 1 %></td>
                                                 <td><%= link_to team_season.team.teamname, team_season.team %></td>
