@@ -21,6 +21,8 @@ namespace :dota do
   	league_id = @season.league_id
     raise "Season does not have dota league id set" unless league_id
 
+    # TODO: Get dotabuff ids from ONLY teams registered for this season
+
     @seen_games = Game.pluck(:steam_match_id)
 
   	# Get the last game in our table from this league
@@ -66,7 +68,7 @@ namespace :dota do
   	 		:dire_team_name => dota_match.raw_match["dire_name"],
   	 		:radiant_dota_team_id => dota_match.raw_match["radiant_team_id"],
   	 		:radiant_team_name => dota_match.raw_match["radiant_name"],
-  	 		:radiant_win => dota_match.raw_match["radiant_win"] == "1"
+  	 		:radiant_win => dota_match.raw_match["radiant_win"]
   	 	)
       puts ""
   	 	puts "Processing #{match.id}: #{game_entry[:radiant_team_name]} (#{game_entry[:radiant_dota_team_id]}) vs. #{game_entry[:dire_team_name]} (#{game_entry[:dire_dota_team_id]})"
@@ -416,6 +418,35 @@ namespace :dota do
     drop_ts.save!
 
     replace_ts.destroy
+    puts "It is so"
+  end
+
+  task :merge_teams => :environment do
+    puts "This tool allows you to merge duplicate teams"
+    puts "all their matches and players will be condensed. NOTE: we cannot recomputed MMR so that will remain unchanged"
+    puts ""
+    puts "First, input the team id that you want to remain"
+    team_id = STDIN.gets.chomp.to_i
+    team = Team.find(team_id)
+    raise "Not Found" unless team
+
+    puts "Next, input the team id which will be merged and removed"
+    dup_team_id = STDIN.gets.chomp.to_i
+    dup_team = Team.find(dup_team_id)
+    raise "Not Found" unless dup_team
+
+    puts "You are about to mege '#{dup_team.teamname}' (MMR: #{dup_team.mmr}) into '#{team.teamname}' (MMR: #{team.mmr}) ...are you sure? (yes charles)"
+    ok_to_insert = STDIN.gets.chomp == "yes charles"
+    raise "Later days!" unless ok_to_insert
+
+
+    TeamSeason.where(:team_id => dup_team_id).update_all(:team_id => team_id)
+    Match.where(:home_team_id => dup_team_id).update_all(:home_team_id => team_id)
+    Match.where(:away_team_id => dup_team_id).update_all(:away_team_id => team_id)
+    team.players << (dup_team.players - team.players)
+
+    dup_team.reload.destroy
+
     puts "It is so"
   end
 end
