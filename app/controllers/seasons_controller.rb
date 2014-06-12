@@ -58,7 +58,7 @@ class SeasonsController < ApplicationController
     @season = Season.find(params[:id])
     head :forbidden and return unless Permissions.can_edit? @season
     respond_to do |format|
-      if @season.update_attributes(params[:season], :as => @current_user.permission_role)
+      if @season.update_attributes(params[:season], :as => @current_user.role_for_object(@seasons))
         expire_fragment("seasonPage-" + @season.id.to_s)
         format.html { redirect_to(@season, :notice => 'Season was successfully updated.') }
         format.json { respond_with_bip(@season) }

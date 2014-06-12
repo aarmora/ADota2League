@@ -34,7 +34,7 @@ class TeamsController < ApplicationController
 		@team = Team.find(params[:id])
 		raise unless Permissions.can_edit? @team
 		respond_to do |format|
-			if @team.update_attributes(params[:team], :as => @current_user.permission_role)
+			if @team.update_attributes(params[:team], :as => @current_user.role_for_object(@team))
 		        format.html { redirect_to(@team, :notice => 'Player was successfully updated.') }
 		        format.json { respond_with_bip(@team) }
 		    else

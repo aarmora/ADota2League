@@ -42,6 +42,14 @@ module Permissions
     end
   end
 
+  def role_for_object(object)
+    if Permissions.can_edit? object
+      :admin
+    else
+      :default
+    end
+  end
+
   def self.user_is_site_admin?(user = nil)
     user ||= @current_user
     self.permissions_for_user(user).detect {|p| p.permission_mode == "site"}

@@ -18,14 +18,5 @@ class Player < ActiveRecord::Base
   attr_accessible :twitch, :region, :as => [:admin, :caster]
   attr_accessible :caster, :admin, :as => :admin
 
-  def permission_role
-  	if Permissions.user_is_site_admin?(self)
-  		:admin
-  	elsif self.caster
-  		:caster
-  	else
-  		:default
-  	end
-  end
 end
 

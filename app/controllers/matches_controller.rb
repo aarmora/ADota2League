@@ -29,7 +29,7 @@ class MatchesController < ApplicationController
 
 
     respond_to do |format|
-      if @match.update_attributes(params[:match], :as => @current_user.permission_role)
+      if @match.update_attributes(params[:match], :as => @current_user.role_for_object(@match))
         format.html { redirect_to(@match, :notice => 'Player was successfully updated.') }
         format.json { respond_with_bip(@match) }
       else
