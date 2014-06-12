@@ -29,6 +29,8 @@ gem 'rubin' # round robin
 group :production do
 	gem 'exception_notification'
   gem "oink" # for doing memory analysis
+  gem 'memcachier'
+  gem 'dalli'
 end
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
