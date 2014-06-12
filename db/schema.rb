@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140602204224) do
+ActiveRecord::Schema.define(:version => 20140612044840) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -30,14 +30,18 @@ ActiveRecord::Schema.define(:version => 20140602204224) do
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "games", :force => true do |t|
-    t.integer "match_id"
-    t.integer "steam_match_id"
-    t.string  "dire_team_name",    :limit => 50
-    t.integer "dire_team_id"
-    t.string  "radiant_team_name", :limit => 50
-    t.integer "radiant_team_id"
-    t.string  "radiantwin",        :limit => 50
-    t.integer "game_code"
+    t.integer  "match_id"
+    t.integer  "steam_match_id"
+    t.string   "dire_team_name",       :limit => 50
+    t.integer  "dire_dota_team_id"
+    t.string   "radiant_team_name",    :limit => 50
+    t.integer  "radiant_dota_team_id"
+    t.boolean  "radiant_win"
+    t.integer  "game_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "dire_team_id"
+    t.integer  "radiant_team_id"
   end
 
   add_index "games", ["match_id"], :name => "index_games_on_match_id"

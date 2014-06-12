@@ -47,19 +47,21 @@ namespace :dota do
   	 	# Don't save it yet, let's see if we can find the match
   	 	game_entry = Game.new(
   	 		:steam_match_id => dota_match.id,
-  	 		:dire_team_id => dota_match.raw_match["dire_team_id"],
+  	 		:dire_dota_team_id => dota_match.raw_match["dire_team_id"],
   	 		:dire_team_name => dota_match.raw_match["dire_name"],
-  	 		:radiant_team_id => dota_match.raw_match["radiant_team_id"],
+  	 		:radiant_dota_team_id => dota_match.raw_match["radiant_team_id"],
   	 		:radiant_team_name => dota_match.raw_match["radiant_name"],
-  	 		:radiantwin => dota_match.raw_match["radiant_win"]
+  	 		:radiant_win => dota_match.raw_match["radiant_win"] == "1"
   	 	)
 
   	 	puts "Processing #{match.id}: #{game_entry[:radiant_team_name]} vs. #{game_entry[:dire_team_name]}"
 
   	 	# Try to match the team ids from steam to those in our database
-  	 	dire_team = Team.find_by_dotabuff_id(game_entry.dire_team_id)
-  	 	radiant_team = Team.find_by_dotabuff_id(game_entry.radiant_team_id)
+  	 	dire_team = Team.find_by_dotabuff_id(game_entry.dire_dota_team_id)
+  	 	radiant_team = Team.find_by_dotabuff_id(game_entry.radiant_dota_team_id)
   	 	if dire_team && radiant_team
+        game_entry.dire_team_id = dire_team.id
+        game_entry.radiant_team_id = radiant_team.id
   	 		m = Match.where(:season_id => @season.id, :away_team_id => [dire_team.id, radiant_team.id], :home_team_id => [dire_team.id, radiant_team.id]).first
   	 		# NOTE: This is time boxed, so the game should take place within a week of the scheduled match for auto-matching
   	 		if m && (dota_match.start.to_date - m.date.to_date).abs <= 8
@@ -122,19 +124,9 @@ namespace :dota do
         puts "No wins detected for match: #{match.id} checking games"
 
         # See if there are games we logged that might change the scores
-        match.games.each do |game|
-          if game.radiantwin === "true" || game.radiantwin === true
-            team = Team.find_by_dotabuff_id(game.radiant_team_id)
-          else
-            team = Team.find_by_dotabuff_id(game.dire_team_id)
-          end
-
-          if team == home_team
-            home_wins += 1
-          elsif team == away_team
-            away_wins += 1
-          end
-        end
+        match.update_score_from_games!
+        home_wins = match.home_score
+        away_wins = match.away_score
 
         # still no wins? then we skip it
         if away_wins == 0 && home_wins == 0
