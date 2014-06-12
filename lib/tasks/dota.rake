@@ -15,13 +15,18 @@ namespace :dota do
 
   	# Get the last game in our table from this league
   	# NOTE: We do not have this mapping right now, so we're looking at all games :(
-  	last_seen_id = Game.where(:match_id => @season.matches.pluck(:id)).maximum(:steam_match_id) || 0
+
   	last_start_id = nil
 
     # Matches API starts with highest match id, so we go while matches are greater than our last seen
-  	puts "Working backwards from now to game #{last_seen_id}"
+  	# last_seen_id = Game.where(:match_id => @season.matches.pluck(:id)).maximum(:steam_match_id) || 0
+    # puts "Working backwards from now to game #{last_seen_id}"
+
+    # Just run everything in the season until we are actually raping the API
+    last_seen_id = 0
 
   	begin
+     last_start_id = last_start_id - 1 if last_start_id
   	 puts "Pulling a batch of games starting at #{last_start_id}"
   	 history = Dota.history(:league_id => league_id, :start_at_match_id => last_start_id)
   	 matches = history.matches
@@ -31,7 +36,10 @@ namespace :dota do
   	 	break if last_start_id <= last_seen_id
 
   	 	# Double check it doesn't exist, just in case...I don't think we'd want that
-  	 	next if @seen_games.include? match.id.to_i
+  	 	if @seen_games.include? match.id.to_i
+        puts "Skipping seen game #{match.id}"
+        next
+      end
 
   	 	# We haven't seen this match yet, let's fetch the details and insert it
   	 	dota_match = Dota.match(match.id)
@@ -60,9 +68,13 @@ namespace :dota do
   	 			# TODO: adjust MMR here based on results?
           game_entry.save!
           @seen_games << match.id.to_i
-  	 		end
+  	 		else
+          puts "Match not found or out of 8-day time box: #{m.inspect}"
+        end
   	 	else
-        puts "Unable to find teams in DB for match. Got Dire: #{dire_team}(#{dota_match.raw_match["dire_team_id"]}) Radiant: #{radiant_team}(#{dota_match.raw_match["radiant_team_id"]})...skipping"
+        puts "Unable to find teams in DB for match."
+        puts "no dire team found: #{dota_match.raw_match["dire_name"]}(#{dota_match.raw_match["dire_team_id"]})" if !dire_team
+        puts "no radiant team found: #{dota_match.raw_match["radiant_name"]}(#{dota_match.raw_match["radiant_team_id"]})" if !radiant_team
       end
   	 end
   	end while last_start_id > last_seen_id
