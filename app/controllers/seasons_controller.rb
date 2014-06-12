@@ -26,7 +26,7 @@ class SeasonsController < ApplicationController
           @teams_by_division = @season.team_seasons.includes(:team).group_by {|ts| ts.division.to_s}
 
           # compute the scores using the pieces we already have so we don't need to re-fetch them again
-          if params[:id] == "1" || params[:id] == "8" || param[:id] == "9"
+          if params[:id] == "1" || params[:id] == "8" || params[:id] == "9"
             # don't display the divisions here
             @teams_by_division = {"" => @teams_by_division.collect {|div, teams| teams}.flatten}
             @total_scores = {}
