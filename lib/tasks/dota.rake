@@ -67,6 +67,7 @@ namespace :dota do
   	 			puts "Found matching match! #{m.id}"
   	 			# TODO: adjust MMR here based on results?
           game_entry.save!
+          m.update_score_from_games!
           @seen_games << match.id.to_i
   	 		else
           puts "Match not found or out of 8-day time box: #{m.inspect}"
