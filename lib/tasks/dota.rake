@@ -3,7 +3,17 @@ namespace :dota do
   task :pull_games => :environment do
   	# NOTE: This might need to be run while no games are going on. Unclear if it returns in-progress matches
   	# NOTE: Dota API "matches" are really just single games AFAIK. That convolutes the notation a bit.
-    # TODO: we need to be able to come back and re-process for teams that we don't know about
+
+    dups = Team.connection.select_all("SELECT dotabuff_id, COUNT(*) as count FROM teams WHERE dotabuff_id IS NOT NULL GROUP BY dotabuff_id HAVING COUNT(*) > 1")
+    unless dups.empty?
+      puts "WARNING: Some teams have the same dotabuff id. This can cause issues and should be fixed by merging or removing the teams (carefully)"
+      puts "Duplicate ids:"
+      dups.each do |item|
+        puts "#{item["dotabuff_id"]} - #{item["count"]}"
+      end
+      puts "-------"
+      puts ""
+    end
 
   	puts "What season id?"
     season_id = STDIN.gets.chomp.to_i
@@ -44,6 +54,11 @@ namespace :dota do
   	 	# We haven't seen this match yet, let's fetch the details and insert it
   	 	dota_match = Dota.match(match.id)
 
+      if dota_match.raw_match["dire_team_id"].blank? || dota_match.raw_match["radiant_team_id"].blank?
+        puts "Skipping game without two teams #{match.id}"
+        next
+      end
+
   	 	# Don't save it yet, let's see if we can find the match
   	 	game_entry = Game.new(
   	 		:steam_match_id => dota_match.id,
@@ -53,8 +68,8 @@ namespace :dota do
   	 		:radiant_team_name => dota_match.raw_match["radiant_name"],
   	 		:radiant_win => dota_match.raw_match["radiant_win"] == "1"
   	 	)
-
-  	 	puts "Processing #{match.id}: #{game_entry[:radiant_team_name]} vs. #{game_entry[:dire_team_name]}"
+      puts ""
+  	 	puts "Processing #{match.id}: #{game_entry[:radiant_team_name]} (#{game_entry[:radiant_dota_team_id]}) vs. #{game_entry[:dire_team_name]} (#{game_entry[:dire_dota_team_id]})"
 
   	 	# Try to match the team ids from steam to those in our database
   	 	dire_team = Team.find_by_dotabuff_id(game_entry.dire_dota_team_id)
@@ -73,6 +88,8 @@ namespace :dota do
           @seen_games << match.id.to_i
   	 		else
           puts "Match not found or out of 8-day time box: #{m.inspect}"
+          puts "Radiant DB team: #{radiant_team.id}"
+          puts "Dire DB Team: #{dire_team.id}"
         end
   	 	else
         puts "Unable to find teams in DB for match."

@@ -36,9 +36,12 @@ class Match < ActiveRecord::Base
     return if self.games.count == 0
     score_by_steam_id = {}
     self.games.each do |g|
+      # Add one point to winning team, 0 to losing team so that they show up in the keyset when we check later
       if g.radiant_win === true
         score_by_steam_id[g.radiant_team_id] = score_by_steam_id[g.radiant_team_id].to_i + 1
+        score_by_steam_id[g.dire_team_id] = score_by_steam_id[g.dire_team_id].to_i
       elsif g.radiant_win === false
+        score_by_steam_id[g.radiant_team_id] = score_by_steam_id[g.radiant_team_id].to_i
         score_by_steam_id[g.dire_team_id] = score_by_steam_id[g.dire_team_id].to_i + 1
       end
     end
@@ -49,6 +52,9 @@ class Match < ActiveRecord::Base
       self.away_score = score_by_steam_id[self.away_team.id]
       self.save!
     else
+      puts score_by_steam_id.inspect
+      puts self.home_team_id.inspect
+      puts self.away_team_id.inspect
       puts "WARNING: teams did not match, not updating match score"
     end
 
