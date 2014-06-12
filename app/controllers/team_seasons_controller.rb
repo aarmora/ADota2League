@@ -47,7 +47,7 @@ class TeamSeasonsController < ApplicationController
     if params[:team_season]
       head :forbidden and return unless Permissions.can_edit? @ts.team
       respond_to do |format|
-        if @ts.update_attributes(params[:team_season], :as => @current_user.permission_role)
+        if @ts.update_attributes(params[:team_season], :as => @current_user.role_for_object(@ts))
           format.html { redirect_to(manage_season_path(@ts.season_id), :notice => 'TeamSeason was successfully updated.') }
           format.json { respond_with_bip(@ts) }
         else
