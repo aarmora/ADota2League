@@ -31,6 +31,10 @@ class Season < ActiveRecord::Base
   end
 
   def check_in_available?
-    Time.now > (self.start_date - 20.minutes) && !self.challonge_id.blank?
+    if self.start_date
+      Time.now > (self.start_date - 20.minutes) && !self.challonge_id.blank?
+    else
+      Time.now
+    end
   end
 end

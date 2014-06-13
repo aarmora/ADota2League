@@ -7,9 +7,4 @@ After creating your app or setting up your existing app to use the buildpack, yo
 
 heroku config:add DATABASE_URL=sqlserver://username:password@sqlserver_host:1433/database_name
 
-Finally, we need to add the data from application.yml (our Dota2 API key and so on). Since we use Figaro (see that gem page for more info), we can simply run rake figaro:heroku, which will set all our variables on heroku
-
-== TODO:
-- Match casters are listed using ids from the player table and then their twitch channel...this should be an eager loaded association
-- There are many things wrong with CSS...but 1) mobile-friendly scaling (bootstrap?), 2) #fullbox -> .class
-- Add memcache to Heroku and Rails page caching esp for heavy common pages (schedules, etc.)
+Finally, we need to add the data from application.yml (our Dota2 API key and so on). Since we use Figaro (see that gem page for more info), we can simply run rake figaro:heroku, which will set all our variables on heroku.  An application.sample.yml is included to show an example of what would be needed.
