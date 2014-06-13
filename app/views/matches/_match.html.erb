@@ -48,6 +48,11 @@
 		<%= best_in_place_if Permissions.can_edit?(match), match, :home_score, :type => :input %>
 		:
 		<%= best_in_place_if Permissions.can_edit?(match), match, :away_score, :type => :input %>
+		<% if Permissions.can_edit?(match) %>
+			<%= best_in_place match, :forfeit, :type => :checkbox%>
+			<br>
+			<sub>Forfeit?</sub>
+		<% end %>
 	</td>
 	<td>
 		<%= best_in_place_if Permissions.can_edit?(match), match,

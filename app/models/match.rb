@@ -10,7 +10,7 @@ class Match < ActiveRecord::Base
   # TODO: This is wrong since date should be UTC or whatever
   scope :future, lambda {where("date > ?", Time.zone.now) }
   scope :scored, where("(home_score IS NOT NULL AND home_score > 0) OR (away_score IS NOT NULL AND away_score > 0)")
-  attr_accessible :home_team_id, :away_team_id, :home_score, :away_score, :date, :caster_id, :as => [:admin]
+  attr_accessible :home_team_id, :away_team_id, :home_score, :away_score, :date, :caster_id, :forfeit, :as => [:admin]
 
   # We could use a uniqueness validator, but since we have home and away, it wouldn't work so well
   validates_each :home_team_id, :away_team_id do |record, attr, value|
