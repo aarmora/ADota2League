@@ -4,12 +4,13 @@
 <h4>Teams</h4>
   <table class="table table-bordered" id="admin-data-table">
     <thead>
-      <tr><th>Team</th><th>Captain</th><th>MMR</th><th>Team Region</th><th>Division</th><th>Registered On (UTC)</th><th>Paid?</th><th>Checked in?</th></tr>
+      <tr><th>Team</th><th>Captain</th><th>DotaBuff ID</th><th>MMR</th><th>Team Region</th><th>Division</th><th>Registered On (UTC)</th><th>Paid?</th><th>Checked in?</th></tr>
     </thead>
     <% @season.team_seasons.each do |ts| %>
     <tr>
       <td><%= link_to ts.team.teamname, ts.team %></td>
       <td><%= link_to ts.team.captain.name, ts.team.captain if ts.team.captain %></td>
+      <td><%= best_in_place_if Permissions.can_edit?(@season), ts.team, :dotabuff_id, :type => :input %></td>
       <td><%= best_in_place_if Permissions.can_edit?(@season), ts.team, :mmr, :type => :input %></td>
       <td><%= best_in_place_if Permissions.can_edit?(@season), ts.team, :region, :type => :input %></td>
       <td><%= best_in_place_if Permissions.can_edit?(@season), ts, :division, :type => :input %></td>
