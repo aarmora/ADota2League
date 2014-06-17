@@ -36,7 +36,9 @@ class TeamSeasonsController < ApplicationController
 
   # payment page
   def show
-    @current_user.email = nil
+    if @current_user
+      @current_user.email = nil
+    end
     @ts = TeamSeason.find(params[:id])
     head :forbidden and return unless Permissions.can_edit? @ts.team
   end
