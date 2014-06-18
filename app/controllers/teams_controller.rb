@@ -21,15 +21,15 @@ class TeamsController < ApplicationController
 
         @team.matches.each do |match|
           # fill in the data for this event, each session acts like a repeating event
-          desc = "AD2L #{match.season.title}"
-          desc = desc + " cast by: #{match.caster.name} (#{match.caster.twitch})"unless match.caster_id.blank?
+          desc = if match.season "AD2L #{match.season.title}" else "AD2L"
+          desc = desc + " cast by: #{match.caster.name} (#{match.caster.twitch})" unless match.caster_id.blank?
           end_time = match.date. + 3.hours
           # Build the event
           cal.event do |e|
             e.dtstart = Icalendar::Values::DateTime.new match.date, 'tzid' => tzid
             e.dtend   = Icalendar::Values::DateTime.new end_time, 'tzid' => tzid
-            e.summary = match.home_team.teamname + " vs. " + match.away_team.teamname
-            e.description =
+            e.summary = match.home_team.teamname + " vs. " + match.away_team.teamname unless !match.away_team || !match.home_team
+            e.description = desc
             e.url     = "http://amateurdota2league.com/matches/#{match.id}" #shows in iCal only
           end
         end
