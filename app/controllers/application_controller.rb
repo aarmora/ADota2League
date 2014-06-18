@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
         []
       end
     end
+    @official_streams = @active_streams.select { |s| ["amateurdota2league","amateurdota2league1"].include? s.name }
   end
 
   def verify_admin
