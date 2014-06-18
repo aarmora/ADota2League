@@ -21,7 +21,7 @@ class TeamsController < ApplicationController
 
         @team.matches.each do |match|
           # fill in the data for this event, each session acts like a repeating event
-          desc = if match.season "AD2L #{match.season.title}" else "AD2L"
+          desc = if match.season "AD2L #{match.season.title}" else "AD2L" end
           desc = desc + " cast by: #{match.caster.name} (#{match.caster.twitch})" unless match.caster_id.blank?
           end_time = match.date. + 3.hours
           # Build the event
