@@ -75,7 +75,8 @@
 			<% end %>
 	</div>
 
-	<%= link_to "View Team on Dotabuff", "http://dotabuff.com/teams/#{@team.dotabuff_id}" unless @team.dotabuff_id.nil? %>
+	<%= link_to "View Team on Dotabuff", "http://dotabuff.com/teams/#{@team.dotabuff_id}" unless @team.dotabuff_id.nil? %><br />
+
 	<br ><br >
 	<h3>Roster</h3>
 	<div class="rosterholder">
@@ -94,6 +95,10 @@
 	<%= render :partial => "welcome/learn_more" %>
 
 	<h3>Schedule</h3>
+	<br />
+	Add Team Schedule to GCal:<br />
+	<%= link_to image_tag("http://www.google.com/calendar/images/ext/gc_button6.gif"), team_path(@team, :format => :ics), :title => "Click to add team schedule to GCal", :onclick => "event.preventDefault(); alert('Right click to copy the link address, go to GCal, Other Calendars -> Add by URL. And then paste the link in!');" %>
+	<br /><br /><br />
 	<%- @team.team_seasons.sort.reverse.each do |ts| %>
 		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
 		<% if Permissions.can_edit?(@team) %>

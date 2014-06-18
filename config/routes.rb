@@ -20,6 +20,7 @@ Ad2l::Application.routes.draw do
 
   resources :teams do
     member do
+      match 'calendar' => 'teams#calendar'
       match 'players' => 'teams#add_players', :via => :post
       match 'players'  => 'teams#remove_players', :via => :delete
     end

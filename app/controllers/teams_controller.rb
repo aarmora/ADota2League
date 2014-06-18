@@ -4,19 +4,55 @@ class TeamsController < ApplicationController
 	end
 
 	def show
-		# TODO: Is this mess ok?
-		@team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_team, :home_team], :home_matches => [:away_team, :home_team]}).find(params[:id])
-		if @current_user
-			@current_user.teams.each do |team|
-				if @team.id == team.id
-					@current_tab = "teampage"
-				end
-			end
-		end
-		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
-  	@players = Player.order(:name).pluck_all(:id, :name)
-		@casters = Player.order(:name).where(:caster => true)
-		@permissions = Permission.all
+    @team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_team, :home_team], :home_matches => [:away_team, :home_team]}).find(params[:id])
+    if request.format == :ics
+      # Create an ical format feed of the given team's calendar.
+
+        require 'icalendar'
+        require 'icalendar/tzinfo'
+
+        # Create a calendar with an event (standard method)
+        cal = Icalendar::Calendar.new
+
+        tzid = @team.matches.last.date.zone
+        tz = TZInfo::Timezone.get tzid
+        timezone = tz.ical_timezone Time.now
+        cal.add_timezone timezone
+
+        @team.matches.each do |match|
+          # fill in the data for this event, each session acts like a repeating event
+          desc = "AD2L #{match.season.title}"
+          desc = desc + " cast by: #{match.caster.name} (#{match.caster.twitch})"unless match.caster_id.blank?
+          end_time = match.date. + 3.hours
+          # Build the event
+          cal.event do |e|
+            e.dtstart = Icalendar::Values::DateTime.new match.date, 'tzid' => tzid
+            e.dtend   = Icalendar::Values::DateTime.new end_time, 'tzid' => tzid
+            e.summary = match.home_team.teamname + " vs. " + match.away_team.teamname
+            e.description =
+            e.url     = "http://amateurdota2league.com/matches/#{match.id}" #shows in iCal only
+          end
+        end
+
+        #puts cal.to_ical
+        head :unprocessable_entity if !cal
+
+        # We did it! Make it look like a file.
+        send_data(cal.to_ical, :type => 'text/calendar', :filename => params[:id] + '.ics' )
+        return
+    else
+      if @current_user
+  			@current_user.teams.each do |team|
+  				if @team.id == team.id
+  					@current_tab = "teampage"
+  				end
+  			end
+  		end
+  		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
+    	@players = Player.order(:name).pluck_all(:id, :name)
+  		@casters = Player.order(:name).where(:caster => true)
+  		@permissions = Permission.all
+    end
 	end
 
 	def create

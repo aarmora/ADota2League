@@ -25,6 +25,7 @@ gem 'best_in_place'
 gem 'mandrill-api'
 
 gem 'rubin' # round robin
+gem 'icalendar' # Ical support
 
 group :production do
 	gem 'exception_notification'
