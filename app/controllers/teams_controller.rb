@@ -14,10 +14,12 @@ class TeamsController < ApplicationController
         # Create a calendar with an event (standard method)
         cal = Icalendar::Calendar.new
 
-        tzid = @team.matches.detect{|m| m.date }.date.zone
-        tz = TZInfo::Timezone.get tzid
-        timezone = tz.ical_timezone Time.now
-        cal.add_timezone timezone
+        if @team.matches.any? {|m| m.date }
+          tzid = @team.matches.detect{|m| m.date }.date.zone
+          tz = TZInfo::Timezone.get tzid
+          timezone = tz.ical_timezone Time.now
+          cal.add_timezone timezone
+        end
 
         @team.matches.select{|m| m.date }.each do |match|
           # fill in the data for this event, each session acts like a repeating event
