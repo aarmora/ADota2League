@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
             desc = "AD2L" 
           end
           desc = desc + " cast by: #{match.caster.name} (#{match.caster.twitch})" unless match.caster_id.blank?
-          end_time = match.date. + 3.hours
+          end_time = match.date. + 3.hours.to_s
           # Build the event
           cal.event do |e|
             e.dtstart = Icalendar::Values::DateTime.new match.date, 'tzid' => tzid
