@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
         # Create a calendar with an event (standard method)
         cal = Icalendar::Calendar.new
 
-        tzid = @team.matches.detect{|m| m.date }.zone
+        tzid = @team.matches.detect{|m| m.date }.date.zone
         tz = TZInfo::Timezone.get tzid
         timezone = tz.ical_timezone Time.now
         cal.add_timezone timezone
@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
             desc = "AD2L"
           end
           desc = desc + " cast by: #{match.caster.name} (#{match.caster.twitch})" unless match.caster_id.blank?
-          end_time = match.date. + 3.hours.to_s
+          end_time = match.date + 3.hours
           # Build the event
           cal.event do |e|
             e.dtstart = Icalendar::Values::DateTime.new match.date, 'tzid' => tzid
