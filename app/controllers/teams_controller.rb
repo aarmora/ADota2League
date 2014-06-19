@@ -14,17 +14,17 @@ class TeamsController < ApplicationController
         # Create a calendar with an event (standard method)
         cal = Icalendar::Calendar.new
 
-        tzid = @team.matches.last.date.zone
+        tzid = @team.matches.detect{|m| m.date }.zone
         tz = TZInfo::Timezone.get tzid
         timezone = tz.ical_timezone Time.now
         cal.add_timezone timezone
 
-        @team.matches.each do |match|
+        @team.matches.select{|m| m.date }.each do |match|
           # fill in the data for this event, each session acts like a repeating event
           if match.season
-            desc = "AD2L #{match.season.title}" 
-          else 
-            desc = "AD2L" 
+            desc = "AD2L #{match.season.title}"
+          else
+            desc = "AD2L"
           end
           desc = desc + " cast by: #{match.caster.name} (#{match.caster.twitch})" unless match.caster_id.blank?
           end_time = match.date. + 3.hours.to_s
