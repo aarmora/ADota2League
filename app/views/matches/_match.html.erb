@@ -13,34 +13,34 @@
 		</td>
 	<td>
 			<%=
-				if Permissions.can_edit?(match)
+				# Pulling in this data is a pretty heavy query, so we need to only do it when it actually makes sense
+				if Permissions.can_edit?(match) && match.date > Time.now && match.home_score.to_i == 0 && match.home_score.to_i == 0 && match.away_score.to_i == 0
 					best_in_place match,
 					  :home_team_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-home",
 			      	  :type => :select,
-			      	  # this is terrible and I should be shot for doing it
-			      	  collection: ["", "None"] + (Team.available_for_season_and_week(match.season_id, match.week) << match.home_team).compact.uniq.sort_by(&:teamname).collect {|team| ["#{team.id}", "#{team.teamname}"]}
+			      	  collection: select_teams_for_season_week_with_current_team(match.season_id, match.week, match.home_team)
 			  else
 			  	link_to_if match.home_team && match.home_team != @team, match.home_team ? match.home_team.teamname : "TBD", match.home_team
 			  end
 			%>
-				<% if Permissions.can_edit?(match) %>
+				<% if Permissions.can_edit?(match) && match.date > Time.now && match.home_score.to_i == 0 && match.away_score.to_i == 0 %>
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-home"></span>
 				<%end%>
 			vs
 			<%=
-				if Permissions.can_edit?(match)
+				if Permissions.can_edit?(match) && match.date > Time.now && match.home_score.to_i == 0 && match.home_score.to_i == 0 && match.away_score.to_i == 0
 					best_in_place match,
 					  :away_team_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-away",
 			      	  :type => :select,
 			      	  # this is terrible and I should be shot for doing it
-			      	  collection: ["", "None"] + (Team.available_for_season_and_week(match.season_id, match.week) << match.away_team).compact.uniq.sort_by(&:teamname).collect {|team| ["#{team.id}", "#{team.teamname}"]}
+			      	  collection: select_teams_for_season_week_with_current_team(match.season_id, match.week, match.away_team)
 			  else
 			  	link_to_if match.away_team && match.away_team != @team, match.away_team ? match.away_team.teamname : "TBD", match.away_team
 			  end
 			%>
-				<% if Permissions.can_edit?(match) %>
+				<% if Permissions.can_edit?(match) && match.date > Time.now && match.home_score.to_i == 0 && match.home_score.to_i == 0 && match.away_score.to_i == 0 %>
 					<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-away"></span>
 				<%end%>
 	</td>
