@@ -3,7 +3,7 @@ class AdminController < ApplicationController
 
   def index
     if Permissions.user_is_site_admin?
-      @permissions = Permission.all
+      @permissions = Permission.includes(:player).all
       @players = Player.pluck_all(:id, :name)
     end
     @seasons = Season.all

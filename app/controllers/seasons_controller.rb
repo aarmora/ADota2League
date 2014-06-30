@@ -11,7 +11,7 @@ class SeasonsController < ApplicationController
 
       @seasons = Season.all
       @season = @seasons.detect {|season| season.id == params[:id].to_i}
-      @permissions = Permission.all
+      @permissions = Permission.includes(:player).all
       if @season.nil?
         redirect_to seasons_path
       else

@@ -67,7 +67,6 @@
 		<% if Permissions.can_edit?(match) %>
 			<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=match.id%>-caster"></span>
 		<%end%>
-
 	</td>
 	<td>
 		<%= link_to (image_tag 'view_outline_detail.png', :alt => "Match details"), match%>
