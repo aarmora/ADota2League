@@ -11,7 +11,6 @@ class SeasonsController < ApplicationController
 
       @seasons = Season.all
       @season = @seasons.detect {|season| season.id == params[:id].to_i}
-      @permissions = Permission.includes(:player).all
       if @season.nil?
         redirect_to seasons_path
       else
@@ -22,6 +21,7 @@ class SeasonsController < ApplicationController
         if @no_cache || !fragment_exist?("seasonPage-" + params[:id].to_s)
           @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
           @casters = Player.where(:caster => true)
+          @permissions = Permission.includes(:player).all
 
           @teams_by_division = @season.team_seasons.includes(:team).group_by {|ts| ts.division.to_s}
 
