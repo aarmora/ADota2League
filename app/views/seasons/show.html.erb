@@ -89,6 +89,7 @@
                                 <% end %>
                             <% else %>
                                 <ul class="list-inline week-selector">
+                                    <span class="week">Week</span>
                                     <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
                                         <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
                                     <% end %>
