@@ -1,64 +1,32 @@
 <div class="container">
-	<%= render :partial => "welcome/learn_more" %>
+	<div class="col-md-12">
+		<h2>Register for the AD2L</h2>
 
-	<% if @open_season %>
-		<h2>Register with one of your teams (that you captain)</h2>
+		<p>The AD2L runs a variety of tournaments anywhere from a few hours to a few months with prizes ranging from hundreds of dollars to bragging rights.</p>
+
+		<p>However, it really sucks for everyone in any tournament when teams don't show up.  To this end, some tournaments cost a nominal fee to ensure your participation or may ask you to check in on the website 15 minutes before they start.</p>
+
+		<p>To get started, choose a team you captain to register, or sign up for one of our individual tournaments below.</p>
+
+		<p>Not sure you are ready to commit?  Click one of the links below to learn more about our various tournaments.</p>
+		<%= render :partial => "welcome/learn_more" %>
+	</div>
+
+	<div class="col-md-6">		
+		<h2>Choose a team</h2>
 		<% @player.teams.each do |team| %>
-			<% if @current_user && @current_user.id == team.captain_id %>
-				<%= link_to team.teamname, "#{team.id}"%><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
-			<% end %>
+			<%= link_to team.teamname, team %><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
 		<% end %>
+		<p>
+			If you are new to the site, or wish to create a new team you can do so HERE and come back!
+		</p>
+		<button>Create team</button>
+	</div>
 
-		<% if @current_user && @current_user.id == @player.id %>
-			<h2>Or create a team</h2>
-			<p>
-				If you are already on a team above, and wish to register for a new season. Please select the team above
-				and register for the new season from your team page instead.
-			</p>
+	<div class="col-md-6">
+		<h2>Individual Tournaments</h2>
+		<p>Tournies here. We need to know what team they are on.</p>
+	</div>
+	
 
-			<p>
-				NOTE: you will be automatically registered for the current open season.
-				Please make sure that you are positive you will be able to field 5 players each week
-				before submitting this
-			</p>
-
-			<%= form_for Team.new, :html => { :class => "form-horizontal", :role => "form"} do |f| %>
-				<div class="form-group">
-				  <%= f.label :teamname, "Team Name", :class => "col-sm-2 control-label" %>
-				  <div class="col-sm-10">
-				  	<%= f.text_field :teamname %>
-				  </div>
-			  </div>
-				<div  class="form-group">
-				  <%= f.label :originalmmr, "Estimated MMR?", :class => "col-sm-2 control-label" %>
-				  <div class="col-sm-10">
-				  	<%= f.text_field :originalmmr %>
-				  	<p class="help-block">Average your 5-player's MMRs to give us an idea of who to match you up against initially.</p>
-				  </div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2">Preferred region?</label>
-					<div class="col-sm-10">
-						<div class="radio">
-						  <label>
-						    <%= f.radio_button :region, 'EU' %>
-						    EU
-						  </label>
-						</div>
-						<div class="radio">
-						  <label>
-						    <%= f.radio_button :region, 'NA' %>
-						    NA
-						  </label>
-						</div>
-					</div>
-			  </div>
-			  <%= f.submit "Create team", :confirm => "Are you sure you will participate at the listed times? Please ensure you and your team can make it before proceeding!", :class => "button" %>
-			<% end %>
-		<% end %>
-	<%else%>
-		<br>
-		<br>
-		No leagues or tournaments are currently open for registration.  Check back soon!
-	<%end%>
 </div>
