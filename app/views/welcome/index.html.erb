@@ -1,3 +1,5 @@
+ 
+
 <div id="fullbox">
     <div id="tabs">
         <div class="tab active" id="tab1">News</div>
@@ -8,18 +10,24 @@
         <div class="TabsContainer" style="width:100%">
             <div class="tabbody1 active">
                 <div class="<%= @official_streams.empty? ? 'col-md-12' : 'col-md-5' %>">
-                    <%@posts.each do |post|%>
-                        <article>
-                            <header>
-                                <h2>
-                                    <%= post.title%> <br />
-                                     <small><%=post.author.name%> - <%= format_date(post.created_at) %></small>
-                                </h2>
+                    <%if false%>
+                      <%@posts.each do |post|%>
+                          <article>
+                              <header>
+                                  <h2>
+                                      <%= post.title%> <br />
+                                       <small><%=post.author.name%> - <%= format_date(post.created_at) %></small>
+                                  </h2>
 
-                            </header>
-                        	<%=raw post.text%>
-                        </article>
-                        <hr>
+                              </header>
+                          	<%=raw post.text%>
+                          </article>
+                          <hr>
+                      <%end%>
+                    <%else%>
+                      <div ng-app>
+                        {{pizza}}                        
+                      </div>
                     <%end%>
                 </div>
                 <% unless @official_streams.empty? %>
