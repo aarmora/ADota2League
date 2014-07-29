@@ -11,7 +11,29 @@
         <div class="TabsContainer" style="width:100%">
             <div class="tabbody1 active">
                 <div class="<%= @official_streams.empty? ? 'col-md-12' : 'col-md-5' %>">
-                    <%if false%>
+                      <div ng-app="blogApp" ng-controller="blogController">
+                        <article ng-repeat="post in posts">
+                          <header>
+                            <h2>
+                              <a href="{{post.link}}" target="_blank">{{post.title}}</a>
+                              <br />
+                              <small>{{post["dc:creator"]}} - {{post.pubDate | date}}</small>
+                            </h2>
+
+                          </header>
+                          <p ng-hide="post['content:encoded'] != ''" ng-bind-html="post.description"></p>
+                          <p ng-bind-html="post['content:encoded']"></p>
+                          <br>
+                          <a href="{{post.comments}}" target="_blank">{{post["slash:comments"]}} 
+                            <ng-pluralize count="post['slash:comments'] | number" when="{
+                              '1': 'comment',
+                              'other': 'comments'
+                              }" 
+                            </ng-pluralize>
+                          </a>
+                          <hr>                 
+                        </article>     
+                      </div>
                       <%@posts.each do |post|%>
                           <article>
                               <header>
@@ -21,38 +43,11 @@
                                   </h2>
 
                               </header>
-                          	<%=raw post.text%>
+                            <%=raw post.text%>
                             <span ng-init="comments()"></span>
                           </article>
                           <hr>
                       <%end%>
-                    <%else%>
-                      <div ng-app="blogApp" ng-controller="blogController">
-                        <article ng-repeat="post in posts">
-                          <header>
-                            <h2>
-                              <a href="{{post.link}}" target="_blank">{{post.title}}</a>
-                              <br />
-                              <small>{{post["dc:creator"]}}</small>
-                            </h2>
-
-                          </header>
-                          {{post.description}}
-                          <br>
-                          <a ng-hide="post['slash:comments'] > 1" href="{{post.comments}}" target="_blank">{{post["slash:comments"]}} 
-                            <ng-pluralize count="post['slash:comments']" when="{
-                              '0': '',
-                              '1': 'comment',
-                              'other': 'comments'
-
-                              }" 
-                            </ng-pluralize>
-                          </a>
-                          <a ng-hide="post['slash:comments'] == 1" href="{{post.comments}}" target="_blank">{{post["slash:comments"]}} comment</a>
-                          <hr>                 
-                        </article>     
-                      </div>
-                    <%end%>
                 </div>
                 <% unless @official_streams.empty? %>
                     <div class="col-md-6 col-md-offset-1 hidden-sm hidden-xs">
