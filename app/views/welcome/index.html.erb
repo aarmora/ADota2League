@@ -17,12 +17,14 @@
                             <h2>
                               <a href="{{post.link}}" target="_blank">{{post.title}}</a>
                               <br />
-                              <small>{{post["dc:creator"]}} - {{post.pubDate | date}}</small>
+                              <small ng-show="post['dc:creator']">{{post["dc:creator"]}} -</small>
+                              <small ng-hide="post['dc:creator']">Ryan -</small>
+
+                              <small>{{post.pubDate | date}}</small>
                             </h2>
 
                           </header>
-                          <p ng-hide="post['content:encoded'] != ''" ng-bind-html="post.description"></p>
-                          <p ng-bind-html="post['content:encoded']"></p>
+                          <p ng-bind-html="post.description"></p>
                           <br>
                           <a href="{{post.comments}}" target="_blank">{{post["slash:comments"]}} 
                             <ng-pluralize count="post['slash:comments'] | number" when="{
