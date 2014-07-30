@@ -33,7 +33,7 @@ GIT
       railties (>= 3.1)
 
 GIT
-  remote: git://github.com/stripe/stripe-ruby.git
+  remote: https://github.com/stripe/stripe-ruby
   revision: 4aed61af42df22d77106558354bd2f5370c04e06
   specs:
     stripe (1.15.0)
