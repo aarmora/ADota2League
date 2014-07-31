@@ -34,7 +34,7 @@ group :production do
   gem 'dalli'
 end
 
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby', '~> 1.15'
 
 #gem paperclip for ActiveRecord PaperClip
 gem 'paperclip'
