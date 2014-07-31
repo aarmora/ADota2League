@@ -6,7 +6,6 @@ gem 'rails', '3.2.17'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
 gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter'
 gem 'execjs'
