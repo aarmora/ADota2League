@@ -12,7 +12,7 @@
             <div class="tabbody1 active">
                 <div class="<%= @official_streams.empty? ? 'col-md-12' : 'col-md-5' %>">
                       <div ng-app="blogApp" ng-controller="blogController">
-                        <article ng-repeat="post in posts">
+                        <article ng-repeat="post in posts | limitTo:5">
                           <header>
                             <h2>
                               <a href="{{post.link}}" target="_blank">{{post.title}}</a>
@@ -20,11 +20,16 @@
                               <small ng-show="post['dc:creator']">{{post["dc:creator"]}} -</small>
                               <small ng-hide="post['dc:creator']">Ryan -</small>
 
-                              <small>{{post.pubDate | date}}</small>
+                              <small>{{post.pubDate | limitTo:16}}</small>
                             </h2>
 
                           </header>
-                          <p ng-bind-html="post.description"></p>
+                          <div class="col-mid-12">
+                            <a href="{{post.image}}" target="_blank"><img src="{{post.image}}"/></a>
+                          </div>
+                          <div class="col-mid-12">
+                            <p ng-bind-html="post.description"></p>
+                          </div>
                           <br>
                           <a href="{{post.comments}}" target="_blank">{{post["slash:comments"]}} 
                             <ng-pluralize count="post['slash:comments'] | number" when="{
