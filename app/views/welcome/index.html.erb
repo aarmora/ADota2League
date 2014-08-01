@@ -11,6 +11,7 @@
         <div class="TabsContainer" style="width:100%">
             <div class="tabbody1 active">
                 <div class="<%= @official_streams.empty? ? 'col-md-12' : 'col-md-5' %>">
+                      <h3>Note as of July 31 - Not all teams will have games scheduled tonight!</h3>
                       <div ng-app="blogApp" ng-controller="blogController">
                         <article ng-repeat="post in posts | limitTo:5">
                           <header>
