@@ -30,7 +30,7 @@
                             <a href="{{post.image}}" target="_blank"><img src="{{post.image}}"/></a>
                           </div>
                           <div class="col-mid-12">
-                            <p ng-bind-html="post.description"></p>
+                            <span ng-class="{dots: post.description.length > 800}" ng-bind-html="post.description | limitTo: 800 "></span>
                           </div>
                           <br>
                           <a href="{{post.comments}}" target="_blank">{{post["slash:comments"]}} 
