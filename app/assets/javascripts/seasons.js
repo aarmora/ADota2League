@@ -9,6 +9,13 @@ $(document).ready(function(){
     $("#week_" + $(this).data("week")).show();
   });
 
+  // Find all times on the page (might be cached), and convert to local TZ
+  $(".week-holder .js-time").each(function() {
+      var epoch = $(this).data("epoch-offset");
+      var timeString = moment(epoch * 1000).tz(USER_TZ).format("M/D/YY h:mmA z");
+      $(this).replaceWith(timeString);
+  });
+
   // Check in button
   $(".js-check-in").on("click", function(e, data) {
     $.ajax({

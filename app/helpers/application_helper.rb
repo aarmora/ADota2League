@@ -10,6 +10,12 @@ module ApplicationHelper
     end
   end
 
+  def user_js_tz_name
+    #tz = @current_user.time_zone if @current_user
+    tz ||= "Eastern Time (US & Canada)"
+    ActiveSupport::TimeZone.find_tzinfo(tz).name
+  end
+
   def format_date(t)
     tz = @current_user.time_zone if @current_user
     tz ||= "Eastern Time (US & Canada)"
@@ -25,7 +31,8 @@ module ApplicationHelper
   def format_datetime(t)
     tz = @current_user.time_zone if @current_user
     tz ||= "Eastern Time (US & Canada)"
-    t ? t.in_time_zone(tz).strftime("%-m/%-d/%y %l:%M%p %Z") : ""
+    time = t ? t.in_time_zone(tz).strftime("%-m/%-d/%y %l:%M%p %Z") : ""
+    "<span class='js-time' data-epoch-offset='#{t.to_i}'>#{time}</span>".html_safe
   end
 
   def format_datetime_month(t)
