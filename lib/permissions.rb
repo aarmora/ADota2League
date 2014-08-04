@@ -17,7 +17,12 @@ module Permissions
       self.permissions_for_user(user).detect do |p|
         (p.season_id == object.season_id && p.permission_mode == "season") ||
         (p.season_id == object.season_id && p.permission_mode == "division" &&
-          TeamSeason.where(:season_id => object.season_id, :division => p.division, :team_id => [object.home_team_id, object.away_team_id]).count > 0
+          # Check the mapping if it exists, otherwise lookup on the fly
+          (@ts_season == object.season_id ?
+            (@ts_map[object.home_team_id] == p.division || @ts_map[object.home_team_id] == p.division)
+            :
+            TeamSeason.where(:season_id => object.season_id, :division => p.division, :team_id => [object.home_team_id, object.away_team_id]).count > 0
+          )
         )
       end
     elsif object.is_a? Team
@@ -27,6 +32,14 @@ module Permissions
     else
       false # anything else only site admins can do
     end
+  end
+
+  # This is probably not the best way to do this, but we allow pages to "cue" us that we're
+  # going to be looking up the teams in a given season, thereby creating a map to be used above
+  def self.load_team_divisions_for_season(season_id)
+    data = TeamSeason.where(:season_id => season_id).pluck_all(:team_id, :division)
+    @ts_map = data.inject({}) {|r, val| r[val[0]] = val[1]; r}
+    @ts_season = season_id
   end
 
   # Niche case used only for seasons right now

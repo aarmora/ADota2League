@@ -19,6 +19,10 @@ class SeasonsController < ApplicationController
         # we always need the above, only run all the queries if we need to rebuild the cache or it's an admin or users need to see their individual check in
         @no_cache = Permissions.can_view?(@season) || @season.check_in_available?
         if @no_cache || !fragment_exist?("seasonPage-" + params[:id].to_s)
+
+          # Cue the permission system to load the divisions if we might need those
+          Permissions.load_team_divisions_for_season(@season.id) unless Permissions.can_edit?(@season) || !Permissions.can_view?(@season)
+
           @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
           @casters = Player.where(:caster => true)
           @permissions = Permission.includes(:player).all
@@ -40,7 +44,7 @@ class SeasonsController < ApplicationController
             @matches.each do |match|
               @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
               @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
-            end            
+            end
           else
             @total_scores = {}
             @matches.each do |match|
