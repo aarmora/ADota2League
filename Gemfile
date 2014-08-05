@@ -3,10 +3,13 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.17'
 
+gem 'yaml_db'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'tiny_tds'
+gem 'mysql2', '> 0.3'
 gem 'activerecord-sqlserver-adapter'
 gem 'execjs'
 
@@ -35,9 +38,6 @@ group :production do
 end
 
 gem 'stripe'
-
-#gem paperclip for ActiveRecord PaperClip
-gem 'paperclip'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
