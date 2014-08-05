@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140612044840) do
+ActiveRecord::Schema.define(:version => 20140805020743) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -50,8 +50,9 @@ ActiveRecord::Schema.define(:version => 20140612044840) do
     t.integer  "match_id"
     t.integer  "player_id"
     t.text     "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "auto_generated", :default => false, :null => false
   end
 
   add_index "matchcomments", ["match_id"], :name => "index_matchcomments_on_match_id"
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20140612044840) do
   create_table "matches", :force => true do |t|
     t.integer  "home_team_id"
     t.integer  "away_team_id"
-    t.string   "steam_match_id", :limit => 50
+    t.string   "steam_match_id",      :limit => 50
     t.datetime "date"
     t.integer  "home_score"
     t.integer  "away_score"
@@ -70,8 +71,11 @@ ActiveRecord::Schema.define(:version => 20140612044840) do
     t.integer  "season"
     t.integer  "season_id"
     t.boolean  "forfeit"
-    t.boolean  "mmr_processed",                :default => false, :null => false
+    t.boolean  "mmr_processed",                     :default => false, :null => false
     t.integer  "challonge_id"
+    t.string   "lobby_password"
+    t.datetime "reschedule_time"
+    t.integer  "reschedule_proposer"
   end
 
   add_index "matches", ["away_team_id"], :name => "index_matches_on_away_team_id"

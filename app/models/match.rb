@@ -10,7 +10,8 @@ class Match < ActiveRecord::Base
   # TODO: This is wrong since date should be UTC or whatever
   scope :future, lambda {where("date > ?", Time.zone.now) }
   scope :scored, where("(home_score IS NOT NULL AND home_score > 0) OR (away_score IS NOT NULL AND away_score > 0)")
-  attr_accessible :home_team_id, :away_team_id, :home_score, :away_score, :date, :caster_id, :forfeit, :as => [:admin]
+  attr_accessible :home_team_id, :away_team_id, :date, :lobby_password, :as => [:admin]
+  attr_accessible :home_score, :away_score, :caster_id, :forfeit, :as => [:admin, :captain]
 
   # We could use a uniqueness validator, but since we have home and away, it wouldn't work so well
   validates_each :home_team_id, :away_team_id do |record, attr, value|
@@ -57,6 +58,19 @@ class Match < ActiveRecord::Base
       puts self.away_team_id.inspect
       puts "WARNING: teams did not match, not updating match score"
     end
+  end
 
+  def create_auto_match_comments(changes, user)
+    # check type conversions since this is coming off params :-/
+    changes.each  {|field, vals| vals[1] = vals[1].to_i if vals[1].to_i.to_s == vals[1]}
+    return true unless changes.any? {|field, vals| vals[0] != vals[1]}
+
+    text = "The following changes were made:<br />"
+    changes.each do |field, vals|
+      text += "#{field}: #{vals[0]} -> #{vals[1]}<br />"
+    end
+    comment = self.matchcomments.build(:player_id => user.id, :comment => text)
+    comment.auto_generated = true
+    comment.save!
   end
 end

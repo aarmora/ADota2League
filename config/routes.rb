@@ -27,7 +27,11 @@ Ad2l::Application.routes.draw do
   end
 
   resources :team_seasons, :only => [:create, :show, :update, :destroy]
-  resources :matches
+  resources :matches do
+    member do
+      match 'accept_reschedule' => 'matches#accept_reschedule'
+    end
+  end
   resources :posts
   resources :permissions
 

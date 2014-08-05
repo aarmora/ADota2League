@@ -55,8 +55,12 @@ module Permissions
     end
   end
 
+  # Mixed in to permissions
   def role_for_object(object)
-    if Permissions.can_edit? object
+    # Order is important here as captains may change some but NOT all things via mass update
+    if object.is_a?(Match) && (self.captained_teams.include?(object.home_team) || self.captained_teams.include?(object.away_team))
+      :captain
+    elsif Permissions.can_edit? object
       :admin
     else
       :default

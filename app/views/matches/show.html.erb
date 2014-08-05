@@ -1,39 +1,34 @@
 <div class="container-fluid">
+
+	<% # Reschedule Warnings %>
+	<% if @current_user && @match.reschedule_proposer == @current_user.id %>
+    <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept!</div>
+  <% elsif Permissions.can_edit?(@match) && @match.reschedule_proposer %>
+    <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= @match.reschedule_time.strftime("%-m/%-d/%y %H:%M %Z") %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
+  <% end %>
+
 	<div class="row">
 		<div class="col-md-8">
-			<h4><%= format_datetime(@match.date) %></h4>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3 rosterholder">
-			<% if @match.home_team.nil? %>
-				<h3>Bye</h3>
-			<% else %>
-				<h3><%= link_to @match.home_team.teamname, @match.home_team%></h3>
-				<%= render :partial => "teams/roster", :locals => {:roster => @home_team_roster, :team => @match.home_team}%>
+			<% if Permissions.can_edit?(@match) %>
+				NOTE: The below selector will allow you to ask to reschedule the match. Both parties must aggree on a time for it to go through. The selector is in UTC, so you MUST translate your desired date into UTC time.
+				<br /><br />
+				For reference the current match time in UTC is: <%= @match.date.strftime("%-m/%-d/%y %H:%M %Z") %>
 			<% end %>
-		</div>
-		<div class="col-md-2">
-			<h3><%=@match.home_score%></h3>
-		</div>
-		<div class="col-md-2">
-			<h3>vs</h3>
-		</div>
-		<div class="col-md-2">
-			<h3><%=@match.away_score%></h3>
-		</div>
-		<div class="col-md-3 rosterholder">
-			<% if @match.away_team.nil? %>
-				<h3>Bye</h3>
-			<% else %>
-				<h3><%= link_to @match.away_team.teamname, @match.away_team%></h3>
-				<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_team}%>
+			<h4>
+				<%= best_in_place_if Permissions.can_edit?(@match), @match,
+				  :date,
+				  :display_with => lambda { |date| format_datetime(date)},
+				  :activator => ".fa-calendar.#{@match.id}-date",
+		      :type => :datetime
+				%>
+				<% if Permissions.can_edit?(@match) %>
+					<span class="fa fa-calendar form-control-feedback <%=@match.id%>-date" title="Reschedule this Game"></span>
+				<%end%>
+			</h4>
+			<% if @match.lobby_password && @match.date > Time.now - 1.day %>
+				<h3>Lobby Password: <%= @match.lobby_password %></h3>
 			<% end %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			Caster: 
+			Caster:
 			<%= best_in_place_if Permissions.can_edit?(@match), @match,
 			  :caster_id,
 			  :display_with => (lambda do |caster_id|
@@ -48,8 +43,40 @@
 			<%end%>
 		</div>
 	</div>
+	<br /><br />
+	<b>Result:</b>
+	<div class="row">
+		<div class="col-xs-3 text-center">
+			<h5><%=@match.home_score%></h5>
+		</div>
+		<div class="col-xs-2 text-center">
+			<h5>vs</h5>
+		</div>
+		<div class="col-xs-3 text-center">
+			<h5><%=@match.away_score%></h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 rosterholder">
+			<% if @match.home_team.nil? %>
+				<h3>Bye</h3>
+			<% else %>
+				<h3><%= link_to @match.home_team.teamname, @match.home_team%></h3>
+				<%= render :partial => "teams/roster", :locals => {:roster => @home_team_roster, :team => @match.home_team}%>
+			<% end %>
+		</div>
+		<div class="col-sm-4 col-sm-offset-1 rosterholder">
+			<% if @match.away_team.nil? %>
+				<h3>Bye</h3>
+			<% else %>
+				<h3><%= link_to @match.away_team.teamname, @match.away_team%></h3>
+				<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_team}%>
+			<% end %>
+		</div>
+	</div>
 <br>
 <br>
+<h4>Match Comments</h4>
 <div class="container-fluid" id="matchcommentspartial">
 	<%= render :partial => "matches/match_comments"%>
 </div>
