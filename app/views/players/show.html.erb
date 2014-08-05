@@ -4,9 +4,10 @@
 <%end%>
 <div id="container">
 	<h2>
-		<%= @player.name %> <%= render :partial => "players/endorsement_icon", :locals => {:user => @player} %> 
-		<%= link_to "", "steam://friends/add/#{@player.steamid}", :class => "fa fa-plus"%>
-		<%= link_to "DB", "http://dotabuff.com/players/#{@player.steam32id}", :target => "blank"%>
+		<%= @player.name %>
+		<%= render :partial => "players/endorsement_icon", :locals => {:user => @player} %>
+		<%= link_to "", "steam://friends/add/#{@player.steamid}", :title => "Add on Steam", "data-toggle" => "tooltip", :class => "fa fa-plus" %>
+		<%= link_to "DB", "http://dotabuff.com/players/#{@player.steam32id}", :title => "View on Dotabuff", "data-toggle" => "tooltip", :target => "blank"%>
 	</h2>
 	<div class="col-md-6">
 		<div class="form-horizontal" role="form">
@@ -148,6 +149,6 @@
 		<%= link_to "Create Team", new_team_path%>
 	</div>
 	<div class="col-md-6">
-		
+
 	</div>
 </div>
