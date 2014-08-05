@@ -23,7 +23,8 @@ module Permissions
             :
             TeamSeason.where(:season_id => object.season_id, :division => p.division, :team_id => [object.home_team_id, object.away_team_id]).count > 0
           )
-        )
+        ) || # captains of either team are AOK
+        (!@match_captain_permissions_off && (user.captained_teams.include?(home_team) || user.captained_teams.include?(away_team)))
       end
     elsif object.is_a? Team
       user.captained_teams.include? object
@@ -82,8 +83,9 @@ module Permissions
     !self.permissions_for_user(user).empty?
   end
 
-  def self.managed_teams
-
+  # This is terrible, but allows us to disallow captains from editing on the season page
+  def self.match_captain_permissions_off
+    @match_captain_permissions_off = true
   end
 
   def self.current_user=(user) #set current_user

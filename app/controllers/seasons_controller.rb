@@ -21,6 +21,7 @@ class SeasonsController < ApplicationController
         if @no_cache || !fragment_exist?("seasonPage-" + params[:id].to_s)
 
           # Cue the permission system to load the divisions if we might need those
+          Permissions.match_captain_permissions_off
           Permissions.load_team_divisions_for_season(@season.id) unless Permissions.can_edit?(@season) || !Permissions.can_view?(@season)
 
           @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
