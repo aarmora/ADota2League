@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-md-8">
 			<% if Permissions.can_edit?(@match) %>
-				NOTE: The below selector will allow you to ask to reschedule the match. Both parties must aggree on a time for it to go through. The selector is in UTC, so you MUST translate your desired date into UTC time.
+				NOTE: The below selector will allow you to ask to reschedule the match. Both parties must agree on a time for it to go through. The selector is in UTC, so you MUST translate your desired date into UTC time.
 				<br /><br />
 				For reference the current match time in UTC is: <%= @match.date.strftime("%-m/%-d/%y %H:%M %Z") %>
 			<% end %>
@@ -47,13 +47,13 @@
 	<b>Result:</b>
 	<div class="row">
 		<div class="col-xs-3 text-center">
-			<h5><%=@match.home_score%></h5>
+			<h5><%= best_in_place_if Permissions.can_edit?(@match), @match, :home_score, :type => :input %></h5>
 		</div>
 		<div class="col-xs-2 text-center">
 			<h5>vs</h5>
 		</div>
 		<div class="col-xs-3 text-center">
-			<h5><%=@match.away_score%></h5>
+			<h5><%= best_in_place_if Permissions.can_edit?(@match), @match, :away_score, :type => :input %></h5>
 		</div>
 	</div>
 	<div class="row">
