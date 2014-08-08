@@ -26,9 +26,9 @@ module Permissions
         )
       end 
         #Rails.logger.debug("My object: #{@match_captain_permissions_off}")
-        #Rails.logger.debug("My object: #{user.captained_teams.include?(object.away_team)}")
+        Rails.logger.debug(!@match_captain_permissions_off && (user.captained_teams.include?(object.home_team) || user.captained_teams.include?(object.away_team)))
         # captains of either team are AOK
-        (!@match_captain_permissions_off && (user.captained_teams.include?(object.home_team) || user.captained_teams.include?(object.away_team)))
+      (!@match_captain_permissions_off && (user.captained_teams.include?(object.home_team) || user.captained_teams.include?(object.away_team)))
     elsif object.is_a? Team
       user.captained_teams.include? object
     elsif object.is_a? Player

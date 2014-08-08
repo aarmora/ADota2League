@@ -2,6 +2,8 @@ class MatchesController < ApplicationController
 	def index
 	end
   def show
+    Rails.logger.debug("Im Jordan and I log.")
+
     @match = Match.find(params[:id])
     unless @match.home_team.nil?
       @home_team_roster = @match.home_team.players.sort_by {|p| p.id == @match.home_team.captain_id ? 0 : 1}
