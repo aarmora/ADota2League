@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: git://github.com/rweng/jquery-datatables-rails.git
-  revision: 724f21145fa764da38db8f7cdc270b9af0859a6e
+  revision: 9f2b7af9a5e8d83dd16ef8aed43d25a5ed9cdeac
   specs:
-    jquery-datatables-rails (2.1.10.0.4)
+    jquery-datatables-rails (2.2.1)
       jquery-rails
       sass-rails
 
@@ -84,7 +84,7 @@ GEM
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
-    excon (0.38.0)
+    excon (0.39.3)
     execjs (2.2.1)
     faraday (0.8.9)
       multipart-post (~> 1.2.0)
@@ -126,7 +126,7 @@ GEM
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
-    mysql2 (0.3.15)
+    mysql2 (0.3.16)
     netrc (0.7.7)
     oink (0.10.1)
       activerecord
@@ -183,7 +183,7 @@ GEM
       netrc (~> 0.7)
     rubin (0.2.0)
     ruby-openid (2.5.0)
-    sass (3.3.13)
+    sass (3.3.14)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)

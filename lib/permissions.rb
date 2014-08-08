@@ -24,7 +24,10 @@ module Permissions
             TeamSeason.where(:season_id => object.season_id, :division => p.division, :team_id => [object.home_team_id, object.away_team_id]).count > 0
           )
         )
-      end || # captains of either team are AOK
+      end 
+        #Rails.logger.debug("My object: #{@match_captain_permissions_off}")
+        #Rails.logger.debug("My object: #{user.captained_teams.include?(object.away_team)}")
+        # captains of either team are AOK
         (!@match_captain_permissions_off && (user.captained_teams.include?(object.home_team) || user.captained_teams.include?(object.away_team)))
     elsif object.is_a? Team
       user.captained_teams.include? object

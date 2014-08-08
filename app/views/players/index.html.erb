@@ -16,6 +16,7 @@
                 <th>Endorsements</th>
                 <th>MMR</th>
                 <th>Hours Played</th>
+                <th>Comments</th>
 
             </tr>
         </thead>
@@ -46,6 +47,9 @@
                     </td>
                     <td>
                         <%= freeagent.hours_played %>
+                    </td>
+                    <td>
+                        <%= freeagent.player_comments.size %>
                     </td>
                 </tr>
             <%end%>

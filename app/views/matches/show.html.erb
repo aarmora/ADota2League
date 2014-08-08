@@ -1,5 +1,4 @@
 <div class="container-fluid">
-
 	<% # Reschedule Warnings %>
 	<% if @current_user && @match.reschedule_proposer == @current_user.id %>
     <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept!</div>
