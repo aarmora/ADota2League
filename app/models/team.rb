@@ -17,7 +17,7 @@ class Team < ActiveRecord::Base
   end
 
   def default_mmr
-    3000
+    2567
   end
 
   def self.available_for_season_and_week(season_id, week)

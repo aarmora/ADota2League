@@ -1,509 +1,3 @@
-2014-08-08T15:27:11.883607+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
-2014-08-08T15:27:11.883631+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
-2014-08-08T15:27:11.883637+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
-2014-08-08T15:27:11.883646+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
-2014-08-08T15:27:11.883634+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
-2014-08-08T15:27:11.883645+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
-2014-08-08T15:27:11.883626+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
-2014-08-08T15:27:11.883642+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
-2014-08-08T15:27:11.883649+00:00 app[web.1]: 
-2014-08-08T15:27:11.883644+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
-2014-08-08T15:27:11.883648+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
-2014-08-08T15:27:11.883650+00:00 app[web.1]: 
-2014-08-08T15:27:11.883606+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
-2014-08-08T15:27:11.883632+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
-2014-08-08T15:27:11.883638+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
-2014-08-08T15:27:11.883641+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
-2014-08-08T15:27:11.883635+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
-2014-08-08T15:27:13.583258+00:00 app[web.1]: Read fragment views/seasonPage-8 0.0ms
-2014-08-08T15:27:13.560694+00:00 app[web.1]: Started GET "/seasons/8" for 143.215.116.177 at 2014-08-08 15:27:13 +0000
-2014-08-08T15:27:13.563481+00:00 app[web.1]: Processing by SeasonsController#show as HTML
-2014-08-08T15:27:13.563508+00:00 app[web.1]:   Parameters: {"id"=>"8"}
-2014-08-08T15:27:13.580422+00:00 app[web.1]: Exist fragment? views/seasonPage-8 4.2ms
-2014-08-08T15:27:13.902655+00:00 heroku[router]: at=info method=GET path="/seasons/8" host=amateurdota2league.com request_id=c92a1de0-95a2-4712-8ede-efce088ea042 fwd="143.215.116.177" dyno=web.1 connect=1ms service=348ms status=200 bytes=814
-2014-08-08T15:27:13.842953+00:00 app[web.1]:   Rendered seasons/show.html.erb within layouts/application (260.4ms)
-2014-08-08T15:27:13.889941+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (4.0ms)
-2014-08-08T15:27:13.895792+00:00 app[web.1]: Aug 08 15:27:13 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:27:13.895727+00:00 app[web.1]: Aug 08 15:27:13 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 86 | Season: 86
-2014-08-08T15:27:13.894699+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.5ms)
-2014-08-08T15:27:13.894947+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:27:13.895486+00:00 app[web.1]: Aug 08 15:27:13 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: seasons#show
-2014-08-08T15:27:13.895624+00:00 app[web.1]: Aug 08 15:27:13 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:27:13.894759+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (9.0ms)
-2014-08-08T15:27:13.884031+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:27:13.893995+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.9ms)
-2014-08-08T15:27:13.895301+00:00 app[web.1]: Completed 200 OK in 331.7ms (Views: 314.6ms | ActiveRecord: 3.8ms)
-2014-08-08T15:28:07.333246+00:00 app[web.1]: Started GET "/teams/2539.ics" for 66.249.64.167 at 2014-08-08 15:28:07 +0000
-2014-08-08T15:28:07.336249+00:00 app[web.1]: Processing by TeamsController#show as ICS
-2014-08-08T15:28:07.336308+00:00 app[web.1]:   Parameters: {"id"=>"2539"}
-2014-08-08T15:28:07.761519+00:00 heroku[router]: at=info method=GET path="/teams/2539.ics" host=amateurdota2league.com request_id=fbc7b32d-0687-49a3-89c0-6f1cb8569098 fwd="66.249.64.167" dyno=web.1 connect=1ms service=426ms status=200 bytes=462
-2014-08-08T15:28:07.752135+00:00 app[web.1]: Sent data 2539.ics  (0.8ms)
-2014-08-08T15:28:07.752446+00:00 app[web.1]: Aug 08 15:28:07 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
-2014-08-08T15:28:07.752259+00:00 app[web.1]: Completed 200 OK in 415.8ms (Views: 0.7ms | ActiveRecord: 30.3ms)
-2014-08-08T15:28:07.752562+00:00 app[web.1]: Aug 08 15:28:07 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:28:07.752650+00:00 app[web.1]: Aug 08 15:28:07 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 231 | Player: 161 | Season: 43 | Team: 15 | Match: 12
-2014-08-08T15:28:07.752696+00:00 app[web.1]: Aug 08 15:28:07 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:28:07.752030+00:00 app[web.1]:   Rendered text template (0.0ms)
-2014-08-08T15:28:15.460156+00:00 heroku[router]: at=info method=GET path="/players/548" host=amateurdota2league.com request_id=84de3622-e2db-46b0-81f4-c17d00dbce9c fwd="66.249.64.172" dyno=web.1 connect=1ms service=47ms status=200 bytes=509
-2014-08-08T15:28:15.458955+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
-2014-08-08T15:28:15.452548+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (8.4ms)
-2014-08-08T15:28:15.461702+00:00 app[web.1]: Aug 08 15:28:15 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
-2014-08-08T15:28:15.460969+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.6ms)
-2014-08-08T15:28:15.461527+00:00 app[web.1]: Completed 200 OK in 32.7ms (Views: 15.4ms | ActiveRecord: 9.0ms)
-2014-08-08T15:28:15.444472+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
-2014-08-08T15:28:15.461100+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.8ms)
-2014-08-08T15:28:15.462063+00:00 app[web.1]: Aug 08 15:28:15 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:28:15.428691+00:00 app[web.1]:   Parameters: {"id"=>"548"}
-2014-08-08T15:28:15.461860+00:00 app[web.1]: Aug 08 15:28:15 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:28:15.462057+00:00 app[web.1]: Aug 08 15:28:15 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 45 | Season: 43 | Player: 1 | Team: 1
-2014-08-08T15:28:15.428682+00:00 app[web.1]: Processing by PlayersController#show as */*
-2014-08-08T15:28:15.461291+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:28:15.425714+00:00 app[web.1]: Started GET "/players/548" for 66.249.64.172 at 2014-08-08 15:28:15 +0000
-2014-08-08T15:28:15.448117+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (1.8ms)
-2014-08-08T15:28:15.460055+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.9ms)
-2014-08-08T15:28:15.458122+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:28:18.601976+00:00 heroku[router]: at=info method=GET path="/teams/3723" host=amateurdota2league.com request_id=e837bc60-0f27-4def-bbcd-5e91b620861e fwd="143.215.116.177" dyno=web.1 connect=1ms service=240ms status=200 bytes=824
-2014-08-08T15:28:18.534755+00:00 app[web.1]:   Rendered teams/_roster.html.erb (0.7ms)
-2014-08-08T15:28:18.576427+00:00 app[web.1]:   Rendered matches/_match.html.erb (2.5ms)
-2014-08-08T15:28:18.591733+00:00 app[web.1]:   Rendered matches/_match.html.erb (2.0ms)
-2014-08-08T15:28:18.370339+00:00 app[web.1]:   Parameters: {"id"=>"3723"}
-2014-08-08T15:28:18.586105+00:00 app[web.1]:   Rendered matches/_match.html.erb (7.5ms)
-2014-08-08T15:28:18.370308+00:00 app[web.1]: Processing by TeamsController#show as HTML
-2014-08-08T15:28:18.599570+00:00 app[web.1]: Completed 200 OK in 229.1ms (Views: 50.8ms | ActiveRecord: 72.3ms)
-2014-08-08T15:28:18.591846+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (24.3ms)
-2014-08-08T15:28:18.592003+00:00 app[web.1]:   Rendered teams/show.html.erb within layouts/application (63.3ms)
-2014-08-08T15:28:18.599153+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.2ms)
-2014-08-08T15:28:18.536387+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (0.0ms)
-2014-08-08T15:28:18.599864+00:00 app[web.1]: Aug 08 15:28:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:28:18.599084+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.5ms)
-2014-08-08T15:28:18.564590+00:00 app[web.1]:   Rendered matches/_match.html.erb (2.1ms)
-2014-08-08T15:28:18.599358+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:28:18.597555+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:28:18.599728+00:00 app[web.1]: Aug 08 15:28:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
-2014-08-08T15:28:18.599925+00:00 app[web.1]: Aug 08 15:28:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 307 | Player: 196 | Season: 46 | Permission: 41 | Team: 12 | Match: 9 | TeamSeason: 3
-2014-08-08T15:28:18.599976+00:00 app[web.1]: Aug 08 15:28:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:28:18.534915+00:00 app[web.1]:   Rendered welcome/_learn_more.html.erb (0.0ms)
-2014-08-08T15:28:18.367399+00:00 app[web.1]: Started GET "/teams/3723" for 143.215.116.177 at 2014-08-08 15:28:18 +0000
-2014-08-08T15:28:18.566642+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.9ms)
-2014-08-08T15:28:18.562260+00:00 app[web.1]:   Rendered matches/_match.html.erb (24.7ms)
-2014-08-08T15:28:18.578332+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.7ms)
-2014-08-08T15:28:18.589569+00:00 app[web.1]:   Rendered matches/_match.html.erb (3.2ms)
-2014-08-08T15:28:18.573688+00:00 app[web.1]:   Rendered matches/_match.html.erb (5.9ms)
-2014-08-08T15:28:18.598442+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:28:18.566729+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (29.5ms)
-2014-08-08T15:28:18.596791+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:28:27.584217+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=amateurdota2league.com request_id=eedc2cb8-2b76-44aa-b487-ecb237ca00ba fwd="143.215.116.177" dyno=web.1 connect=1ms service=10ms status=200 bytes=775
-2014-08-08T15:28:34.212896+00:00 app[web.1]:   Rendered teams/_roster.html.erb (2.3ms)
-2014-08-08T15:28:34.255729+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.7ms)
-2014-08-08T15:28:34.270626+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (55.7ms)
-2014-08-08T15:28:34.278741+00:00 app[web.1]: Aug 08 15:28:34 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:28:34.270739+00:00 app[web.1]:   Rendered teams/show.html.erb within layouts/application (65.5ms)
-2014-08-08T15:28:34.045210+00:00 app[web.1]: Processing by TeamsController#show as HTML
-2014-08-08T15:28:34.260079+00:00 app[web.1]:   Rendered matches/_match.html.erb (2.1ms)
-2014-08-08T15:28:34.275505+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:28:34.277982+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.3ms)
-2014-08-08T15:28:34.278330+00:00 app[web.1]: Completed 200 OK in 233.0ms (Views: 50.1ms | ActiveRecord: 74.5ms)
-2014-08-08T15:28:34.045222+00:00 app[web.1]:   Parameters: {"id"=>"5596"}
-2014-08-08T15:28:34.257802+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.9ms)
-2014-08-08T15:28:34.277905+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:28:34.242686+00:00 app[web.1]:   Rendered matches/_match.html.erb (27.5ms)
-2014-08-08T15:28:34.262291+00:00 app[web.1]:   Rendered matches/_match.html.erb (2.0ms)
-2014-08-08T15:28:34.253799+00:00 app[web.1]:   Rendered matches/_match.html.erb (3.1ms)
-2014-08-08T15:28:34.276288+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:28:34.213071+00:00 app[web.1]:   Rendered welcome/_learn_more.html.erb (0.0ms)
-2014-08-08T15:28:34.270562+00:00 app[web.1]:   Rendered matches/_match.html.erb (8.0ms)
-2014-08-08T15:28:34.278693+00:00 app[web.1]: Aug 08 15:28:34 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 307 | Player: 201 | Season: 45 | Permission: 41 | Team: 10 | Match: 8 | TeamSeason: 2
-2014-08-08T15:28:34.278150+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:28:34.278475+00:00 app[web.1]: Aug 08 15:28:34 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
-2014-08-08T15:28:34.250522+00:00 app[web.1]:   Rendered matches/_match.html.erb (7.5ms)
-2014-08-08T15:28:34.285040+00:00 heroku[router]: at=info method=GET path="/teams/5596" host=amateurdota2league.com request_id=5aeb4ea4-143d-4f1d-8469-8ff74334b904 fwd="143.215.116.177" dyno=web.1 connect=1ms service=252ms status=200 bytes=824
-2014-08-08T15:28:34.277297+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.9ms)
-2014-08-08T15:28:34.040265+00:00 app[web.1]: Started GET "/teams/5596" for 143.215.116.177 at 2014-08-08 15:28:34 +0000
-2014-08-08T15:28:34.278608+00:00 app[web.1]: Aug 08 15:28:34 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:30:24.171185+00:00 app[web.1]: Processing by WelcomeController#index as HTML
-2014-08-08T15:30:24.167963+00:00 app[web.1]: Started GET "/" for 162.157.226.245 at 2014-08-08 15:30:24 +0000
-2014-08-08T15:30:24.579619+00:00 heroku[router]: at=info method=GET path="/" host=amateurdota2league.com request_id=65671305-6b37-473e-9cdc-95f39c452395 fwd="162.157.226.245" dyno=web.1 connect=6ms service=416ms status=200 bytes=510
-2014-08-08T15:30:24.562727+00:00 app[web.1]:   Rendered register/_sign_in.html.erb (0.1ms)
-2014-08-08T15:30:24.569533+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:30:24.562912+00:00 app[web.1]:   Rendered welcome/index.html.erb within layouts/application (16.3ms)
-2014-08-08T15:30:24.573529+00:00 app[web.1]: Aug 08 15:30:24 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:30:24.573649+00:00 app[web.1]: Aug 08 15:30:24 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:30:24.571771+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (1.1ms)
-2014-08-08T15:30:24.573231+00:00 app[web.1]: Completed 200 OK in 401.9ms (Views: 20.5ms | ActiveRecord: 23.0ms)
-2014-08-08T15:30:24.573590+00:00 app[web.1]: Aug 08 15:30:24 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 211 | Player: 163 | Season: 43 | Post: 5
-2014-08-08T15:30:24.573340+00:00 app[web.1]: Aug 08 15:30:24 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: welcome#index
-2014-08-08T15:30:24.572638+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.6ms)
-2014-08-08T15:30:24.570494+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.7ms)
-2014-08-08T15:30:24.572969+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:30:24.572748+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (3.0ms)
-2014-08-08T15:30:25.094895+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=104c618e-542b-41ef-b257-9883dd0561b5 fwd="162.157.226.245" dyno=web.1 connect=1ms service=13ms status=404 bytes=789
-2014-08-08T15:30:25.086942+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 162.157.226.245 at 2014-08-08 15:30:25 +0000
-2014-08-08T15:30:25.089171+00:00 app[web.1]: Aug 08 15:30:25 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
-2014-08-08T15:30:25.089223+00:00 app[web.1]: Aug 08 15:30:25 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:30:25.090345+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
-2014-08-08T15:30:25.090340+00:00 app[web.1]: 
-2014-08-08T15:30:25.090349+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
-2014-08-08T15:30:25.090350+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
-2014-08-08T15:30:25.090354+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
-2014-08-08T15:30:25.090355+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
-2014-08-08T15:30:25.090360+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
-2014-08-08T15:30:25.090362+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
-2014-08-08T15:30:25.090358+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
-2014-08-08T15:30:25.090365+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
-2014-08-08T15:30:25.090369+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
-2014-08-08T15:30:25.090368+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
-2014-08-08T15:30:25.090347+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
-2014-08-08T15:30:25.090357+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
-2014-08-08T15:30:25.090366+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
-2014-08-08T15:30:25.090343+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
-2014-08-08T15:30:25.090352+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
-2014-08-08T15:30:25.090363+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
-2014-08-08T15:30:25.090370+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
-2014-08-08T15:30:25.090379+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
-2014-08-08T15:30:25.090382+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
-2014-08-08T15:30:25.090373+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
-2014-08-08T15:30:25.090380+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
-2014-08-08T15:30:25.090371+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
-2014-08-08T15:30:25.090374+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
-2014-08-08T15:30:25.090377+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
-2014-08-08T15:30:25.090383+00:00 app[web.1]: 
-2014-08-08T15:30:25.090376+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
-2014-08-08T15:30:25.090384+00:00 app[web.1]: 
-2014-08-08T15:30:25.089055+00:00 app[web.1]: Aug 08 15:30:25 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:30:25.620475+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=b715c632-d02c-425f-87fa-229816bd1da2 fwd="162.157.226.245" dyno=web.1 connect=1ms service=9ms status=404 bytes=789
-2014-08-08T15:30:25.617090+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 162.157.226.245 at 2014-08-08 15:30:25 +0000
-2014-08-08T15:30:25.619308+00:00 app[web.1]: Aug 08 15:30:25 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:30:25.619358+00:00 app[web.1]: Aug 08 15:30:25 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
-2014-08-08T15:30:25.619400+00:00 app[web.1]: Aug 08 15:30:25 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:30:25.620285+00:00 app[web.1]: 
-2014-08-08T15:30:25.620293+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
-2014-08-08T15:30:25.620296+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
-2014-08-08T15:30:25.620289+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
-2014-08-08T15:30:25.620287+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
-2014-08-08T15:30:25.620291+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
-2014-08-08T15:30:25.620298+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
-2014-08-08T15:30:25.620302+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
-2014-08-08T15:30:25.620306+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
-2014-08-08T15:30:25.620307+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
-2014-08-08T15:30:25.620316+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
-2014-08-08T15:30:25.620327+00:00 app[web.1]: 
-2014-08-08T15:30:25.620299+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
-2014-08-08T15:30:25.620319+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
-2014-08-08T15:30:25.620324+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
-2014-08-08T15:30:25.620294+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
-2014-08-08T15:30:25.620301+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
-2014-08-08T15:30:25.620317+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
-2014-08-08T15:30:25.620323+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
-2014-08-08T15:30:25.620314+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
-2014-08-08T15:30:25.620320+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
-2014-08-08T15:30:25.620310+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
-2014-08-08T15:30:25.620312+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
-2014-08-08T15:30:25.620321+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
-2014-08-08T15:30:25.620326+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
-2014-08-08T15:30:25.620328+00:00 app[web.1]: 
-2014-08-08T15:30:25.620313+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
-2014-08-08T15:30:25.620304+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
-2014-08-08T15:30:25.620309+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
-2014-08-08T15:31:24.601772+00:00 heroku[router]: at=info method=GET path="/players/12148" host=amateurdota2league.com request_id=b3425652-ee4f-48d6-983e-8d7ff8a9d7f8 fwd="37.58.100.143" dyno=web.1 connect=1ms service=39ms status=200 bytes=422
-2014-08-08T15:31:24.598158+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:31:24.596596+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:31:24.589194+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (1.5ms)
-2014-08-08T15:31:24.566759+00:00 app[web.1]: Started GET "/players/12148" for 37.58.100.143 at 2014-08-08 15:31:24 +0000
-2014-08-08T15:31:24.569319+00:00 app[web.1]: Processing by PlayersController#show as */*
-2014-08-08T15:31:24.598739+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:31:24.599006+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:31:24.569327+00:00 app[web.1]:   Parameters: {"id"=>"12148"}
-2014-08-08T15:31:24.586297+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
-2014-08-08T15:31:24.592150+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (6.1ms)
-2014-08-08T15:31:24.597276+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.4ms)
-2014-08-08T15:31:24.599193+00:00 app[web.1]: Completed 200 OK in 29.8ms (Views: 11.5ms | ActiveRecord: 11.0ms)
-2014-08-08T15:31:24.598821+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.1ms)
-2014-08-08T15:31:24.599447+00:00 app[web.1]: Aug 08 15:31:24 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:31:24.599298+00:00 app[web.1]: Aug 08 15:31:24 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
-2014-08-08T15:31:24.599511+00:00 app[web.1]: Aug 08 15:31:24 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 45 | Season: 43 | Player: 1 | Team: 1
-2014-08-08T15:31:24.599563+00:00 app[web.1]: Aug 08 15:31:24 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:31:56.380115+00:00 heroku[router]: at=info method=GET path="/robots.txt" host=amateurdota2league.com request_id=8f29c575-4bdf-45d7-9532-f9e0844f1615 fwd="157.55.39.216" dyno=web.1 connect=2ms service=15ms status=200 bytes=486
-2014-08-08T15:32:08.293219+00:00 app[web.1]:   Parameters: {"id"=>"3008"}
-2014-08-08T15:32:08.293196+00:00 app[web.1]: Processing by MatchesController#show as */*
-2014-08-08T15:32:08.290591+00:00 app[web.1]: Started GET "/matches/3008" for 157.55.39.216 at 2014-08-08 15:32:08 +0000
-2014-08-08T15:32:08.729397+00:00 heroku[router]: at=info method=GET path="/matches/3008" host=amateurdota2league.com request_id=6053771f-6aab-4850-a678-a4b50fb4b095 fwd="157.55.39.216" dyno=web.1 connect=2ms service=443ms status=200 bytes=501
-2014-08-08T15:32:08.717078+00:00 app[web.1]:   Rendered matches/show.html.erb within layouts/application (23.5ms)
-2014-08-08T15:32:08.713902+00:00 app[web.1]:   Rendered teams/_roster.html.erb (0.4ms)
-2014-08-08T15:32:08.714586+00:00 app[web.1]:   Rendered teams/_roster.html.erb (0.3ms)
-2014-08-08T15:32:08.723620+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:32:08.723691+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.2ms)
-2014-08-08T15:32:08.724026+00:00 app[web.1]: Completed 200 OK in 430.7ms (Views: 21.5ms | ActiveRecord: 44.8ms)
-2014-08-08T15:32:08.724149+00:00 app[web.1]: Aug 08 15:32:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: matches#show
-2014-08-08T15:32:08.724265+00:00 app[web.1]: Aug 08 15:32:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:32:08.716971+00:00 app[web.1]:   Rendered matches/_match_comments.html.erb (2.2ms)
-2014-08-08T15:32:08.721348+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.0ms)
-2014-08-08T15:32:08.724339+00:00 app[web.1]: Aug 08 15:32:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 364 | Player: 318 | Season: 43 | Team: 2 | Match: 1
-2014-08-08T15:32:08.722187+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:32:08.723857+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:32:08.724382+00:00 app[web.1]: Aug 08 15:32:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:32:08.723100+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
-2014-08-08T15:32:55.635229+00:00 heroku[router]: at=info method=GET path="/players/291" host=calm-sea-4265.herokuapp.com request_id=c3ce5409-47f2-4328-8594-266593bab8a5 fwd="66.249.64.94" dyno=web.1 connect=3ms service=41ms status=200 bytes=463
-2014-08-08T15:32:55.620362+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (1.5ms)
-2014-08-08T15:32:55.599799+00:00 app[web.1]: Started GET "/players/291" for 66.249.64.94 at 2014-08-08 15:32:55 +0000
-2014-08-08T15:32:55.630557+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:32:55.628923+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:32:55.602386+00:00 app[web.1]:   Parameters: {"id"=>"291"}
-2014-08-08T15:32:55.631709+00:00 app[web.1]: Aug 08 15:32:55 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
-2014-08-08T15:32:55.623737+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (6.5ms)
-2014-08-08T15:32:55.602343+00:00 app[web.1]: Processing by PlayersController#show as */*
-2014-08-08T15:32:55.617479+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
-2014-08-08T15:32:55.629651+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:32:55.631576+00:00 app[web.1]: Completed 200 OK in 29.1ms (Views: 12.5ms | ActiveRecord: 9.9ms)
-2014-08-08T15:32:55.631145+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:32:55.631867+00:00 app[web.1]: Aug 08 15:32:55 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:32:55.631391+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:32:55.631940+00:00 app[web.1]: Aug 08 15:32:55 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 46 | Season: 43 | Team: 2 | Player: 1
-2014-08-08T15:32:55.631211+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.2ms)
-2014-08-08T15:32:55.631982+00:00 app[web.1]: Aug 08 15:32:55 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:33:12.277386+00:00 heroku[router]: at=info method=GET path="/teams/4996" host=amateurdota2league.com request_id=2351ff34-6b0a-46c1-b840-d82b574dbe1d fwd="66.249.64.167" dyno=web.1 connect=0ms service=151ms status=200 bytes=508
-2014-08-08T15:33:12.262769+00:00 app[web.1]:   Rendered teams/show.html.erb within layouts/application (8.0ms)
-2014-08-08T15:33:12.130461+00:00 app[web.1]:   Parameters: {"id"=>"4996"}
-2014-08-08T15:33:12.267902+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.4ms)
-2014-08-08T15:33:12.261687+00:00 app[web.1]:   Rendered teams/_roster.html.erb (1.5ms)
-2014-08-08T15:33:12.130373+00:00 app[web.1]: Processing by TeamsController#show as */*
-2014-08-08T15:33:12.261969+00:00 app[web.1]:   Rendered welcome/_learn_more.html.erb (0.0ms)
-2014-08-08T15:33:12.270192+00:00 app[web.1]: Aug 08 15:33:12 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:33:12.127796+00:00 app[web.1]: Started GET "/teams/4996" for 66.249.64.167 at 2014-08-08 15:33:12 +0000
-2014-08-08T15:33:12.267244+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:33:12.269433+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.0ms)
-2014-08-08T15:33:12.270078+00:00 app[web.1]: Aug 08 15:33:12 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:33:12.269646+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:33:12.270153+00:00 app[web.1]: Aug 08 15:33:12 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 138 | Season: 43 | Permission: 41 | Player: 37 | Team: 10 | Match: 7
-2014-08-08T15:33:12.269820+00:00 app[web.1]: Completed 200 OK in 139.3ms (Views: 12.3ms | ActiveRecord: 44.0ms)
-2014-08-08T15:33:12.269364+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:33:12.269932+00:00 app[web.1]: Aug 08 15:33:12 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
-2014-08-08T15:33:12.268842+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:34:17.896461+00:00 app[web.1]: Started GET "/players/9898" for 66.249.64.172 at 2014-08-08 15:34:17 +0000
-2014-08-08T15:34:17.899132+00:00 app[web.1]:   Parameters: {"id"=>"9898"}
-2014-08-08T15:34:17.899107+00:00 app[web.1]: Processing by PlayersController#show as */*
-2014-08-08T15:34:18.307980+00:00 heroku[router]: at=info method=GET path="/players/9898" host=amateurdota2league.com request_id=434081cc-81f6-453c-aebb-b65d2c7c6b20 fwd="66.249.64.172" dyno=web.1 connect=2ms service=417ms status=200 bytes=510
-2014-08-08T15:34:18.286075+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
-2014-08-08T15:34:18.296607+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (10.7ms)
-2014-08-08T15:34:18.304158+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:34:18.303990+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.1ms)
-2014-08-08T15:34:18.302510+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:34:18.303925+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:34:18.304338+00:00 app[web.1]: Completed 200 OK in 405.1ms (Views: 13.5ms | ActiveRecord: 28.0ms)
-2014-08-08T15:34:18.304690+00:00 app[web.1]: Aug 08 15:34:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:34:18.301799+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:34:18.292490+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (4.9ms)
-2014-08-08T15:34:18.303403+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:34:18.304445+00:00 app[web.1]: Aug 08 15:34:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
-2014-08-08T15:34:18.304582+00:00 app[web.1]: Aug 08 15:34:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:34:18.304649+00:00 app[web.1]: Aug 08 15:34:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 205 | Player: 159 | Season: 43 | Team: 3
-2014-08-08T15:34:31.068992+00:00 app[web.1]: Started GET "/teams/5170" for 66.249.64.167 at 2014-08-08 15:34:31 +0000
-2014-08-08T15:34:31.071477+00:00 app[web.1]: Processing by TeamsController#show as */*
-2014-08-08T15:34:31.071509+00:00 app[web.1]:   Parameters: {"id"=>"5170"}
-2014-08-08T15:34:31.577877+00:00 heroku[router]: at=info method=GET path="/teams/5170" host=amateurdota2league.com request_id=b43085c7-f074-4f68-b777-04de8d193423 fwd="66.249.64.167" dyno=web.1 connect=0ms service=515ms status=200 bytes=508
-2014-08-08T15:34:31.526048+00:00 app[web.1]:   Rendered teams/_roster.html.erb (4.0ms)
-2014-08-08T15:34:31.527958+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (0.0ms)
-2014-08-08T15:34:31.556747+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.8ms)
-2014-08-08T15:34:31.552852+00:00 app[web.1]:   Rendered matches/_match.html.erb (2.1ms)
-2014-08-08T15:34:31.526265+00:00 app[web.1]:   Rendered welcome/_learn_more.html.erb (0.0ms)
-2014-08-08T15:34:31.564613+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.7ms)
-2014-08-08T15:34:31.560757+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.8ms)
-2014-08-08T15:34:31.564791+00:00 app[web.1]:   Rendered teams/show.html.erb within layouts/application (46.7ms)
-2014-08-08T15:34:31.571585+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
-2014-08-08T15:34:31.572735+00:00 app[web.1]: Completed 200 OK in 501.1ms (Views: 47.3ms | ActiveRecord: 53.1ms)
-2014-08-08T15:34:31.573051+00:00 app[web.1]: Aug 08 15:34:31 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:34:31.573234+00:00 app[web.1]: Aug 08 15:34:31 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:34:31.569886+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:34:31.564676+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (35.8ms)
-2014-08-08T15:34:31.572884+00:00 app[web.1]: Aug 08 15:34:31 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
-2014-08-08T15:34:31.573191+00:00 app[web.1]: Aug 08 15:34:31 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 306 | Player: 201 | Season: 45 | Permission: 41 | Team: 9 | Match: 8 | TeamSeason: 2
-2014-08-08T15:34:31.550575+00:00 app[web.1]:   Rendered matches/_match.html.erb (21.4ms)
-2014-08-08T15:34:31.558795+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.8ms)
-2014-08-08T15:34:31.554756+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.7ms)
-2014-08-08T15:34:31.570671+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:34:31.562714+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.8ms)
-2014-08-08T15:34:31.572460+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:34:31.572199+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:34:31.572262+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.2ms)
-2014-08-08T15:34:52.441360+00:00 heroku[router]: at=info method=GET path="/players/10404" host=amateurdota2league.com request_id=6cf87d2c-5edd-48b5-97e4-377970e188e2 fwd="66.249.64.177" dyno=web.1 connect=1ms service=43ms status=200 bytes=461
-2014-08-08T15:34:52.428629+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (1.7ms)
-2014-08-08T15:34:52.404375+00:00 app[web.1]: Started GET "/players/10404" for 66.249.64.177 at 2014-08-08 15:34:52 +0000
-2014-08-08T15:34:52.436443+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:34:52.438168+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
-2014-08-08T15:34:52.437221+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:34:52.439029+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.4ms)
-2014-08-08T15:34:52.438962+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.6ms)
-2014-08-08T15:34:52.407339+00:00 app[web.1]: Processing by PlayersController#show as */*
-2014-08-08T15:34:52.407363+00:00 app[web.1]:   Parameters: {"id"=>"10404"}
-2014-08-08T15:34:52.425475+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
-2014-08-08T15:34:52.439235+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:34:52.439431+00:00 app[web.1]: Completed 200 OK in 32.0ms (Views: 12.5ms | ActiveRecord: 11.1ms)
-2014-08-08T15:34:52.439881+00:00 app[web.1]: Aug 08 15:34:52 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:34:52.439829+00:00 app[web.1]: Aug 08 15:34:52 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 44 | Season: 43 | Player: 1
-2014-08-08T15:34:52.439691+00:00 app[web.1]: Aug 08 15:34:52 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:34:52.439564+00:00 app[web.1]: Aug 08 15:34:52 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
-2014-08-08T15:34:52.431513+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (6.3ms)
-2014-08-08T15:34:54.378645+00:00 heroku[router]: at=info method=GET path="/teams/4840" host=amateurdota2league.com request_id=47833c1d-c0f6-4f2a-b667-ac1e7eefa6fe fwd="66.249.64.172" dyno=web.1 connect=0ms service=173ms status=200 bytes=508
-2014-08-08T15:34:54.375626+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:34:54.373968+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:34:54.210735+00:00 app[web.1]: Started GET "/teams/4840" for 66.249.64.172 at 2014-08-08 15:34:54 +0000
-2014-08-08T15:34:54.213185+00:00 app[web.1]: Processing by TeamsController#show as */*
-2014-08-08T15:34:54.213213+00:00 app[web.1]:   Parameters: {"id"=>"4840"}
-2014-08-08T15:34:54.368189+00:00 app[web.1]:   Rendered teams/_roster.html.erb (2.4ms)
-2014-08-08T15:34:54.368331+00:00 app[web.1]:   Rendered welcome/_learn_more.html.erb (0.0ms)
-2014-08-08T15:34:54.374734+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:34:54.369631+00:00 app[web.1]:   Rendered teams/show.html.erb within layouts/application (7.0ms)
-2014-08-08T15:34:54.376256+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.1ms)
-2014-08-08T15:34:54.376457+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:34:54.376195+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:34:54.376627+00:00 app[web.1]: Completed 200 OK in 163.3ms (Views: 13.2ms | ActiveRecord: 54.6ms)
-2014-08-08T15:34:54.376742+00:00 app[web.1]: Aug 08 15:34:54 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
-2014-08-08T15:34:54.376886+00:00 app[web.1]: Aug 08 15:34:54 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:34:54.376965+00:00 app[web.1]: Aug 08 15:34:54 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 143 | Season: 45 | Permission: 41 | Player: 40 | Team: 9 | Match: 6 | TeamSeason: 2
-2014-08-08T15:34:54.377006+00:00 app[web.1]: Aug 08 15:34:54 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:35:05.200600+00:00 heroku[router]: at=info method=GET path="/teams/4810" host=amateurdota2league.com request_id=d44e4fa6-a245-471c-bd2a-3a29ae6603a6 fwd="66.249.64.177" dyno=web.1 connect=1ms service=187ms status=200 bytes=508
-2014-08-08T15:35:05.188493+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.4ms)
-2014-08-08T15:35:05.019292+00:00 app[web.1]: Started GET "/teams/4810" for 66.249.64.177 at 2014-08-08 15:35:05 +0000
-2014-08-08T15:35:05.196948+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:35:05.192146+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (33.6ms)
-2014-08-08T15:35:05.192074+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.6ms)
-2014-08-08T15:35:05.192266+00:00 app[web.1]:   Rendered teams/show.html.erb within layouts/application (41.7ms)
-2014-08-08T15:35:05.185068+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.7ms)
-2014-08-08T15:35:05.181430+00:00 app[web.1]:   Rendered matches/_match.html.erb (2.0ms)
-2014-08-08T15:35:05.198550+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:35:05.156420+00:00 app[web.1]:   Rendered teams/_roster.html.erb (0.3ms)
-2014-08-08T15:35:05.183237+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.6ms)
-2014-08-08T15:35:05.199186+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.1ms)
-2014-08-08T15:35:05.199372+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:35:05.156558+00:00 app[web.1]:   Rendered welcome/_learn_more.html.erb (0.0ms)
-2014-08-08T15:35:05.199118+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:35:05.186960+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.7ms)
-2014-08-08T15:35:05.199651+00:00 app[web.1]: Aug 08 15:35:05 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
-2014-08-08T15:35:05.199800+00:00 app[web.1]: Aug 08 15:35:05 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:35:05.021701+00:00 app[web.1]: Processing by TeamsController#show as */*
-2014-08-08T15:35:05.179221+00:00 app[web.1]:   Rendered matches/_match.html.erb (20.3ms)
-2014-08-08T15:35:05.190269+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.6ms)
-2014-08-08T15:35:05.199537+00:00 app[web.1]: Completed 200 OK in 177.7ms (Views: 39.6ms | ActiveRecord: 47.6ms)
-2014-08-08T15:35:05.021732+00:00 app[web.1]:   Parameters: {"id"=>"4810"}
-2014-08-08T15:35:05.199879+00:00 app[web.1]: Aug 08 15:35:05 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 298 | Player: 191 | Season: 46 | Permission: 41 | Team: 9 | Match: 8 | TeamSeason: 3
-2014-08-08T15:35:05.197666+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:35:05.199914+00:00 app[web.1]: Aug 08 15:35:05 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:35:14.097980+00:00 heroku[router]: at=info method=GET path="/players/205" host=amateurdota2league.com request_id=05fa334a-fe9e-4db1-bc9f-cf03c79df2d5 fwd="66.249.64.167" dyno=web.1 connect=0ms service=99ms status=200 bytes=509
-2014-08-08T15:35:14.001296+00:00 app[web.1]:   Parameters: {"id"=>"205"}
-2014-08-08T15:35:14.089664+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.9ms)
-2014-08-08T15:35:13.998359+00:00 app[web.1]: Started GET "/players/205" for 66.249.64.167 at 2014-08-08 15:35:13 +0000
-2014-08-08T15:35:14.087828+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:35:14.077038+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (53.7ms)
-2014-08-08T15:35:14.001094+00:00 app[web.1]: Processing by PlayersController#show as */*
-2014-08-08T15:35:14.021905+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
-2014-08-08T15:35:14.082318+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (60.7ms)
-2014-08-08T15:35:14.088616+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:35:14.090397+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.4ms)
-2014-08-08T15:35:14.090336+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:35:14.090799+00:00 app[web.1]: Completed 200 OK in 89.4ms (Views: 29.5ms | ActiveRecord: 51.0ms)
-2014-08-08T15:35:14.091088+00:00 app[web.1]: Aug 08 15:35:14 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:35:14.090921+00:00 app[web.1]: Aug 08 15:35:14 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
-2014-08-08T15:35:14.091148+00:00 app[web.1]: Aug 08 15:35:14 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 61 | Season: 43 | Player: 7 | PlayerComment: 6 | Team: 5
-2014-08-08T15:35:14.090613+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:35:14.091188+00:00 app[web.1]: Aug 08 15:35:14 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:35:46.336467+00:00 heroku[router]: at=info method=GET path="/teams/3776" host=amateurdota2league.com request_id=7b824bf1-3cd5-443c-bc05-6ddc47b370b1 fwd="66.249.64.167" dyno=web.1 connect=2ms service=202ms status=200 bytes=508
-2014-08-08T15:35:46.312961+00:00 app[web.1]:   Rendered matches/_match.html.erb (3.9ms)
-2014-08-08T15:35:46.136915+00:00 app[web.1]: Processing by TeamsController#show as */*
-2014-08-08T15:35:46.136939+00:00 app[web.1]:   Parameters: {"id"=>"3776"}
-2014-08-08T15:35:46.270844+00:00 app[web.1]:   Rendered teams/_roster.html.erb (1.7ms)
-2014-08-08T15:35:46.322186+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.293315+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.296609+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.299885+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.289964+00:00 app[web.1]:   Rendered matches/_match.html.erb (17.1ms)
-2014-08-08T15:35:46.134533+00:00 app[web.1]: Started GET "/teams/3776" for 66.249.64.167 at 2014-08-08 15:35:46 +0000
-2014-08-08T15:35:46.291648+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.298240+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.327671+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:35:46.294951+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.320477+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.329215+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:35:46.326886+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:35:46.329986+00:00 app[web.1]: Aug 08 15:35:46 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 319 | Player: 199 | Season: 46 | Permission: 41 | Team: 16 | Match: 14 | TeamSeason: 3
-2014-08-08T15:35:46.270976+00:00 app[web.1]:   Rendered welcome/_learn_more.html.erb (0.0ms)
-2014-08-08T15:35:46.329680+00:00 app[web.1]: Completed 200 OK in 192.6ms (Views: 49.6ms | ActiveRecord: 63.6ms)
-2014-08-08T15:35:46.328633+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
-2014-08-08T15:35:46.322330+00:00 app[web.1]:   Rendered teams/show.html.erb within layouts/application (59.8ms)
-2014-08-08T15:35:46.322242+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (20.0ms)
-2014-08-08T15:35:46.329895+00:00 app[web.1]: Aug 08 15:35:46 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:35:46.318834+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.6ms)
-2014-08-08T15:35:46.301544+00:00 app[web.1]:   Rendered matches/_match.html.erb (1.5ms)
-2014-08-08T15:35:46.329761+00:00 app[web.1]: Aug 08 15:35:46 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
-2014-08-08T15:35:46.301612+00:00 app[web.1]:   Rendered matches/_match_table.html.erb (29.0ms)
-2014-08-08T15:35:46.330029+00:00 app[web.1]: Aug 08 15:35:46 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:35:46.308866+00:00 app[web.1]:   Rendered matches/_match.html.erb (6.4ms)
-2014-08-08T15:35:46.329500+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:35:46.317063+00:00 app[web.1]:   Rendered matches/_match.html.erb (3.9ms)
-2014-08-08T15:35:46.329321+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.3ms)
-2014-08-08T15:35:47.096100+00:00 heroku[router]: at=info method=GET path="/players/6475" host=amateurdota2league.com request_id=064bf37c-7b16-4ffd-b1f3-9e8c49438578 fwd="66.249.64.167" dyno=web.1 connect=1ms service=38ms status=200 bytes=510
-2014-08-08T15:35:47.074936+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
-2014-08-08T15:35:47.060788+00:00 app[web.1]:   Parameters: {"id"=>"6475"}
-2014-08-08T15:35:47.080731+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (6.1ms)
-2014-08-08T15:35:47.060678+00:00 app[web.1]: Processing by PlayersController#show as */*
-2014-08-08T15:35:47.087387+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:35:47.085948+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.4ms)
-2014-08-08T15:35:47.087457+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.1ms)
-2014-08-08T15:35:47.088167+00:00 app[web.1]: Aug 08 15:35:47 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:35:47.086797+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:35:47.085236+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:35:47.057842+00:00 app[web.1]: Started GET "/players/6475" for 66.249.64.167 at 2014-08-08 15:35:47 +0000
-2014-08-08T15:35:47.078236+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (1.9ms)
-2014-08-08T15:35:47.088065+00:00 app[web.1]: Aug 08 15:35:47 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:35:47.087624+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:35:47.087798+00:00 app[web.1]: Completed 200 OK in 26.9ms (Views: 11.1ms | ActiveRecord: 8.9ms)
-2014-08-08T15:35:47.087911+00:00 app[web.1]: Aug 08 15:35:47 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
-2014-08-08T15:35:47.088128+00:00 app[web.1]: Aug 08 15:35:47 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 44 | Season: 43 | Player: 1
-2014-08-08T15:36:15.108890+00:00 app[web.1]: Started GET "/players" for 37.115.184.168 at 2014-08-08 15:36:15 +0000
-2014-08-08T15:36:15.111958+00:00 app[web.1]: Processing by PlayersController#index as HTML
-2014-08-08T15:36:18.860136+00:00 heroku[router]: sock=client at=error code=H18 desc="Request Interrupted" method=GET path="/players" host=amateurdota2league.com request_id=e61abb2f-c328-4e60-ba2c-bdecc92c5413 fwd="37.115.184.168" dyno=web.1 connect=1ms service=3758ms status=503 bytes=384
-2014-08-08T15:36:18.846764+00:00 app[web.1]:   Rendered players/index.html.erb within layouts/application (3344.2ms)
-2014-08-08T15:36:18.854780+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:36:18.852955+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
-2014-08-08T15:36:18.854510+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:36:18.863874+00:00 app[web.1]: Processing by PlayersController#index as HTML
-2014-08-08T15:36:18.854578+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.3ms)
-2014-08-08T15:36:18.853885+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
-2014-08-08T15:36:18.855532+00:00 app[web.1]: Aug 08 15:36:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:36:18.855298+00:00 app[web.1]: Aug 08 15:36:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:36:18.851783+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:36:18.855144+00:00 app[web.1]: Aug 08 15:36:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#index
-2014-08-08T15:36:18.855479+00:00 app[web.1]: Aug 08 15:36:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 1435 | Player: 1392 | Season: 43
-2014-08-08T15:36:18.855013+00:00 app[web.1]: Completed 200 OK in 3742.8ms (Views: 1804.5ms | ActiveRecord: 1562.8ms)
-2014-08-08T15:36:18.860500+00:00 app[web.1]: Started GET "/players" for 37.115.184.168 at 2014-08-08 15:36:18 +0000
-2014-08-08T15:36:23.041515+00:00 heroku[router]: sock=client at=error code=H18 desc="Request Interrupted" method=GET path="/players" host=amateurdota2league.com request_id=8a83e44e-fbc1-4e81-8b73-c919af3c73c9 fwd="37.115.184.168" dyno=web.1 connect=1ms service=7651ms status=503 bytes=388
-2014-08-08T15:36:23.035236+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.2ms)
-2014-08-08T15:36:23.026785+00:00 app[web.1]:   Rendered players/index.html.erb within layouts/application (4153.1ms)
-2014-08-08T15:36:23.032586+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:36:23.035170+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:36:23.035959+00:00 app[web.1]: Aug 08 15:36:23 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#index
-2014-08-08T15:36:23.035773+00:00 app[web.1]: Completed 200 OK in 4171.8ms (Views: 1696.4ms | ActiveRecord: 2469.4ms)
-2014-08-08T15:36:23.034596+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
-2014-08-08T15:36:23.036164+00:00 app[web.1]: Aug 08 15:36:23 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:36:23.033643+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:36:23.035464+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:36:23.036262+00:00 app[web.1]: Aug 08 15:36:23 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 1277 | Player: 1234 | Season: 43
-2014-08-08T15:36:23.036339+00:00 app[web.1]: Aug 08 15:36:23 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:36:23.044699+00:00 app[web.1]: Processing by PlayersController#index as HTML
-2014-08-08T15:36:23.041682+00:00 app[web.1]: Started GET "/players" for 37.115.184.168 at 2014-08-08 15:36:23 +0000
-2014-08-08T15:36:26.063968+00:00 heroku[router]: sock=client at=error code=H18 desc="Request Interrupted" method=GET path="/players" host=amateurdota2league.com request_id=4af6531a-e610-4419-baab-225de9ffbd2d fwd="37.115.184.168" dyno=web.1 connect=1ms service=9791ms status=503 bytes=384
-2014-08-08T15:36:26.051408+00:00 app[web.1]:   Rendered players/index.html.erb within layouts/application (2997.8ms)
-2014-08-08T15:36:26.057147+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.5ms)
-2014-08-08T15:36:26.058022+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.7ms)
-2014-08-08T15:36:26.056165+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
-2014-08-08T15:36:26.059200+00:00 app[web.1]: Aug 08 15:36:26 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#index
-2014-08-08T15:36:26.059467+00:00 app[web.1]: Aug 08 15:36:26 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:36:26.059350+00:00 app[web.1]: Aug 08 15:36:26 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:36:26.059060+00:00 app[web.1]: Completed 200 OK in 3014.3ms (Views: 1569.6ms | ActiveRecord: 1439.3ms)
-2014-08-08T15:36:26.064130+00:00 app[web.1]: Started GET "/players" for 37.115.184.168 at 2014-08-08 15:36:26 +0000
-2014-08-08T15:36:26.059423+00:00 app[web.1]: Aug 08 15:36:26 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 1277 | Player: 1234 | Season: 43
-2014-08-08T15:36:26.058650+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.1ms)
-2014-08-08T15:36:26.058581+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
-2014-08-08T15:36:26.058837+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
-2014-08-08T15:36:26.067195+00:00 app[web.1]: Processing by PlayersController#index as HTML
 2014-08-08T15:36:29.556265+00:00 heroku[router]: sock=client at=error code=H18 desc="Request Interrupted" method=GET path="/players" host=amateurdota2league.com request_id=db6f5244-730d-4195-a974-db1961d213c8 fwd="37.115.184.168" dyno=web.1 connect=1ms service=13015ms status=503 bytes=388
 2014-08-08T15:36:29.540557+00:00 app[web.1]:   Rendered players/index.html.erb within layouts/application (3466.1ms)
 2014-08-08T15:36:29.550775+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
@@ -1252,8 +746,7 @@
 2014-08-08T15:46:39.180709+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
 2014-08-08T15:46:39.180731+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
 2014-08-08T15:46:39.179258+00:00 app[web.1]: Aug 08 15:46:39 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
-2014-08-08T15:46:39.180711+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware
-/show_exceptions.rb:56:in `call'
+2014-08-08T15:46:39.180711+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
 2014-08-08T15:46:39.180728+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
 2014-08-08T15:46:39.180712+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
 2014-08-08T15:46:39.180730+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
@@ -1407,8 +900,7 @@
 2014-08-08T15:48:55.957249+00:00 app[web.1]: Started GET "/players/12250" for 83.201.251.69 at 2014-08-08 15:48:55 +0000
 2014-08-08T15:48:56.038112+00:00 app[web.1]: Aug 08 15:48:56 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
 2014-08-08T15:48:56.037871+00:00 app[web.1]: Aug 08 15:48:56 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
-2014-08-08T15:48:56.020647+00:00 app[web.1]:   Rendered players/_player_comments.html.erb
- (2.8ms)
+2014-08-08T15:48:56.020647+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (2.8ms)
 2014-08-08T15:48:56.031922+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
 2014-08-08T15:48:56.036517+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.8ms)
 2014-08-08T15:48:56.036641+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (4.5ms)
@@ -1501,3 +993,513 @@
 2014-08-08T15:52:14.747988+00:00 app[web.1]: Aug 08 15:52:14 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
 2014-08-08T15:52:14.748072+00:00 app[web.1]: Aug 08 15:52:14 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 86 | Season: 86
 2014-08-08T15:52:14.748124+00:00 app[web.1]: Aug 08 15:52:14 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:01.174894+00:00 heroku[router]: at=info method=GET path="/" host=amateurdota2league.com request_id=89f40ed4-54da-49ad-a444-c0816b72a63b fwd="72.206.120.222" dyno=web.1 connect=0ms service=64ms status=200 bytes=636
+2014-08-08T15:53:01.160950+00:00 app[web.1]:   Rendered welcome/index.html.erb within layouts/application (19.2ms)
+2014-08-08T15:53:01.169726+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:01.115126+00:00 app[web.1]: Started GET "/" for 72.206.120.222 at 2014-08-08 15:53:01 +0000
+2014-08-08T15:53:01.166345+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:53:01.167204+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
+2014-08-08T15:53:01.118442+00:00 app[web.1]: Processing by WelcomeController#index as HTML
+2014-08-08T15:53:01.169218+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:53:01.168925+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.5ms)
+2014-08-08T15:53:01.169806+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 53 | Season: 43 | Post: 5 | Player: 5
+2014-08-08T15:53:01.169848+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:01.169000+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.5ms)
+2014-08-08T15:53:01.160821+00:00 app[web.1]:   Rendered register/_sign_in.html.erb (0.1ms)
+2014-08-08T15:53:01.168189+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
+2014-08-08T15:53:01.169448+00:00 app[web.1]: Completed 200 OK in 50.9ms (Views: 19.5ms | ActiveRecord: 23.2ms)
+2014-08-08T15:53:01.169576+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: welcome#index
+2014-08-08T15:53:01.492521+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=1dfab8eb-fb8f-4dcd-85a3-2cae57697def fwd="72.206.120.222" dyno=web.1 connect=3ms service=15ms status=404 bytes=849
+2014-08-08T15:53:01.480918+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 72.206.120.222 at 2014-08-08 15:53:01 +0000
+2014-08-08T15:53:01.489606+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
+2014-08-08T15:53:01.489618+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2014-08-08T15:53:01.489620+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2014-08-08T15:53:01.489621+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2014-08-08T15:53:01.488466+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:01.489603+00:00 app[web.1]: 
+2014-08-08T15:53:01.488502+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
+2014-08-08T15:53:01.488544+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:01.489615+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
+2014-08-08T15:53:01.489633+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2014-08-08T15:53:01.489634+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2014-08-08T15:53:01.489617+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
+2014-08-08T15:53:01.489608+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2014-08-08T15:53:01.489613+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
+2014-08-08T15:53:01.489612+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
+2014-08-08T15:53:01.489642+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+2014-08-08T15:53:01.489628+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
+2014-08-08T15:53:01.489626+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
+2014-08-08T15:53:01.489625+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2014-08-08T15:53:01.489610+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2014-08-08T15:53:01.489623+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2014-08-08T15:53:01.489631+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2014-08-08T15:53:01.489635+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
+2014-08-08T15:53:01.489637+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
+2014-08-08T15:53:01.489641+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2014-08-08T15:53:01.489640+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
+2014-08-08T15:53:01.489630+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2014-08-08T15:53:01.489644+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+2014-08-08T15:53:01.489645+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+2014-08-08T15:53:01.489648+00:00 app[web.1]: 
+2014-08-08T15:53:01.489638+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2014-08-08T15:53:01.489647+00:00 app[web.1]: 
+2014-08-08T15:53:01.988759+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=d5a8973d-8b68-4aaf-b8f1-b68a559325d8 fwd="72.206.120.222" dyno=web.1 connect=0ms service=10ms status=404 bytes=849
+2014-08-08T15:53:01.981035+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 72.206.120.222 at 2014-08-08 15:53:01 +0000
+2014-08-08T15:53:01.984817+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2014-08-08T15:53:01.984818+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
+2014-08-08T15:53:01.984826+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2014-08-08T15:53:01.984824+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
+2014-08-08T15:53:01.984831+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2014-08-08T15:53:01.984846+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2014-08-08T15:53:01.984839+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2014-08-08T15:53:01.984852+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+2014-08-08T15:53:01.984836+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
+2014-08-08T15:53:01.984844+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
+2014-08-08T15:53:01.984854+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+2014-08-08T15:53:01.984856+00:00 app[web.1]: 
+2014-08-08T15:53:01.984813+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
+2014-08-08T15:53:01.984823+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
+2014-08-08T15:53:01.984841+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2014-08-08T15:53:01.984855+00:00 app[web.1]: 
+2014-08-08T15:53:01.983784+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:01.984833+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2014-08-08T15:53:01.984848+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
+2014-08-08T15:53:01.983835+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
+2014-08-08T15:53:01.984828+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2014-08-08T15:53:01.984842+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2014-08-08T15:53:01.983876+00:00 app[web.1]: Aug 08 15:53:01 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:01.984834+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
+2014-08-08T15:53:01.984849+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2014-08-08T15:53:01.984810+00:00 app[web.1]: 
+2014-08-08T15:53:01.984821+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
+2014-08-08T15:53:01.984829+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2014-08-08T15:53:01.984838+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2014-08-08T15:53:01.984851+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+2014-08-08T15:53:01.984815+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2014-08-08T15:53:01.984845+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
+2014-08-08T15:53:04.048335+00:00 heroku[router]: at=info method=GET path="/seasons/6" host=amateurdota2league.com request_id=54c0a2b5-66ff-40d8-9fc7-52d8fd793b9e fwd="72.206.120.222" dyno=web.1 connect=0ms se
+rvice=49ms status=200 bytes=890
+2014-08-08T15:53:04.002028+00:00 app[web.1]: Started GET "/seasons/6" for 72.206.120.222 at 2014-08-08 15:53:04 +0000
+2014-08-08T15:53:04.029507+00:00 app[web.1]:   Rendered seasons/show.html.erb within layouts/application (2.1ms)
+2014-08-08T15:53:04.029373+00:00 app[web.1]: Read fragment views/seasonPage-6 0.0ms
+2014-08-08T15:53:04.037799+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
+2014-08-08T15:53:04.039156+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.9ms)
+2014-08-08T15:53:04.040364+00:00 app[web.1]: Aug 08 15:53:04 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 86 | Season: 86
+2014-08-08T15:53:04.040434+00:00 app[web.1]: Aug 08 15:53:04 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:04.035920+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:53:04.039847+00:00 app[web.1]: Completed 200 OK in 33.4ms (Views: 13.1ms | ActiveRecord: 6.7ms)
+2014-08-08T15:53:04.040247+00:00 app[web.1]: Aug 08 15:53:04 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:04.006240+00:00 app[web.1]: Processing by SeasonsController#show as HTML
+2014-08-08T15:53:04.006319+00:00 app[web.1]:   Parameters: {"id"=>"6"}
+2014-08-08T15:53:04.036784+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
+2014-08-08T15:53:04.038878+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.8ms)
+2014-08-08T15:53:04.040041+00:00 app[web.1]: Aug 08 15:53:04 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: seasons#show
+2014-08-08T15:53:04.026485+00:00 app[web.1]: Exist fragment? views/seasonPage-6 2.8ms
+2014-08-08T15:53:04.039471+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.1ms)
+2014-08-08T15:53:08.473694+00:00 heroku[router]: at=info method=GET path="/" host=amateurdota2league.com request_id=9f900dc7-bffe-418d-8e93-32d3551ed5c8 fwd="208.71.160.23" dyno=web.1 connect=1ms service=60ms status=200 bytes=652
+2014-08-08T15:53:08.421870+00:00 app[web.1]: Started GET "/" for 208.71.160.23 at 2014-08-08 15:53:08 +0000
+2014-08-08T15:53:08.458472+00:00 app[web.1]:   Rendered welcome/index.html.erb within layouts/application (16.4ms)
+2014-08-08T15:53:08.458338+00:00 app[web.1]:   Rendered register/_sign_in.html.erb (0.1ms)
+2014-08-08T15:53:08.469588+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (1.3ms)
+2014-08-08T15:53:08.466666+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:53:08.471359+00:00 app[web.1]: Completed 200 OK in 45.0ms (Views: 25.3ms | ActiveRecord: 11.4ms)
+2014-08-08T15:53:08.471831+00:00 app[web.1]: Aug 08 15:53:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 53 | Season: 43 | Post: 5 | Player: 5
+2014-08-08T15:53:08.471533+00:00 app[web.1]: Aug 08 15:53:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: welcome#index
+2014-08-08T15:53:08.471072+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:53:08.426246+00:00 app[web.1]: Processing by WelcomeController#index as HTML
+2014-08-08T15:53:08.468022+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.9ms)
+2014-08-08T15:53:08.470657+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.8ms)
+2014-08-08T15:53:08.470766+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (3.8ms)
+2014-08-08T15:53:08.471898+00:00 app[web.1]: Aug 08 15:53:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:08.471718+00:00 app[web.1]: Aug 08 15:53:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:08.928846+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=8854f698-746e-4b01-8eb0-885bf97629d7 fwd="208.71.160.23" dyno=web.1 connect=2ms service=16ms status=404 bytes=848
+2014-08-08T15:53:08.922716+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 208.71.160.23 at 2014-08-08 15:53:08 +0000
+2014-08-08T15:53:08.925356+00:00 app[web.1]: Aug 08 15:53:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:08.925191+00:00 app[web.1]: Aug 08 15:53:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:08.926971+00:00 app[web.1]: 
+2014-08-08T15:53:08.925263+00:00 app[web.1]: Aug 08 15:53:08 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
+2014-08-08T15:53:08.926980+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2014-08-08T15:53:08.926981+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
+2014-08-08T15:53:08.926984+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
+2014-08-08T15:53:08.926986+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
+2014-08-08T15:53:08.926987+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
+2014-08-08T15:53:08.926977+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2014-08-08T15:53:08.926975+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
+2014-08-08T15:53:08.927012+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
+2014-08-08T15:53:08.927014+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2014-08-08T15:53:08.926997+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2014-08-08T15:53:08.927022+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+2014-08-08T15:53:08.926989+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2014-08-08T15:53:08.927043+00:00 app[web.1]: 
+2014-08-08T15:53:08.926993+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2014-08-08T15:53:08.927020+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2014-08-08T15:53:08.927040+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+2014-08-08T15:53:08.927003+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2014-08-08T15:53:08.926991+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2014-08-08T15:53:08.927001+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
+2014-08-08T15:53:08.927007+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2014-08-08T15:53:08.927009+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2014-08-08T15:53:08.926995+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2014-08-08T15:53:08.926999+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
+2014-08-08T15:53:08.927005+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2014-08-08T15:53:08.927024+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+2014-08-08T15:53:08.927045+00:00 app[web.1]: 
+2014-08-08T15:53:08.927010+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
+2014-08-08T15:53:08.927016+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
+2014-08-08T15:53:09.332957+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=c3d5a5e5-3058-4e51-9e0b-fb8ce453313c fwd="208.71.160.23" dyno=web.1 connect=0ms service=10ms status=404 bytes=848
+2014-08-08T15:53:09.329057+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 208.71.160.23 at 2014-08-08 15:53:09 +0000
+2014-08-08T15:53:09.331144+00:00 app[web.1]: Aug 08 15:53:09 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:09.331240+00:00 app[web.1]: Aug 08 15:53:09 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
+2014-08-08T15:53:09.331282+00:00 app[web.1]: Aug 08 15:53:09 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:09.332530+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2014-08-08T15:53:09.332539+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
+2014-08-08T15:53:09.332528+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
+2014-08-08T15:53:09.332541+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
+2014-08-08T15:53:09.332537+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
+2014-08-08T15:53:09.332544+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2014-08-08T15:53:09.332535+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
+2014-08-08T15:53:09.332550+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2014-08-08T15:53:09.332552+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2014-08-08T15:53:09.332524+00:00 app[web.1]: 
+2014-08-08T15:53:09.332560+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2014-08-08T15:53:09.332562+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2014-08-08T15:53:09.332571+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
+2014-08-08T15:53:09.332566+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2014-08-08T15:53:09.332533+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2014-08-08T15:53:09.332545+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2014-08-08T15:53:09.332556+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
+2014-08-08T15:53:09.332564+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2014-08-08T15:53:09.332558+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
+2014-08-08T15:53:09.332579+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+2014-08-08T15:53:09.332548+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2014-08-08T15:53:09.332568+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
+2014-08-08T15:53:09.332573+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2014-08-08T15:53:09.332581+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+2014-08-08T15:53:09.332587+00:00 app[web.1]: 
+2014-08-08T15:53:09.332583+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+2014-08-08T15:53:09.332577+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2014-08-08T15:53:09.332585+00:00 app[web.1]: 
+2014-08-08T15:53:09.332575+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
+2014-08-08T15:53:09.798873+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=53bc0e51-96d8-4b66-a9b8-0f7a4c106ac8 fwd="208.71.160.23" dyno=web.1 connect=1ms service=11ms status=404 bytes=848
+2014-08-08T15:53:09.793501+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 208.71.160.23 at 2014-08-08 15:53:09 +0000
+2014-08-08T15:53:09.796268+00:00 app[web.1]: Aug 08 15:53:09 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:09.796386+00:00 app[web.1]: Aug 08 15:53:09 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
+2014-08-08T15:53:09.796440+00:00 app[web.1]: Aug 08 15:53:09 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:09.797884+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2014-08-08T15:53:09.797886+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2014-08-08T15:53:09.797881+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
+2014-08-08T15:53:09.797888+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
+2014-08-08T15:53:09.797890+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
+2014-08-08T15:53:09.797894+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
+2014-08-08T15:53:09.797903+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2014-08-08T15:53:09.797876+00:00 app[web.1]: 
+2014-08-08T15:53:09.797892+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
+2014-08-08T15:53:09.797896+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2014-08-08T15:53:09.797898+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2014-08-08T15:53:09.797905+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2014-08-08T15:53:09.797913+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2014-08-08T15:53:09.797901+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2014-08-08T15:53:09.797907+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
+2014-08-08T15:53:09.797911+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2014-08-08T15:53:09.797940+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2014-08-08T15:53:09.797915+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2014-08-08T15:53:09.797920+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
+2014-08-08T15:53:09.797922+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
+2014-08-08T15:53:09.797945+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+2014-08-08T15:53:09.797917+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2014-08-08T15:53:09.797909+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cac
+he/context.rb:136:in `forward'
+2014-08-08T15:53:09.797952+00:00 app[web.1]: 
+2014-08-08T15:53:09.797924+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2014-08-08T15:53:09.797926+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
+2014-08-08T15:53:09.797942+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+2014-08-08T15:53:09.797948+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+2014-08-08T15:53:09.797950+00:00 app[web.1]: 
+2014-08-08T15:53:11.313906+00:00 heroku[router]: at=info method=GET path="/seasons/8" host=amateurdota2league.com request_id=165f94b6-bbfb-4c68-a10b-7779212f6513 fwd="72.206.120.222" dyno=web.1 connect=0ms service=61ms status=200 bytes=899
+2014-08-08T15:53:11.427301+00:00 heroku[router]: at=info method=GET path="/seasons/9" host=amateurdota2league.com request_id=76772d66-7c1d-407a-b11e-2372c28ed86f fwd="213.181.130.131" dyno=web.1 connect=1ms service=56ms status=304 bytes=956
+2014-08-08T15:53:11.414912+00:00 app[web.1]:   Rendered seasons/show.html.erb within layouts/application (2.4ms)
+2014-08-08T15:53:11.411270+00:00 app[web.1]: Exist fragment? views/seasonPage-9 8.6ms
+2014-08-08T15:53:11.300120+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:53:11.382722+00:00 app[web.1]: Processing by SeasonsController#show as HTML
+2014-08-08T15:53:11.382780+00:00 app[web.1]:   Parameters: {"id"=>"9"}
+2014-08-08T15:53:11.423090+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
+2014-08-08T15:53:11.259491+00:00 app[web.1]: Started GET "/seasons/8" for 72.206.120.222 at 2014-08-08 15:53:11 +0000
+2014-08-08T15:53:11.304588+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (4.2ms)
+2014-08-08T15:53:11.289830+00:00 app[web.1]: Read fragment views/seasonPage-8 0.1ms
+2014-08-08T15:53:11.303210+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (1.6ms)
+2014-08-08T15:53:11.414526+00:00 app[web.1]: Read fragment views/seasonPage-9 0.1ms
+2014-08-08T15:53:11.301390+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.9ms)
+2014-08-08T15:53:11.305357+00:00 app[web.1]: Completed 200 OK in 42.6ms (Views: 19.6ms | ActiveRecord: 6.8ms)
+2014-08-08T15:53:11.421074+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:53:11.304480+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.9ms)
+2014-08-08T15:53:11.305723+00:00 app[web.1]: Aug 08 15:53:11 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:11.305007+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:53:11.262526+00:00 app[web.1]: Processing by SeasonsController#show as HTML
+2014-08-08T15:53:11.305827+00:00 app[web.1]: Aug 08 15:53:11 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 86 | Season: 86
+2014-08-08T15:53:11.262575+00:00 app[web.1]:   Parameters: {"id"=>"8"}
+2014-08-08T15:53:11.285468+00:00 app[web.1]: Exist fragment? views/seasonPage-8 4.6ms
+2014-08-08T15:53:11.305536+00:00 app[web.1]: Aug 08 15:53:11 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: seasons#show
+2014-08-08T15:53:11.290086+00:00 app[web.1]:   Rendered seasons/show.html.erb within layouts/application (3.0ms)
+2014-08-08T15:53:11.305894+00:00 app[web.1]: Aug 08 15:53:11 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:11.423680+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
+2014-08-08T15:53:11.379589+00:00 app[web.1]: Started GET "/seasons/9" for 213.181.130.131 at 2014-08-08 15:53:11 +0000
+2014-08-08T15:53:11.422059+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
+2014-08-08T15:53:11.424631+00:00 app[web.1]: Aug 08 15:53:11 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:11.424637+00:00 app[web.1]: Aug 08 15:53:11 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:11.423751+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.4ms)
+2014-08-08T15:53:11.423927+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:53:11.424188+00:00 app[web.1]: Completed 200 OK in 41.3ms (Views: 12.7ms | ActiveRecord: 4.4ms)
+2014-08-08T15:53:11.424634+00:00 app[web.1]: Aug 08 15:53:11 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 86 | Season: 86
+2014-08-08T15:53:11.424337+00:00 app[web.1]: Aug 08 15:53:11 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: seasons#show
+2014-08-08T15:53:13.345229+00:00 app[web.1]: Started GET "/seasons/9" for 72.206.120.222 at 2014-08-08 15:53:13 +0000
+2014-08-08T15:53:13.377123+00:00 app[web.1]: Read fragment views/seasonPage-9 0.0ms
+2014-08-08T15:53:13.382324+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:53:13.348392+00:00 app[web.1]: Processing by SeasonsController#show as HTML
+2014-08-08T15:53:13.348460+00:00 app[web.1]:   Parameters: {"id"=>"9"}
+2014-08-08T15:53:13.374510+00:00 app[web.1]: Exist fragment? views/seasonPage-9 9.7ms
+2014-08-08T15:53:13.377402+00:00 app[web.1]:   Rendered seasons/show.html.erb within layouts/application (2.0ms)
+2014-08-08T15:53:13.652573+00:00 heroku[router]: at=info method=GET path="/seasons/9" host=amateurdota2league.com request_id=fd3a393a-2b6b-428a-bb95-7e8f7b147142 fwd="72.206.120.222" dyno=web.1 connect=1ms service=310ms status=200 bytes=899
+2014-08-08T15:53:13.621851+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (3.9ms)
+2014-08-08T15:53:13.629076+00:00 app[web.1]: Completed 200 OK in 280.5ms (Views: 254.4ms | ActiveRecord: 5.9ms)
+2014-08-08T15:53:13.629405+00:00 app[web.1]: Aug 08 15:53:13 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:13.628584+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (11.3ms)
+2014-08-08T15:53:13.629234+00:00 app[web.1]: Aug 08 15:53:13 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: seasons#show
+2014-08-08T15:53:13.628576+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.7ms)
+2014-08-08T15:53:13.628789+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:53:13.629482+00:00 app[web.1]: Aug 08 15:53:13 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 86 | Season: 86
+2014-08-08T15:53:13.629546+00:00 app[web.1]: Aug 08 15:53:13 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:13.627595+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (2.8ms)
+2014-08-08T15:53:17.316207+00:00 heroku[router]: at=info method=GET path="/" host=amateurdota2league.com request_id=cb76bae7-7494-47dd-a6d2-8309f430380e fwd="72.206.120.222" dyno=web.1 connect=1ms service=57ms status=304 bytes=941
+2014-08-08T15:53:17.261745+00:00 app[web.1]: Started GET "/" for 72.206.120.222 at 2014-08-08 15:53:17 +0000
+2014-08-08T15:53:17.302366+00:00 app[web.1]:   Rendered register/_sign_in.html.erb (0.2ms)
+2014-08-08T15:53:17.302444+00:00 app[web.1]:   Rendered welcome/index.html.erb within layouts/application (20.5ms)
+2014-08-08T15:53:17.308028+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.2ms)
+2014-08-08T15:53:17.310326+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (1.0ms)
+2014-08-08T15:53:17.312091+00:00 app[web.1]: Aug 08 15:53:17 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 53 | Season: 43 | Post: 5 | Player: 5
+2014-08-08T15:53:17.309177+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.8ms)
+2014-08-08T15:53:17.264928+00:00 app[web.1]: Processing by WelcomeController#index as HTML
+2014-08-08T15:53:17.311105+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.9ms)
+2014-08-08T15:53:17.311028+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.5ms)
+2014-08-08T15:53:17.311516+00:00 app[web.1]: Completed 200 OK in 46.5ms (Views: 19.0ms | ActiveRecord: 15.7ms)
+2014-08-08T15:53:17.312134+00:00 app[web.1]: Aug 08 15:53:17 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:17.311316+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:53:17.512420+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 72.206.120.222 at 2014-08-08 15:53:17 +0000
+2014-08-08T15:53:17.311637+00:00 app[web.1]: Aug 08 15:53:17 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: welcome#index
+2014-08-08T15:53:17.311910+00:00 app[web.1]: Aug 08 15:53:17 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:17.518307+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=3da105af-8ec3-4879-84b6-db225b80afdd fwd="72.206.120.222" dyno=web.1 connect=1ms service=13ms status=404 bytes=849
+2014-08-08T15:53:17.514947+00:00 app[web.1]: Aug 08 15:53:17 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:17.515087+00:00 app[web.1]: Aug 08 15:53:17 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:17.516717+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
+2014-08-08T15:53:17.515030+00:00 app[web.1]: Aug 08 15:53:17 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
+2014-08-08T15:53:17.516713+00:00 app[web.1]: 
+2014-08-08T15:53:17.516718+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2014-08-08T15:53:17.516720+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2014-08-08T15:53:17.516727+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
+2014-08-08T15:53:17.516725+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
+2014-08-08T15:53:17.516729+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2014-08-08T15:53:17.516722+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
+2014-08-08T15:53:17.516724+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
+2014-08-08T15:53:17.516730+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2014-08-08T15:53:17.516732+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2014-08-08T15:53:17.516735+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2014-08-08T15:53:17.516738+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
+2014-08-08T15:53:17.516733+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2014-08-08T15:53:17.516741+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2014-08-08T15:53:17.516742+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2014-08-08T15:53:17.516739+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2014-08-08T15:53:17.516736+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
+2014-08-08T15:53:17.516743+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2014-08-08T15:53:17.516745+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
+2014-08-08T15:53:17.516747+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2014-08-08T15:53:17.516746+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
+2014-08-08T15:53:17.516752+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+2014-08-08T15:53:17.516753+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+2014-08-08T15:53:17.516756+00:00 app[web.1]: 
+2014-08-08T15:53:17.516755+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+2014-08-08T15:53:17.516758+00:00 app[web.1]: 
+2014-08-08T15:53:17.516749+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
+2014-08-08T15:53:17.516750+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2014-08-08T15:53:18.052039+00:00 heroku[router]: at=info method=GET path="/%7B%7Bpost.image%7D%7D" host=amateurdota2league.com request_id=b94d0f2d-22e9-4ddb-a4f0-9a8644a47a3a fwd="72.206.120.222" dyno=web.1 connect=1ms service=9ms status=404 bytes=849
+2014-08-08T15:53:18.049144+00:00 app[web.1]: Started GET "/%7B%7Bpost.image%7D%7D" for 72.206.120.222 at 2014-08-08 15:53:18 +0000
+2014-08-08T15:53:18.051334+00:00 app[web.1]: Aug 08 15:53:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 0
+2014-08-08T15:53:18.052350+00:00 app[web.1]: 
+2014-08-08T15:53:18.052356+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2014-08-08T15:53:18.052368+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2014-08-08T15:53:18.052363+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `call'
+2014-08-08T15:53:18.052364+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2014-08-08T15:53:18.051279+00:00 app[web.1]: Aug 08 15:53:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:53:18.052371+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2014-08-08T15:53:18.052378+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2014-08-08T15:53:18.052375+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
+2014-08-08T15:53:18.052366+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2014-08-08T15:53:18.052382+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2014-08-08T15:53:18.052354+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2014-08-08T15:53:18.052359+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:16:in `block in call'
+2014-08-08T15:53:18.052385+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/application.rb:231:in `call'
+2014-08-08T15:53:18.052390+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+2014-08-08T15:53:18.052389+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2014-08-08T15:53:18.052369+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2014-08-08T15:53:18.052383+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/engine.rb:484:in `call'
+2014-08-08T15:53:18.052372+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/actionpack-3.2.17/lib/action_dispatch/middleware/static.rb:63:in `call'
+2014-08-08T15:53:18.052387+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/log_tailer.rb:17:in `call'
+2014-08-08T15:53:18.052392+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+2014-08-08T15:53:18.052386+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gem
+s/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2014-08-08T15:53:18.051393+00:00 app[web.1]: Aug 08 15:53:18 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:53:18.052377+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2014-08-08T15:53:18.052353+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/%7B%7Bpost.image%7D%7D"):
+2014-08-08T15:53:18.052358+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/railties-3.2.17/lib/rails/rack/logger.rb:32:in `call_app'
+2014-08-08T15:53:18.052393+00:00 app[web.1]:   vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+2014-08-08T15:53:18.052394+00:00 app[web.1]: 
+2014-08-08T15:53:18.052380+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2014-08-08T15:53:18.052396+00:00 app[web.1]: 
+2014-08-08T15:53:18.052361+00:00 app[web.1]:   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.17/lib/active_support/tagged_logging.rb:22:in `tagged'
+2014-08-08T15:54:29.575813+00:00 app[web.1]: Started GET "/players/10368" for 66.249.64.102 at 2014-08-08 15:54:29 +0000
+2014-08-08T15:54:29.578696+00:00 app[web.1]: Processing by PlayersController#show as */*
+2014-08-08T15:54:29.578748+00:00 app[web.1]:   Parameters: {"id"=>"10368"}
+2014-08-08T15:54:29.996092+00:00 heroku[router]: at=info method=GET path="/players/10368" host=amateurdota2league.com request_id=89aec93a-814a-4a44-a925-2be1ccac29f2 fwd="66.249.64.102" dyno=web.1 connect=1ms service=428ms status=200 bytes=461
+2014-08-08T15:54:29.978830+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
+2014-08-08T15:54:29.992163+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
+2014-08-08T15:54:29.985111+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (6.6ms)
+2014-08-08T15:54:29.994134+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.5ms)
+2014-08-08T15:54:29.994460+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:54:29.994216+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.8ms)
+2014-08-08T15:54:29.982219+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (1.8ms)
+2014-08-08T15:54:29.991269+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:54:29.993403+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (1.0ms)
+2014-08-08T15:54:29.994954+00:00 app[web.1]: Aug 08 15:54:29 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:54:29.994685+00:00 app[web.1]: Completed 200 OK in 415.8ms (Views: 14.4ms | ActiveRecord: 20.6ms)
+2014-08-08T15:54:29.994804+00:00 app[web.1]: Aug 08 15:54:29 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
+2014-08-08T15:54:29.995065+00:00 app[web.1]: Aug 08 15:54:29 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:54:29.995025+00:00 app[web.1]: Aug 08 15:54:29 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 202 | Player: 159 | Season: 43
+2014-08-08T15:54:54.117677+00:00 heroku[router]: at=info method=GET path="/" host=amateurdota2league.com request_id=bc3ab393-22ab-4cde-b404-5f6787dc0e4f fwd="91.232.100.27" dyno=web.1 connect=1ms service=78ms status=200 bytes=627
+2014-08-08T15:54:54.034473+00:00 app[web.1]: Started GET "/" for 91.232.100.27 at 2014-08-08 15:54:54 +0000
+2014-08-08T15:54:54.077641+00:00 app[web.1]:   Rendered welcome/index.html.erb within layouts/application (16.2ms)
+2014-08-08T15:54:54.084177+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:54:54.077516+00:00 app[web.1]:   Rendered register/_sign_in.html.erb (0.1ms)
+2014-08-08T15:54:54.086594+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (1.1ms)
+2014-08-08T15:54:54.085276+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.7ms)
+2014-08-08T15:54:54.087533+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (3.2ms)
+2014-08-08T15:54:54.087426+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.6ms)
+2014-08-08T15:54:54.087809+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:54:54.088358+00:00 app[web.1]: Aug 08 15:54:54 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:54:54.088521+00:00 app[web.1]: Aug 08 15:54:54 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:54:54.088470+00:00 app[web.1]: Aug 08 15:54:54 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 53 | Season: 43 | Post: 5 | Player: 5
+2014-08-08T15:54:54.088224+00:00 app[web.1]: Aug 08 15:54:54 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: welcome#index
+2014-08-08T15:54:54.037467+00:00 app[web.1]: Processing by WelcomeController#index as HTML
+2014-08-08T15:54:54.088085+00:00 app[web.1]: Completed 200 OK in 50.5ms (Views: 20.6ms | ActiveRecord: 20.5ms)
+2014-08-08T15:54:54.823166+00:00 heroku[router]: at=info method=GET path="/{{post.image}}" host=amateurdota2league.com request_id=440068ff-9756-4255-9959-fc0fa211c94c fwd="91.232.100.27" dyno=web.1 connect=1ms service=4ms status=400 bytes=831
+2014-08-08T15:54:55.026934+00:00 heroku[router]: at=info method=GET path="/assets/application-c4508beb02274b1fd8300140d5959fcf.css" host=amateurdota2league.com request_id=95062b0d-194c-4c37-8242-3d32ffe47721 fwd="91.232.100.27,205.251.208.11" dyno=web.1 connect=0ms service=24ms status=200 bytes=572
+2014-08-08T15:54:54.825806+00:00 app[web.1]: [2014-08-08 15:54:54] ERROR bad URI `/{{post.image}}'.
+2014-08-08T15:54:57.373740+00:00 heroku[router]: at=info method=GET path="/assets/application-d46a5a77c08f44e9d266212198747a04.js" host=amateurdota2league.com request_id=85cdb6b8-9d69-4f9d-bd05-054851a2fbea fwd="91.232.100.27,205.251.208.11" dyno=web.1 connect=2ms service=27ms status=200 bytes=621
+2014-08-08T15:55:16.097336+00:00 heroku[router]: at=info method=GET path="/assets/patreon2-476fe35155df0edc112d93508f1fbd17.png" host=amateurdota2league.com request_id=5f396b7f-8f3b-4b85-adc2-b2853ec836cd fwd="91.232.100.27,205.251.208.11" dyno=web.1 connect=0ms service=24ms status=200 bytes=619
+2014-08-08T15:55:16.319691+00:00 heroku[router]: at=info method=GET path="/assets/S4Legend_600x400-8318a0b66e42e502ae026df9587a9eb0.png" host=amateurdota2league.com request_id=0eccbfee-2d03-4602-ab92-2b6c442c5f7c fwd="172.16.18.147, 109.110.113.190,205.251.208.11" dyno=web.1 connect=1ms service=39ms status=200 bytes=644
+2014-08-08T15:55:16.321892+00:00 heroku[router]: at=info method=GET path="/assets/heroicleague-e8917e3a7a63dad51db078946783719a.jpg" host=amateurdota2league.com request_id=f5a26c6c-5ac3-4729-bdef-94a4bdd823c6 fwd="172.16.18.147, 109.110.113.190,205.251.208.11" dyno=web.1 connect=1ms service=35ms status=200 bytes=640
+2014-08-08T15:55:16.338361+00:00 heroku[router]: at=info method=GET path="/assets/Championsleague-b35903f4b164a87b9743d0aac4f03086.jpg" host=amateurdota2league.com request_id=d26aa367-8bce-41db-a5bc-becbb4c355d6 fwd="172.16.18.147, 109.110.113.190,205.251.208.11" dyno=web.1 connect=1ms service=48ms status=200 bytes=643
+2014-08-08T15:55:16.337334+00:00 heroku[router]: at=info method=GET path="/assets/Entryleague-f4574fd743c95129b583f7f3ad9a00f2.jpg" host=amateurdota2league.com request_id=2d50d03f-1aad-4f0f-a932-535dac07872e fwd="172.16.18.147, 109.110.113.190,205.251.208.11" dyno=web.1 connect=4ms service=46ms status=200 bytes=639
+2014-08-08T15:55:16.366056+00:00 heroku[router]: at=info method=GET path="/assets/legendaryleague-69fb6881f2036904730ac6769da9eaa0.jpg" host=amateurdota2league.com request_id=0fcd7ac6-57ca-4e93-9373-d09e5beb5936 fwd="172.16.18.147, 109.110.113.190,205.251.208.11" dyno=web.1 connect=1ms service=19ms status=200 bytes=643
+2014-08-08T15:55:21.642293+00:00 heroku[router]: at=info method=GET path="/{{post.image}}" host=amateurdota2league.com request_id=b10c6f6c-1fd8-4a3f-81d4-0645eb655ad0 fwd="172.16.18.147,109.110.113.190" dyno=web.1 connect=0ms service=10ms status=400 bytes=848
+2014-08-08T15:55:21.642782+00:00 app[web.1]: [2014-08-08 15:55:21] ERROR bad URI `/{{post.image}}'.
+2014-08-08T15:55:23.507595+00:00 heroku[router]: at=info method=GET path="/assets/bg01-ab7a01c6eb59708d62bc7cdef7d76b6f.png" host=amateurdota2league.com request_id=3f048009-389a-4054-8328-3b3b5f1ff2f3 fwd="172.16.18.147, 109.110.113.190,205.251.208.11" dyno=web.1 connect=7ms service=21ms status=200 bytes=632
+2014-08-08T15:56:04.169157+00:00 app[web.1]: Started GET "/players/10360" for 66.249.64.93 at 2014-08-08 15:56:04 +0000
+2014-08-08T15:56:04.172467+00:00 app[web.1]: Processing by PlayersController#show as */*
+2014-08-08T15:56:04.172509+00:00 app[web.1]:   Parameters: {"id"=>"10360"}
+2014-08-08T15:56:04.581250+00:00 heroku[router]: at=info method=GET path="/players/10360" host=calm-sea-4265.herokuapp.com request_id=2623b755-4ba3-4284-9682-6404ed91617b fwd="66.249.64.93" dyno=web.1 connect=3ms service=420ms status=200 bytes=589
+2014-08-08T15:56:04.566037+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (1.9ms)
+2014-08-08T15:56:04.575821+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:56:04.578123+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.9ms)
+2014-08-08T15:56:04.579661+00:00 app[web.1]: Aug 08 15:56:04 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:56:04.579409+00:00 app[web.1]: Completed 200 OK in 406.8ms (Views: 14.9ms | ActiveRecord: 24.0ms)
+2014-08-08T15:56:04.579524+00:00 app[web.1]: Aug 08 15:56:04 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
+2014-08-08T15:56:04.579813+00:00 app[web.1]: Aug 08 15:56:04 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:56:04.579759+00:00 app[web.1]: Aug 08 15:56:04 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 203 | Player: 159 | Season: 43 | Team: 1
+2014-08-08T15:56:04.577013+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
+2014-08-08T15:56:04.578955+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.7ms)
+2014-08-08T15:56:04.578849+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.5ms)
+2014-08-08T15:56:04.562633+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
+2014-08-08T15:56:04.579179+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:56:04.569496+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (7.1ms)
+2014-08-08T15:56:21.265204+00:00 heroku[router]: at=info method=GET path="/players/10432" host=amateurdota2league.com request_id=4108a4f3-6802-4547-964c-1d8e7617b9cd fwd="66.249.64.97" dyno=web.1 connect=0ms service=40ms status=200 bytes=460
+2014-08-08T15:56:21.233870+00:00 app[web.1]: Started GET "/players/10432" for 66.249.64.97 at 2014-08-08 15:56:21 +0000
+2014-08-08T15:56:21.255078+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (2.0ms)
+2014-08-08T15:56:21.262809+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:56:21.264684+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.8ms)
+2014-08-08T15:56:21.236531+00:00 app[web.1]: Processing by PlayersController#show as */*
+2014-08-08T15:56:21.265382+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.4ms)
+2014-08-08T15:56:21.266101+00:00 app[web.1]: Aug 08 15:56:21 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:56:21.266064+00:00 app[web.1]: Aug 08 15:56:21 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 44 | Season: 43 | Player: 1
+2014-08-08T15:56:21.251585+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
+2014-08-08T15:56:21.265315+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
+2014-08-08T15:56:21.236555+00:00 app[web.1]:   Parameters: {"id"=>"10432"}
+2014-08-08T15:56:21.265743+00:00 app[web.1]: Completed 200 OK in 29.1ms (Views: 12.1ms | ActiveRecord: 9.4ms)
+2014-08-08T15:56:21.263662+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
+2014-08-08T15:56:21.257654+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (6.3ms)
+2014-08-08T15:56:21.265566+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:56:21.265857+00:00 app[web.1]: Aug 08 15:56:21 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: players#show
+2014-08-08T15:56:21.265989+00:00 app[web.1]: Aug 08 15:56:21 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:56:41+00:00 heroku[slug-compiler]: Slug compilation started
+2014-08-08T15:57:33.934758+00:00 app[web.1]: Started GET "/teams/5098" for 66.249.64.12 at 2014-08-08 15:57:33 +0000
+2014-08-08T15:57:33.937479+00:00 app[web.1]: Processing by TeamsController#show as */*
+2014-08-08T15:57:33.937505+00:00 app[web.1]:   Parameters: {"id"=>"5098"}
+2014-08-08T15:57:34.806138+00:00 heroku[router]: at=info method=GET path="/teams/5098" host=amateurdota2league.com request_id=bc496b16-0ec2-4d59-ad93-f35461961162 fwd="66.249.64.12" dyno=web.1 connect=1ms service=876ms status=200 bytes=631
+2014-08-08T15:57:34.786582+00:00 app[web.1]:   Rendered teams/_roster.html.erb (3.4ms)
+2014-08-08T15:57:34.797804+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.5ms)
+2014-08-08T15:57:34.797876+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (2.7ms)
+2014-08-08T15:57:34.798144+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2014-08-08T15:57:34.798915+00:00 app[web.1]: Aug 08 15:57:34 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Action: teams#show
+2014-08-08T15:57:34.799408+00:00 app[web.1]: Aug 08 15:57:34 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Oink Log Entry Complete
+2014-08-08T15:57:34.796001+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.6ms)
+2014-08-08T15:57:34.799304+00:00 app[web.1]: Aug 08 15:57:34 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Instantiation Breakdown: Total: 293 | Player: 197 | Season: 43 | Permission: 41 | Team: 7 | Match: 5
+2014-08-08T15:57:34.786961+00:00 app[web.1]:   Rendered welcome/_learn_more.html.erb (0.1ms)
+2014-08-08T15:57:34.787989+00:00 app[web.1]:   Rendered teams/show.html.erb within layouts/application (13.1ms)
+2014-08-08T15:57:34.799128+00:00 app[web.1]: Aug 08 15:57:34 f64a0fad-2eaf-484e-be44-4f1eb5fbb34b rails[2]: Memory usage: 484188 | PID: 2
+2014-08-08T15:57:34.794978+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2014-08-08T15:57:34.797137+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.9ms)
+2014-08-08T15:57:34.798477+00:00 app[web.1]: Completed 200 OK in 860.8ms (Views: 19.9ms | ActiveRecord: 51.6ms)
+2014-08-08T15:57:56+00:00 heroku[slug-compiler]: Slug compilation finished
+2014-08-08T15:57:56.898147+00:00 heroku[web.1]: State changed from up to starting
+2014-08-08T15:58:01.092733+00:00 app[web.1]: [2014-08-08 15:58:01] ERROR SignalException: SIGTERM
+2014-08-08T15:58:01.092740+00:00 app[web.1]: 	/app/vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:98:in `select'
+2014-08-08T15:57:56.790845+00:00 heroku[api]: Deploy 55163bc by amateurdota2league@gmail.com
+2014-08-08T15:57:56.790947+00:00 heroku[api]: Release v227 created by amateurdota2league@gmail.com
+2014-08-08T15:58:00.348231+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-08-08T15:58:01.449225+00:00 heroku[web.1]: Starting process with command `bundle exec rails server -p 34440`
+2014-08-08T15:58:06.345374+00:00 app[web.1]: 	/app/vendor/ruby-1.9.3/lib/ruby/1.9.1/webrick/server.rb:98:in `select'
+2014-08-08T15:58:06.345342+00:00 app[web.1]: [2014-08-08 15:58:06] ERROR SignalException: SIGTERM
+2014-08-08T15:58:06.749675+00:00 app[web.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/config/environment.rb:5)
+2014-08-08T15:58:06.750178+00:00 app[web.1]: DEPRECATION WARNING: You have 
+Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/config/environment.rb:5)
+2014-08-08T15:58:08.643619+00:00 app[web.1]: => Call with -d to detach
+2014-08-08T15:58:08.643617+00:00 app[web.1]: => Rails 3.2.17 application starting in production on http://0.0.0.0:34440
+2014-08-08T15:58:08.643623+00:00 app[web.1]: Connecting to database specified by DATABASE_URL
+2014-08-08T15:58:08.643607+00:00 app[web.1]: => Booting WEBrick
+2014-08-08T15:58:08.643621+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-08-08T15:58:05.554371+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-08-08T15:58:11.117078+00:00 heroku[web.1]: State changed from starting to up
+2014-08-08T15:58:10.923564+00:00 app[web.1]: [2014-08-08 15:58:10] INFO  WEBrick 1.3.1
+2014-08-08T15:58:10.923579+00:00 app[web.1]: [2014-08-08 15:58:10] INFO  ruby 1.9.3 (2014-05-14) [x86_64-linux]
+2014-08-08T15:58:10.924119+00:00 app[web.1]: [2014-08-08 15:58:10] INFO  WEBrick::HTTPServer#start: pid=2 port=34440
+2014-08-08T15:58:12.439453+00:00 app[web.1]: Dalli/SASL authenticating as 8af9c4
+2014-08-08T15:58:12.441289+00:00 app[web.1]: Started GET "/matches/3684" for 71.209.13.131 at 2014-08-08 15:58:12 +0000
+2014-08-08T15:58:12.510025+00:00 app[web.1]: Processing by MatchesController#show as HTML
+2014-08-08T15:58:12.510038+00:00 app[web.1]:   Parameters: {"id"=>"3684"}
+2014-08-08T15:58:12.440384+00:00 app[web.1]: Dalli/SASL: 8af9c4
+2014-08-08T15:58:13.054441+00:00 app[web.1]:   Rendered teams/_roster.html.erb (3.3ms)
+2014-08-08T15:58:13.093162+00:00 app[web.1]:   Rendered matches/_match_comments.html.erb (35.3ms)
+2014-08-08T15:58:13.057241+00:00 app[web.1]:   Rendered teams/_roster.html.erb (2.3ms)
+2014-08-08T15:58:13.096696+00:00 app[web.1]:   Rendered matches/show.html.erb within layouts/application (177.8ms)
+2014-08-08T15:58:14.058633+00:00 heroku[router]: at=info method=GET path="/matches/3684" host=amateurdota2league.com request_id=fb0c0936-d787-4673-9785-0af0a19ce936 fwd="71.209.13.131" dyno=web.1 connect=3ms service=1674ms status=200 bytes=1266
+2014-08-08T15:58:14.009862+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (1.2ms)
+2014-08-08T15:58:14.019454+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (2.2ms)
+2014-08-08T15:58:14.014237+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (2.4ms)
+2014-08-08T15:58:14.019567+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (8.9ms)
+2014-08-08T15:58:14.021643+00:00 app[web.1]: Aug 08 15:58:14 89342ae6-6bae-4561-937b-2511034eb584 rails[2]: Oink Action: matches#show
+2014-08-08T15:58:14.053376+00:00 app[web.1]: Aug 08 15:58:14 89342ae6-6bae-4561-937b-2511034eb584 rails[2]: Instantiation Breakdown: Total: 224 | Player: 175 | Season: 43 | Team: 2 | Matchcomment: 2 | Permission: 1 | Match: 1
+2014-08-08T15:58:14.053442+00:00 app[web.1]: Aug 08 15:58:14 89342ae6-6bae-4561-937b-2511034eb584 rails[2]: Oink Log Entry Complete
+2014-08-08T15:58:14.021053+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.5ms)
+2014-08-08T15:58:14.016621+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (1.8ms)
+2014-08-08T15:58:14.021424+00:00 app[web.1]: Completed 200 OK in 1511.2ms (Views: 1092.9ms | ActiveRecord: 132.6ms)
+2014-08-08T15:58:14.053160+00:00 app[web.1]: Aug 08 15:58:14 89342ae6-6bae-4561-937b-2511034eb584 rails[2]: Memory usage: 187036 | PID: 2
+2014-08-08T15:58:11.035828+00:00 heroku[web.1]: Error R12 (Exit timeout) -> At least one process failed to exit within 10 seconds of SIGTERM
+2014-08-08T15:58:11.036173+00:00 heroku[web.1]: Stopping remaining processes with SIGKILL
+2014-08-08T15:58:13.315309+00:00 heroku[web.1]: Process exited with status 137

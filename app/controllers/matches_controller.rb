@@ -1,8 +1,22 @@
 class MatchesController < ApplicationController
 	def index
 	end
+
+  def new
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?(@current_user)
+    @season = 9
+    @week = 10
+
+
+
+  end
+
+  def create
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?(@current_user)
+
+  end
+
   def show
-    Rails.logger.debug("Im Jordan and I log.")
 
     @match = Match.find(params[:id])
     unless @match.home_team.nil?
@@ -48,6 +62,7 @@ class MatchesController < ApplicationController
     if params[:match][:date] && @current_user.role_for_object(@match) == :captain
       @match.reschedule_proposer = @current_user.id
       @match.reschedule_time = params[:match][:date]
+      UserMailer.reschedule_proposed(params[:match][:date], @match, @current_user).deliver
     end
 
     # Log changes for later

@@ -31,7 +31,20 @@ class UserMailer < ActionMailer::Base
     @match_id = match_id
     @comments = comments
     mail(to: ENV['TOP_PLAY_EMAIL'], cc: ENV['GMAIL_ACCOUNT'], subject: "AD2L top play!")
+  end
 
+  def reschedule_proposed(proposed_date, match, proposer)
+    @match = match;
+    @proposer = proposer;
+    if @match.home_team.captain == @current_user
+      @recipient = @match.away_team.captain
+    else
+      @recipient = @match.home_team.captain
+    end
+    if @recipient.email
+      mail(to: @recipient.email, subject: "Proposed schedule change")
+    end
+    
   end
 
 end

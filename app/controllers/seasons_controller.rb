@@ -28,7 +28,7 @@ class SeasonsController < ApplicationController
           @casters = Player.where(:caster => true)
           @permissions = Permission.includes(:player).all
 
-          @teams_by_division = @season.team_seasons.includes(:team).group_by {|ts| ts.division.to_s}
+          @teams_by_division = @season.team_seasons.includes(:team).where(:paid => true).group_by {|ts| ts.division.to_s}
 
           # compute the scores using the pieces we already have so we don't need to re-fetch them again
           if params[:id] == "1"

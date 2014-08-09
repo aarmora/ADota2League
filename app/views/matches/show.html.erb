@@ -17,7 +17,7 @@
 				<%= best_in_place_if Permissions.can_edit?(@match), @match,
 				  :date,
 				  :display_with => lambda { |date| format_datetime(date)},
-				  :activator => ".fa-calendar.#{@match.id}-date",
+				  :activator => ".fa-calendar.#{@match.id}-date, .js-time",
 		      :type => :datetime
 				%>
 				<% if Permissions.can_edit?(@match) %>
