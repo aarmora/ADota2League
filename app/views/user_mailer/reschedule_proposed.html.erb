@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <% unless @recipient.name.nil? %>
+      <h2>Hello <%= @recipient.name %>!</h2>
+    <% end %>
+    <p>
+      <%= @proposer.name %> has requested a schedule change for <%=link_to "your match", :controller => "matches", :action => "show", :id => @match.id, :host => "amateurdota2league.com"%>.  Go to that link to check the scheduled time and accept it or propose a different time.
+    </p>
+    <p>
+      Thanks!
+    </p>
+    <p>
+      AD2L
+    </p>
+  </body>
+</html>

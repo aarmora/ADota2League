@@ -342,6 +342,18 @@ namespace :dota do
     end
   end
 
+  task :playoff_mail => :environment do
+    @seasonz = Season.where(:id => [44, 45, 46])
+
+    @seasonz.each do |season|
+      season.teams.each do |team|
+        unless team.captain.nil?
+          UserMailer.playoff_email(team.captain).deliver
+        end
+      end
+    end
+  end
+
 
   task :scheduler => :environment do
     puts "What season id?"

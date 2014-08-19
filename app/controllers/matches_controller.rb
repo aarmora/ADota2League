@@ -4,15 +4,19 @@ class MatchesController < ApplicationController
 
   def new
     raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?(@current_user)
-    @season = 9
-    @week = 10
-
+    @teams = [["", ""]] + Team.order(:teamname).all.map { |team| [team.teamname, team.id]}
+    @seasons = [["", ""]] + Season.where(:active => true).map { |season| [season.id, season.id]}
 
 
   end
 
   def create
     raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?(@current_user)
+    @match = Match.new
+    @match.update_attributes(params[:match], :as => @current_user.role_for_object(@match))
+    @match.date = Date.today
+    @match.save!
+    redirect_to @match
 
   end
 

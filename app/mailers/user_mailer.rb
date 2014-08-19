@@ -47,4 +47,15 @@ class UserMailer < ActionMailer::Base
     
   end
 
+  def playoff_email(player)
+
+    @player = player
+
+    if @player.email
+      mail(to: @player.email, subject: "Playoffs!")
+    end
+
+  
+  end
+
 end

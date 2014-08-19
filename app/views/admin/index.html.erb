@@ -1,6 +1,6 @@
 <% if Permissions.user_is_site_admin? %>
 
-  <h2>Player Management</h2>
+  <h2>Team Management</h2>
   <%= link_to "Teams", admin_teams_path, :class => "button"%>
 
   <h2>Player Management</h2>
@@ -50,6 +50,7 @@
   <%= form_for Season.new do |f| %>
     <%= f.submit "Create new season", :class => "btn btn-primary" %>
   <% end %>
+  <%= link_to "New Match", matches_path, :class => "button"%>
 <% end %>
 
 <% Season.all.each do |s| %>
