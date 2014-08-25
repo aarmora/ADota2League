@@ -9,7 +9,9 @@
   <br>
   <%=!@match_captain_permissions_off%>
   <br>
-  <%=@current_user.name%>
+  <%unless @current_user.name.nil?%>
+  	<%=@current_user.name%>
+  <%end%>
 	<div class="row">
 		<div class="col-md-8">
 			<% if Permissions.can_edit?(@match) %>
