@@ -5,7 +5,11 @@
   <% elsif Permissions.can_edit?(@match) && @match.reschedule_proposer %>
     <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= @match.reschedule_time.strftime("%-m/%-d/%y %H:%M %Z") %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
   <% end %>
-
+  <%=Permissions.can_edit?(@match)%>
+  <br>
+  <%=!@match_captain_permissions_off%>
+  <br>
+  <%=@current_user.name%>
 	<div class="row">
 		<div class="col-md-8">
 			<% if Permissions.can_edit?(@match) %>
