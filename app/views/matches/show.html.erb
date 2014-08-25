@@ -9,7 +9,7 @@
   <br>
   <%=!@match_captain_permissions_off%>
   <br>
-  <%unless @current_user.name.nil?%>
+  <%if @current_user%>
   	<%=@current_user.name%>
   <%end%>
 	<div class="row">
