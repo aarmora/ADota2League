@@ -17,10 +17,12 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def season4_reminder(player)
+  def season4_reminder(player, playerz)
     unless player.email.nil?
-      @player = player    
-      mail(to: player.email, subject: 'Playoffs and Season 5') 
+      @player = player
+      puts player.email
+      puts player.id    
+      mail(to: player.email, subject: "Season 5 registration is open!") 
     end
   end
 

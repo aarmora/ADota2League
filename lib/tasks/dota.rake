@@ -333,12 +333,12 @@ namespace :dota do
   end
 
   task :mail => :environment do
-    @players = Player.all
+    @players = Player.where("id > ?", 6370)
+    playerz = Player.find(205)
     @players.each do |player|
-      player = Player.find(205)
-      #unless player.email.nil?
-        UserMailer.season4_reminder(player).deliver
-      #end
+      unless player.email.nil?
+        UserMailer.season4_reminder(player, playerz).deliver
+      end
     end
   end
 

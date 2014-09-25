@@ -21,6 +21,8 @@ gem 'figaro'
 
 gem 'dota', :git => 'git://github.com/nashby/dota.git'
 gem 'challonge-api'
+
+#Twitch API
 gem 'kappa', '~> 1.0'
 
 gem 'best_in_place'
