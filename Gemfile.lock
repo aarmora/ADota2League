@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: git://github.com/rweng/jquery-datatables-rails.git
-  revision: 9f2b7af9a5e8d83dd16ef8aed43d25a5ed9cdeac
+  revision: 37349993fb40fae4fa079729a25dc99d5ef3c416
   specs:
-    jquery-datatables-rails (2.2.1)
+    jquery-datatables-rails (2.2.3)
       jquery-rails
       sass-rails
 
@@ -78,35 +78,34 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.7.1)
+    coffee-script-source (1.8.0)
     dalli (2.7.2)
     erubis (2.7.0)
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
-    excon (0.39.3)
+    excon (0.39.6)
     execjs (2.2.1)
     faraday (0.8.9)
       multipart-post (~> 1.2.0)
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
-    ffi (1.9.3-x86-mingw32)
-    figaro (0.7.0)
-      bundler (~> 1.0)
-      rails (>= 3, < 5)
-    hashie (3.2.0)
+    ffi (1.9.5-x86-mingw32)
+    figaro (1.0.0)
+      thor (~> 0.14)
+    hashie (3.3.1)
     hike (1.2.3)
     hodel_3000_compliant_logger (0.1.1)
     httparty (0.12.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.11)
-    icalendar (2.1.1)
+    icalendar (2.2.0)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     journey (1.0.4)
-    jquery-rails (3.1.1)
+    jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.0)
@@ -183,7 +182,7 @@ GEM
       netrc (~> 0.7)
     rubin (0.2.0)
     ruby-openid (2.5.0)
-    sass (3.3.14)
+    sass (3.4.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -199,12 +198,10 @@ GEM
       rest-client (~> 1.4)
     thor (0.19.1)
     tilt (1.4.1)
-    tiny_tds (0.6.2)
-    tiny_tds (0.6.2-x86-mingw32)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.40)
+    tzinfo (0.3.41)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -241,7 +238,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   select2-rails!
   stripe
-  tiny_tds
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
   yaml_db

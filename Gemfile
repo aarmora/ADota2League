@@ -8,9 +8,7 @@ gem 'yaml_db'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'tiny_tds'
 gem 'mysql2', '> 0.3'
-gem 'activerecord-sqlserver-adapter'
 gem 'execjs'
 
 # use Steam OpenID Omniauth gem for authenticating Steam users
