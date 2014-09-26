@@ -9,6 +9,7 @@ gem 'yaml_db'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '> 0.3'
+gem 'activerecord-sqlserver-adapter'
 gem 'execjs'
 
 # use Steam OpenID Omniauth gem for authenticating Steam users
