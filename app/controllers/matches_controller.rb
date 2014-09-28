@@ -52,7 +52,10 @@ class MatchesController < ApplicationController
 
   def update
     @match = Match.find(params[:id])
-    raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @match
+
+    @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @match || @can_edit
 
     if params[:match][:home_team]
       params[:match][:home_team_id] = params[:match][:home_team]
