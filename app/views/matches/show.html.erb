@@ -2,31 +2,25 @@
 	<% # Reschedule Warnings %>
 	<% if @current_user && @match.reschedule_proposer == @current_user.id %>
     <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept!</div>
-  <% elsif Permissions.can_edit?(@match) && @match.reschedule_proposer %>
+  <% elsif (Permissions.can_edit?(@match) || @can_edit) && @match.reschedule_proposer %>
     <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= @match.reschedule_time.strftime("%-m/%-d/%y %H:%M %Z") %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
   <% end %>
-  <%=Permissions.can_edit?(@match)%>
-  <br>
-  <%=!@match_captain_permissions_off%>
-  <br>
-  <%if @current_user%>
-  	<%=@current_user.name%>
-  <%end%>
+
 	<div class="row">
 		<div class="col-md-8">
-			<% if Permissions.can_edit?(@match) %>
+			<% if Permissions.can_edit?(@match) || @can_edit %>
 				NOTE: The below selector will allow you to ask to reschedule the match. Both parties must agree on a time for it to go through. The selector is in UTC, so you MUST translate your desired date into UTC time.
 				<br /><br />
 				For reference the current match time in UTC is: <%= @match.date.strftime("%-m/%-d/%y %H:%M %Z") %>
 			<% end %>
 			<h4>
-				<%= best_in_place_if Permissions.can_edit?(@match), @match,
+				<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
 				  :date,
 				  :display_with => lambda { |date| format_datetime(date)},
 				  :activator => ".fa-calendar.#{@match.id}-date, .js-time",
 		      :type => :datetime
 				%>
-				<% if Permissions.can_edit?(@match) %>
+				<% if Permissions.can_edit?(@match) || @can_edit %>
 					<span class="fa fa-calendar form-control-feedback <%=@match.id%>-date" title="Reschedule this Game"></span>
 				<%end%>
 			</h4>
@@ -34,7 +28,7 @@
 				<h3>Lobby Password: <%= @match.lobby_password %></h3>
 			<% end %>
 			Caster:
-			<%= best_in_place_if Permissions.can_edit?(@match), @match,
+			<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
 			  :caster_id,
 			  :display_with => (lambda do |caster_id|
 			    caster_id.nil? ? "" : (link_to @match.caster.name, @match.caster.twitch, :target => "blank")
@@ -43,7 +37,7 @@
 	      	  :type => :select,
 	      	  collection: ["", "None"] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 			%>
-			<% if Permissions.can_edit?(@match) %>
+			<% if Permissions.can_edit?(@match) || @can_edit %>
 				<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=@match.id%>-caster"></span>
 			<%end%>
 		</div>
@@ -52,13 +46,13 @@
 	<b>Result:</b>
 	<div class="row">
 		<div class="col-xs-3 text-center">
-			<h5><%= best_in_place_if Permissions.can_edit?(@match), @match, :home_score, :type => :input %></h5>
+			<h5><%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match, :home_score, :type => :input %></h5>
 		</div>
 		<div class="col-xs-2 text-center">
 			<h5>vs</h5>
 		</div>
 		<div class="col-xs-3 text-center">
-			<h5><%= best_in_place_if Permissions.can_edit?(@match), @match, :away_score, :type => :input %></h5>
+			<h5><%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match, :away_score, :type => :input %></h5>
 		</div>
 	</div>
 	<div class="row">
@@ -79,18 +73,19 @@
 			<% end %>
 		</div>
 	</div>
-<br>
-<br>
-<h4>Match Comments</h4>
-<div class="container-fluid" id="matchcommentspartial">
-	<%= render :partial => "matches/match_comments"%>
-</div>
-<%if @current_user%>
-	<div class="container-fluid">
-	  <%= form_for Matchcomment.new, :remote => true, :url => matchcomment_path, :html => { :method => :post, :class => "form-horizontal", :role => "form"}, :id => "match_comments_form" do |f| %>
-	    <%=f.text_area :comment, :style => "width:100%; height:100px;", :placeholder => "Post a comment here!"%>
-	    <%= f.hidden_field :match_id, :value => @match.id %>
-	    <%=f.submit "Post", :class => "button", :id => "publish"%>
-	  <%end%>
+	<br>
+	<br>
+	<h4>Match Comments</h4>
+	<div class="container-fluid" id="matchcommentspartial">
+		<%= render :partial => "matches/match_comments"%>
 	</div>
-<%end%>
+	<%if @current_user%>
+		<div class="container-fluid">
+		  <%= form_for Matchcomment.new, :remote => true, :url => matchcomment_path, :html => { :method => :post, :class => "form-horizontal", :role => "form"}, :id => "match_comments_form" do |f| %>
+		    <%=f.text_area :comment, :style => "width:100%; height:100px;", :placeholder => "Post a comment here!"%>
+		    <%= f.hidden_field :match_id, :value => @match.id %>
+		    <%=f.submit "Post", :class => "button", :id => "publish"%>
+		  <%end%>
+		</div>
+	<%end%>
+</div>

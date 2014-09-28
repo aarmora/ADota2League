@@ -31,6 +31,8 @@ class MatchesController < ApplicationController
     end
     @matchcomments = @match.matchcomments
     @casters = Player.order("name ASC").where(:caster => true)
+
+    @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
   end
 
   def accept_reschedule
