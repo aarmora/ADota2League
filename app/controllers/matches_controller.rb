@@ -32,12 +32,14 @@ class MatchesController < ApplicationController
     @matchcomments = @match.matchcomments
     @casters = Player.order("name ASC").where(:caster => true)
 
-    @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+    if @match.home_team && @match.away_team
+      @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+    end
   end
 
   def accept_reschedule
     @match = Match.find(params[:id])
-    raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit?(@match) && @match.reschedule_proposer
+    raise ActionController::RoutingError.new('Not Found') unless (Permissions.can_edit?(@match) && @match.reschedule_proposer) || (@can_edit && @match.reschedule_proposer)
     if @match.reschedule_proposer != @current_user.id
       @match.date = @match.reschedule_time
       @match.reschedule_time = nil
@@ -51,12 +53,14 @@ class MatchesController < ApplicationController
   end
 
   def update
-    
+
     @match = Match.find(params[:id])
 
-    @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+    if @match.home_team && @match.away_team
+      @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+    end
 
-    raise ActionController::RoutingError.new('Not Found') unless @can_edit
+    raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit?(@match) || @can_edit
 
     if params[:match][:home_team]
       params[:match][:home_team_id] = params[:match][:home_team]
