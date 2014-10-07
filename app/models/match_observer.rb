@@ -7,7 +7,7 @@ class MatchObserver < ActiveRecord::Observer
 
   def after_create(match)
     if match.date && match.date > Time.now
-      match.lobby_password = "ad2l" & rand(1000)
+      match.lobby_password = "ad2l" + rand(1000).to_s
       match.save
     end
   end
