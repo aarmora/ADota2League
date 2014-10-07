@@ -26,6 +26,7 @@
 			</h4>
 			<% if @match.lobby_password && @match.date > Time.now - 1.day %>
 				<h3>Lobby Password: <%= @match.lobby_password %></h3>
+				<h4><%= @match.home_team.teamname %> is responsible for hosting this lobby!</h4>
 			<% end %>
 			Caster:
 			<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
