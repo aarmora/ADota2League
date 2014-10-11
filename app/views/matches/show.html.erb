@@ -36,7 +36,7 @@
 			  end),
 			  :activator => ".glyphicon-warning-sign.#{@match.id}-caster",
 	      	  :type => :select,
-	      	  collection: ["", "None"] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}J
+	      	  collection: ["", "None"] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 			%>
 			<% if Permissions.can_edit?(@match) || @can_edit %>
 				<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=@match.id%>-caster"></span>
