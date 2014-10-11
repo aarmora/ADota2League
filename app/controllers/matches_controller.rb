@@ -43,7 +43,6 @@ class MatchesController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') unless (Permissions.can_edit?(@match) && @match.reschedule_proposer) || (@can_edit && @match.reschedule_proposer)
     if @match.reschedule_proposer != @current_user.id
       @match.date = @match.reschedule_time
-      @match.reschedule_time = nil
       @match.reschedule_proposer = nil
       @match.save!
       m = @match.matchcomments.build(:player_id => @current_user.id, :comment => "I have accepted the reschedule!")
@@ -74,9 +73,8 @@ class MatchesController < ApplicationController
     end
 
     # do reschedule handling
-    if params[:match][:date] && @current_user.role_for_object(@match) == :captain
+    if params[:match][:reschedule_time] && @current_user.role_for_object(@match) == :captain
       @match.reschedule_proposer = @current_user.id
-      @match.reschedule_time = params[:match][:date]
       UserMailer.reschedule_proposed(params[:match][:date], @match, @current_user).deliver
     end
 

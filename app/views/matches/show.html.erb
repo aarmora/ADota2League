@@ -15,7 +15,7 @@
 			<% end %>
 			<h4>
 				<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
-				  :date,
+				  :reschedule_time,
 				  :display_with => lambda { |date| format_datetime(date)},
 				  :activator => ".fa-calendar.#{@match.id}-date, .js-time",
 		      :type => :datetime
