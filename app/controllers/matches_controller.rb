@@ -14,8 +14,10 @@ class MatchesController < ApplicationController
   def create
     raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?(@current_user)
     @match = Match.new
+    @match.lobby_password = "ad2l" + rand(1000).to_s
     @match.update_attributes(params[:match], :as => @current_user.role_for_object(@match))
     @match.date = Date.today
+    @match.reschedule_time = Date.today
     @match.save!
     redirect_to @match
 
