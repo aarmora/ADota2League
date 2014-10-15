@@ -42,6 +42,11 @@ class MatchesController < ApplicationController
 
   def accept_reschedule
     @match = Match.find(params[:id])
+
+    if @match.home_team && @match.away_team
+      @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+    end
+    
     raise ActionController::RoutingError.new('Not Found') unless (Permissions.can_edit?(@match) && @match.reschedule_proposer) || (@can_edit && @match.reschedule_proposer)
     if @match.reschedule_proposer != @current_user.id
       @match.date = @match.reschedule_time
