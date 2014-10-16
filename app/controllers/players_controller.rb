@@ -32,6 +32,7 @@ class PlayersController < ApplicationController
   end
 
 
+
   def create_player_comment
     @player_comment = PlayerComment.new
     @player_comment.attributes = params[:player_comment]

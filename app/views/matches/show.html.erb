@@ -3,7 +3,7 @@
 	<% if @current_user && @match.reschedule_proposer == @current_user.id %>
     <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept!</div>
   <% elsif (Permissions.can_edit?(@match) || @can_edit) && @match.reschedule_proposer %>
-    <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= @match.reschedule_time.strftime("%-m/%-d/%y %H:%M %Z") %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
+    <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= format_datetime(@match.reschedule_time) %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
   <% end %>
 
 	<div class="row">
@@ -11,15 +11,19 @@
 			<% if Permissions.can_edit?(@match) || @can_edit %>
 				NOTE: The below selector will allow you to ask to reschedule the match. Both parties must agree on a time for it to go through. The selector is in UTC, so you MUST translate your desired date into UTC time.
 				<br /><br />
-				For reference the current match time in UTC is: <%= @match.date.strftime("%-m/%-d/%y %H:%M %Z") %>
+				For reference the current match time in UTC is: <%= format_datetime(@match.date) %>
 			<% end %>
 			<h4>
-				<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
-				  :reschedule_time,
-				  :display_with => lambda { |date| format_datetime(date)},
-				  :activator => ".fa-calendar.#{@match.id}-date, .js-time",
-		      :type => :datetime
-				%>
+				<%if Permissions.can_edit?(@match) || @can_edit%>
+					<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
+					  :reschedule_time,
+					  :display_with => lambda { |date| format_datetime(date)},
+					  :activator => ".fa-calendar.#{@match.id}-date, .js-time",
+			      :type => :datetime
+					%>
+				<%else%>
+					<%=format_datetime(@match.date)%>
+				<%end%>
 				<% if Permissions.can_edit?(@match) || @can_edit %>
 					<span class="fa fa-calendar form-control-feedback <%=@match.id%>-date" title="Reschedule this Game"></span>
 				<%end%>

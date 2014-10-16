@@ -34,12 +34,14 @@ Ad2l::Application.routes.draw do
   end
   resources :posts
   resources :permissions
+  resources :inhouses
 
   resources :players, :only => [:new, :index, :show, :update] do
     member do
       match 'endorse' => 'players#endorse', :via => :post
     end
   end
+
 
   post 'auth/steam/callback' => 'welcome#auth_callback'
   get 'contact', :to => 'welcome#community', :as => 'contact'
