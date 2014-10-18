@@ -11,11 +11,8 @@ class AddInhouseGameandPlayerTables < ActiveRecord::Migration
   		t.integer :game_mode
   		t.integer :human_players
   		t.integer :leagueid
-  		t.integer :lobby_type
   		t.integer :match_id
   		t.integer :match_seq_num
-  		t.integer :negative_votes
-  		t.integer :positive_votes
   		t.integer :radiant_captain
   		t.integer :radiant_win
   		t.integer :start_time
@@ -25,7 +22,6 @@ class AddInhouseGameandPlayerTables < ActiveRecord::Migration
   		t.integer :assists
   		t.integer :deaths
   		t.integer :denies
-  		t.integer :gold
   		t.integer :gold_per_min
   		t.integer :gold_spent
   		t.integer :hero_damage
@@ -35,7 +31,6 @@ class AddInhouseGameandPlayerTables < ActiveRecord::Migration
   		t.integer :last_hits
   		t.integer :leaver_status
   		t.integer :level
-  		t.integer :player_slot
   		t.integer :tower_damage
   		t.integer :xp_per_min
   		t.timestamps

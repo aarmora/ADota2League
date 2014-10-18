@@ -1,0 +1,14 @@
+<%=@team.home_matches%>
+
+<%=@player%>
+
+<%#=@player.reflect_on_all_associations(:has_many)%>
+
+<%@inhouse_games.each do |game|%>
+	<li>
+		<%if game.player%>
+			<ul><%=game.player.name%></ul>
+
+		<%end%>
+	</li>
+<%end%>

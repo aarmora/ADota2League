@@ -397,6 +397,7 @@ namespace :dota do
         match.home_team_id = home
         match.away_team_id = away
         match.date = datetime
+        match.reschedule_time = datetime
         match.save!
       end
     end

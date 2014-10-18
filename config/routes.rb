@@ -11,9 +11,6 @@ Ad2l::Application.routes.draw do
     end
   end
 
-
-
-
   resources :register
 
   get "schedule" => 'seasons#index'
@@ -41,7 +38,6 @@ Ad2l::Application.routes.draw do
       match 'endorse' => 'players#endorse', :via => :post
     end
   end
-
 
   post 'auth/steam/callback' => 'welcome#auth_callback'
   get 'contact', :to => 'welcome#community', :as => 'contact'
