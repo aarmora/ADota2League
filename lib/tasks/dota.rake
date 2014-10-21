@@ -462,4 +462,106 @@ namespace :dota do
 
     puts "It is so"
   end
+
+  task :pull_inhousegames => :environment do    
+
+    @inhouse_games_ids = Inhousegame.where(:leagueid => 2047).uniq.pluck(:match_id)
+
+    @games = Dota.history(:league_id => 2047)
+
+    @all_games = Array.new
+
+    @games.raw_history["matches"].each do |game|
+      if !@inhouse_games_ids.include? game["match_id"]
+
+        this_game = Dota.match(game["match_id"])
+        if this_game.raw_match["duration"] > 600
+          @all_games.push this_game
+          this_game.raw_match["players"].each do |player|
+            @inhouse_game = Inhousegame.new
+            @inhouse_game.update_attributes(:barracks_status_dire => this_game.raw_match["barracks_status_dire"], :barracks_status_radiant => this_game.raw_match["barracks_status_radiant"], :cluster => this_game.raw_match["cluster"], :dire_captain => this_game.raw_match["dire_captain"])
+            @inhouse_game.update_attributes(:duration => this_game.raw_match["duration"], :first_blood_time => this_game.raw_match["first_blood_time"], :game_mode => this_game.raw_match["human_players"],  :human_players => this_game.raw_match["human_players"], :leagueid => this_game.raw_match["leagueid"])
+            @inhouse_game.update_attributes(:match_id => this_game.raw_match["match_id"], :match_seq_num => this_game.raw_match["match_seq_num"], :radiant_captain => this_game.raw_match["radiant_captain"], :radiant_win => this_game.raw_match["radiant_win"])
+            @inhouse_game.update_attributes(:start_time => this_game.raw_match["start_time"], :tower_status_dire => this_game.raw_match["tower_status_dire"])
+            @inhouse_game.update_attributes(:account_id => player["account_id"], :assists => player["assists"])
+            @inhouse_game.update_attributes(:deaths => player["deaths"], :denies => player["denies"], :gold_per_min => player["gold_per_min"], :gold_spent => player["gold_spent"], :hero_damage => player["hero_damage"], :hero_healing => player["hero_healing"])
+            @inhouse_game.update_attributes(:hero_id => player["hero_id"], :kills => player["kills"], :last_hits => player["last_hits"], :leaver_status => player["leaver_status"], :level => player["level"], :tower_damage => player["tower_damage"], :xp_per_min => player["xp_per_min"], :player_slot => player["player_slot"])
+            @inhouse_game.save!
+          end
+        end
+      end
+    end
+
+  end
+
+  task :compile_inhouse => :environment do
+
+    @accounts = Inhousegame.uniq.pluck(:account_id)
+
+    @accounts.each do |account|
+      @games = Inhousegame.where(:account_id => account, :checked => false)
+
+      if !@games.empty?
+        puts "hey"
+
+        @wins = 0
+        @kills = 0
+        @deaths = 0
+        @assists = 0
+        @games_played = 0
+
+        @player = Player.find_by_steam32id(account)
+
+        unless @player
+          @profiles = Dota.profiles(account + 76561197960265728.to_i)
+
+          @profiles.each do |profile|
+            @player = Player.new
+            @player.steam32id = account
+            @player.steamid = account + 76561197960265728.to_i
+            @player.name = profile.raw_profile["personaname"]
+            @player.save!
+          end
+
+        end
+
+        @games.each do |game|
+          if (game.player_slot < 5 && game.radiant_win === 1) || (game.player_slot > 4 && game.radiant_win != 1)
+            @wins = @wins + 1
+          end
+
+          @kills = @kills + game.kills
+          @deaths = @deaths + game.deaths
+          @assists = @assists + game.assists
+          @games_played = @games_played + 1
+
+          game.checked = true
+          game.save!
+
+        end
+
+        @player_exists = Inhouseleaderboard.find_by_player_id(@player.id)
+
+        if !@player_exists
+          @inhouseleaderboard_record = Inhouseleaderboard.new
+        else
+          @inhouseleaderboard_record = @player_exists
+        end
+
+        @inhouseleaderboard_record.account_id = account
+        @inhouseleaderboard_record.player_id = @player.id
+        @inhouseleaderboard_record.season_id = 1
+        @inhouseleaderboard_record.wins = @wins + @inhouseleaderboard_record.wins.to_i
+        @inhouseleaderboard_record.games_played = @games_played + @inhouseleaderboard_record.games_played.to_i
+        @inhouseleaderboard_record.kills = @kills + @inhouseleaderboard_record.kills.to_i
+        @inhouseleaderboard_record.deaths = @deaths + @inhouseleaderboard_record.deaths.to_i
+        @inhouseleaderboard_record.assists = @assists + @inhouseleaderboard_record.assists.to_i
+        @inhouseleaderboard_record.save!
+      end
+
+    end
+
+  end
+
+
 end

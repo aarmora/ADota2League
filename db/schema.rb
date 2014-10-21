@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141016030743) do
+ActiveRecord::Schema.define(:version => 20141019163740) do
 
   create_table "games", :force => true do |t|
     t.integer  "match_id"
@@ -61,8 +61,21 @@ ActiveRecord::Schema.define(:version => 20141016030743) do
     t.integer  "level"
     t.integer  "tower_damage"
     t.integer  "xp_per_min"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.integer  "player_slot"
+    t.boolean  "checked",                 :default => false, :null => false
+  end
+
+  create_table "inhouseleaderboards", :force => true do |t|
+    t.integer "player_id"
+    t.integer "account_id"
+    t.integer "season_id"
+    t.integer "wins"
+    t.integer "games_played"
+    t.integer "kills"
+    t.integer "deaths"
+    t.integer "assists"
   end
 
   create_table "matchcomments", :force => true do |t|

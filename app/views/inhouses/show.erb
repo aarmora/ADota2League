@@ -1,14 +1,60 @@
-<%=@team.home_matches%>
 
-<%=@player%>
+<script type="javascript">
 
-<%#=@player.reflect_on_all_associations(:has_many)%>
+	var datatable = $('#datatable')
+	datatable.fnDestroy();
+ 	$('#datatable').dataTable({
+	  	"iDisplayLength": 25,
+	  	"aaSorting": [[ 6, "desc" ]]
+	});
+		
+</script>
 
-<%@inhouse_games.each do |game|%>
-	<li>
-		<%if game.player%>
-			<ul><%=game.player.name%></ul>
-
-		<%end%>
-	</li>
-<%end%>
+<div class="col-md-12">
+    <div><h2>Season One - Inhouse Leaderboard </h2> </div>
+    <div class="col-md-12">The points formula where GP is games played.(10*(wins/GP) + (k(.02)-d(.01)+a(.01)))(gp/gp+10)</div>
+    <div class="col-md-12">Contact <%= link_to "Submaniac", "/players/2974" %> or <%=link_to "ThatPhageGuy", "/players/5351" %> for further explanation.</div>
+	<table id="datatableInhouse" class="table table-hover table-bordered" >
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Wins</th>
+                <th>Games Played</th>
+                <th>Average Kills</th>
+                <th>Average Deaths</th>
+                <th>Average Assists</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+			<%@inhouse_players.each do |player|%>
+                <tr>
+                    <td >
+                    	<%= link_to player.player.name, player.player%>
+                    </td>
+                    <td>
+                        <%= player.wins%>
+                    </td>
+                	<td>
+                		<%= player.games_played%>
+                    </td>
+                    <td>
+                        <%= player.kills / player.games_played%>
+                    </td>
+                    <td>
+                        <%= player.deaths / player.games_played %>
+                    </td>
+                    <td>
+                        <%= player.assists / player.games_played %>
+                    </td>
+                    <td>
+                    	<%if player.games_played > 4%>
+                        	<% this = (10*(player.wins.to_f / player.games_played) + ( (player.kills * 0.02 ) + (player.assists * 0.01 ) - (player.deaths * 0.01 ) ))*(player.games_played.to_f / (player.games_played + 10))%>
+                        	<%=this.round(2)%>
+                        <%end%>
+                    </td>
+                </tr>
+            <%end%>
+        </tbody>
+    </table>
+</div>
