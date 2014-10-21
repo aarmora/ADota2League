@@ -87,6 +87,9 @@
 	        <% end %>
         </ul>
     	</li>
+			<li <%if @current_tab == 'inhouse'%> class="active" <%end%>>
+				<%= link_to "Inhouses", inhouse_path(1) %>
+			</li>
 			<li <%if @current_tab == 'freeagents'%> class="active" <%end%>>
 				<%= link_to "Free Agents", players_path %>
 			</li>
