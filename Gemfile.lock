@@ -213,7 +213,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-sqlserver-adapter
-  best_in_place
+  best_in_place (~> 2.0)
   challonge-api
   coffee-rails (~> 3.2.1)
   dalli

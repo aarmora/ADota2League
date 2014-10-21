@@ -24,7 +24,8 @@ gem 'challonge-api'
 #Twitch API
 gem 'kappa', '~> 1.0'
 
-gem 'best_in_place'
+# BIP colelction API changed in 3.0, update with Rails 4 / Ruby 2.1
+gem 'best_in_place', "~> 2.0"
 
 gem 'mandrill-api'
 
