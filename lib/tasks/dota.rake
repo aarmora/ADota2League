@@ -390,7 +390,7 @@ namespace :dota do
       schedule.each_matchup do |home, away, round_num|
         next unless round_num == week
         # TODO: check existing matches and throw a warning if we are scheduling teams to play each other again
-        time = rand(2) === 0 ? "20:30:00" : "22:00:00"
+        time = rand(3) === 0 ? "22:00:00" : "20:30:00"
         datetime = "#{date} #{time} #{tz}"
         match = @season.matches.build
         match.week = week
