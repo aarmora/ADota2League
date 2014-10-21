@@ -23,8 +23,10 @@ class Team < ActiveRecord::Base
   def self.available_for_season_and_week(season_id, week)
     @result_map ||= {}
     cache_key = season_id.to_s + "-" + week.to_s
-    playing_ids = (Match.where(:season_id => season_id, :week => week).pluck(:away_team_id) + Match.where(:season_id => season_id, :week => week).pluck(:home_team_id)).compact
-    Team.joins(:team_seasons).where(Team.arel_table[:id].not_in(playing_ids)).where(:team_seasons => {:season_id => season_id}).pluck_all(:id, :teamname)
+    @result_map[cache_key] ||= begin
+      playing_ids = (Match.where(:season_id => season_id, :week => week).pluck(:away_team_id) + Match.where(:season_id => season_id, :week => week).pluck(:home_team_id)).compact
+      Team.joins(:team_seasons).where(Team.arel_table[:id].not_in(playing_ids)).where(:team_seasons => {:season_id => season_id}).pluck_all(:id, :teamname)
+    end
   end
 
   def seasons_available_for_registration
