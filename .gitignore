@@ -22,3 +22,6 @@ config/database.yml
 
 #ignore gemfile.lock
 Gemfile.lock
+
+# Ignore SASS cache
+/.sass-cache
