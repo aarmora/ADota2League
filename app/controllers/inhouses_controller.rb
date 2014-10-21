@@ -1,6 +1,8 @@
 class InhousesController < ApplicationController
 
 	def index
+		
+		redirect_to inhouse_url(1)
 	end
 
 	def show
