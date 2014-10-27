@@ -354,7 +354,6 @@ namespace :dota do
     end
   end
 
-
   task :scheduler => :environment do
     puts "What season id?"
     season_id = STDIN.gets.chomp.to_i
@@ -376,31 +375,73 @@ namespace :dota do
       raise "Teams that would be scheduled are already scheduled for this week"
     end
 
-    puts "Now, need a date for these matches (i.e. 2014-03-06) in that EXACT format"
+    puts "Now, need a date for these matches (i.e. 2014-03-06, yyyy-mm-dd) in that EXACT format"
     date = STDIN.gets.chomp
 
-    puts "Finally, timezone (i.e. -0400 for EDT, +0100 for CEST) in that EXACT format"
+    puts "Finally, timezone (i.e. -0400 for EDT, +0200 for CEST) in that EXACT format"
     tz = STDIN.gets.chomp
 
+    matchup_array = []
+    object = Object.new
+    @matches = Match.where(:season_id => @season.id)
+    @matches.each do |match|
+      if match.home_team_id && match.away_team_id
+        matchup_array.push match.home_team_id + match.away_team_id
+      end
+    end
 
     teams_by_division = ts.all.group_by(&:division)
+
     teams_by_division.each do |division, team_seasons|
-      puts "Creating matches for division #{division}"
-      schedule = Rubin.new(team_seasons.sort_by(&:id).map(&:team_id))
-      schedule.each_matchup do |home, away, round_num|
-        next unless round_num == week
-        # TODO: check existing matches and throw a warning if we are scheduling teams to play each other again
+      until test_matchups(team_seasons, matchup_array, division, week, date, @season, tz) == 0
+        puts "failed"
+      end
+    end
+
+  end
+
+  def test_matchups(team_seasons, matchup_array, division, week, date, season, tz)
+      team_array = []
+      test_matches = []
+
+
+      team_seasons.each do |tz|
+        team_array.push(tz.team_id)
+      end
+
+      length = team_array.length/2
+      i = 0
+      while i < length
+        this = team_array.sample(2)
+        team_array = team_array - this
+        test_matches.push(this)
+        i += 1
+      end
+
+      puts "Testing matches for #{division}"
+      fail = 0
+      test_matches.each do |test_match|
+        puts "#{test_match}"
+        if matchup_array.include? test_match[0] + test_match[1]
+          puts "#{test_match[0]} and #{test_match[1]} may have already played!}"
+          return 1
+        end
+      end 
+
+      test_matches.each do |test_match|
         time = rand(3) === 0 ? "22:00:00" : "20:30:00"
         datetime = "#{date} #{time} #{tz}"
-        match = @season.matches.build
+        match = season.matches.build
         match.week = week
-        match.home_team_id = home
-        match.away_team_id = away
+        match.home_team_id = test_match[0]
+        match.away_team_id = test_match[1]
         match.date = datetime
         match.reschedule_time = datetime
         match.save!
       end
-    end
+
+      return 0
+
   end
 
   task :swap_teams => :environment do
