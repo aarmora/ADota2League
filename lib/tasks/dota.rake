@@ -393,8 +393,13 @@ namespace :dota do
     teams_by_division = ts.all.group_by(&:division)
 
     teams_by_division.each do |division, team_seasons|
-      until test_matchups(team_seasons, matchup_array, division, week, date, @season, tz) == 0
-        puts "failed"
+      count = 0
+      until test_matchups(team_seasons, matchup_array, division, week, date, @season, tz) == 0 || count == 30
+        count = count + 1
+        puts "Failed on attempt number #{count}"
+      end
+      if count == 30
+        puts "#{division} could not find a suitable match"
       end
     end
 
@@ -439,7 +444,7 @@ namespace :dota do
         match.reschedule_time = datetime
         match.save!
       end
-
+      puts "Success!"
       return 0
 
   end

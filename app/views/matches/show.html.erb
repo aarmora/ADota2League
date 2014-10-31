@@ -1,4 +1,5 @@
 <div class="container-fluid">
+	<%= Time.new%>
 	<% # Reschedule Warnings %>
 	<% if @current_user && @match.reschedule_proposer == @current_user.id %>
     <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept!</div>
@@ -60,6 +61,16 @@
 			<h5><%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match, :away_score, :type => :input %></h5>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<% if Permissions.can_edit?(@match) || @can_edit %>				
+				<%= best_in_place @match, :forfeit, :type => :checkbox%>
+				<br>
+				<sub>Forfeit?</sub>
+			<% end %>			
+		</div>		
+	</div>
+
 	<div class="row">
 		<div class="col-sm-4 rosterholder">
 			<% if @match.home_team.nil? %>
