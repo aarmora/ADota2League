@@ -378,7 +378,7 @@ namespace :dota do
     puts "Now, need a date for these matches (i.e. 2014-03-06, yyyy-mm-dd) in that EXACT format"
     date = STDIN.gets.chomp
 
-    puts "Finally, timezone (i.e. -0400 for EDT, +0200 for CEST) in that EXACT format"
+    puts "Finally, timezone (i.e. -0500 for EST, +0100 for CET) in that EXACT format"
     tz = STDIN.gets.chomp
 
     matchup_array = []
