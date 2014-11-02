@@ -17,5 +17,5 @@
 	<br>
 	<br>
   <%= f.hidden_field :team_id, :value => @team.id %>
-  <%= submit_tag "Register!", :class => "btn btn-primary", :confirm => "Please make sure you are committed to playing before registering!" %>
+  <%= submit_tag "Register!", :class => "btn btn-primary", :confirm => "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one on your team can be ABOVE the stated MMR." %>
 <% end %>
