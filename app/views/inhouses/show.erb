@@ -12,10 +12,7 @@
 
 <div class="col-md-12">
     <div><h2>Season One - Inhouse Leaderboard </h2> </div>
-    <div><h4>Want to play?  Just join the <%= link_to "AD2L Steam Group", "http://steamcommunity.com/groups/AD2L", :target => "blank"%>!</h4></div>
-    <div>
-        Join the <a href="steam://friends/joinchat/103582791435143521" class="btn btn-primary">STEAM group chat!</a> to try and get in on the latest games!
-    </div>    
+    <div><h4>Want to play?  View the <button class="btn-primary btn" data-toggle="modal" data-target="#inhouseModal">Rules</button> and join the <%= link_to "AD2L Steam Group", "http://steamcommunity.com/groups/AD2L", :target => "blank", :class => "btn-primary btn"%>!</h4></div>
     <div>The points formula where GP is games played.(10*(wins/GP) + (k(.02)-d(.01)+a(.01)))(gp/gp+10)</div>
     <div>Contact <%= link_to "Submaniac", "/players/2974" %> or <%=link_to "ThatPhageGuy", "/players/5351" %> for further explanation.</div>
 	<table id="datatableInhouse" class="table table-hover table-bordered" >
@@ -61,4 +58,59 @@
             <%end%>
         </tbody>
     </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="inhouseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">AD2L Inhouse Rules</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Bannable Offense</h4>
+        <ul>
+            <li>Abandoning Games (counts for two offenses)</li>
+            <li>Intentional Throwing/Ability Abuse</li>
+            <li>Racial Slurs/General Racism</li>
+            <li>Homophobic Remarks & Slurs/Phrases</li>
+            <li>Sexism</li>
+            <li>Dodging Previously Established Bans (counts as two offenses)</li>
+            <li>It is acceptable to flame an admin for being a terrible player, but calling out/insulting an admin based on their banning decisions will not be tolerated</li>
+            <li>Chat spam in pre-game lobby (“GO”)</li>
+        </ul>
+        <h4>Ban Protocols</h4>
+        <ul>
+            <li>First Offense: warning</li>
+            <li>Second Offense: 3 day ban</li>
+            <li>Third Offense: 1 week ban</li>
+            <li>Fourth Offense: 1 month ban</li>
+            <li>Fifth Offense: 1 season ban</li>
+            <li>Sixth Offense across two consecutive seasons: Permanent Ban</li>
+        </ul>
+        <p>
+            An AD2L Inhouse League Admin playing in an Inhouse League game shall not be considered to have admin privileges when it comes to banning players to prevent rage bans from occurring. 
+        </p>
+        <p>
+            If a player banned in one season returns for a different season of the inhouse league, their first infraction in the new season will be viewed as their immediate third offense and as such will be subject to a 1 week ban or higher.
+        </p>
+        <p>
+            If an infraction occurs and there are no admins present in the lobby, contact an admin ASAP through the steam group or guild. There must be two other players from the lobby present to verify the story.
+        </p>
+        <p>
+            AD2L Admin decisions, once discussed among the team and announced, are final until the duration has expired or a success. All appeals to revoke or challenge bans should be sent to thatphageguy@gmail.com.
+        </p>
+        <h4>Other Rules</h4>
+        <ul>
+            <li>No private profiles so that admins can verify your status as an unbanned player. Players with private profiles will be prohibited from playing.</li>
+            <li>No preferential treatment just because you happen to know an admin or ARE an admin. Breaking the rules is taken very seriously regardless of who breaks them.</li>
+            <li>Light to heavy flaming is fine so long as the flame is based on plays, skill level, etc. Flaming based on race or sexual orientation is prohibited.</li>
+            <li>You should be able to speak and understand basic/conversational English to participate in these inhouses, as the server location is often in US East or Europe and most players are English speakers.</li>
+            <li>Player bans reset after one month of infraction-less play.</li>
+            <li>Any admin who receives an infraction higher than a “warning” level will lose admin privileges for the rest of the season and may apply at the beginning of the next season.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
