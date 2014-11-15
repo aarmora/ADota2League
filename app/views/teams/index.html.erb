@@ -21,7 +21,9 @@
 	                    	<%= link_to team.teamname, team %>
 	                    </td>
 	                    <td>
-	                        <%= link_to team.captain.name, team.captain%>
+	                    	<% if team.captain.name %>
+	                        	<%= link_to team.captain.name, team.captain%>
+	                        <% end %>
 	                    </td>
 	                </tr>
 	            <%end%>
