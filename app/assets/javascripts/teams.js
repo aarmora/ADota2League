@@ -1,5 +1,9 @@
 $(document).ready(function(){
   var another = $('#addplayers').clone();
+  $('#datatableTeams').dataTable({
+  	"iDisplayLength": 25,
+  	"aaSorting": [[ 0, "desc" ]]
+	});
   $("select.addplayer").select2();
 
 	$(document).on('change', '.addplayer', function() {

@@ -1,3 +1,31 @@
-<div id="fullbox">		
-	<h2>Your teams</h2>
+<% content_for :page_subtitle do %>
+    Teams
+<% end %>
+<% content_for :meta_description do %>
+    Check out the active teams in AD2L
+<% end %>
+<div class="container">
+	<div class="col-md-12">
+	    <div><h2>Active Teams </h2> </div>
+		<table id="datatableTeams" class="table table-hover table-bordered" >
+	        <thead>
+	            <tr>
+	                <th>Name</th>
+	                <th>Captain</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <%@teams.each do |team|%>
+	                <tr>
+	                    <td >
+	                    	<%= link_to team.teamname, team %>
+	                    </td>
+	                    <td>
+	                        <%= link_to team.captain.name, team.captain%>
+	                    </td>
+	                </tr>
+	            <%end%>
+	        </tbody>
+	    </table>
+	</div>
 </div>

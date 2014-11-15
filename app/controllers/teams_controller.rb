@@ -1,6 +1,11 @@
 class TeamsController < ApplicationController
 
   def index
+
+    @teams = Team.includes(:seasons).where("seasons.active = true")
+    
+
+    #render :json => @seasons.teams
 	end
 
 	def show
