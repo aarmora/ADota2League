@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
 
   def index
+    @current_tab = 'teams'
 
     @teams = Team.includes(:seasons).where("seasons.active = true")
     
