@@ -332,6 +332,7 @@ namespace :dota do
     end
   end
 
+  desc "Send email"
   task :mail => :environment do
     @players = Player.where("id > ?", 6370)
     playerz = Player.find(205)
@@ -342,6 +343,7 @@ namespace :dota do
     end
   end
 
+  desc "Email about playoffs"
   task :playoff_mail => :environment do
     @seasonz = Season.where(:id => [44, 45, 46])
 
@@ -354,6 +356,7 @@ namespace :dota do
     end
   end
 
+  desc "Schedule"
   task :scheduler => :environment do
     puts "What season id?"
     season_id = STDIN.gets.chomp.to_i
@@ -509,6 +512,7 @@ namespace :dota do
     puts "It is so"
   end
 
+  desc "Get the inhouse stuff"
   task :pull_inhousegames => :environment do    
 
     @inhouse_games_ids = Inhousegame.where(:leagueid => 2047).uniq.pluck(:match_id)
