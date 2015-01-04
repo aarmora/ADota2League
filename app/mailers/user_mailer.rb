@@ -56,7 +56,6 @@ class UserMailer < ActionMailer::Base
     if @player.email
       mail(to: @player.email, subject: "Playoffs!")
     end
-
   
   end
 

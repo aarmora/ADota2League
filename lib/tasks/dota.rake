@@ -334,7 +334,7 @@ namespace :dota do
 
   desc "Send email"
   task :mail => :environment do
-    @players = Player.where("id > ?", 6370)
+    @players = Player.where("id > ?", 13165)
     playerz = Player.find(205)
     @players.each do |player|
       unless player.email.nil?

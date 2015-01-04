@@ -40,21 +40,7 @@
                           </a>
                           <hr>                 
                         </article>     
-                      </div>
-                      <%@posts.each do |post|%>
-                          <article>
-                              <header>
-                                  <h2>
-                                      <%= post.title%> <br />
-                                       <small><%=post.author.name%> - <%= format_date(post.created_at) %></small>
-                                  </h2>
-
-                              </header>
-                            <%=raw post.text%>
-                            <span ng-init="comments()"></span>
-                          </article>
-                          <hr>
-                      <%end%>
+                      </div>                      
                 </div>
                 <% unless @official_streams.empty? %>
                     <div class="col-md-6 col-md-offset-1 hidden-sm hidden-xs">
