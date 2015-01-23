@@ -3,8 +3,8 @@ class TeamsController < ApplicationController
   def index
     @current_tab = 'teams'
 
-    @teams = Team.includes(:seasons).where("seasons.active = true")
-    
+    @teams = Team.includes(:seasons, :captain).where(active: true, seasons: { active: true })
+
 
     #render :json => @seasons.teams
 	end
@@ -60,8 +60,8 @@ class TeamsController < ApplicationController
   				end
   			end
   		end
-  		@roster = @team.players.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
-    	@players = Player.order(:name).pluck_all(:id, :name)
+  		@roster = @team.players.to_a.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
+    	@players = Player.order(:name).pluck(:id, :name)
   		@casters = Player.order(:name).where(:caster => true)
   		@permissions = Permission.includes(:player).all
     end

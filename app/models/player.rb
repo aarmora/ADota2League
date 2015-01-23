@@ -18,7 +18,7 @@ class Player < ActiveRecord::Base
   has_many :commenters, :through => :player_comments
   has_many :outgoing_comments, :class_name => "PlayerComment", :foreign_key => "commenter_id", :dependent => :delete_all
 
-  attr_accessible :name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :as => [:default, :caster, :admin]
+  attr_accessible :name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :steamid, :as => [:default, :caster, :admin]
   attr_accessible :twitch, :region, :as => [:admin, :caster]
   attr_accessible :caster, :admin, :as => :admin
 

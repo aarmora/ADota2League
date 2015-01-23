@@ -1,13 +1,16 @@
 Ad2l::Application.routes.draw do
 
-  get "welcome/index"
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root 'welcome#index'
+
   resources :seasons, :only => [:create, :update, :index, :show] do
     member do
-      match 'manage' => "seasons#manage"
-      match 'setup_challonge' => "challonge#setup"
-      match 'sync_challonge_matches' => "challonge#sync_matches"
-      match 'launch_challonge' => "challonge#launch"
-      match 'rebuild_challonge' => "challonge#rebuild"
+      get 'manage' => "seasons#manage"
+      get 'setup_challonge' => "challonge#setup"
+      get 'sync_challonge_matches' => "challonge#sync_matches"
+      get 'launch_challonge' => "challonge#launch"
+      get 'rebuild_challonge' => "challonge#rebuild"
     end
   end
 
@@ -17,16 +20,16 @@ Ad2l::Application.routes.draw do
 
   resources :teams do
     member do
-      match 'calendar' => 'teams#calendar'
-      match 'players' => 'teams#add_players', :via => :post
-      match 'players'  => 'teams#remove_players', :via => :delete
+      get 'calendar' => 'teams#calendar'
+      post 'players' => 'teams#add_players'
+      delete 'players'  => 'teams#remove_players'
     end
   end
 
   resources :team_seasons, :only => [:create, :show, :update, :destroy]
   resources :matches do
     member do
-      match 'accept_reschedule' => 'matches#accept_reschedule'
+      get 'accept_reschedule' => 'matches#accept_reschedule'
     end
   end
   resources :posts
@@ -35,7 +38,7 @@ Ad2l::Application.routes.draw do
 
   resources :players, :only => [:new, :index, :show, :update] do
     member do
-      match 'endorse' => 'players#endorse', :via => :post
+      post 'endorse' => 'players#endorse'
     end
   end
 
@@ -58,7 +61,7 @@ Ad2l::Application.routes.draw do
   post 'player_comment_delete' => 'players#delete_player_comment'
 
   scope '/admin' do
-    root :to => "admin#index"
+    get '/' => "admin#index"
     get 'teams' => 'admin#teams', :as => "admin_teams"
     get 'players' => 'admin#players', :as => "admin_players"
     get "manage_seasons(/:season(/:week))" => 'admin#manage_seasons'
@@ -68,11 +71,6 @@ Ad2l::Application.routes.draw do
   get '/Schedule.asp' => redirect('/schedule')
   get '/community.asp' => redirect('/community')
   get '/Index.asp' => redirect('/')
-
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

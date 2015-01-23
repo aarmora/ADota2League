@@ -24,7 +24,7 @@
     <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
       <label>Select team to add:</label>
 
-      <%= f.select(:team_id, options_for_select(Team.where(:active => true).sort_by(&:teamname).map{|team| [team.teamname, team.id]}), {}, :style => "min-width: 300px;" ) %>
+      <%= f.select(:team_id, options_for_select(Team.where(:active => true).order(:teamname).map{|team| [team.teamname, team.id]}), {}, :style => "min-width: 300px;" ) %>
       <%= f.hidden_field :season_id, :value => @season.id %>
       <%= submit_tag "Add Team", :class => "btn btn-primary" %>
     <% end %>
@@ -48,7 +48,7 @@
         <% end %>
       </td>
       <td>
-        <%= 
+        <%=
         if Permissions.user_is_site_admin?
           best_in_place permission,
           :permission_mode,
@@ -59,7 +59,7 @@
           :permission_mode,
           :type => :select,
           collection: [["", "None"], ["season", "season"], ["division","division"]]
-        end 
+        end
         %>
       </td>
       <td><%= best_in_place_if Permissions.can_edit?(@season), permission, :organization_id, :type => :input%></td>

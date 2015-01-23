@@ -24,7 +24,7 @@ class SeasonsController < ApplicationController
           Permissions.match_captain_permissions_off
           Permissions.load_team_divisions_for_season(@season.id) unless Permissions.can_edit?(@season) || !Permissions.can_view?(@season)
 
-          @matches = @season.matches.includes(:home_team, :away_team, :caster).sort_by!{|m| m.date ? m.date : Time.now}.reverse
+          @matches = @season.matches.includes(:home_team, :away_team, :caster).to_a.sort_by{|m| m.date ? m.date : Time.now}.reverse
           @casters = Player.where(:caster => true)
           @permissions = Permission.includes(:player).all
 
@@ -86,6 +86,6 @@ class SeasonsController < ApplicationController
     @season = Season.includes({:team_seasons => [:team => [:captain]], :matches => [:away_team, :home_team]}).find(params[:id])
     head :forbidden and return unless Permissions.can_view?(@season)
 
-    @players = Player.order("name ASC").pluck_all(:id, :name)
+    @players = Player.order("name ASC").pluck(:id, :name)
   end
 end

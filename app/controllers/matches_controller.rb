@@ -27,10 +27,10 @@ class MatchesController < ApplicationController
 
     @match = Match.find(params[:id])
     unless @match.home_team.nil?
-      @home_team_roster = @match.home_team.players.sort_by {|p| p.id == @match.home_team.captain_id ? 0 : 1}
+      @home_team_roster = @match.home_team.players.to_a.sort_by {|p| p.id == @match.home_team.captain_id ? 0 : 1}
     end
     unless @match.away_team.nil?
-      @away_team_roster = @match.away_team.players.sort_by {|p| p.id == @match.away_team.captain_id ? 0 : 1}
+      @away_team_roster = @match.away_team.players.to_a.sort_by {|p| p.id == @match.away_team.captain_id ? 0 : 1}
     end
     @matchcomments = @match.matchcomments
     @casters = Player.order("name ASC").where(:caster => true)
@@ -46,7 +46,7 @@ class MatchesController < ApplicationController
     if @match.home_team && @match.away_team
       @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
     end
-    
+
     raise ActionController::RoutingError.new('Not Found') unless (Permissions.can_edit?(@match) && @match.reschedule_proposer) || (@can_edit && @match.reschedule_proposer)
     if @match.reschedule_proposer != @current_user.id
       @match.date = @match.reschedule_time

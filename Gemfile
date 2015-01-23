@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby "2.2.0"
 
-gem 'rails', '3.2.17'
+gem 'rails', '~> 4.2'
+gem 'rails-observers'
+gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
+gem 'unicorn'
 
 gem 'yaml_db'
 
@@ -9,8 +12,8 @@ gem 'yaml_db'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '> 0.3'
-gem 'activerecord-sqlserver-adapter'
 gem 'execjs'
+gem 'nokogiri', '1.6.6.1'
 
 # use Steam OpenID Omniauth gem for authenticating Steam users
 gem 'omniauth-steam'
@@ -24,8 +27,7 @@ gem 'challonge-api'
 #Twitch API
 gem 'kappa', '~> 1.0'
 
-# BIP colelction API changed in 3.0, update with Rails 4 / Ruby 2.1
-gem 'best_in_place', "~> 2.0"
+gem 'best_in_place', "~> 3.0"
 
 gem 'mandrill-api'
 
@@ -53,21 +55,17 @@ gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables
 
 gem 'rails_12factor', group: :production
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  #gem 'turbo-sprockets-rails3'
+gem 'sass-rails'
+gem 'coffee-rails'
+#gem 'turbo-sprockets-rails3'
 
-  # gem "less-rails"
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
+# gem "less-rails"
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'uglifier', '>= 1.0.3'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

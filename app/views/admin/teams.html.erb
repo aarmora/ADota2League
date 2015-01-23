@@ -10,11 +10,11 @@
   <div>
     <h5>Assign New Captain to Exisiting Team:</h5>
     <p>Go to the team page above, add the desired user to the team, and then make them a captain</p>
-    <%=# form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
-      <%=# select_tag(:id, options_for_select(@teams.map{|team| [team.teamname, team.id]})) %>
+    <%= form_tag("/teams/id", :method => "put", :class => "adaptive") do %>
+      <%= select_tag(:id, options_for_select(@active_teams)) %>
 
-      <%=# collection_select(:team, :captain_id, @players.select(&:name).sort_by(&:name), :id, :name) %>
-      <%=# submit_tag "Assign Captain", :class => "button" %>
+      <%= collection_select(:team, :captain_id, @players.select(&:name).to_a.sort_by(&:name), :id, :name) %>
+      <%= submit_tag "Assign Captain", :class => "button" %>
     <% end %>
   </div>
 

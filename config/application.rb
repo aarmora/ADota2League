@@ -7,6 +7,9 @@ if defined?(Bundler)
   Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
+  # Require the gems listed in Gemfile, including any gems
+  # you've limited to :test, :development, or :production.
+  Bundler.require(*Rails.groups)
 end
 
 module Ad2l
@@ -54,7 +57,7 @@ module Ad2l
     config.active_record.whitelist_attributes = true
 
     # Heroku doesn't let us access the full-stack on precompile, so don't use it!
-    config.assets.initialize_on_precompile = false
+    # config.assets.initialize_on_precompile = false
 
     # Enable the asset pipeline
     config.assets.enabled = true

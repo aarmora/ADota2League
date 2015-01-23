@@ -24,7 +24,7 @@ module Permissions
             TeamSeason.where(:season_id => object.season_id, :division => p.division, :team_id => [object.home_team_id, object.away_team_id]).count > 0
           )
         )
-      end 
+      end
         #Rails.logger.debug("My object: #{@match_captain_permissions_off}")
         #Rails.logger.debug(!@match_captain_permissions_off && (user.captained_teams.include?(object.home_team) || user.captained_teams.include?(object.away_team)))
         # captains of either team are AOK
@@ -41,7 +41,7 @@ module Permissions
   # This is probably not the best way to do this, but we allow pages to "cue" us that we're
   # going to be looking up the teams in a given season, thereby creating a map to be used above
   def self.load_team_divisions_for_season(season_id)
-    data = TeamSeason.where(:season_id => season_id).pluck_all(:team_id, :division)
+    data = TeamSeason.where(:season_id => season_id).pluck(:team_id, :division)
     @ts_map = data.inject({}) {|r, val| r[val[0]] = val[1]; r}
     @ts_season = season_id
   end

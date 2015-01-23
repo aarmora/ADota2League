@@ -8,3 +8,16 @@ After creating your app or setting up your existing app to use the buildpack, yo
 heroku config:add DATABASE_URL=sqlserver://username:password@sqlserver_host:1433/database_name
 
 Finally, we need to add the data from application.yml (our Dota2 API key and so on). Since we use Figaro (see that gem page for more info), we can simply run rake figaro:heroku, which will set all our variables on heroku.  An application.sample.yml is included to show an example of what would be needed.
+
+== Rails 4
+Recent migration to Rails 4 was a minimal effort update, meaning some things might not be best practices. Some things to evaluate:
+- AREL removal in favor of ".not" support
+- attr_accessible to new style (Strong Paramaters)
+- config/secrets.yml
+- upgraded cookie signing (secret_key_base)
+- dalli is default memcache client.
+- Web Console...do we want it?
+- have our milliseconds desynched anywhere (to_json)
+- mutator methods on relations
+- PATCH vs PUT
+- Gemfile environments and organization

@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
 
   def index
     @current_tab = "index"
-    @posts = Post.all.sort_by{|p| p[:created_at]}.reverse
+    # @posts = Post.all.sort_by{|p| p[:created_at]}.reverse
   end
 
   def community

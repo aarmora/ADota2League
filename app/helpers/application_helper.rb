@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def user_js_tz_name
-    #tz = @current_user.time_zone if @current_user
+    tz = @current_user.time_zone if @current_user
     tz ||= "Eastern Time (US & Canada)"
     ActiveSupport::TimeZone.find_tzinfo(tz).name
   end
