@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def load_user
     Permissions.current_user = nil
-    return unless session[:current_user]
+    return unless session[:current_user] && session[:current_user][:uid]
 	  @current_user = Player.find_or_create_by!(:steamid => session[:current_user][:uid]) do |user|
   	  # If they are a new user, ship them over to the profile page
       user.steam32id = user.steamid.to_i - 76561197960265728.to_i
