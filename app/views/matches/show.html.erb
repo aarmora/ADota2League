@@ -38,11 +38,11 @@
 			<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
 			  :caster_id,
 			  :display_with => (lambda do |caster_id|
-			    caster_id.nil? ? "" : (link_to @match.caster.name, @match.caster.twitch, :target => "blank")
+			    @match.caster ? (link_to @match.caster.name, @match.caster.twitch, :target => "blank") : ""
 			  end),
 			  :activator => ".glyphicon-warning-sign.#{@match.id}-caster",
 	      	  :type => :select,
-	      	  collection: ["", "None"] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
+	      	  collection: [["", "None"]] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 			%>
 			<% if Permissions.can_edit?(@match) || @can_edit %>
 				<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=@match.id%>-caster"></span>
@@ -64,12 +64,12 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<% if Permissions.can_edit?(@match) || @can_edit %>				
+			<% if Permissions.can_edit?(@match) || @can_edit %>
 				<%= best_in_place @match, :forfeit, :type => :checkbox%>
 				<br>
 				<sub>Forfeit?</sub>
-			<% end %>			
-		</div>		
+			<% end %>
+		</div>
 	</div>
 
 	<div class="row">
