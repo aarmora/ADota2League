@@ -8,16 +8,19 @@
     #tbox2 td{
         background: white;
     }
-
 </style>
-<div id="tabs">
-  <div style="clear: both"></div>
-  <div class="tab active" id="tab10">Community</div>
-  <div class="tab nonactive" id="tab11">FAQ</div>
-  <div class="tab nonactive" id="tab12">Contact</div>
-  <div class="tab nonactive" id="tab13">Backers!</div>
-  <div class="TabsContainer">
-    <div class="tabbody10 active">
+<div class="tabbable">
+  <% content_for :subnav do %>
+    <ul class="nav nav-tabs">
+      <li class="tab active"><a data-toggle="tab" href="#community">Community</a></li>
+      <li class="tab"><a data-toggle="tab" href="#faq">FAQ</a></li>
+      <li class="tab"><a data-toggle="tab" href="#contact">Contact</a></li>
+      <li class="tab"><a data-toggle="tab" href="#backers">Backers!</a></li>
+    </ul>
+  <% end %>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="community">
       <div class="col-md-6">
           <div><h2>Our amazing Casters!</h2></div>
           <table>
@@ -60,7 +63,7 @@
           <p><a href="http://reddit.com/r/ad2l">Visit it here!</a>  We will be posting rescheduled games here and hopefully just some great game discussions can also happen here!  Please feel free to hop in and participate!</p>
       </div>
     </div>
-    <div class="tabbody11 nonactive">
+    <div class="tab-pane" id="faq">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
@@ -163,10 +166,10 @@
         </div>
       </div>
     </div>
-    <div class="tabbody12 nonactive">
+    <div class="tab-pane" id="contact">
       <script language="JavaScript">
-        var username = "amateurdota2league";
-        var hostname = "gmail.com";
+        var username = "ad2l-admins";
+        var hostname = "groups.google.com";
         var linktext = username + "@" + hostname ;
         $(document).ready(function(){
             $('#emailaddress').html("<a href='" + "mail" + "to:" + username + "@" + hostname + "'>" + linktext + "</a>");
@@ -176,9 +179,9 @@
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
       </script>
       <div class="container">
-            <p>Your feedback is extremely important to us.</p>
-            <p>If you contact us, we WILL respond.  Fast.</p>
-        </div>
+        <p>Your feedback is extremely important to us.</p>
+        <p>If you contact us, we WILL respond.  Fast.</p>
+      </div>
       <div class="container">
             <div style="margin: 6px 0 22px 0;">EMAIL:<span style="margin-left: 30px;" id="emailaddress"></span></div>
             <div style="margin-bottom: 22px"><a href="https://twitter.com/adota2l" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @Adota2l</a></div>
@@ -186,21 +189,22 @@
             <div style="margin-bottom: 22px">Join our <%=link_to "steam group chat", "steam://friends/joinchat/103582791435143521"%> for possibly instant answers!</div>
             <p>
               <div><b>Us</b></div>
+              <div>Message all admins -- <%= link_to "ad2l-admins@groups.google.com", "mailto:ad2l-admins@groups.google.com"%></div>
               <div>Shadowkiller --<%= link_to "sethad2l@gmail.com", "mailto:sethad2l@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198096413824", :class => "fa fa-plus" %></div>
               <div>Rasputin --<%= link_to "amateurdota2league@gmail.com", "mailto:amateurdota2league@gmail.com"%></div>
             </p>
-               <p>
-                  <div><b>Our awesome admins!</b></div>
-                  <div>Contact <%= link_to "Submaniac", "/players/2974" %> or <%=link_to "KuroSaki", "/players/13066" %> for information on inhouses.</div>
-                  <%if false%>
-                    <%@admins.each do |admin|%>
-                        <div><%= link_to admin.name, admin%> --add him on steam <%= link_to "", "steam://friends/add/#{admin.steamid}", :class => "fa fa-plus" %></div>
-                    <%end%>
+             <p>
+                <div><b>Our awesome admins!</b></div>
+                <div>Contact <%= link_to "Submaniac", "/players/2974" %> or <%=link_to "KuroSaki", "/players/13066" %> for information on inhouses.</div>
+                <% if false %>
+                  <%@admins.each do |admin|%>
+                      <div><%= link_to admin.name, admin%> --add him on steam <%= link_to "", "steam://friends/add/#{admin.steamid}", :class => "fa fa-plus" %></div>
                   <%end%>
-              </p>
-        </div>      
+                <%end%>
+            </p>
+        </div>
     </div>
-    <div class="tabbody13 nonactive">
+    <div class="tab-pane" id="backers">
       <div class="col-md-12">
         <div class="col-md-12">We are extremely grateful for their support!</div>
         <br>
@@ -216,8 +220,7 @@
           <li>Jonathan Cooper</li>
           <li>Jake Weisgable</li>
           <li>Lindsey Irving</li>
-        </ul>      
+        </ul>
       </div>
     </div>
   </div>
-</div>

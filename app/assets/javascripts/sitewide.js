@@ -43,9 +43,6 @@ $(document).ready(function() {
             $(this).attr("action", $(this).attr("action").replace("/id", "/" + $el.val()));
         }
     });
-
-    // Activate select2 fields
-
 });
 
 //Reset ajax forms on ajax:complete
@@ -54,14 +51,4 @@ $(document).ready(function(){
         $('#top_plays_form').trigger('reset');
         alert('Thanks for submitting this play!')
     });
-});
-
-
-//tabs js
-$(document).on('click', '#tabs .nonactive[id^="tab"]', function(){
-    var tabname = $(this).attr('id').replace('tab', '');
-    $(this).closest('#tabs').find('.active[id^="tab"]').removeClass('active').addClass('nonactive');
-    $(this).removeClass('nonactive').addClass('active');
-    $(this).closest('#tabs').find('.TabsContainer [class^="tabbody"]').removeClass('active').addClass('nonactive');
-    $(this).closest('#tabs').find('.TabsContainer [class*="tabbody'+tabname+'"]').removeClass('nonactive').addClass('active');
 });

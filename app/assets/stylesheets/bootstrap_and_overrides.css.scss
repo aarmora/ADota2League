@@ -159,9 +159,11 @@ body {
 .navbar-ad2l
 {
   background: #1B1B1B;
+  border: none;
   border-bottom: 4px solid #BC1414;
+  border-radius: 0px;
 
-  .navbar-nav > li > a {
+  ul.nav > li > a {
     padding: 0em 27px;
     line-height: 80px;
     letter-spacing: 1px;
@@ -182,6 +184,35 @@ body {
   .navbar-nav > .active > a:focus {
     background: #BC1414;
     color: #FFF;
+  }
+
+  &.navbar-subnav {
+    background-color: #BC1414;
+    border-bottom: none;
+  }
+
+  /* sub-nav, similar to above navbar colors, could probably condense */
+  .nav-tabs { border-bottom: none; }
+  ul.nav-tabs > li.tab {
+    padding: 0px 12px;
+    &.active {
+      a, a:hover, a:focus {
+        /* background-color: #8a0f0f; */
+        background-color: #fff;
+        border-color: #fff;
+        color: #BC1414;
+      }
+    }
+    a {
+      line-height: 50px;
+      padding: 0em 6px;
+      color: #c4c4c4;
+      font-size: 0.9em;
+      &:hover, &:focus {
+        background-color: #8a0f0f;
+        color: #fff;
+      }
+    }
   }
 
   /* Other stuff in the nav bar */

@@ -19,7 +19,7 @@
 
 
 
- 	
+
 
 
 	.formholder{
@@ -99,83 +99,6 @@
 		text-decoration: none;
 	}
 
-	.steamsignin{
-		margin-left:394px
-	}
-
-
-/*********************************************************************************/
-/* Tabs                                                                */
-/*********************************************************************************/
-#tabs > .active{
-	color:#fff;
-	/* IE10 Consumer Preview */
-	background-image: -ms-linear-gradient(top, #AEAEAE 40%, #A4A4A4 60%);
-	/* Mozilla Firefox */
-	background-image: -moz-linear-gradient(top, #AEAEAE 40%, #A4A4A4 60%);
-	/* Webkit (Safari/Chrome 10) */
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(.4, #AEAEAE), color-stop(.6, #A4A4A4));
-	/* Webkit (Chrome 11+) */
-	background-image: -webkit-linear-gradient(top, #AEAEAE 40%, #A4A4A4 60%);
-	/* IE 6-9  */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#AEAEAE', endColorstr='#A4A4A4',GradientType=0 );
-    background: #BC1414;
-}
-
-#tabs > .nonactive{
-	color:#838383;
-	cursor:pointer;
-	/* IE10 Consumer Preview */
-	background-image: -ms-linear-gradient(top, #D7D7D7 40%, #CCCCCC 60%);
-	/* Mozilla Firefox */
-	background-image: -moz-linear-gradient(top, #D7D7D7 40%, #CCCCCC 60%);
-	/* Webkit (Safari/Chrome 10) */
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(.4, #D7D7D7), color-stop(.6, #CCCCCC));
-	/* Webkit (Chrome 11+) */
-	background-image: -webkit-linear-gradient(top, #D7D7D7 40%, #CCCCCC 60%);
-	/* IE 6-9  */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D7D7D7', endColorstr='#CCCCCC',GradientType=0 );
-    background: #1B1B1B image-url('bg01.png') repeat;
-}
-
-.tab{
-	font-size:18px;
-	font-weight:bold;
-	border-top-left-radius:6px;
-	border-top-right-radius:6px;
-	padding:8px 16px;
-	text-decoration:none;
-}
-
-.tab_mini{
-	font-size:12px;
-	font-weight:bold;
-	border-top-left-radius:6px;
-	border-top-right-radius:6px;
-	padding:4px 12px;
-}
-
-#tabs > .tab {
-	float:left;
-	margin-left:5px;
-}
-
-#tabs .TabsContainer{
-	border:1px solid #A4A4A4;
-	border-radius:6px;
-	padding:0px;
-	background:#FFFFFF;
-  float: left;
-  width: 100%;
-}
-
-[class^="tabbody"].active{
-	display:block;
-}
-
-[class^="tabbody"].nonactive{
-	display:none;
-}
 /*********************************************************************************/
 /* Heading Titles                                                                */
 /*********************************************************************************/

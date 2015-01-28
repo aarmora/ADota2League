@@ -1,156 +1,154 @@
 
-  <%= javascript_include_tag "app" %>
+<%= javascript_include_tag "app" %>
 
-<div id="fullbox">
-    <div id="tabs">
-        <div class="tab active" id="tab1">News</div>
-        <div class="tab nonactive" id="tab2">The Why</div>
-        <div class="tab nonactive" id="tab3">Rules</div>
-        <div class="tab nonactive" id="tab4">Submit Top Plays!</div>
-        <div style="clear: both"></div>
-        <div class="TabsContainer" style="width:100%">
-            <div class="tabbody1 active">
-                <div class="<%= @official_streams.empty? ? 'col-md-12' : 'col-md-5' %>">
-                      <div ng-app="blogApp" ng-controller="blogController">
-                        <article ng-repeat="post in posts | limitTo:5">
-                          <header>
-                            <h2>
-                              <a href="{{post.link}}" target="_blank">{{post.title}}</a>
-                              <br />
-                              <small ng-show="post['dc:creator']">{{post["dc:creator"]}} -</small>
-                              <small ng-hide="post['dc:creator']">Ryan -</small>
+<div class="tabbable">
+  <% content_for :subnav do %>
+    <ul class="nav nav-tabs">
+      <li class="tab active"><a data-toggle="tab" href="#news">News</a></li>
+      <li class="tab"><a data-toggle="tab" href="#why">The Why</a></li>
+      <li class="tab"><a data-toggle="tab" href="#rules">Rules</a></li>
+      <li class="tab"><a data-toggle="tab" href="#plays">Submit Top Plays!</a></li>
+    </ul>
+  <% end %>
+  <div class="tab-content">
+    <div class="tab-pane active" id="news">
+        <div class="<%= @official_streams.empty? ? 'col-md-12' : 'col-md-5' %>">
+            <div ng-app="blogApp" ng-controller="blogController">
+              <article ng-repeat="post in posts | limitTo:5">
+                <header>
+                  <h2>
+                    <a href="{{post.link}}" target="_blank">{{post.title}}</a>
+                    <br />
+                    <small ng-show="post['dc:creator']">{{post["dc:creator"]}} -</small>
+                    <small ng-hide="post['dc:creator']">Ryan -</small>
 
-                              <small>{{post.pubDate | limitTo:16}}</small>
-                            </h2>
+                    <small>{{post.pubDate | limitTo:16}}</small>
+                  </h2>
 
-                          </header>
-                          <div class="col-mid-12">
-                            <!-- <a href="{{post.image}}" target="_blank"><img src="{{post.image}}"/></a> -->
-                          </div>
-                          <div class="col-mid-12">
-                            <span ng-class="{dots: post.description.length > 800}" ng-bind-html="post.description | limitTo: 800 "></span>
-                          </div>
-                          <br>
-                          <a href="{{post.comments}}" target="_blank">{{post["slash:comments"]}}
-                            <ng-pluralize count="post['slash:comments'] | number" when="{
-                              '1': 'comment',
-                              'other': 'comments'
-                              }"
-                            </ng-pluralize>
-                          </a>
-                          <hr>
-                        </article>
-                      </div>
+                </header>
+                <div class="col-mid-12">
+                  <!-- <a href="{{post.image}}" target="_blank"><img src="{{post.image}}"/></a> -->
                 </div>
-                <% unless @official_streams.empty? %>
-                    <div class="col-md-6 col-md-offset-1 hidden-sm hidden-xs">
-                        <h4>Watch Live AD2L Streams</h4>
-                        <%- @official_streams.each do |stream| %>
-                        <object type="application/x-shockwave-flash"
-                                style="width: 100%; height: 370px;"
-                                data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=<%= stream.channel.name %>"
-                                bgcolor="#000000">
-                          <param  name="allowFullScreen"
-                                  value="true" />
-                          <param  name="allowScriptAccess"
-                                  value="always" />
-                          <param  name="allowNetworking"
-                                  value="all" />
-                          <param  name="movie"
-                                  value="http://www.twitch.tv/widgets/live_embed_player.swf" />
-                          <param  name="flashvars"
-                                  value="hostname=www.twitch.tv&channel=<%= stream.channel.name %>&auto_play=false&start_volume=20" />
-                        </object>
-                          <br /><br />
-                        <%- end %>
-                    </div>
-                <% end %>
-        	</div>
-            <div class="tabbody2 nonactive">
-                <div>
-                    <p>We created this league because we love to play Dota.  We are busy adults but want to have at least one dedicated night a week to play games as an organized team.  We want this league to be as simple and user friendly as possible.  Most of all we want to have fun and enjoy Dota!</p>
-
-                    <p>Please, go and sign up.  It's as simple as signing with your steam account and submitting your team name and email.</p>
-
-                    <p>Don't have a team?  Sign up as a free agent!  We can't guarantee to find you a spot but we will do everything we can to try and find you a team.</p>
+                <div class="col-mid-12">
+                  <span ng-class="{dots: post.description.length > 800}" ng-bind-html="post.description | limitTo: 800 "></span>
                 </div>
-            </div>
-            <div class="tabbody3 nonactive">
-                <div>
-                   <h2>No-Shows, Forfeits, Disputes, Coordination and Scheduling</h2>
-                    <h3>Scheduling</h3>
-                    <p>
-                      We try to assign every match a default time, you are of course welcome to reschedule at a better time for you and the other team, but both captains must confirm this on the match page on the AD2L site. One captain may propose a change by picking a new time, and the other captain must accept it. Until this happens, everyone is expected to play at the default time shown on the match page. Please check your match pages frequently for comments or changes! From now on (post Season 4-playoffs) each match on the site will have a lobby password generated for it (on the page). You should search for the lobby or create it if it does not exist.
-                    </p>
-                    <h3>Contact</h3>
-                    <p>
-                      We encourage you to contact the other captain ahead of time to ensure the time works and to coordinate on finding a caster or whatever else you might need. However, should you be unable to find the other team, the ONLY place to look is the <%=link_to "AD2L Steam chat" "steam://friends/joinchat/103582791435143521" %>. Only captains should communicate in steam chat. Friend requests are unreliable. Guild chat is non-official as we cannot invite everyone in a timely fashion, feel free to use guild chat to find inhouses and RMM players. But if you are looking for an opponent look in steam chat instead.
-                    </p>
-                    <h3>Forfeits</h3>
-                    <p>
-                     We recognize that no-shows were a huge problem season 4, and we’d like to clarify the rules for everyone going forward. If all of your players are not in the lobby 15 minutes after the scheduled time, you forfeit both games. We want this to be a fun league and encourage you to scrimmage, but if you are claiming a forfeit win, you must do so BEFORE any games are played. If both captains agree to play late, you may no longer claim a forfeit win. Evidence of a no-show should always be captured (screen shot, etc) and submitted IMMEDIATELY to the email below. We will use the time we receive the email as the final time the match was called.
-                    </p>
-                    <h3>Reporting and Disputes</h3>
-                    <p>
-                     We’ve also empowered captains to report scores, it is your job to ensure your teams scores are accurate. Please report each match by editing the score on the match page after your game. If you have an issue you feel the admins need to get involved with, please collect evidence and email ad2l-admins@groups.google.com, we will only be assisting with requests sent via that account.
-                    </p>
-                    <h3>Behavior</h3>
-                    <p>
-                     We’ve also empowered captains to report scores, it is your job to ensure your teams scores are accurate. Please report each match by editing the score on the match page after your game. If you have an issue you feel the admins need to get involved with, please collect evidence and email ad2l-admins@groups.google.com, we will only be assisting with requests sent via that account.
-                    </p>
-
-                    <h3>Stand ins</h3>
-                    <p>Stand ins are totally allowed.  We want the games to be played!  If you are having trouble filling your roster for the season or just one night, please check the free agent page <a href="freeagent.asp">here</a> or contact us and we'll make sure that you have a full team.</p>
-
-                    <h3>Game Settings</h3>
-                    <p>Game Mode: Captains Mode</p>
-                    <p>Home team gets choice between either pick or side.</p>
-                    <p>Version: Tournament</p>
-                    <p>Spectators: AD2L</p>
-                    <p>Cheats: Disabled</p>
-                    <h3>Servers</h3>
-                    <p>Defaults to USE for NA region and EUW for EU region.</p>
-
-                    <h3>Pauses</h3>
-                    <p>Teams are allowed to pause up to three times per match. The opposing team must respect this pause for a minimum of three  minutes, but then are free to unpause whenever they wish.</p>
-
-                    <h3>Prize</h3>
-                    <p>See our <%=link_to "FAQ page", "community"%></p>
-                </div>
-
-            </div>
-            <div class="tabbody4 nonactive">
-              <% if @current_user %>
-                <div class="container-fluid">
-                  <h3>Submit your top plays!</h3>
-                  <%= form_tag (top_plays_email_path), :remote => true, :html => { :class => "form-horizontal", :role => "form"}, :id => "top_plays_form" do %>
-                    <div class="form-group">
-                      <%= label_tag 'name', 'Name' %>
-                      <%= text_field_tag 'name', nil, class: 'form-control', placeholder: 'Your Name (optional)' %>
-                    </div>
-                    <div class="form-group">
-                       <%= label_tag 'email', 'Email' %>
-                       <%= email_field_tag 'email', nil, class: 'form-control', placeholder: 'Your Email Address (optional)' %>
-                    </div>
-                    <div class="form-group">
-                      <%= label_tag 'time', 'Match Time' %>
-                      <%= text_field_tag 'time', nil, class: 'form-control', placeholder: 'When did the play happen?', :required => true %>
-                    </div>
-                    <div class="form-group">
-                      <%= label_tag 'match_id', 'Match ID' %>
-                      <%= text_field_tag 'match_id', nil, class: 'form-control', placeholder: 'Match ID?', :required => true %>
-                    </div>
-                    <div class="form-group">
-                      <%= label_tag 'comments', 'Comments' %>
-                      <%= text_area_tag 'comments', nil, class: 'form-control', rows: 4, placeholder: 'Tell us a bit about the play (optional)' %>
-                    </div>
-                    <%= submit_tag 'Submit', class: 'button' %>
-                  <%end%>
-                </div>
-              <% else %>
-                <%= render :partial => "register/sign_in" %>
-              <% end %>
+                <br>
+                <a href="{{post.comments}}" target="_blank">{{post["slash:comments"]}}
+                  <ng-pluralize count="post['slash:comments'] | number" when="{
+                    '1': 'comment',
+                    'other': 'comments'
+                    }"
+                  </ng-pluralize>
+                </a>
+                <hr>
+              </article>
             </div>
         </div>
+        <% unless @official_streams.empty? %>
+            <div class="col-md-6 col-md-offset-1 hidden-sm hidden-xs">
+                <h4>Watch Live AD2L Streams</h4>
+                <%- @official_streams.each do |stream| %>
+                <object type="application/x-shockwave-flash"
+                        style="width: 100%; height: 370px;"
+                        data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=<%= stream.channel.name %>"
+                        bgcolor="#000000">
+                  <param  name="allowFullScreen"
+                          value="true" />
+                  <param  name="allowScriptAccess"
+                          value="always" />
+                  <param  name="allowNetworking"
+                          value="all" />
+                  <param  name="movie"
+                          value="http://www.twitch.tv/widgets/live_embed_player.swf" />
+                  <param  name="flashvars"
+                          value="hostname=www.twitch.tv&channel=<%= stream.channel.name %>&auto_play=false&start_volume=20" />
+                </object>
+                  <br /><br />
+                <%- end %>
+            </div>
+        <% end %>
+	  </div>
+    <div class="tab-pane" id="why">
+        <div>
+          <p>We created this league because we love to play Dota.  We are busy adults but want to have at least one dedicated night a week to play games as an organized team.  We want this league to be as simple and user friendly as possible.  Most of all we want to have fun and enjoy Dota!</p>
+
+          <p>Please, go and sign up.  It's as simple as signing with your steam account and submitting your team name and email.</p>
+
+          <p>Don't have a team?  Sign up as a free agent!  We can't guarantee to find you a spot but we will do everything we can to try and find you a team.</p>
+        </div>
     </div>
+    <div class="tab-pane" id="rules">
+      <h2>No-Shows, Forfeits, Disputes, Coordination and Scheduling</h2>
+      <h3>Scheduling</h3>
+      <p>
+        We try to assign every match a default time, you are of course welcome to reschedule at a better time for you and the other team, but both captains must confirm this on the match page on the AD2L site. One captain may propose a change by picking a new time, and the other captain must accept it. Until this happens, everyone is expected to play at the default time shown on the match page. Please check your match pages frequently for comments or changes! From now on (post Season 4-playoffs) each match on the site will have a lobby password generated for it (on the page). You should search for the lobby or create it if it does not exist.
+      </p>
+      <h3>Contact</h3>
+      <p>
+        We encourage you to contact the other captain ahead of time to ensure the time works and to coordinate on finding a caster or whatever else you might need. However, should you be unable to find the other team, the ONLY place to look is the <%=link_to "AD2L Steam chat" "steam://friends/joinchat/103582791435143521" %>. Only captains should communicate in steam chat. Friend requests are unreliable. Guild chat is non-official as we cannot invite everyone in a timely fashion, feel free to use guild chat to find inhouses and RMM players. But if you are looking for an opponent look in steam chat instead.
+      </p>
+      <h3>Forfeits</h3>
+      <p>
+       We recognize that no-shows were a huge problem season 4, and we’d like to clarify the rules for everyone going forward. If all of your players are not in the lobby 15 minutes after the scheduled time, you forfeit both games. We want this to be a fun league and encourage you to scrimmage, but if you are claiming a forfeit win, you must do so BEFORE any games are played. If both captains agree to play late, you may no longer claim a forfeit win. Evidence of a no-show should always be captured (screen shot, etc) and submitted IMMEDIATELY to the email below. We will use the time we receive the email as the final time the match was called.
+      </p>
+      <h3>Reporting and Disputes</h3>
+      <p>
+       We’ve also empowered captains to report scores, it is your job to ensure your teams scores are accurate. Please report each match by editing the score on the match page after your game. If you have an issue you feel the admins need to get involved with, please collect evidence and email ad2l-admins@groups.google.com, we will only be assisting with requests sent via that account.
+      </p>
+      <h3>Behavior</h3>
+      <p>
+       We’ve also empowered captains to report scores, it is your job to ensure your teams scores are accurate. Please report each match by editing the score on the match page after your game. If you have an issue you feel the admins need to get involved with, please collect evidence and email ad2l-admins@groups.google.com, we will only be assisting with requests sent via that account.
+      </p>
+
+      <h3>Stand ins</h3>
+      <p>Stand ins are totally allowed.  We want the games to be played!  If you are having trouble filling your roster for the season or just one night, please check the free agent page <a href="freeagent.asp">here</a> or contact us and we'll make sure that you have a full team.</p>
+
+      <h3>Game Settings</h3>
+      <p>Game Mode: Captains Mode</p>
+      <p>Home team gets choice between either pick or side.</p>
+      <p>Version: Tournament</p>
+      <p>Spectators: AD2L</p>
+      <p>Cheats: Disabled</p>
+      <h3>Servers</h3>
+      <p>Defaults to USE for NA region and EUW for EU region.</p>
+
+      <h3>Pauses</h3>
+      <p>Teams are allowed to pause up to three times per match. The opposing team must respect this pause for a minimum of three  minutes, but then are free to unpause whenever they wish.</p>
+
+      <h3>Prize</h3>
+      <p>See our <%=link_to "FAQ page", "community"%></p>
+    </div>
+    <div class="tab-pane" id="plays">
+      <% if @current_user %>
+        <div class="container-fluid">
+          <h3>Submit your top plays!</h3>
+          <%= form_tag (top_plays_email_path), :remote => true, :html => { :class => "form-horizontal", :role => "form"}, :id => "top_plays_form" do %>
+            <div class="form-group">
+              <%= label_tag 'name', 'Name' %>
+              <%= text_field_tag 'name', nil, class: 'form-control', placeholder: 'Your Name (optional)' %>
+            </div>
+            <div class="form-group">
+               <%= label_tag 'email', 'Email' %>
+               <%= email_field_tag 'email', nil, class: 'form-control', placeholder: 'Your Email Address (optional)' %>
+            </div>
+            <div class="form-group">
+              <%= label_tag 'time', 'Match Time' %>
+              <%= text_field_tag 'time', nil, class: 'form-control', placeholder: 'When did the play happen?', :required => true %>
+            </div>
+            <div class="form-group">
+              <%= label_tag 'match_id', 'Match ID' %>
+              <%= text_field_tag 'match_id', nil, class: 'form-control', placeholder: 'Match ID?', :required => true %>
+            </div>
+            <div class="form-group">
+              <%= label_tag 'comments', 'Comments' %>
+              <%= text_area_tag 'comments', nil, class: 'form-control', rows: 4, placeholder: 'Tell us a bit about the play (optional)' %>
+            </div>
+            <%= submit_tag 'Submit', class: 'button' %>
+          <%end%>
+        </div>
+      <% else %>
+        <%= render :partial => "register/sign_in" %>
+      <% end %>
+    </div>
+  </div>
 </div>

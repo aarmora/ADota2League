@@ -4,106 +4,107 @@
 <% content_for :meta_description do %>
     Check out the schedules for all the currently running AD2L tournaments
 <% end %>
-<div id="fullbox">
-    <div id="tabs">
+<% content_for :subnav do %>
+    <ul class="nav nav-tabs">
 		<%- @seasons.each do |season| %>
             <% unless season.active == false %>
-        	   <%= link_to season.title, season, :class => "tab " + (@season == season ? "active" : "nonactive") %>
+        	   <li class="tab <%= (@season == season ? "active" : "")%>" + ><%= link_to season.title, season %></li>
             <%end%>
         <% end %>
-        <% cache_unless(@no_cache, "seasonPage-" + @season.id.to_s) do %>
-            <div style="clear: both"></div>
-            <div class="TabsContainer">
-                <div class="tabbody3 active">
-                    <div class="steam_chat container-fluid">
-                        Can't find your opponent?  Join the <a href="steam://friends/joinchat/103582791435143521" class="btn btn-primary">STEAM group chat!</a>
-                    </div>
-                    <% if (@season.challonge_url && !@season.challonge_tournament) || (@season.challonge_tournament && @season.challonge_tournament.state != "pending") %>
-                        <iframe src="http://challonge.com/<%=@season.challonge_url%>/module" width="1100px" height="1000px" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
-                    <% else %>
-                        <div class="col-sm-4">
-                            <h2 class="rankings">Rankings</h2>
-                            <% @teams_by_division.each do |division, team_seasons| %>
-                                <table class="table table-hover table-bordered">
-                                    <thead>
-                                        <% if @teams_by_division.size > 1 %>
-                                            <tr>
-                                                <th colspan=3>
-                                                    Division <%= division %>
-                                                    <% matched_permission = @permissions.detect { |p| p.division == division }
-                                                    if matched_permission  %>
-                                                        <br/>
-                                                        <sub>Admin -
-                                                        <%= link_to matched_permission.player.name, matched_permission.player%></sub>
-                                                    <% end %>
-                                                </th>
-                                            </tr>
-                                        <% end %>
-                                        <tr>
-                                            <%if @teams_by_division.size > 1 %>
-                                                <th>Place</th>
-                                            <%else%>
-                                                <th></th>
-                                            <%end%>
-                                            <th>Name</th>
-                                            <th>Wins</th>
-                                            <% if @season.check_in_available? %>
-                                                <th>Checked in?</th>
+    </ul>
+<% end %>
+
+<% cache_unless(@no_cache, "seasonPage-" + @season.id.to_s) do %>
+    <div style="clear: both"></div>
+    <div class="TabsContainer">
+        <div class="tabbody3 active">
+            <div class="steam_chat container-fluid">
+                Can't find your opponent?  Join the <a href="steam://friends/joinchat/103582791435143521" class="btn btn-primary">STEAM group chat!</a>
+            </div>
+            <% if (@season.challonge_url && !@season.challonge_tournament) || (@season.challonge_tournament && @season.challonge_tournament.state != "pending") %>
+                <iframe src="http://challonge.com/<%=@season.challonge_url%>/module" width="1100px" height="1000px" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
+            <% else %>
+                <div class="col-sm-4">
+                    <h2 class="rankings">Rankings</h2>
+                    <% @teams_by_division.each do |division, team_seasons| %>
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <% if @teams_by_division.size > 1 %>
+                                    <tr>
+                                        <th colspan=3>
+                                            Division <%= division %>
+                                            <% matched_permission = @permissions.detect { |p| p.division == division }
+                                            if matched_permission  %>
+                                                <br/>
+                                                <sub>Admin -
+                                                <%= link_to matched_permission.player.name, matched_permission.player%></sub>
                                             <% end %>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% team_seasons.sort_by do |ts|
-                                            if @season.start_date && @season.start_date > Time.now
-                                                ts.id
-                                            else
-                                                @total_scores[ts.team_id].to_i
-                                            end
-                                        end.reverse.each_with_index do |team_season, index| %>
-                                            <tr>
-                                                <td><%= index + 1 %></td>
-                                                <td><%= link_to team_season.team.teamname, team_season.team %></td>
-                                                <td><%= @total_scores[team_season.team_id].to_i %></td>
-                                                <% if @season.check_in_available? %>
-                                                    <td>
-                                                        <% if Permissions.can_edit?(team_season.team) || Permissions.can_edit?(team_season) && !team_season.checked_in %>
-                                                            <%= button_tag "Check In", :class => "btn btn-primary btn-block js-check-in", "data-url" => team_season_path(team_season) %>
-                                                        <% else %>
-                                                            <%= team_season.checked_in ? "Yes" : "" %>
-                                                        <% end %>
-                                                    </td>
-                                                <% end %>
-                                            </tr>
-                                        <%end%>
-                                    </tbody>
-                                </table>
-                            <%end%>
-                        </div>
-                        <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
-                            <h2>Schedule</h2>
-                            <% if @season.challonge_tournament || (@season.late_fee_start && @season.late_fee_start > Time.now) %>
-                                <%if @season.challonge_id.nil?%>
-                                    <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
-                                <% else %>
-                                    <p>Schedule will be released when the tournament starts on <%= format_datetime_month(@season.start_date) %></p>
+                                        </th>
+                                    </tr>
                                 <% end %>
-                            <% else %>
-                                <ul class="list-inline week-selector">
-                                    <span class="week">Week</span>
-                                    <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
-                                        <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
+                                <tr>
+                                    <%if @teams_by_division.size > 1 %>
+                                        <th>Place</th>
+                                    <%else%>
+                                        <th></th>
+                                    <%end%>
+                                    <th>Name</th>
+                                    <th>Wins</th>
+                                    <% if @season.check_in_available? %>
+                                        <th>Checked in?</th>
                                     <% end %>
-                                </ul>
-                                <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
-                                    <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
-                                        <%= render :partial => "matches/match_table", :object => @matches.select{|m| m.week == week_num } %>
-                                    </div>
-                                <% end %>
-                            <% end %>
-                        </div>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% team_seasons.sort_by do |ts|
+                                    if @season.start_date && @season.start_date > Time.now
+                                        ts.id
+                                    else
+                                        @total_scores[ts.team_id].to_i
+                                    end
+                                end.reverse.each_with_index do |team_season, index| %>
+                                    <tr>
+                                        <td><%= index + 1 %></td>
+                                        <td><%= link_to team_season.team.teamname, team_season.team %></td>
+                                        <td><%= @total_scores[team_season.team_id].to_i %></td>
+                                        <% if @season.check_in_available? %>
+                                            <td>
+                                                <% if Permissions.can_edit?(team_season.team) || Permissions.can_edit?(team_season) && !team_season.checked_in %>
+                                                    <%= button_tag "Check In", :class => "btn btn-primary btn-block js-check-in", "data-url" => team_season_path(team_season) %>
+                                                <% else %>
+                                                    <%= team_season.checked_in ? "Yes" : "" %>
+                                                <% end %>
+                                            </td>
+                                        <% end %>
+                                    </tr>
+                                <%end%>
+                            </tbody>
+                        </table>
                     <%end%>
                 </div>
-            </div>
-        <% end %>
+                <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
+                    <h2>Schedule</h2>
+                    <% if @season.challonge_tournament || (@season.late_fee_start && @season.late_fee_start > Time.now) %>
+                        <%if @season.challonge_id.nil?%>
+                            <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
+                        <% else %>
+                            <p>Schedule will be released when the tournament starts on <%= format_datetime_month(@season.start_date) %></p>
+                        <% end %>
+                    <% else %>
+                        <ul class="list-inline week-selector">
+                            <span class="week">Week</span>
+                            <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
+                                <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
+                            <% end %>
+                        </ul>
+                        <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
+                            <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
+                                <%= render :partial => "matches/match_table", :object => @matches.select{|m| m.week == week_num } %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+            <%end%>
+        </div>
     </div>
-</div>
+<% end %>
