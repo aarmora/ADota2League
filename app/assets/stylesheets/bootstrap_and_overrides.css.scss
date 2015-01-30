@@ -120,6 +120,7 @@ body {
     font-size: 14px;
     color: white;
     text-transform: none;
+    z-index: 1; // Put it over the bootstrap crap
 
     a {
     	color: white;
