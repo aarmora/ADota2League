@@ -7,7 +7,13 @@ class WelcomeController < ApplicationController
 
   def index
     @current_tab = "index"
-    # @posts = Post.all.sort_by{|p| p[:created_at]}.reverse
+
+  end
+
+  def get_posts
+    @posts = HTTParty.get('http://api.tumblr.com/v2/blog/blog.amateurdota2league.com/posts?api_key=R53BwtQewNSXChah0yFwYhbj8ewGZWTt6Y1y4lzsDxCwUH0SPt')
+    render :json => @posts
+
   end
 
   def community
