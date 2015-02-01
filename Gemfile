@@ -43,6 +43,7 @@ group :production do
   gem "oink" # for doing memory analysis
   gem 'memcachier'
   gem 'dalli'
+  gem 'unicorn'
 end
 
 gem 'stripe'
