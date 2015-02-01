@@ -5,7 +5,7 @@
 			  :date,
 			  :display_with => lambda { |date| format_datetime(date)},
 			  :activator => ".fa-calendar.#{match.id}-date",
-	      :type => :datetime
+	      :as => :datetime
 			%>
 			<% if Permissions.can_edit?(match) %>
 				<span class="fa fa-calendar form-control-feedback <%=match.id%>-date"></span>
@@ -18,7 +18,7 @@
 					best_in_place match,
 					  :home_team_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-home",
-			      	  :type => :select,
+			      	  :as => :select,
 			      	  collection: select_teams_for_season_week_with_current_team(match.season_id, match.week, match.home_team)
 			  else
 			  	link_to_if match.home_team && match.home_team != @team, match.home_team ? match.home_team.teamname : "TBD", match.home_team
@@ -33,7 +33,7 @@
 					best_in_place match,
 					  :away_team_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-away",
-			      	  :type => :select,
+			      	  :as => :select,
 			      	  # this is terrible and I should be shot for doing it
 			      	  collection: select_teams_for_season_week_with_current_team(match.season_id, match.week, match.away_team)
 			  else
@@ -45,11 +45,11 @@
 				<%end%>
 	</td>
 	<td>
-		<%= best_in_place_if Permissions.can_edit?(match), match, :home_score, :type => :input %>
+		<%= best_in_place_if Permissions.can_edit?(match), match, :home_score, :as => :input %>
 		:
-		<%= best_in_place_if Permissions.can_edit?(match), match, :away_score, :type => :input %>
+		<%= best_in_place_if Permissions.can_edit?(match), match, :away_score, :as => :input %>
 		<% if Permissions.can_edit?(match) %>
-			<%= best_in_place match, :forfeit, :type => :checkbox%>
+			<%= best_in_place match, :forfeit, :as => :checkbox%>
 			<br>
 			<sub>Forfeit?</sub>
 		<% end %>
@@ -61,7 +61,7 @@
 		    match.caster ? (link_to match.caster.name, match.caster.twitch, :target => "blank") : ""
 		  end),
 		  :activator => ".glyphicon-warning-sign.#{match.id}-caster",
-      	  :type => :select,
+      	  :as => :select,
       	  collection: [["", "None"]] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 		%>
 		<% if Permissions.can_edit?(match) %>

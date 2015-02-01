@@ -60,7 +60,6 @@ class MatchesController < ApplicationController
   end
 
   def update
-
     @match = Match.find(params[:id])
 
     if @match.home_team && @match.away_team
@@ -82,7 +81,14 @@ class MatchesController < ApplicationController
     # do reschedule handling
     if params[:match][:reschedule_time] && @current_user.role_for_object(@match) == :captain
       @match.reschedule_proposer = @current_user.id
-      UserMailer.reschedule_proposed(params[:match][:date], @match, @current_user).deliver
+      UserMailer.reschedule_proposed(params[:match][:reschedule_time], @match, @current_user).deliver
+    end
+
+    # Admin rescheduling
+     if params[:match][:reschedule_time] && @current_user.role_for_object(@match) == :admin
+      @match.reschedule_proposer = nil
+      params[:match][:date] = params[:match][:reschedule_time]
+      # TODO: send mail to both captains?
     end
 
     # Log changes for later

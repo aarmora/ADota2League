@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<% # Reschedule Warnings %>
 	<% if @current_user && @match.reschedule_proposer == @current_user.id %>
-    <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept!</div>
+    <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept! The time shown is the reschedule time, the current scheduled time is still <%= format_datetime(date) %></div>
   <% elsif (Permissions.can_edit?(@match) || @can_edit) && @match.reschedule_proposer %>
     <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= format_datetime(@match.reschedule_time) %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
   <% end %>
@@ -9,15 +9,13 @@
 	<div class="row">
 		<div class="col-md-8">
 			<% if Permissions.can_edit?(@match) || @can_edit %>
-				NOTE: The below selector will allow you to ask to reschedule the match. Both parties must agree on a time for it to go through. The selector is in UTC, so you MUST translate your desired date into UTC time.
-				<br /><br />
-				For reference the current match time in UTC is: <%= format_datetime(@match.date) %>
+				NOTE: The below selector will allow you to ask to reschedule the match. Both parties must agree on a time for it to become official. If your opponent has already asked for a reschedule, you can simply click above to accept it. Beware of the timezone resetting when you open the selector!
 			<% end %>
 			<h4>
 				<%if Permissions.can_edit?(@match) || @can_edit%>
 					<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
 					  :reschedule_time,
-					  :display_with => lambda { |date| format_datetime(date)},
+					  :display_with => lambda { |date| format_datetime(date)}, # TODO: this doesn't pre-fill the time right
 					  :activator => ".fa-calendar.#{@match.id}-date, .js-time",
 			      :type => :datetime
 					%>
