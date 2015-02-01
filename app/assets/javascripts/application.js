@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/slider
 //= require jquery-ui/datepicker
 //= require twitter/bootstrap
 //= require best_in_place
