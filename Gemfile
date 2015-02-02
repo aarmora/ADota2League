@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.1.5"
 
-gem 'rails', '~> 4.1'
+gem 'rails', '~> 4.2'
 gem 'rails-observers'
 gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 #gem 'unicorn'
@@ -43,7 +43,7 @@ group :production do
   gem "oink" # for doing memory analysis
   gem 'memcachier'
   gem 'dalli'
-  gem 'unicorn'
+  #gem 'unicorn'
 end
 
 gem 'stripe'
