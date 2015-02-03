@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<% # Reschedule Warnings %>
 	<% if @current_user && @match.reschedule_proposer == @current_user.id %>
-    <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept! The time shown is the reschedule time, the current scheduled time is still <%= format_datetime(date) %></div>
+    <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept! The time shown is the reschedule time, the current scheduled time is still <%= format_datetime(@match.date) %></div>
   <% elsif (Permissions.can_edit?(@match) || @can_edit) && @match.reschedule_proposer %>
     <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= format_datetime(@match.reschedule_time) %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
   <% end %>

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby "2.1.5"
+ruby "2.2.0"
 
-gem 'rails', '~> 4.1'
+gem 'rails', '~> 4.2'
 gem 'rails-observers'
 gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 #gem 'unicorn'
@@ -30,10 +30,6 @@ gem 'kappa', '~> 1.0'
 gem 'best_in_place', "~> 3.0"
 
 gem 'mandrill-api'
-
-gem 'tzinfo-data'
-
-gem "httparty"
 
 gem 'rubin' # round robin
 gem 'icalendar' # Ical support
