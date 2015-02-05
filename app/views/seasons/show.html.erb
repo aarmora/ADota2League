@@ -14,7 +14,7 @@
     </ul>
 <% end %>
 
-<% cache_unless(@no_cache, "seasonPage-" + @season.id.to_s) do %>
+<% cache_unless @no_cache, "seasonPage-" + @season.id.to_s, skip_digest: true do %>
     <div style="clear: both"></div>
     <div class="TabsContainer">
         <div class="tabbody3 active">
