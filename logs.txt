@@ -1503,3 +1503,104 @@ Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be rem
 2014-08-08T15:58:11.035828+00:00 heroku[web.1]: Error R12 (Exit timeout) -> At least one process failed to exit within 10 seconds of SIGTERM
 2014-08-08T15:58:11.036173+00:00 heroku[web.1]: Stopping remaining processes with SIGKILL
 2014-08-08T15:58:13.315309+00:00 heroku[web.1]: Process exited with status 137
+2015-02-06T19:33:19.724391+00:00 app[web.1]: Started GET "/auth/steam/callback?_method=post&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.mode=id_res&openid.op_endpoint=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Flogin&openid.claimed_id=http%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198039667046&openid.identity=http%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198039667046&openid.return_to=http%3A%2F%2Famateurdota2league.com%2Fauth%2Fsteam%2Fcallback%3F_method%3Dpost&openid.response_nonce=2015-02-06T19%3A33%3A19ZrZZqG88S%2FjQs8tIjSf6xxmKStVI%3D&openid.assoc_handle=1234567890&openid.signed=signed%2Cop_endpoint%2Cclaimed_id%2Cidentity%2Creturn_to%2Cresponse_nonce%2Cassoc_handle&openid.sig=0F2rodtfeoov0%2Fwy5jeVqFzqKII%3D" for 5.151.152.209 at 2015-02-06 19:33:19 +0000
+2015-02-06T19:33:19.730073+00:00 app[web.1]: I, [2015-02-06T19:33:19.729980 #10]  INFO -- OpenID: Performing discovery on http://steamcommunity.com/openid/id/76561198039667046
+2015-02-06T19:33:19.729790+00:00 app[web.1]: I, [2015-02-06T19:33:19.729730 #10]  INFO -- OpenID: Error attempting to use stored discovery information: OpenID::TypeURIMismatch
+2015-02-06T19:33:19.729818+00:00 app[web.1]: I, [2015-02-06T19:33:19.729779 #10]  INFO -- OpenID: Attempting discovery to verify endpoint
+2015-02-06T19:33:19.725971+00:00 app[web.1]: I, [2015-02-06T19:33:19.725894 #10]  INFO -- omniauth: (steam) Callback phase initiated.
+2015-02-06T19:33:20.035179+00:00 app[web.1]: I, [2015-02-06T19:33:20.035080 #10]  INFO -- OpenID: Using 'check_authentication' with https://steamcommunity.com/openid/login
+2015-02-06T19:33:20.719484+00:00 app[web.1]: Started GET "/players/12364" for 68.180.228.171 at 2015-02-06 19:33:20 +0000
+2015-02-06T19:33:20.732790+00:00 app[web.1]:   Rendered players/_player_comments.html.erb (1.9ms)
+2015-02-06T19:33:20.745135+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2015-02-06T19:33:20.745598+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.0ms)
+2015-02-06T19:33:20.805422+00:00 app[web.1]: Redirected to http://amateurdota2league.com/
+2015-02-06T19:33:20.805536+00:00 app[web.1]: Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+2015-02-06T19:33:20.805687+00:00 app[web.1]: Feb 06 19:33:20 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[10]: Oink Action: welcome#auth_callback
+2015-02-06T19:33:20.730414+00:00 app[web.1]:   Rendered players/_endorsement_icon.html.erb (0.0ms)
+2015-02-06T19:33:20.737616+00:00 app[web.1]:   Rendered players/show.html.erb within layouts/application (7.5ms)
+2015-02-06T19:33:20.745436+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.0ms)
+2015-02-06T19:33:20.746075+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.4ms)
+2015-02-06T19:33:20.721751+00:00 app[web.1]:   Parameters: {"id"=>"12364"}
+2015-02-06T19:33:20.746134+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (0.8ms)
+2015-02-06T19:33:20.721744+00:00 app[web.1]: Processing by PlayersController#show as */*
+2015-02-06T19:33:20.746295+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2015-02-06T19:33:20.746821+00:00 app[web.1]: Feb 06 19:33:20 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[7]: Instantiation Breakdown: Total: 7 | Season: 5 | Player: 1 | Team: 1
+2015-02-06T19:33:20.806001+00:00 app[web.1]: Feb 06 19:33:20 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[10]: Instantiation Breakdown: Total: 0
+2015-02-06T19:33:20.806036+00:00 app[web.1]: Feb 06 19:33:20 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[10]: Oink Log Entry Complete
+2015-02-06T19:33:20.746856+00:00 app[web.1]: Feb 06 19:33:20 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[7]: Oink Log Entry Complete
+2015-02-06T19:33:20.803648+00:00 app[web.1]: Processing by WelcomeController#auth_callback as HTML
+2015-02-06T19:33:20.805909+00:00 app[web.1]: Feb 06 19:33:20 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[10]: Memory usage: 447116 | PID: 10
+2015-02-06T19:33:20.746757+00:00 app[web.1]: Feb 06 19:33:20 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[7]: Memory usage: 440644 | PID: 7
+2015-02-06T19:33:20.746537+00:00 app[web.1]: Completed 200 OK in 25ms (Views: 8.5ms | ActiveRecord: 12.5ms)
+2015-02-06T19:33:20.746632+00:00 app[web.1]: Feb 06 19:33:20 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[7]: Oink Action: players#show
+2015-02-06T19:33:20.773801+00:00 heroku[router]: at=info method=GET path="/players/12364" host=amateurdota2league.com request_id=a447f48e-5f07-425f-817c-6fbbe0e2ee37 fwd="68.180.228.171" dyno=web.1 connect=23ms service=36ms status=200 bytes=28402
+2015-02-06T19:33:20.821491+00:00 heroku[router]: at=info method=GET path="/auth/steam/callback?_method=post&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.mode=id_res&openid.op_endpoint=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Flogin&openid.claimed_id=http%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198039667046&openid.identity=http%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198039667046&openid.return_to=http%3A%2F%2Famateurdota2league.com%2Fauth%2Fsteam%2Fcallback%3F_method%3Dpost&openid.response_nonce=2015-02-06T19%3A33%3A19ZrZZqG88S%2FjQs8tIjSf6xxmKStVI%3D&openid.assoc_handle=1234567890&openid.signed=signed%2Cop_endpoint%2Cclaimed_id%2Cidentity%2Creturn_to%2Cresponse_nonce%2Cassoc_handle&openid.sig=0F2rodtfeoov0%2Fwy5jeVqFzqKII%3D" host=amateurdota2league.com request_id=8203917a-1fa6-43e4-86f3-2af172dd5c7a fwd="5.151.152.209" dyno=web.1 connect=1ms service=1088ms status=302 bytes=1008
+2015-02-06T19:33:21.102409+00:00 heroku[router]: at=info method=GET path="/" host=amateurdota2league.com request_id=01d810a8-1da9-47f2-9138-cf8c0e06c734 fwd="5.151.152.209" dyno=web.1 connect=1ms service=48ms status=200 bytes=35051
+2015-02-06T19:33:21.161885+00:00 heroku[router]: at=info method=GET path="/assets/glyphicons-halflings-regular.ttf" host=amateurdota2league.com request_id=25d9582c-7250-42d8-add9-b28137539566 fwd="98.112.227.16,205.251.202.50" dyno=web.1 connect=1ms service=5ms status=200 bytes=41591
+2015-02-06T19:33:21.098777+00:00 app[web.1]:   Rendered layouts/_ga.html.erb (0.0ms)
+2015-02-06T19:33:21.091268+00:00 app[web.1]:   Rendered welcome/index.html.erb within layouts/application (1.5ms)
+2015-02-06T19:33:21.097831+00:00 app[web.1]:   Rendered welcome/_sFour_faq.html.erb (0.0ms)
+2015-02-06T19:33:21.058809+00:00 app[web.1]: Processing by WelcomeController#index as HTML
+2015-02-06T19:33:21.153404+00:00 app[web.1]: Feb 06 19:33:21 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[10]: Oink Log Entry Complete
+2015-02-06T19:33:21.153369+00:00 app[web.1]: Feb 06 19:33:21 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[10]: Instantiation Breakdown: Total: 0
+2015-02-06T19:33:21.153324+00:00 app[web.1]: Feb 06 19:33:21 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[10]: Memory usage: 447116 | PID: 10
+2015-02-06T19:33:21.097321+00:00 app[web.1]:   Rendered layouts/_flash_messages.html.erb (0.1ms)
+2015-02-06T19:33:21.056146+00:00 app[web.1]: Started GET "/" for 5.151.152.209 at 2015-02-06 19:33:21 +0000
+2015-02-06T19:33:21.098544+00:00 app[web.1]:   Rendered welcome/_onevone_faq.html.erb (0.6ms)
+2015-02-06T19:33:21.097664+00:00 app[web.1]:   Rendered welcome/_wts_faq.html.erb (0.1ms)
+2015-02-06T19:33:21.098606+00:00 app[web.1]:   Rendered layouts/_dialogs.html.erb (1.1ms)
+2015-02-06T19:33:21.099203+00:00 app[web.1]: Feb 06 19:33:21 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[13]: Memory usage: 458816 | PID: 13
+2015-02-06T19:33:21.099063+00:00 app[web.1]: Feb 06 19:33:21 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[13]: Oink Action: welcome#index
+2015-02-06T19:33:21.098968+00:00 app[web.1]: Completed 200 OK in 40ms (Views: 7.1ms | ActiveRecord: 25.0ms)
+2015-02-06T19:33:21.099263+00:00 app[web.1]: Feb 06 19:33:21 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[13]: Instantiation Breakdown: Total: 7 | Season: 5 | Player: 2
+2015-02-06T19:33:21.151416+00:00 app[web.1]: Started GET "/assets/glyphicons-halflings-regular.ttf" for 205.251.202.50 at 2015-02-06 19:33:21 +0000
+2015-02-06T19:33:21.099298+00:00 app[web.1]: Feb 06 19:33:21 dff6e03f-32ed-4b83-9868-e7a572446a05 rails[13]: Oink Log Entry Complete
+2015-02-06T19:33:42.124344+00:00 heroku[api]: Deploy 816301a by amateurdota2league@gmail.com
+2015-02-06T19:33:42.124344+00:00 heroku[api]: Release v293 created by amateurdota2league@gmail.com
+2015-02-06T19:33:42.313969+00:00 heroku[web.1]: State changed from up to starting
+2015-02-06T19:33:44.531426+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2015-02-06T19:33:45.082942+00:00 app[web.1]: Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT
+2015-02-06T19:33:45.082953+00:00 app[web.1]: Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT
+2015-02-06T19:33:45.083767+00:00 app[web.1]: Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT
+2015-02-06T19:33:45.194759+00:00 app[web.1]: Unicorn master intercepting TERM and sending myself QUIT instead
+2015-02-06T19:33:45.931231+00:00 heroku[web.1]: Starting process with command `bundle exec unicorn -p 20791 -c ./config/unicorn.rb`
+2015-02-06T19:33:46.103195+00:00 app[web.1]: I, [2015-02-06T19:33:46.103116 #3]  INFO -- : master complete
+2015-02-06T19:33:46.102917+00:00 app[web.1]: I, [2015-02-06T19:33:46.102836 #3]  INFO -- : reaped #<Process::Status: pid 10 exit 0> worker=1
+2015-02-06T19:33:46.103020+00:00 app[web.1]: I, [2015-02-06T19:33:46.102973 #3]  INFO -- : reaped #<Process::Status: pid 13 exit 0> worker=2
+2015-02-06T19:33:46.102678+00:00 app[web.1]: I, [2015-02-06T19:33:46.057756 #3]  INFO -- : reaped #<Process::Status: pid 7 exit 0> worker=0
+2015-02-06T19:33:48.126783+00:00 app[web.1]: /app/vendor/bundle/ruby/2.2.0/gems/bundler-1.7.12/lib/bundler/rubygems_integration.rb:309:in `block in replace_bin_path': undefined method `name' for nil:NilClass (NoMethodError)
+2015-02-06T19:33:48.126806+00:00 app[web.1]: 	from /app/vendor/bundle/bin/unicorn:16:in `<main>'
+2015-02-06T19:33:48.785095+00:00 heroku[web.1]: Process exited with status 1
+2015-02-06T19:33:48.794347+00:00 heroku[web.1]: State changed from starting to crashed
+2015-02-06T19:33:48.795198+00:00 heroku[web.1]: State changed from crashed to starting
+2015-02-06T19:33:48.937470+00:00 heroku[web.1]: Process exited with status 0
+2015-02-06T19:33:53.408699+00:00 heroku[web.1]: Starting process with command `bundle exec unicorn -p 7631 -c ./config/unicorn.rb`
+2015-02-06T19:33:55.352458+00:00 app[web.1]: /app/vendor/bundle/ruby/2.2.0/gems/bundler-1.7.12/lib/bundler/rubygems_integration.rb:309:in `block in replace_bin_path': undefined method `name' for nil:NilClass (NoMethodError)
+2015-02-06T19:33:55.352481+00:00 app[web.1]: 	from /app/vendor/bundle/bin/unicorn:16:in `<main>'
+2015-02-06T19:33:56.078393+00:00 heroku[web.1]: State changed from starting to crashed
+2015-02-06T19:33:56.067371+00:00 heroku[web.1]: Process exited with status 1
+2015-02-06T19:33:56.528986+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/matches/4351" host=amateurdota2league.com request_id=6ffa9a2c-c597-49e2-8efe-5ef017bf886b fwd="157.55.39.76" dyno= connect= service= status=503 bytes=
+2015-02-06T19:33:57.009481+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/seasons/62" host=amateurdota2league.com request_id=08c29ecb-36de-4d14-9270-ac4f4025ef61 fwd="5.151.152.209" dyno= connect= service= status=503 bytes=
+2015-02-06T19:33:58.113957+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/seasons/62" host=amateurdota2league.com request_id=72612e94-ab94-4bed-b31c-bb9adcccc3f6 fwd="5.151.152.209" dyno= connect= service= status=503 bytes=
+2015-02-06T19:33:58.717237+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=4541c2b8-43dc-46cd-aefa-93fe2fc2f386 fwd="5.151.152.209" dyno= connect= service= status=503 bytes=
+2015-02-06T19:34:03.980363+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/seasons/62" host=amateurdota2league.com request_id=27435895-eb22-454a-8c9a-c5adb7714dd2 fwd="5.151.152.209" dyno= connect= service= status=503 bytes=
+2015-02-06T19:34:04.411574+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=fdf2b5f0-ed80-484d-8634-bb24a3d9eee4 fwd="5.151.152.209" dyno= connect= service= status=503 bytes=
+2015-02-06T19:34:11.145164+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/seasons/58" host=amateurdota2league.com request_id=b61c3e1e-e5bd-4c85-b881-8e26aa062480 fwd="5.151.152.209" dyno= connect= service= status=503 bytes=
+2015-02-06T19:34:11.586684+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=94ff45c3-f91b-4904-a1ea-64246780baab fwd="5.151.152.209" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:09.580114+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=amateurdota2league.com request_id=89c2ab46-c3db-4913-81a3-47183be60bfd fwd="195.174.193.166" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:10.582309+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=4c9f7a73-6cec-43ad-9b2a-a94d914c6ef4 fwd="195.174.193.166" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:12.378070+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=amateurdota2league.com request_id=ba1695b2-6920-489a-ba96-e7a5992e15fe fwd="195.174.193.166" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:13.203449+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=5525f985-7fbf-4964-97ee-9df6c0c2234e fwd="195.174.193.166" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:14.203398+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=amateurdota2league.com request_id=0b43fb1f-ef7c-4e1d-a838-9273c47a3750 fwd="82.34.149.13" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:14.595920+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=amateurdota2league.com request_id=8340f2f7-7ab2-4555-a3e4-e26ee65beb6e fwd="82.34.149.13" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:14.885400+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=dcd3d8a6-beba-4b42-9664-202c6c62bec3 fwd="82.34.149.13" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:15.118579+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=7d926bd9-6af4-4d04-8d9c-c1fad77348ee fwd="82.34.149.13" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:16.106504+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/seasons" host=amateurdota2league.com request_id=f6880513-9cf8-452a-be84-48a2bb2660a6 fwd="195.174.193.166" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:16.878277+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=c9b56b78-b5cb-41c1-8503-f55ac49a428d fwd="195.174.193.166" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:20.961607+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=amateurdota2league.com request_id=74bbda8b-e073-4c93-9647-efee37700129 fwd="184.99.107.44" dyno= connect= service= status=503 byt
+es=
+2015-02-06T19:35:22.553659+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=daf9624a-0524-4930-9758-c50fbdeb74bb fwd="184.99.107.44" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:27.020845+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=amateurdota2league.com request_id=7373b308-f520-43ae-a1a8-221ea5f5e13d fwd="184.99.107.44" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:27.991752+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=ebde16c8-d5ba-4f90-b537-8808c3aba397 fwd="184.99.107.44" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:57.704085+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=amateurdota2league.com request_id=440036b6-07dc-4b29-8ac0-3da2b2ca077e fwd="82.34.149.13" dyno= connect= service= status=503 bytes=
+2015-02-06T19:35:58.236640+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=amateurdota2league.com request_id=c18872ed-f82f-480b-b186-8435abe50a8b fwd="82.34.149.13" dyno= connect= service= status=503 bytes=
