@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.0"
+ruby "2.1.5"
 
 gem 'rails', '~> 4.2'
 gem 'rails-observers'
@@ -31,7 +31,7 @@ gem 'best_in_place', "~> 3.0"
 
 gem 'mandrill-api'
 
-#gem 'tzinfo-data'
+gem 'tzinfo-data'
 # gem "httparty"
 
 gem 'rubin' # round robin
