@@ -24,6 +24,7 @@ body {
   height: 150px;
 	img {
 		max-height: 120px;
+    max-width: 100%;
 	}
 }
 
@@ -47,9 +48,12 @@ body {
   width:1050px;
 }
 
-
 .dropdown:hover .dropdown-menu {
     display: block;
+ }
+
+ #community table {
+  word-break: break-all;
  }
 
 

@@ -1,15 +1,4 @@
 module ApplicationHelper
-  def cache_unless *args
-    m = args.shift
-    if m
-      yield
-    else
-      cache args do
-        yield
-      end
-    end
-  end
-
   def user_js_tz_name
     tz = @current_user.time_zone if @current_user
     tz ||= "Eastern Time (US & Canada)"

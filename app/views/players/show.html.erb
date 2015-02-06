@@ -3,13 +3,13 @@
 	<%=image_tag ("brushfire.jpg"), :style => "width:83%; cursor:pointer; position:absolute; z-index:1", :id => "brushfire"%>
 <%end%>
 <div id="container">
-	<h2>
-		<%= @player.name %>
-		<%= render :partial => "players/endorsement_icon", :locals => {:user => @player} %>
-		<%= link_to "", "steam://friends/add/#{@player.steamid}", :title => "Add on Steam", "data-toggle" => "tooltip", :class => "fa fa-plus" %>
-		<%= link_to "DB", "http://dotabuff.com/players/#{@player.steam32id}", :title => "View on Dotabuff", "data-toggle" => "tooltip", :target => "blank"%>
-	</h2>
 	<div class="col-md-6">
+		<h2>
+			<%= @player.name %>
+			<%= render :partial => "players/endorsement_icon", :locals => {:user => @player} %>
+			<%= link_to "", "steam://friends/add/#{@player.steamid}", :title => "Add on Steam", "data-toggle" => "tooltip", :class => "fa fa-plus" %>
+			<%= link_to "DB", "http://dotabuff.com/players/#{@player.steam32id}", :title => "View on Dotabuff", "data-toggle" => "tooltip", :target => "blank"%>
+		</h2>
 		<div class="form-horizontal" role="form">
 			<% if Permissions.can_edit?(@player) %>
 				<div class="form-group">
@@ -140,9 +140,23 @@
 	  	</div>
 	</div>
 	<div class="col-md-6">
+		<h2>Solo Tournaments</h2>
+		<%- @player.team_seasons.sort.reverse.each do |ts| %>
+			<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
+			<%= best_in_place_if Permissions.can_edit?(ts.season), ts, :division, :type => :input %>
+			<% if Permissions.can_edit?(@player) %>
+				<% if ts.paid == false && ts.season.current_price.to_i > 0 %>
+					<%= link_to "Pay Registration Fee", ts, :class => "btn btn-primary" %>
+				<% end %>
+				<%= form_for ts, :html => {:method => :delete} do |f|  %>
+				  <%= f.submit "Withdraw", :confirm => "Are you sure you want to withdraw from this season? This is NOT easily reversable!", :class => "btn btn-danger btn-sm fa fa-trash-o" %>
+				<% end %>
+			<% end %>
+		<% end %>
+
 		<h2>Teams</h2>
 		<% @player.teams.each do |team| %>
-			<%= link_to team.teamname, team %><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
+			<%= link_to team.name, team %><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
 		<% end %>
 	</div>
 	<div class="col-md-6">

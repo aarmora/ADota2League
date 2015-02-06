@@ -1,24 +1,26 @@
-<h3>Register for a new season with <%=@team.teamname%></h3>
+<h3>Register for a new season as <%=participant.name%></h3>
 <p>Registration is now open for upcoming seasons. You may register your team below. Please ensure that you have read and understand all the rules of the league before registering. Payment (if applicable) is non-refundable. If payment is required and we do not accept it in your country, please contact the admins directly and we can work out an alternate method.</p>
 
 <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
   <label>Select season:</label>
-  <% @team.seasons_available_for_registration.each do |season, i| %>
+  <% participant.seasons_available_for_registration.each do |season, i| %>
     <div class="radio">
       <%= f.radio_button(:season_id, season.id) %>
-      <%= label_tag("team_season_season_id_" + season.id.to_s, season.title + " (#{format_price(season.current_price)})") %>
-      <%if season.challonge_id.nil?%>
-        <span>Begins <%= format_date_month(season.start_date)%></span>
-      <% else %>
-        <span>Begins <%= format_datetime_month(season.start_date) %></span>
+      <%= label_tag "team_season_season_id_" + season.id.to_s do %>
+        <b><%= season.title %></b> - <i><%= format_price(season.current_price) %></i><br />
+        <% if season.challonge_id.nil?%>
+          <span>Begins <%= format_date_month(season.start_date)%></span>
+        <% else %>
+          <span>Begins <%= format_datetime_month(season.start_date) %></span>
+        <% end %>
       <% end %>
     </div>
     <div class="col-md-12 indent">
-      <i><%= season.description%></i>
+      <p><i><%= season.description%></i></p>
     </div>
   <% end %>
 	<br>
 	<br>
-  <%= f.hidden_field :team_id, :value => @team.id %>
+  <%= f.hidden_field :participant_id, :value => participant.id %>
   <%= submit_tag "Register!", :class => "btn btn-primary", :confirm => "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one on your team can be ABOVE the stated MMR." %>
 <% end %>

@@ -11,23 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123200253) do
-
-  create_table "ckeditor_assets", force: :cascade do |t|
-    t.string   "data_file_name",    limit: 255, null: false
-    t.string   "data_content_type", limit: 255
-    t.integer  "data_file_size",    limit: 4
-    t.integer  "assetable_id",      limit: 4
-    t.string   "assetable_type",    limit: 30
-    t.string   "type",              limit: 30
-    t.integer  "width",             limit: 4
-    t.integer  "height",            limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-  end
-
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+ActiveRecord::Schema.define(version: 20150202215637) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "match_id",             limit: 4
@@ -106,28 +90,30 @@ ActiveRecord::Schema.define(version: 20150123200253) do
   add_index "matchcomments", ["match_id"], name: "index_matchcomments_on_match_id", using: :btree
 
   create_table "matches", force: :cascade do |t|
-    t.integer  "home_team_id",        limit: 4
-    t.integer  "away_team_id",        limit: 4
-    t.string   "steam_match_id",      limit: 50
+    t.integer  "home_participant_id",   limit: 4
+    t.integer  "away_participant_id",   limit: 4
+    t.string   "steam_match_id",        limit: 50
     t.datetime "date"
-    t.integer  "home_score",          limit: 4
-    t.integer  "away_score",          limit: 4
-    t.boolean  "is_disputed",         limit: 1
-    t.boolean  "is_live",             limit: 1
-    t.integer  "caster_id",           limit: 4
-    t.integer  "week",                limit: 4
-    t.integer  "season",              limit: 4
-    t.integer  "season_id",           limit: 4
-    t.boolean  "forfeit",             limit: 1
-    t.boolean  "mmr_processed",       limit: 1,   default: false, null: false
-    t.integer  "challonge_id",        limit: 4
-    t.string   "lobby_password",      limit: 255
+    t.integer  "home_score",            limit: 4
+    t.integer  "away_score",            limit: 4
+    t.boolean  "is_disputed",           limit: 1
+    t.boolean  "is_live",               limit: 1
+    t.integer  "caster_id",             limit: 4
+    t.integer  "week",                  limit: 4
+    t.integer  "season",                limit: 4
+    t.integer  "season_id",             limit: 4
+    t.boolean  "forfeit",               limit: 1
+    t.boolean  "mmr_processed",         limit: 1,   default: false,  null: false
+    t.integer  "challonge_id",          limit: 4
+    t.string   "lobby_password",        limit: 255
     t.datetime "reschedule_time"
-    t.integer  "reschedule_proposer", limit: 4
+    t.integer  "reschedule_proposer",   limit: 4
+    t.string   "home_participant_type", limit: 255, default: "Team", null: false
+    t.string   "away_participant_type", limit: 255, default: "Team", null: false
   end
 
-  add_index "matches", ["away_team_id"], name: "index_matches_on_away_team_id", using: :btree
-  add_index "matches", ["home_team_id"], name: "index_matches_on_home_team_id", using: :btree
+  add_index "matches", ["away_participant_id", "away_participant_type"], name: "index_matches_on_away_participant_id_and_away_participant_type", using: :btree
+  add_index "matches", ["home_participant_id", "home_participant_type"], name: "index_matches_on_home_participant_id_and_home_participant_type", using: :btree
   add_index "matches", ["season_id"], name: "index_matches_on_season_id", using: :btree
 
   create_table "permissions", force: :cascade do |t|
@@ -171,14 +157,14 @@ ActiveRecord::Schema.define(version: 20150123200253) do
     t.integer  "clickedprobuilt",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "bio",                limit: 65535
+    t.text     "bio",                limit: 16777215
     t.boolean  "admin",              limit: 1
-    t.integer  "endorsements_count", limit: 4,     default: 0, null: false
+    t.integer  "endorsements_count", limit: 4,        default: 0, null: false
     t.integer  "mmr",                limit: 4
     t.integer  "hours_played",       limit: 4
     t.string   "stripe_customer_id", limit: 255
     t.string   "time_zone",          limit: 255
-    t.integer  "comments_count",     limit: 4,     default: 0, null: false
+    t.integer  "comments_count",     limit: 4,        default: 0, null: false
   end
 
   create_table "players_teams", force: :cascade do |t|
@@ -197,6 +183,10 @@ ActiveRecord::Schema.define(version: 20150123200253) do
     t.integer  "author_id",  limit: 4
   end
 
+  create_table "season_types", force: :cascade do |t|
+    t.string "Season type", limit: 255
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.integer  "league_id",         limit: 4
     t.string   "title",             limit: 255
@@ -213,24 +203,44 @@ ActiveRecord::Schema.define(version: 20150123200253) do
     t.string   "challonge_type",    limit: 255
     t.datetime "start_date"
     t.text     "description",       limit: 65535
+    t.boolean  "solo_league",       limit: 1,     default: false
+    t.integer  "season_type",       limit: 4,     default: 1
+    t.boolean  "team_tourney",      limit: 1,     default: true
+  end
+
+  create_table "solo_league_matches", force: :cascade do |t|
+    t.integer "home_team_id_1", limit: 4
+    t.integer "home_team_id_2", limit: 4
+    t.integer "home_team_id_3", limit: 4
+    t.integer "home_team_id_4", limit: 4
+    t.integer "home_team_id_5", limit: 4
+    t.integer "away_team_id1",  limit: 4
+    t.integer "away_team_id2",  limit: 4
+    t.integer "away_team_id3",  limit: 4
+    t.integer "away_team_id4",  limit: 4
+    t.integer "away_team_id5",  limit: 4
+    t.boolean "home_wins",      limit: 1
+    t.integer "round",          limit: 4
+    t.integer "season_id",      limit: 4
   end
 
   create_table "team_seasons", force: :cascade do |t|
-    t.integer  "team_id",          limit: 4
+    t.integer  "participant_id",   limit: 4
     t.integer  "season_id",        limit: 4
     t.string   "division",         limit: 255
-    t.boolean  "paid",             limit: 1,   default: false, null: false
-    t.integer  "price_paid_cents", limit: 4,   default: 0,     null: false
+    t.boolean  "paid",             limit: 1,   default: false,  null: false
+    t.integer  "price_paid_cents", limit: 4,   default: 0,      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "checked_in",       limit: 1,   default: false, null: false
+    t.boolean  "checked_in",       limit: 1,   default: false,  null: false
+    t.string   "participant_type", limit: 255, default: "Team", null: false
   end
 
+  add_index "team_seasons", ["participant_id", "participant_type"], name: "index_team_seasons_on_participant_id_and_participant_type", using: :btree
   add_index "team_seasons", ["season_id", "division"], name: "index_team_seasons_on_season_id_and_division", using: :btree
-  add_index "team_seasons", ["team_id"], name: "index_team_seasons_on_team_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
-    t.string   "teamname",     limit: 300
+    t.string   "name",         limit: 300
     t.integer  "captain_id",   limit: 4
     t.boolean  "tuesdayflag",  limit: 1
     t.boolean  "thursdayflag", limit: 1
@@ -241,43 +251,6 @@ ActiveRecord::Schema.define(version: 20150123200253) do
     t.boolean  "active",       limit: 1,   default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "userprofile", primary_key: "userid", force: :cascade do |t|
-    t.string "username", limit: 56, null: false
-  end
-
-  add_index "userprofile", ["username"], name: "UQ__UserProf__C9F28456150C2377", unique: true, using: :btree
-
-  create_table "webpages_membership", id: false, force: :cascade do |t|
-    t.integer  "userid",                                  limit: 4,                   null: false
-    t.datetime "createdate"
-    t.string   "confirmationtoken",                       limit: 128
-    t.boolean  "isconfirmed",                             limit: 1,   default: false
-    t.datetime "lastpasswordfailuredate"
-    t.integer  "passwordfailuressincelastsuccess",        limit: 4,   default: 0,     null: false
-    t.string   "password",                                limit: 128,                 null: false
-    t.datetime "passwordchangeddate"
-    t.string   "passwordsalt",                            limit: 128,                 null: false
-    t.string   "passwordverificationtoken",               limit: 128
-    t.datetime "passwordverificationtokenexpirationdate"
-  end
-
-  create_table "webpages_oauthmembership", id: false, force: :cascade do |t|
-    t.string  "provider",       limit: 30,  null: false
-    t.string  "provideruserid", limit: 100, null: false
-    t.integer "userid",         limit: 4,   null: false
-  end
-
-  create_table "webpages_roles", primary_key: "roleid", force: :cascade do |t|
-    t.string "rolename", limit: 256, null: false
-  end
-
-  add_index "webpages_roles", ["rolename"], name: "UQ__webpages__8A2B616079931DB6", unique: true, using: :btree
-
-  create_table "webpages_usersinroles", id: false, force: :cascade do |t|
-    t.integer "userid", limit: 4, null: false
-    t.integer "roleid", limit: 4, null: false
   end
 
 end

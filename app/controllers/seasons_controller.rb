@@ -11,6 +11,7 @@ class SeasonsController < ApplicationController
 
       @seasons = Season.all
       @season = @seasons.detect {|season| season.id == params[:id].to_i}
+
       if @season.nil?
         redirect_to seasons_path
       else
@@ -24,33 +25,34 @@ class SeasonsController < ApplicationController
           Permissions.match_captain_permissions_off
           Permissions.load_team_divisions_for_season(@season.id) unless Permissions.can_edit?(@season) || !Permissions.can_view?(@season)
 
-          @matches = @season.matches.includes(:home_team, :away_team, :caster).to_a.sort_by{|m| m.date ? m.date : Time.now}.reverse
+          @matches = @season.matches.includes(:home_participant, :away_participant, :caster).to_a.sort_by{|m| m.date ? m.date : Time.now}.reverse
           @casters = Player.where(:caster => true)
           @permissions = Permission.includes(:player).all
 
-          @teams_by_division = @season.team_seasons.includes(:team).where(:paid => true).group_by {|ts| ts.division.to_s}
+          @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true).group_by {|ts| ts.division.to_s}
 
           # compute the scores using the pieces we already have so we don't need to re-fetch them again
+          # NOTE: Relys on one participant_type per season
           if params[:id] == "1"
             # don't display the divisions here
             @teams_by_division = {"" => @teams_by_division.collect {|div, teams| teams}.flatten}
             @total_scores = {}
             @matches.each do |match|
-              @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
-              @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
+              @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + match.home_score.to_i
+              @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + match.away_score.to_i
             end
           elsif params[:id] != "6"
-            #display divisions herr
+            #display divisions here
             @total_scores = {}
             @matches.each do |match|
-              @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
-              @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
+              @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + match.home_score.to_i
+              @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + match.away_score.to_i
             end
           else
             @total_scores = {}
             @matches.each do |match|
-              @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + (match.home_score.to_i == 2 ? 1 : 0)
-              @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + (match.away_score.to_i == 2 ? 1 : 0)
+              @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + (match.home_score.to_i == 2 ? 1 : 0)
+              @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + (match.away_score.to_i == 2 ? 1 : 0)
             end
           end
         end
@@ -83,9 +85,22 @@ class SeasonsController < ApplicationController
 
   def manage
     # custom permissions for this one
-    @season = Season.includes({:team_seasons => [:team => [:captain]], :matches => [:away_team, :home_team]}).find(params[:id])
+    @season = Season.find(params[:id])
+    if @season.team_seasons.first.is_a? Team
+      @season = Season.includes({:team_seasons => [:participant => [:captain]], :matches => [:away_team, :home_team]}).find(params[:id])
+      @player_season = false
+    else
+      @player_season = true
+    end
     head :forbidden and return unless Permissions.can_view?(@season)
 
     @players = Player.order("name ASC").pluck(:id, :name)
   end
+
+  def reg_form_partial
+    @team = Team.find(params[:team_id])
+
+    render :partial => "seasons/registration_form", :locals => {:participant => @team}
+  end
+
 end

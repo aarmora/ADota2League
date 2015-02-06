@@ -256,7 +256,6 @@ DEPENDENCIES
   exception_notification
   execjs
   figaro
-  httparty
   icalendar
   jbuilder (~> 1.2)
   jquery-datatables-rails!
@@ -278,6 +277,5 @@ DEPENDENCIES
   select2-rails!
   stripe
   twitter-bootstrap-rails!
-  tzinfo-data
   uglifier (>= 1.0.3)
   yaml_db

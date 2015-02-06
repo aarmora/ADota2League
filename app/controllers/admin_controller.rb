@@ -14,9 +14,9 @@ class AdminController < ApplicationController
   end
 
   def teams
-    @all_teams = Team.order(:teamname).pluck(:teamname, :id)
-    @active_teams = Team.where(:active => false).order(:teamname).pluck(:teamname, :id)
-    @inactive_teams = Team.where(:active => false).order(:teamname).pluck(:teamname, :id)
+    @all_teams = Team.order(:name).pluck(:name, :id)
+    @active_teams = Team.where(:active => false).order(:name).pluck(:name, :id)
+    @inactive_teams = Team.where(:active => false).order(:name).pluck(:name, :id)
     @players = Player.order("name ASC").all
   end
 

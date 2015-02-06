@@ -1,4 +1,4 @@
-<div class="container">
+
 	<div class="col-md-12">
 		<h2>Register for the AD2L</h2>
 
@@ -10,27 +10,63 @@
 
 		<p>Not sure you are ready to commit?  Click one of the links below to learn more about our various tournaments.</p>
 		<%= render :partial => "welcome/learn_more" %>
-	</div>
 
-	<div class="col-md-6">		
-		<h2>Choose a team</h2>
-		<% @player.teams.each do |team| %>
-			<%= link_to team.teamname, team %><%= " (Captain - view team page to manage)" if @current_user && (team.captain_id == @current_user.id) %><%= " (Inactive)" if !team.active %><br><br>
-		<% end %>
-		<p>
-			If you are new to the site, or wish to create a new team you can do so HERE and come back!
-		</p>
-		<div class="col-md-6">
-			<%= link_to "Create Team", new_team_path%>
-		</div>
-	</div>
+	<ul class="nav nav-tabs spaceTop" role="tablist">
+		<li role="presentation" class="active"><a href="#team" aria-controls="home" role="tab" data-toggle="tab">Team tournaments</a></li>
+    <li role="presentation"><a href="#player" aria-controls="profile" role="tab" data-toggle="tab">Individual tournaments</a></li>
+    <% if !@player.caster %>
+    	<li role="presentation"><a href="#caster" aria-controls="profile" role="tab" data-toggle="tab">Become a caster</a></li>
+    <% end %>
+	</ul>
 
-	<div class="col-md-6">
-		<%if false%>
-			<h2>Individual Tournaments</h2>
-			<p>Tournies here. We need to know what team they are on.</p>
-		<%end%>
-	</div>
-	
+	<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team">
+    	<% if @player.teams.length == 1 %>
+    		<%= render :partial => "seasons/registration_form", :locals => {:participant => @player.teams.first} %>
+			<% elsif !@player.teams.empty? %>
+				<div id="regFormHolder">
+					<h3>Choose a team to register with</h3>
+					<div class="form-inline">
+						<select id="teamPicker" playerId="<%=@player.id%>" class="form-control">
+							<option></option>
+							<% @player.teams.each do |team| %>
+								<option value="<%=team.id%>"><%=team.name %></option>
+							<% end %>
+						</select>
+					</div>
+
+				</div>
+			<% else %>
+				<div id="regFormHolder">
+					<h3>Looks like you don't have any teams yet.</h3>
+					<p>Create a new team below. If you are on someone elses team, ask to be added to their roster instead.</p>
+					<%= render :partial => "teams/new_team_form", locals: {remote: true} %>
+			  </div>
+			<% end %>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="player">
+			<%= render :partial => "seasons/registration_form", locals: {:participant => @player} %>
+    </div>
+    <% if !@player.caster%>
+	    <div role="tabpanel" class="tab-pane" id="caster">
+	    	<h3>Register to be an official caster for the next six weeks</h3>
+	    	<p>
+	    		Anyone is allowed to cast for AD2L!  To be listed as an official caster for the next eight weeks, pay $3.00 below!   If you've cast with us before and are reliable, let us know and we would be more than happy to waive the fee.  Not sure if casting is for you?  Join our <%=link_to "AD2L steam group", "steam://friends/joinchat/103582791435143521", :target => "_blank"%> and pick up some matches on game day to try it out!
+	    	</p>
+				<form action="/register_caster" method="POST">
+			    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+			            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+			            data-image="<%= path_to_image "AD2L.png" %>"
+			            data-name="Amateur Dota 2 League"
+			            <%= "data-email='#{@current_user.email}'" unless @current_user.email.nil? %>
+			            data-description="Caster Registration Fee"
+			            data-amount="300"
+			            data-allow-remember-me="false"></script>
+		    </form>
+	    </div>
+	  <% end %>
+  </div>
 
 </div>
+

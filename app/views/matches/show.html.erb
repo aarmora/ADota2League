@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<% # Reschedule Warnings %>
 	<% if @current_user && @match.reschedule_proposer == @current_user.id %>
-    <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept! The time shown is the reschedule time, the current scheduled time is still <%= format_datetime(date) %></div>
+    <div class="alert alert-warning" role="alert">You requested to change the match time, but the other captain has not yet accepted...please reach out to them directly to make sure they accept! The time shown is the reschedule time, the current scheduled time is still <%= format_datetime(@match.date) %></div>
   <% elsif (Permissions.can_edit?(@match) || @can_edit) && @match.reschedule_proposer %>
     <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= format_datetime(@match.reschedule_time) %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
   <% end %>
@@ -28,8 +28,8 @@
 			</h4>
 			<% if @match.lobby_password && @match.date > Time.now - 1.day %>
 				<h3>Lobby Password: <%= @match.lobby_password %></h3>
-				<% if @match.home_team %>
-					<h4><%= @match.home_team.teamname %> is responsible for hosting this lobby!</h4>
+				<% if @match.home_participant %>
+					<h4><%= @match.home_participant.name %> is responsible for hosting this lobby!</h4>
 				<% end %>
 			<% end %>
 			Caster:
@@ -72,19 +72,19 @@
 
 	<div class="row">
 		<div class="col-sm-4 rosterholder">
-			<% if @match.home_team.nil? %>
+			<% if @match.home_participant.nil? %>
 				<h3>Bye</h3>
 			<% else %>
-				<h3><%= link_to @match.home_team.teamname, @match.home_team%></h3>
-				<%= render :partial => "teams/roster", :locals => {:roster => @home_team_roster, :team => @match.home_team}%>
+				<h3><%= link_to @match.home_participant.name, @match.home_participant%></h3>
+				<%= render :partial => "teams/roster", :locals => {:roster => @home_team_roster, :team => @match.home_participant}%>
 			<% end %>
 		</div>
 		<div class="col-sm-4 col-sm-offset-1 rosterholder">
-			<% if @match.away_team.nil? %>
+			<% if @match.away_participant.nil? %>
 				<h3>Bye</h3>
 			<% else %>
-				<h3><%= link_to @match.away_team.teamname, @match.away_team%></h3>
-				<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_team}%>
+				<h3><%= link_to @match.away_participant.name, @match.away_participant%></h3>
+				<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_participant}%>
 			<% end %>
 		</div>
 	</div>

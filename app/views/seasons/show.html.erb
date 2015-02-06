@@ -14,7 +14,7 @@
     </ul>
 <% end %>
 
-<% cache_unless(@no_cache, "seasonPage-" + @season.id.to_s) do %>
+<% cache_unless @no_cache, "seasonPage-" + @season.id.to_s, skip_digest: true do %>
     <div style="clear: both"></div>
     <div class="TabsContainer">
         <div class="tabbody3 active">
@@ -60,16 +60,16 @@
                                     if @season.start_date && @season.start_date > Time.now
                                         ts.id
                                     else
-                                        @total_scores[ts.team_id].to_i
+                                        @total_scores[ts.class_id].to_i
                                     end
                                 end.reverse.each_with_index do |team_season, index| %>
                                     <tr>
                                         <td><%= index + 1 %></td>
-                                        <td><%= link_to team_season.team.teamname, team_season.team %></td>
-                                        <td><%= @total_scores[team_season.team_id].to_i %></td>
+                                        <td><%= link_to team_season.participant.name, team_season.participant %></td>
+                                        <td><%= @total_scores[team_season.class_id].to_i %></td>
                                         <% if @season.check_in_available? %>
                                             <td>
-                                                <% if Permissions.can_edit?(team_season.team) || Permissions.can_edit?(team_season) && !team_season.checked_in %>
+                                                <% if Permissions.can_edit?(team_season.participant) || Permissions.can_edit?(team_season) && !team_season.checked_in %>
                                                     <%= button_tag "Check In", :class => "btn btn-primary btn-block js-check-in", "data-url" => team_season_path(team_season) %>
                                                 <% else %>
                                                     <%= team_season.checked_in ? "Yes" : "" %>

@@ -14,7 +14,7 @@ Ad2l::Application.routes.draw do
     end
   end
 
-  resources :register
+  get 'register' =>  'register#new'
 
   get "schedule" => 'seasons#index'
 
@@ -47,6 +47,8 @@ Ad2l::Application.routes.draw do
   get 'community', :to => 'welcome#community', :as => 'community'
   get 'faq', :to => 'welcome#community', :as => 'faq'
   get 'logout' => 'welcome#logout'
+  get 'reg_form_partial' => 'seasons#reg_form_partial'
+  post 'register_caster' => "players#register_caster"
   get 'welcome/get_posts' => 'welcome#get_posts'
   post 'top_plays_email' => 'welcome#top_plays_email'
 

@@ -75,5 +75,45 @@ class PlayersController < ApplicationController
     end
   end
 
+  skip_before_filter  :verify_authenticity_token
+  def register_caster
+
+    #attempt to find them in the Stripe DB first
+      if @current_user.stripe_customer_id.nil?
+        customer = Stripe::Customer.create(
+        :description => @current_user.name,
+        :email => @current_user.email,
+        :metadata => {:user => @current_user.id, :participant_id => @current_user.steamid},
+        :card  => params[:stripeToken]
+      )
+      else
+        customer = Stripe::Customer.retrieve(@current_user.stripe_customer_id)
+        customer.card = params[:stripeToken]
+        customer.save
+      end
+
+      charge = Stripe::Charge.create(
+        :customer    => customer.id,
+        :amount      => 300,
+        :description => "Caster Registration Fee",
+        :statement_description => "AD2L Caster Fee",
+        :metadata => {
+          :customer => @current_user.name,
+          :customer_id => @current_user.id
+        },
+        :currency    => 'usd'
+      )
+
+      # update our records
+      @current_user.email = params[:stripeEmail] if @current_user.email.nil?
+      @current_user.stripe_customer_id = customer.id
+      @current_user.caster = true
+      @current_user.save!
+
+      flash[:notice] = "You have been successfully registered as a caster! " 
+      redirect_to @current_user
+
+  end
+
 
 end

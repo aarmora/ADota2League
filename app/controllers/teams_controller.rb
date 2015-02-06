@@ -4,13 +4,10 @@ class TeamsController < ApplicationController
     @current_tab = 'teams'
 
     @teams = Team.includes(:seasons, :captain).where(active: true, seasons: { active: true })
-
-
-    #render :json => @seasons.teams
 	end
 
 	def show
-    @team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_team, :home_team], :home_matches => [:away_team, :home_team]}).find(params[:id])
+    @team = Team.includes({:team_seasons => [:season], :players => [], :away_matches => [:away_participant, :home_participant], :home_matches => [:away_participant, :home_participant]}).find(params[:id])
     if request.format == :ics
       # Create an ical format feed of the given team's calendar.
 
@@ -40,7 +37,7 @@ class TeamsController < ApplicationController
           cal.event do |e|
             e.dtstart = Icalendar::Values::DateTime.new match.date, 'tzid' => tzid
             e.dtend   = Icalendar::Values::DateTime.new end_time, 'tzid' => tzid
-            e.summary = match.home_team.teamname + " vs. " + match.away_team.teamname unless !match.away_team || !match.home_team
+            e.summary = match.home_participant.name + " vs. " + match.away_participant.name unless !match.away_participant || !match.home_participant
             e.description = desc
             e.url     = "http://amateurdota2league.com/matches/#{match.id}" #shows in iCal only
           end
@@ -75,7 +72,10 @@ class TeamsController < ApplicationController
 		@team.players << @current_user
     	@team.mmr = @team.originalmmr || @team.default_mmr
 		@team.save!
-		redirect_to @team
+    respond_to do |format|
+      format.html { redirect_to(@team, :notice => 'Your new team was successfully created. Good Luck!') }
+      format.json { render json: @team, :status => 200 }
+    end
 	end
 
 	def update

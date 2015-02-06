@@ -21,3 +21,7 @@ Recent migration to Rails 4 was a minimal effort update, meaning some things mig
 - mutator methods on relations
 - PATCH vs PUT
 - Gemfile environments and organization
+
+== Polymorphism
+As we make the scheduling and tournament system more generic:
+- Fix: Relys on one participant_type per season
