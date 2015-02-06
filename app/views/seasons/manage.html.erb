@@ -36,6 +36,15 @@
       <%= submit_tag "Add Team", :class => "btn btn-primary" %>
     <% end %>
   <% end %>
+  <% if Permissions.can_edit?(@season) %>
+    <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
+      <label>Select player to add:</label>
+
+      <%= f.select(:participant_id, options_for_select(Player.order(:name).map{|player| [player.name, player.id]}), {}, :style => "min-width: 300px;" ) %>
+      <%= f.hidden_field :season_id, :value => @season.id %>
+      <%= submit_tag "Add Player", :class => "btn btn-primary" %>
+    <% end %>
+  <% end %>
   <h4>Permissions</h4>
   <table class="table table-bordered" id="perm-data-table">
     <thead>
