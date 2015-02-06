@@ -1,8 +1,8 @@
 class Match < ActiveRecord::Base
   has_many :games, :dependent => :destroy
   has_many :matchcomments, :dependent => :destroy
-  belongs_to :home_team, :class_name => "Team"
-  belongs_to :away_team, :class_name => "Team"
+  belongs_to :home_participant, polymorphic: true
+  belongs_to :away_participant, polymorphic: true
   belongs_to :season
   belongs_to :caster, :class_name => "Player"
 
@@ -14,14 +14,23 @@ class Match < ActiveRecord::Base
   attr_accessible :home_team_id, :away_team_id, :lobby_password, :week, :season_id, :as => :admin
 
   # We could use a uniqueness validator, but since we have home and away, it wouldn't work so well
-  validates_each :home_team_id, :away_team_id do |record, attr, value|
-    if Match.where("id != :match AND season_id = :season AND week = :week AND (home_team_id = :id OR away_team_id = :id)", {:id => value, :match => record.id, :season => record.season_id, :week => record.week}).count > 0
+  # TODO: Update the validators to be updated for polymorphism
+  validates_each :home_participant_id, :away_participant_id do |record, attr, value|
+    if Match.where("id != :match AND season_id = :season AND week = :week AND (home_participant_id = :id OR away_participant_id = :id)", {:id => value, :match => record.id, :season => record.season_id, :week => record.week}).count > 0
       record.errors.add(attr, 'cannot play more than one match per week')
     end
   end
 
   # TODO: This might break migrations, enable once live
   # validates :date, :week, :season, :presence => true
+
+  # class_id is used to identify the type and id so as not to confuse players and teams with the same actual id
+  def home_participant_class_id
+    "#{home_participant_type}/#{home_participant_id}"
+  end
+  def away_participant_class_id
+    "#{away_participant_type}/#{away_participant_id}"
+  end
 
   # in the DB, these can be nil, which sort of sucks...so let's fix that
   def home_score
@@ -48,14 +57,14 @@ class Match < ActiveRecord::Base
     end
 
     # OK the keys are team ids, so now save them
-    if score_by_steam_id[self.home_team.id] != nil && score_by_steam_id[self.away_team.id] != nil
-      self.home_score = score_by_steam_id[self.home_team.id]
-      self.away_score = score_by_steam_id[self.away_team.id]
+    if score_by_steam_id[self.home_participant.id] != nil && score_by_steam_id[self.away_participant.id] != nil
+      self.home_score = score_by_steam_id[self.home_participant.id]
+      self.away_score = score_by_steam_id[self.away_participant.id]
       self.save!
     else
       puts score_by_steam_id.inspect
-      puts self.home_team_id.inspect
-      puts self.away_team_id.inspect
+      puts self.home_participant_id.inspect
+      puts self.away_participant_id.inspect
       puts "WARNING: teams did not match, not updating match score"
     end
   end

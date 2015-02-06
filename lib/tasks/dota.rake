@@ -135,8 +135,8 @@ namespace :dota do
     @team_elos = {}
 
     @matches.each do |match|
-      home_team = match.home_team
-      away_team = match.away_team
+      home_team = match.home_participant
+      away_team = match.away_participant
       home_wins = match.home_score
       away_wins = match.away_score
       if away_wins == 0 && home_wins == 0
@@ -188,8 +188,8 @@ namespace :dota do
 
       newHomeELO = (home_mmr + (this_k + home_bonus_k) / num_games_played * (home_wins - exp_home_win) + 0).floor # Emphatic victor bonus = 0 for now
       newAwayELO = (away_mmr + (this_k + away_bonus_k) / num_games_played * (away_wins - exp_away_win) + 0).floor # Emphatic victor bonus = 0 for now
-      puts "Home: #{home_team.teamname} ( #{home_mmr} --> #{newHomeELO} )   Expected: #{exp_home_win}  Actual: #{home_wins}"
-      puts "Away: #{away_team.teamname} ( #{away_mmr} --> #{newAwayELO} )   Expected: #{exp_away_win}  Actual: #{away_wins}"
+      puts "Home: #{home_team.name} ( #{home_mmr} --> #{newHomeELO} )   Expected: #{exp_home_win}  Actual: #{home_wins}"
+      puts "Away: #{away_team.name} ( #{away_mmr} --> #{newAwayELO} )   Expected: #{exp_away_win}  Actual: #{away_wins}"
       puts "K: #{this_k + home_bonus_k} | #{this_k + away_bonus_k}"
       puts "-----------------"
       @team_elos[home_team.id] = newHomeELO
@@ -206,11 +206,11 @@ namespace :dota do
     elo_holder.each do |info|
       match = info[:match]
 
-      home = match.home_team
+      home = match.home_participant
       home.mmr = @team_elos[home.id]
       home.save!
 
-      away = match.away_team
+      away = match.away_participant
       away.mmr = @team_elos[away.id]
       away.save!
 
@@ -233,10 +233,10 @@ namespace :dota do
     @total_matches = {}
     matches.each do |match|
       next if match.home_score.to_i == 0 && match.away_score.to_i == 0
-      @total_scores[match.home_team_id] = @total_scores[match.home_team_id].to_i + match.home_score.to_i
-      @total_scores[match.away_team_id] = @total_scores[match.away_team_id].to_i + match.away_score.to_i
-      @total_matches[match.home_team_id] = @total_matches[match.home_team_id].to_i + match.home_score.to_i + match.away_score.to_i
-      @total_matches[match.away_team_id] = @total_matches[match.away_team_id].to_i + match.home_score.to_i + match.away_score.to_i
+      @total_scores[match.home_participant_id] = @total_scores[match.home_participant_id].to_i + match.home_score.to_i
+      @total_scores[match.away_participant_id] = @total_scores[match.away_participant_id].to_i + match.away_score.to_i
+      @total_matches[match.home_participant_id] = @total_matches[match.home_participant_id].to_i + match.home_score.to_i + match.away_score.to_i
+      @total_matches[match.away_participant_id] = @total_matches[match.away_participant_id].to_i + match.home_score.to_i + match.away_score.to_i
     end
 
     @win_percents = @total_scores.map do |team_id, wins|
@@ -251,7 +251,7 @@ namespace :dota do
     # @win_percents.sort_by!{|k,v| v}.reverse
 
     # @win_percents.each do |k,v|
-    #   puts "#{teams.find(k).teamname}: #{v}"
+    #   puts "#{teams.find(k).name}: #{v}"
     # end
 
     @opponent_opponent_win_percents = {}
@@ -261,30 +261,30 @@ namespace :dota do
       # puts "TEAM: #{team_id}"
 
       # Find each match this team had and calculate the winning percentage for their opponent
-      teams_matches = matches.select {|m| m.away_team_id == team_id || m.home_team_id == team_id }
+      teams_matches = matches.select {|m| m.away_participant_id == team_id || m.home_participant_id == team_id }
       opp_opp_win_pcts = []
       opp_win_pcts = teams_matches.map do |match|
         # exclude games not yet played or scored...TODO: exclude forfeit?
         next if match.away_score.to_i == 0 && match.home_score.to_i == 0
 
-        # puts "working match #{match.id}: #{match.home_team_id} - #{match.away_team_id}"
+        # puts "working match #{match.id}: #{match.home_participant_id} - #{match.away_participant_id}"
 
-        opponent_id = match.away_team_id == team_id ? match.home_team_id : match.away_team_id
+        opponent_id = match.away_participant_id == team_id ? match.home_participant_id : match.away_participant_id
         # puts "opp: #{opponent_id}"
 
         # Compute this opponent's OWP (for OOWP). All teams are valid for this (including self) so do it separate from the check below
-        opponent_matches_all = matches.select {|m| (m.away_team_id == opponent_id || m.home_team_id == opponent_id )}
-        opp_opp_win_pct = opponent_matches_all.map { |m| m.away_team_id == opponent_id ? @win_percents[m.home_team_id] : @win_percents[m.away_team_id] }
+        opponent_matches_all = matches.select {|m| (m.away_participant_id == opponent_id || m.home_participant_id == opponent_id )}
+        opp_opp_win_pct = opponent_matches_all.map { |m| m.away_participant_id == opponent_id ? @win_percents[m.home_participant_id] : @win_percents[m.away_participant_id] }
         # puts "opp_opp_pct:"
         # puts opp_opp_win_pct.inspect
         opp_opp_win_pcts << opp_opp_win_pct.inject{ |sum, el| sum + el }.to_f / opp_opp_win_pct.size
 
         # OWP calculated as the opponent's winning percentage ignoring ANY games against the current team
-        opponent_matches = matches.select {|m| (m.away_team_id == opponent_id || m.home_team_id == opponent_id) && m.away_team_id != team_id && m.home_team_id != team_id }
+        opponent_matches = matches.select {|m| (m.away_participant_id == opponent_id || m.home_participant_id == opponent_id) && m.away_participant_id != team_id && m.home_participant_id != team_id }
         # puts "opp match count: #{opponent_matches.size}"
         opponent_game_count = opponent_matches.sum{ |m| m.away_score.to_i } + opponent_matches.sum{ |m| m.home_score.to_i }
         # puts "opp game count: #{opponent_game_count}"
-        opponent_wins = opponent_matches.sum{ |m| m.away_team_id == opponent_id ? m.away_score.to_i : m.home_score.to_i }
+        opponent_wins = opponent_matches.sum{ |m| m.away_participant_id == opponent_id ? m.away_score.to_i : m.home_score.to_i }
         # puts "opp wins: #{opponent_wins}"
         opponent_game_count == 0 ? nil : opponent_wins / opponent_game_count
       end
@@ -317,7 +317,7 @@ namespace :dota do
     # Output
     @rpis.sort_by { |k,v| v * -1}.each do |k, v|
       next if k.nil?
-      puts "#{teams.find(k).teamname}: #{v}" rescue next
+      puts "#{teams.find(k).name}: #{v}" rescue next
     end
 
     puts "------------------"
@@ -328,7 +328,7 @@ namespace :dota do
     end.each do |k, v|
       next if k.nil?
       team = teams.find(k) rescue next
-      puts "#{team.teamname}: #{team.mmr * v} (#{v}) (#{team.mmr})"
+      puts "#{team.name}: #{team.mmr * v} (#{v}) (#{team.mmr})"
     end
   end
 
@@ -388,8 +388,8 @@ namespace :dota do
     object = Object.new
     @matches = Match.where(:season_id => @season.id)
     @matches.each do |match|
-      if match.home_team_id && match.away_team_id
-        matchup_array.push match.home_team_id + match.away_team_id
+      if match.home_participant_id && match.away_participant_id
+        matchup_array.push match.home_participant_id + match.away_participant_id
       end
     end
 
@@ -434,15 +434,15 @@ namespace :dota do
           puts "#{test_match[0]} and #{test_match[1]} may have already played!}"
           return 1
         end
-      end 
+      end
 
       test_matches.each do |test_match|
         time = rand(3) === 0 ? "22:00:00" : "20:30:00"
         datetime = "#{date} #{time} #{tz}"
         match = season.matches.build
         match.week = week
-        match.home_team_id = test_match[0]
-        match.away_team_id = test_match[1]
+        match.home_participant_id = test_match[0]
+        match.away_participant_id = test_match[1]
         match.date = datetime
         match.reschedule_time = datetime
         match.save!
@@ -497,7 +497,7 @@ namespace :dota do
     dup_team = Team.find(dup_team_id)
     raise "Not Found" unless dup_team
 
-    puts "You are about to mege '#{dup_team.teamname}' (MMR: #{dup_team.mmr}) into '#{team.teamname}' (MMR: #{team.mmr}) ...are you sure? (yes charles)"
+    puts "You are about to mege '#{dup_team.name}' (MMR: #{dup_team.mmr}) into '#{team.name}' (MMR: #{team.mmr}) ...are you sure? (yes charles)"
     ok_to_insert = STDIN.gets.chomp == "yes charles"
     raise "Later days!" unless ok_to_insert
 
@@ -513,7 +513,7 @@ namespace :dota do
   end
 
   desc "Get the inhouse stuff"
-  task :pull_inhousegames => :environment do    
+  task :pull_inhousegames => :environment do
 
     @inhouse_games_ids = Inhousegame.where(:leagueid => 2047).uniq.pluck(:match_id)
 

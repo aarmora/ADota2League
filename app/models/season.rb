@@ -1,10 +1,10 @@
 class Season < ActiveRecord::Base
 	has_many :team_seasons, :dependent => :delete_all
-	has_many :teams, :through => :team_seasons
+	has_many :participants, :through => :team_seasons
 	has_many :matches
   has_many :permissions, :class_name => "Permission", :foreign_key => "season_id"
 
-  attr_accessible :title, :league_id, :registration_open, :active, :late_fee_start, :price_cents, :late_price_cents, :exclusive_group, :start_date, :challonge_url, :description, :as => :admin
+  attr_accessible :title, :league_id, :registration_open, :active, :late_fee_start, :price_cents, :late_price_cents, :exclusive_group, :start_date, :challonge_url, :description, :team_tourney, :season_type, :as => :admin
 
   def current_price
     self.late_fee_start && self.late_fee_start < Time.now ? self.late_price_cents : self.price_cents

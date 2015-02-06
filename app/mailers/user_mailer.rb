@@ -3,8 +3,8 @@ class UserMailer < ActionMailer::Base
 
    def match_comment_email(match_id)
    	@match = Match.find(match_id)
-    @home_team_roster = @match.home_team.players
-    @away_team_roster = @match.away_team.players
+    @home_team_roster = @match.home_participant.players
+    @away_team_roster = @match.away_participant.players
     @url  = 'http://amateurdota2league.com/matches/'+match_id
     #@match_comment = Matchcomment.where(:match_id: match_id)
     @home_team_roster.each do |player|
@@ -21,8 +21,8 @@ class UserMailer < ActionMailer::Base
     unless player.email.nil?
       @player = player
       puts player.email
-      puts player.id    
-      mail(to: player.email, subject: "Season 5 registration is open!") 
+      puts player.id
+      mail(to: player.email, subject: "Season 5 registration is open!")
     end
   end
 
@@ -38,15 +38,15 @@ class UserMailer < ActionMailer::Base
   def reschedule_proposed(proposed_date, match, proposer)
     @match = match;
     @proposer = proposer;
-    if @match.home_team.captain == @current_user
-      @recipient = @match.away_team.captain
+    if @match.home_participant.captain == @current_user
+      @recipient = @match.away_participant.captain
     else
-      @recipient = @match.home_team.captain
+      @recipient = @match.home_participant.captain
     end
     if @recipient.email
       mail(to: @recipient.email, subject: "Proposed schedule change")
     end
-    
+
   end
 
   def playoff_email(player)
@@ -56,7 +56,7 @@ class UserMailer < ActionMailer::Base
     if @player.email
       mail(to: @player.email, subject: "Playoffs!")
     end
-  
+
   end
 
 end

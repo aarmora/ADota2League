@@ -5,7 +5,7 @@ class MatchesController < ApplicationController
 
   def new
     raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?(@current_user)
-    @teams = [["", ""]] + Team.order(:teamname).all.map { |team| [team.teamname, team.id]}
+    @teams = [["", ""]] + Team.order(:name).all.map { |team| [team.name, team.id]}
     @seasons = [["", ""]] + Season.where(:active => true).map { |season| [season.id, season.id]}
 
 
@@ -26,25 +26,25 @@ class MatchesController < ApplicationController
   def show
 
     @match = Match.find(params[:id])
-    unless @match.home_team.nil?
-      @home_team_roster = @match.home_team.players.to_a.sort_by {|p| p.id == @match.home_team.captain_id ? 0 : 1}
+    unless @match.home_participant.nil?
+      @home_team_roster = @match.home_participant.players.to_a.sort_by {|p| p.id == @match.home_participant.captain_id ? 0 : 1}
     end
-    unless @match.away_team.nil?
-      @away_team_roster = @match.away_team.players.to_a.sort_by {|p| p.id == @match.away_team.captain_id ? 0 : 1}
+    unless @match.away_participant.nil?
+      @away_team_roster = @match.away_participant.players.to_a.sort_by {|p| p.id == @match.away_participant.captain_id ? 0 : 1}
     end
     @matchcomments = @match.matchcomments
     @casters = Player.order("name ASC").where(:caster => true)
 
-    if @match.home_team && @match.away_team
-      @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+    if @match.home_participant && @match.away_participant
+      @can_edit = @current_user && (@match.away_participant.captain_id === @current_user.id || @match.home_participant.captain_id === @current_user.id)
     end
   end
 
   def accept_reschedule
     @match = Match.find(params[:id])
 
-    if @match.home_team && @match.away_team
-      @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+    if @match.home_participant && @match.away_participant
+      @can_edit = @current_user && (@match.away_participant.captain_id === @current_user.id || @match.home_participant.captain_id === @current_user.id)
     end
 
     raise ActionController::RoutingError.new('Not Found') unless (Permissions.can_edit?(@match) && @match.reschedule_proposer) || (@can_edit && @match.reschedule_proposer)
@@ -62,8 +62,8 @@ class MatchesController < ApplicationController
   def update
     @match = Match.find(params[:id])
 
-    if @match.home_team && @match.away_team
-      @can_edit = @current_user && (@match.away_team.captain_id === @current_user.id || @match.home_team.captain_id === @current_user.id)
+    if @match.home_participant && @match.away_participant
+      @can_edit = @current_user && (@match.away_participant.captain_id === @current_user.id || @match.home_participant.captain_id === @current_user.id)
     end
 
     raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit?(@match) || @can_edit

@@ -176,7 +176,7 @@ namespace :dota do
         puts "Matchups for #{keys.inspect}: #{best_matchups.size}"
         puts "\n\n"
         # Sorry about this...whatever
-        best_matchups.map { |matchup| matchup.map { |entry| [entry[:TeamKey],entry[:TeamName],entry[:MMR]]} }.each { |matchup| puts matchup.first[0].to_s + "," + matchup.last[0].to_s + " ------> " + matchup.first[1].to_s + " (#{matchup.first[2]})    vs.    #{matchup.last[1].to_s} (#{matchup.last[2]})"}
+        best_matchups.map { |matchup| matchup.map { |entry| [entry[:TeamKey],entry[:name],entry[:MMR]]} }.each { |matchup| puts matchup.first[0].to_s + "," + matchup.last[0].to_s + " ------> " + matchup.first[1].to_s + " (#{matchup.first[2]})    vs.    #{matchup.last[1].to_s} (#{matchup.last[2]})"}
         puts "\n\n"
         best_matchups
       end

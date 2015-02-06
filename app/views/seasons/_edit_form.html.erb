@@ -42,6 +42,12 @@
         <%= best_in_place_if Permissions.can_edit?(season), season, :description, :type => :textarea %>
       </div>
     </div>
+    <div class="form-group">      
+      <label class="col-sm-6 control-label">Team tournament?</label>
+      <div class="col-sm-6">        
+        <%= best_in_place_if Permissions.can_edit?(season), season, :team_tourney, :type => :checkbox %>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -80,6 +86,15 @@
       </div>
       <div class="col-sm-6">
         <%= best_in_place_if Permissions.can_edit?(season), season, :exclusive_group, :type => :input %>
+      </div>
+    </div>
+    <div class="form-group">      
+      <div class="col-sm-6 control-label">  
+        <label >Tournament Type</label>
+        <p class="help-block">1 = group stage, 2 = single elimination, 3 = double elimination</p>
+      </div>
+      <div class="col-sm-6">        
+        <%= best_in_place_if Permissions.can_edit?(season), season, :season_type, :type => :checkbox %>
       </div>
     </div>
   </div>

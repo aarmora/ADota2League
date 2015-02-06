@@ -56,7 +56,7 @@ class ChallongeController < ApplicationController
         db_ids = db_team_ids.reject{|p| participant_team_ids.include? p}
         teams = Team.find(db_ids).to_a.sort_by{ |t| t.mmr ? t.mmr : t.default_mmr}.reverse
         teams.each_with_index do |team, i|
-          Challonge::Participant.create(:name => team.teamname, :tournament => t, :seed => i + 1, :misc => {:team_id => team.id}.to_json)
+          Challonge::Participant.create(:name => team.name, :tournament => t, :seed => i + 1, :misc => {:team_id => team.id}.to_json)
         end
       end
     end
@@ -99,9 +99,9 @@ class ChallongeController < ApplicationController
       match = @season.matches.build
       scores = m.scores_csv.split("-") # TODO: this might be wrong
       match.challonge_id = m.id
-      match.home_team_id = team_id_from_player(m.player1)
+      match.home_participant_id = team_id_from_player(m.player1)
       match.home_score = scores[0] if scores.size == 2
-      match.away_team_id = team_id_from_player(m.player2)
+      match.away_participant_id = team_id_from_player(m.player2)
       match.away_score = scores[1] if scores.size == 2
       match.save
       matches_added += 1

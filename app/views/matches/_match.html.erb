@@ -16,12 +16,12 @@
 				# Pulling in this data is a pretty heavy query, so we need to only do it when it actually makes sense
 				if Permissions.can_edit?(match) && match.date > Time.now && match.home_score.to_i == 0 && match.home_score.to_i == 0 && match.away_score.to_i == 0
 					best_in_place match,
-					  :home_team_id,
+					  :home_participant_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-home",
 			      	  :as => :select,
-			      	  collection: select_teams_for_season_week_with_current_team(match.season_id, match.week, match.home_team)
+			      	  collection: select_teams_for_season_week_with_current_team(match.season_id, match.week, match.home_participant)
 			  else
-			  	link_to_if match.home_team && match.home_team != @team, match.home_team ? match.home_team.teamname : "TBD", match.home_team
+			  	link_to_if match.home_participant && match.home_participant != @team, match.home_participant ? match.home_participant.name : "TBD", match.home_participant
 			  end
 			%>
 				<% if Permissions.can_edit?(match) && match.date > Time.now && match.home_score.to_i == 0 && match.away_score.to_i == 0 %>
@@ -31,13 +31,13 @@
 			<%=
 				if Permissions.can_edit?(match) && match.date > Time.now && match.home_score.to_i == 0 && match.home_score.to_i == 0 && match.away_score.to_i == 0
 					best_in_place match,
-					  :away_team_id,
+					  :away_participant_id,
 					  :activator => ".glyphicon-warning-sign.#{match.id}-away",
 			      	  :as => :select,
 			      	  # this is terrible and I should be shot for doing it
-			      	  collection: select_teams_for_season_week_with_current_team(match.season_id, match.week, match.away_team)
+			      	  collection: select_teams_for_season_week_with_current_team(match.season_id, match.week, match.away_participant)
 			  else
-			  	link_to_if match.away_team && match.away_team != @team, match.away_team ? match.away_team.teamname : "TBD", match.away_team
+			  	link_to_if match.away_participant && match.away_participant != @team, match.away_participant ? match.away_participant.name : "TBD", match.away_participant
 			  end
 			%>
 				<% if Permissions.can_edit?(match) && match.date > Time.now && match.home_score.to_i == 0 && match.home_score.to_i == 0 && match.away_score.to_i == 0 %>

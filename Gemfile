@@ -31,6 +31,9 @@ gem 'best_in_place', "~> 3.0"
 
 gem 'mandrill-api'
 
+# gem 'tzinfo-data'
+# gem "httparty"
+
 gem 'rubin' # round robin
 gem 'icalendar' # Ical support
 
