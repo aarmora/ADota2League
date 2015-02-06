@@ -23,9 +23,9 @@
   	<br>
   	<br>
     <%= f.hidden_field :participant_id, :value => participant.id %>
-    <%= submit_tag "Register!", :class => "btn btn-primary", :confirm => "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one on your team can be ABOVE the stated MMR." %>
+    <%= submit_tag "Register!", :class => "btn btn-primary", :confirm => "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one can be ABOVE the stated MMR." %>
   <% end %>
 <% else %>
-  <h3>Looks like you're already registered for all available tournaments!  PLAY!</h3>
-
-<% end%>
+  <h3>No Tournaments Available</h3>
+  <p>Looks like you're already registered for all available tournaments, or we don't have any open for registration right now. Check back again soon as new tournaments pop up all the time!</p>
+<% end %>

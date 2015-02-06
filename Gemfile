@@ -4,9 +4,6 @@ ruby "2.1.5"
 gem 'rails', '~> 4.2'
 gem 'rails-observers'
 gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
-#gem 'unicorn'
-
-gem 'yaml_db'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -31,8 +28,11 @@ gem 'best_in_place', "~> 3.0"
 
 gem 'mandrill-api'
 
-gem 'tzinfo-data'
+group :development do
+  gem 'tzinfo-data'
 # gem "httparty"
+  gem 'yaml_db'
+end
 
 gem 'rubin' # round robin
 gem 'icalendar' # Ical support
@@ -42,7 +42,7 @@ group :production do
   gem "oink" # for doing memory analysis
   gem 'memcachier'
   gem 'dalli'
-  #gem 'unicorn'
+  gem 'unicorn'
 end
 
 gem 'stripe'
