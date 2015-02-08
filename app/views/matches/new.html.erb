@@ -4,15 +4,15 @@
 
 	<%= form_for Match.new, :html => { :class => "form-horizontal", :role => "form"} do |f|%>
 		<div class="form-group">
-			<%= f.label :home_team_id, "Home Team", :class => "col-sm-2 control-label"%>
+			<%= f.label :home_participant_id, "Home Team", :class => "col-sm-2 control-label"%>
 			<%#= select_teams_for_season_week_with_current_team(9, 9, Team.find(2499)) %>
 			<div class="col-sm-10">
-				<%= f.select(:home_team_id, options_for_select(@teams))%>				
+				<%= f.select(:home_participant_id, options_for_select(@teams))%>				
 			</div>
-			<%= f.label :away_team_id, "Away Team", :class => "col-sm-2 control-label"%>
+			<%= f.label :away_participant_id, "Away Team", :class => "col-sm-2 control-label"%>
 			<%#= select_teams_for_season_week_with_current_team(9, 9, Team.find(2499)) %>
 			<div class="col-sm-10">
-				<%= f.select(:away_team_id, options_for_select(@teams))%>				
+				<%= f.select(:away_participant_id, options_for_select(@teams))%>				
 			</div>
 			<%= f.label :week, "Week", :class => "col-sm-2 control-label"%>
 			<%#= select_teams_for_season_week_with_current_team(9, 9, Team.find(2499)) %>
