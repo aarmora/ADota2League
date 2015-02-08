@@ -34,14 +34,16 @@ group :development do
   gem 'yaml_db'
 end
 
+
+
 gem 'rubin' # round robin
 gem 'icalendar' # Ical support
 
 group :production do
-	gem 'exception_notification'
   gem "oink" # for doing memory analysis
   gem 'memcachier'
   gem 'dalli'
+  gem 'slack-notifier'
   gem 'unicorn'
 end
 
