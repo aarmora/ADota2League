@@ -40,6 +40,7 @@ gem 'rubin' # round robin
 gem 'icalendar' # Ical support
 
 group :production do
+  gem "exception_notification"
   gem "oink" # for doing memory analysis
   gem 'memcachier'
   gem 'dalli'
