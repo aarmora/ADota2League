@@ -22,7 +22,7 @@ class UserMailer < ActionMailer::Base
       @player = player
       puts player.email
       puts player.id
-      mail(to: player.email, subject: "Season 5 registration is open!")
+      mail(to: player.email, subject: "AD2L Solo Tourney!")
     end
   end
 

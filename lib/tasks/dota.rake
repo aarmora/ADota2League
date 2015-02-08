@@ -334,7 +334,7 @@ namespace :dota do
 
   desc "Send email"
   task :mail => :environment do
-    @players = Player.where("id > ?", 13165)
+    @players = Player.where("id > 13643")
     playerz = Player.find(205)
     @players.each do |player|
       unless player.email.nil?
@@ -374,7 +374,7 @@ namespace :dota do
       raise "This appears to be an invalid week"
     end
 
-    if Match.where(:season_id => @season.id, :week => week).where("away_team_id IN (:team_ids) OR home_team_id IN (:team_ids)", {:team_ids => ts.pluck(:team_id)}).exists?
+    if Match.where(:season_id => @season.id, :week => week).where("away_participant_id IN (:team_ids) OR home_participant_id IN (:team_ids)", {:team_ids => ts.pluck(:participant_id)}).exists?
       raise "Teams that would be scheduled are already scheduled for this week"
     end
 
@@ -414,7 +414,7 @@ namespace :dota do
 
 
       team_seasons.each do |tz|
-        team_array.push(tz.team_id)
+        team_array.push(tz.participant_id)
       end
 
       length = team_array.length/2
