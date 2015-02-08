@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.0"
+ruby "2.1.5"
 
 gem 'rails', '~> 4.2'
 gem 'rails-observers'
@@ -42,7 +42,7 @@ group :production do
   gem "oink" # for doing memory analysis
   gem 'memcachier'
   gem 'dalli'
-  gem 'unicorn'
+  #gem 'unicorn'
 end
 
 gem 'stripe'
