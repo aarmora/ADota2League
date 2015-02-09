@@ -66,11 +66,12 @@ Ad2l::Application.configure do
       :sender_address => %{"AD2L Bug Notifier" <amateurdota2league@gmail.com>},
       :exception_recipients => %w{charlie.croom@gmail.com, jbhansen84@gmail.com},
       :normalize_subject => true
-    },
-    :slack => {
-      :webhook_url => "[https://hooks.slack.com/services/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]",
-      :channel => "#ad2l-heroku_github"
     }
+    #,
+    #:slack => {
+    #  :webhook_url => "[https://hooks.slack.com/services/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]",
+    #  :channel => "#ad2l_exceptions"
+    #}
 
   # Enable threaded mode
   # config.threadsafe!
