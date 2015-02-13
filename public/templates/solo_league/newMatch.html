@@ -1,0 +1,75 @@
+<a href="#/" class="btn btn-default">Back</a>
+
+{{newMatch}}
+<div class="col-md-12">
+	<div class="col-md-6">
+		<h3>Home Team</h3>
+		<form>
+			<div class="form-group">
+				<label>Home One</label>
+				<select class="form-control" ng-model="newMatch.home_1" ng-change="removeFromList(newMatch.home_1)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Home Two</label>
+				<select class="form-control" ng-model="newMatch.home_2" ng-change="removeFromList(newMatch.home_2)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Home Three</label>
+				<select class="form-control" ng-model="newMatch.home_3" ng-change="removeFromList(newMatch.home_3)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Home Four</label>
+				<select class="form-control" ng-model="newMatch.home_4" ng-change="removeFromList(newMatch.home_4)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Home Five</label>
+				<select class="form-control" ng-model="newMatch.home_5" ng-change="removeFromList(newMatch.home_5)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-6">
+		<h3>Away Team</h3>
+		<form>
+			<div class="form-group">
+				<label>Away One</label>
+				<select class="form-control" ng-model="newMatch.away_1" ng-change="removeFromList(newMatch.away_1)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Away Two</label>
+				<select class="form-control" ng-model="newMatch.away_2" ng-change="removeFromList(newMatch.away_2)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Away Three</label>
+				<select class="form-control" ng-model="newMatch.away_3" ng-change="removeFromList(newMatch.away_3)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Away Four</label>
+				<select class="form-control" ng-model="newMatch.away_4" ng-change="removeFromList(newMatch.away_4)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Away Five</label>
+				<select class="form-control" ng-model="newMatch.away_5" ng-change="removeFromList(newMatch.away_5)">
+					<option ng-repeat="player in playersToSelect">{{player.name}}</option>
+				</select>
+			</div>
+		</form>
+	</div>
+</div>

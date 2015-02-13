@@ -35,6 +35,7 @@ Ad2l::Application.routes.draw do
   resources :posts
   resources :permissions
   resources :inhouses
+  resources :solo_leagues
 
   resources :players, :only => [:new, :index, :show, :update] do
     member do

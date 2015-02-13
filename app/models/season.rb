@@ -1,6 +1,7 @@
 class Season < ActiveRecord::Base
 	has_many :team_seasons, :dependent => :delete_all
-	has_many :participants, :through => :team_seasons
+	has_many :players, :through => :team_seasons, :source => :participant, :source_type => "Player"
+  has_many :teams, :through => :team_seasons, :source => :participant, :source_type => "Team"
 	has_many :matches
   has_many :permissions, :class_name => "Permission", :foreign_key => "season_id"
 
