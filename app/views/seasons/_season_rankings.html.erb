@@ -1,0 +1,66 @@
+  <% @teams_by_division.each do |division, team_seasons| %>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <% if @teams_by_division.size > 1 %>
+                <tr>
+                    <th colspan=3>
+                        Division <%= division %>
+                        <% matched_permission = @permissions.detect { |p| p.division == division }
+                        if matched_permission  %>
+                            <br/>
+                            <sub>Admin -
+                            <%= link_to matched_permission.player.name, matched_permission.player%></sub>
+                        <% end %>
+                    </th>
+                </tr>
+            <% end %>
+            <tr>
+                <%if @teams_by_division.size > 1 %>
+                    <th>Place</th>
+                <%else%>
+                    <th></th>
+                <%end%>
+                <th>Name</th>
+                <th>Wins</th>
+                <% if @season.check_in_available? %>
+                    <th>Checked in?</th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% team_seasons.sort_by do |ts|
+                if @season.start_date && @season.start_date > Time.now
+                    ts.id
+                else
+                    if @season.team_tourney == true
+                        @total_scores[ts.class_id].to_i
+                    else
+                        @total_wins[ts.participant.id].to_i - @total_losses[ts.participant.id].to_i
+                    end
+                end
+            end.reverse.each_with_index do |team_season, index| %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= link_to team_season.participant.name, team_season.participant %></td>
+                    <td>
+                        <% if @season.team_tourney == true %>
+                            <%= @total_scores[team_season.class_id].to_i %>
+                        <% else %>
+                            <%= @total_wins[team_season.participant.id].to_i %> - <%= @total_losses[team_season.participant.id].to_i%>
+                        <% end %>
+                    </td>
+                    <% if @season.check_in_available? %>
+                        <td>
+                            <% if Permissions.can_edit?(team_season.participant) || Permissions.can_edit?(team_season) && !team_season.checked_in %>
+                                <%= button_tag "Check In", :class => "btn btn-primary btn-block js-check-in", "data-url" => team_season_path(team_season) %>
+                            <% else %>
+                                <%= team_season.checked_in ? "Yes" : "" %>
+                            <% end %>
+                        </td>
+                    <% end %>
+                </tr>
+            <%end%>
+        </tbody>
+    </table>
+<%end%>

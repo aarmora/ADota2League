@@ -15,47 +15,93 @@ class SeasonsController < ApplicationController
       if @season.nil?
         redirect_to seasons_path
       else
-        @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
+        if @season.team_tourney == true
+          #team tourney stuff
+          @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
 
-        # we always need the above, only run all the queries if we need to rebuild the cache or it's an admin or users need to see their individual check in
-        @no_cache = Permissions.can_view?(@season) || @season.check_in_available?
-        if @no_cache || !fragment_exist?("seasonPage-" + params[:id].to_s)
+          # we always need the above, only run all the queries if we need to rebuild the cache or it's an admin or users need to see their individual check in
+          @no_cache = Permissions.can_view?(@season) || @season.check_in_available?
+          if @no_cache || !fragment_exist?("seasonPage-" + params[:id].to_s)
 
-          # Cue the permission system to load the divisions if we might need those
-          Permissions.match_captain_permissions_off
-          Permissions.load_team_divisions_for_season(@season.id) unless Permissions.can_edit?(@season) || !Permissions.can_view?(@season)
+            # Cue the permission system to load the divisions if we might need those
+            Permissions.match_captain_permissions_off
+            Permissions.load_team_divisions_for_season(@season.id) unless Permissions.can_edit?(@season) || !Permissions.can_view?(@season)
 
-          @matches = @season.matches.includes(:home_participant, :away_participant, :caster).to_a.sort_by{|m| m.date ? m.date : Time.now}.reverse
-          @casters = Player.where(:caster => true)
-          @permissions = Permission.includes(:player).all
+            @matches = @season.matches.includes(:home_participant, :away_participant, :caster).to_a.sort_by{|m| m.date ? m.date : Time.now}.reverse
+            @casters = Player.where(:caster => true)
+            @permissions = Permission.includes(:player).all
 
-          @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true).group_by {|ts| ts.division.to_s}
+            @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true).group_by {|ts| ts.division.to_s}
 
-          # compute the scores using the pieces we already have so we don't need to re-fetch them again
-          # NOTE: Relys on one participant_type per season
-          if params[:id] == "1"
-            # don't display the divisions here
-            @teams_by_division = {"" => @teams_by_division.collect {|div, teams| teams}.flatten}
-            @total_scores = {}
-            @matches.each do |match|
-              @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + match.home_score.to_i
-              @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + match.away_score.to_i
-            end
-          elsif params[:id] != "6"
-            #display divisions here
-            @total_scores = {}
-            @matches.each do |match|
-              @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + match.home_score.to_i
-              @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + match.away_score.to_i
-            end
-          else
-            @total_scores = {}
-            @matches.each do |match|
-              @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + (match.home_score.to_i == 2 ? 1 : 0)
-              @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + (match.away_score.to_i == 2 ? 1 : 0)
+            # compute the scores using the pieces we already have so we don't need to re-fetch them again
+            # NOTE: Relys on one participant_type per season
+            if params[:id] == "1"
+              # don't display the divisions here
+              @teams_by_division = {"" => @teams_by_division.collect {|div, teams| teams}.flatten}
+              @total_scores = {}
+              @matches.each do |match|
+                @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + match.home_score.to_i
+                @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + match.away_score.to_i
+              end
+            elsif params[:id] != "6"
+              #display divisions here
+              @total_scores = {}
+              @matches.each do |match|
+                @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + match.home_score.to_i
+                @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + match.away_score.to_i
+              end
+            else
+              @total_scores = {}
+              @matches.each do |match|
+                @total_scores[match.home_participant_class_id] = @total_scores[match.home_participant_class_id].to_i + (match.home_score.to_i == 2 ? 1 : 0)
+                @total_scores[match.away_participant_class_id] = @total_scores[match.away_participant_class_id].to_i + (match.away_score.to_i == 2 ? 1 : 0)
+              end
             end
           end
+        else
+          #solo tourney stuff          
+          @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true).group_by {|ts| ts.division.to_s}
+
+          @solo_league_matches = SoloLeagueMatch.where(:season_id => @season.id).includes(:home_player_1, :home_player_2, :home_player_3, :home_player_4, :home_player_5, :away_player_1, :away_player_2, :away_player_3, :away_player_4, :away_player_5)
+          @total_wins = {}
+          @total_losses = {}
+          @solo_league_matches.each do |match|
+            if match.home_wins == true
+              puts "home_wins"
+              puts match.home_team_id_1
+              #Add home win
+              @total_wins[match.home_team_id_1] = @total_wins[match.home_team_id_1].to_i + 1
+              @total_wins[match.home_team_id_2] = @total_wins[match.home_team_id_2].to_i + 1
+              @total_wins[match.home_team_id_3] = @total_wins[match.home_team_id_3].to_i + 1
+              @total_wins[match.home_team_id_4] = @total_wins[match.home_team_id_4].to_i + 1
+              @total_wins[match.home_team_id_5] = @total_wins[match.home_team_id_5].to_i + 1
+
+              #Add away loss
+              @total_losses[match.away_team_id1] = @total_losses[match.away_team_id1].to_i + 1
+              @total_losses[match.away_team_id2] = @total_losses[match.away_team_id2].to_i + 1
+              @total_losses[match.away_team_id3] = @total_losses[match.away_team_id3].to_i + 1
+              @total_losses[match.away_team_id4] = @total_losses[match.away_team_id4].to_i + 1
+              @total_losses[match.away_team_id5] = @total_losses[match.away_team_id5].to_i + 1
+            elsif match.home_wins == false
+              puts "away_loses"
+              #Add away win
+              @total_wins[match.away_team_id1] = @total_wins[match.away_team_id1].to_i + 1
+              @total_wins[match.away_team_id2] = @total_wins[match.away_team_id2].to_i + 1
+              @total_wins[match.away_team_id3] = @total_wins[match.away_team_id3].to_i + 1
+              @total_wins[match.away_team_id4] = @total_wins[match.away_team_id4].to_i + 1
+              @total_wins[match.away_team_id5] = @total_wins[match.away_team_id5].to_i + 1
+
+              #Add home loss
+              @total_losses[match.home_team_id_1] = @total_losses[match.home_team_id_1].to_i + 1
+              @total_losses[match.home_team_id_2] = @total_losses[match.home_team_id_2].to_i + 1
+              @total_losses[match.home_team_id_3] = @total_losses[match.home_team_id_3].to_i + 1
+              @total_losses[match.home_team_id_4] = @total_losses[match.home_team_id_4].to_i + 1
+              @total_losses[match.home_team_id_5] = @total_losses[match.home_team_id_5].to_i + 1
+            end
+          end
+
         end
+
 
         @current_tab = 'seasons'
 

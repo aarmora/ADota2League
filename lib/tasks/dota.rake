@@ -613,5 +613,121 @@ namespace :dota do
 
   end
 
+  task :create_solo_match => :environment do 
+    puts "What season id?"
+    season_id = STDIN.gets.chomp.to_i
+    @season = Season.find(season_id)
+
+    puts "What round?"
+    round = STDIN.gets.chomp.to_i
+    #There is no validation for rounds.  This means the same round could be run more than once (ouch).
+    
+    @players = @season.players.order('rand()')
+
+
+    if round == 1
+      count = 0
+      subtractor = 0 
+      @players.each do |player|   
+        puts count
+        puts subtractor
+        if count % 10 == 0
+          puts count
+          puts "new"
+          puts "home_1"
+          puts player.name
+          subtractor = count
+          @sl_match = SoloLeagueMatch.new
+          @sl_match.home_team_id_1 = player.id
+          @sl_match.season_id = @season.id
+          @sl_match.lobby_password =  "ad2l" + rand(1000).to_s
+        elsif count.to_i - subtractor.to_i == 1
+          puts subtractor
+          puts "home_2"
+          puts player.name
+          @sl_match.home_team_id_2 = player.id
+        elsif count.to_i - subtractor.to_i == 2
+          puts "home_3"
+          puts player.name
+          @sl_match.home_team_id_3 = player.id
+        elsif count.to_i - subtractor.to_i == 3
+          puts "home_4"
+          puts player.name
+          @sl_match.home_team_id_4 = player.id
+        elsif count.to_i - subtractor.to_i == 4
+          puts "home_5"
+          puts player.name
+          @sl_match.home_team_id_5 = player.id
+        elsif count.to_i - subtractor.to_i == 5
+          puts "away_1"
+          puts player.name
+          @sl_match.away_team_id1 = player.id
+        elsif count.to_i - subtractor.to_i == 6
+          puts "away_2"
+          puts player.name
+          @sl_match.away_team_id2 = player.id
+        elsif count.to_i - subtractor.to_i == 7
+          puts "away_3"
+          puts player.name
+          @sl_match.away_team_id3 = player.id
+        elsif count.to_i - subtractor.to_i == 8
+          puts "away_4"
+          puts player.name
+          @sl_match.away_team_id4 = player.id
+        elsif count.to_i - subtractor.to_i == 9
+          puts "away_5"
+          puts player.name
+          @sl_match.away_team_id5 = player.id
+          @sl_match.save!
+          puts "match created!"
+        end
+        count = count + 1
+      end
+
+    else
+      #This happens after round 1 and should have some gnarly logic.
+      #This needs to be refactored and DRYed as it's in the Season controller as well
+      @solo_league_matches = SoloLeagueMatch.where(:season_id => @season.id).includes(:home_player_1, :home_player_2, :home_player_3, :home_player_4, :home_player_5, :away_player_1, :away_player_2, :away_player_3, :away_player_4, :away_player_5)
+      @total_wins = {}
+      @total_losses = {}
+      @solo_league_matches.each do |match|
+        if match.home_wins == true
+          puts "home_wins"
+          puts match.home_team_id_1
+          #Add home win
+          @total_wins[match.home_team_id_1] = @total_wins[match.home_team_id_1].to_i + 1
+          @total_wins[match.home_team_id_2] = @total_wins[match.home_team_id_2].to_i + 1
+          @total_wins[match.home_team_id_3] = @total_wins[match.home_team_id_3].to_i + 1
+          @total_wins[match.home_team_id_4] = @total_wins[match.home_team_id_4].to_i + 1
+          @total_wins[match.home_team_id_5] = @total_wins[match.home_team_id_5].to_i + 1
+
+          #Add away loss
+          @total_losses[match.away_team_id1] = @total_losses[match.away_team_id1].to_i + 1
+          @total_losses[match.away_team_id2] = @total_losses[match.away_team_id2].to_i + 1
+          @total_losses[match.away_team_id3] = @total_losses[match.away_team_id3].to_i + 1
+          @total_losses[match.away_team_id4] = @total_losses[match.away_team_id4].to_i + 1
+          @total_losses[match.away_team_id5] = @total_losses[match.away_team_id5].to_i + 1
+        elsif match.home_wins == false
+          puts "away_loses"
+          #Add away win
+          @total_wins[match.away_team_id1] = @total_wins[match.away_team_id1].to_i + 1
+          @total_wins[match.away_team_id2] = @total_wins[match.away_team_id2].to_i + 1
+          @total_wins[match.away_team_id3] = @total_wins[match.away_team_id3].to_i + 1
+          @total_wins[match.away_team_id4] = @total_wins[match.away_team_id4].to_i + 1
+          @total_wins[match.away_team_id5] = @total_wins[match.away_team_id5].to_i + 1
+
+          #Add home loss
+          @total_losses[match.home_team_id_1] = @total_losses[match.home_team_id_1].to_i + 1
+          @total_losses[match.home_team_id_2] = @total_losses[match.home_team_id_2].to_i + 1
+          @total_losses[match.home_team_id_3] = @total_losses[match.home_team_id_3].to_i + 1
+          @total_losses[match.home_team_id_4] = @total_losses[match.home_team_id_4].to_i + 1
+          @total_losses[match.home_team_id_5] = @total_losses[match.home_team_id_5].to_i + 1
+        end
+      end
+
+
+    end
+
+  end
 
 end

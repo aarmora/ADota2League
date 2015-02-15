@@ -52,6 +52,7 @@ Ad2l::Application.routes.draw do
   post 'register_caster' => "players#register_caster"
   get 'welcome/get_posts' => 'welcome#get_posts'
   post 'top_plays_email' => 'welcome#top_plays_email'
+  post 'solo_leagues/update_score' => 'solo_leagues#update_score'
 
 
   get 'matchcommentspartial' => 'matches#match_comments_partial'

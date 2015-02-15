@@ -90,7 +90,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.0)
+    coffee-script-source (1.8.0)
     dalli (2.7.2)
     erubis (2.7.0)
     exception_notification (4.0.1)
@@ -252,6 +252,7 @@ DEPENDENCIES
   best_in_place (~> 3.0)
   challonge-api
   coffee-rails
+  coffee-script-source (= 1.8.0)
   dalli
   dota!
   exception_notification

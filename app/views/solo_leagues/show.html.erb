@@ -1,1 +1,54 @@
-<%=@season.players%>
+<div class="col-md-6">
+	<%=@season.players.length%> players
+	<% @season.players.each do |player| %>
+		<div><%=link_to player.name, player%></div>
+	<% end %>
+</div>
+
+<div class="col-md-6">
+
+	<% @solo_league_matches.each do |sl_match| %>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th colspan="3"><%=sl_match.lobby_password%></th>
+				</tr>
+				<tr>
+					<th>Home</th>
+					<th width="75px">
+						<input type="checkbox" value="<%=sl_match.home_wins%>" class="form-control home_wins"/>
+					</th>
+					<th>Away</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%=sl_match.home_player_1.name%></td>
+					<td></td>
+					<td><%=sl_match.away_player_1.name%></td>
+				</tr>
+				<tr>
+					<td><%=sl_match.home_player_2.name%></td>
+					<td></td>
+					<td><%=sl_match.away_player_2.name%></td>
+				</tr>
+				<tr>
+					<td><%=sl_match.home_player_3.name%></td>
+					<td></td>
+					<td><%=sl_match.away_player_3.name%></td>
+				</tr>
+				<tr>
+					<td><%=sl_match.home_player_4.name%></td>
+					<td></td>
+					<td><%=sl_match.away_player_4.name%></td>
+				</tr>
+				<tr>
+					<td><%=sl_match.home_player_5.name%></td>
+					<td></td>
+					<td><%=sl_match.away_player_5.name%></td>
+				</tr>
+			</tbody>
+			
+		</table>
+	<% end %>
+</div>
