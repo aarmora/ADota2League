@@ -60,7 +60,8 @@ class SeasonsController < ApplicationController
           end
         else
           #solo tourney stuff          
-          @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true).group_by {|ts| ts.division.to_s}
+          @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true).group_by {|ts| ts.division.to_s}          
+          @week_num = params[:week].to_i == 0 ? @season.solo_league_matches.maximum(:round) : params[:week].to_i
 
           @solo_league_matches = SoloLeagueMatch.where(:season_id => @season.id).includes(:home_player_1, :home_player_2, :home_player_3, :home_player_4, :home_player_5, :away_player_1, :away_player_2, :away_player_3, :away_player_4, :away_player_5)
           @total_wins = {}

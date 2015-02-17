@@ -613,6 +613,22 @@ namespace :dota do
 
   end
 
+  task :seed_solo_league => :environment do 
+    puts "What season id?"
+    season_id = STDIN.gets.chomp.to_i
+    @season = Season.find(season_id)
+    @players = Player.last(55)
+
+    @players.each do |player|
+      @ts = @season.team_seasons.build
+      @ts.participant = player
+      @ts.paid = true
+      @ts.save!
+      puts player.name
+    end
+
+  end
+
   task :create_solo_match => :environment do 
     puts "What season id?"
     season_id = STDIN.gets.chomp.to_i
@@ -625,7 +641,7 @@ namespace :dota do
     @players = @season.players.order('rand()')
 
 
-    if round == 1
+    if 1 == 1
       count = 0
       subtractor = 0 
       @players.each do |player|   
@@ -641,6 +657,7 @@ namespace :dota do
           @sl_match.home_team_id_1 = player.id
           @sl_match.season_id = @season.id
           @sl_match.lobby_password =  "ad2l" + rand(1000).to_s
+          @sl_match.round = round
         elsif count.to_i - subtractor.to_i == 1
           puts subtractor
           puts "home_2"

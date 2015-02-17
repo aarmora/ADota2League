@@ -53,9 +53,11 @@ Ad2l::Application.routes.draw do
   get 'welcome/get_posts' => 'welcome#get_posts'
   post 'top_plays_email' => 'welcome#top_plays_email'
   post 'solo_leagues/update_score' => 'solo_leagues#update_score'
+  get 'solo_leagues_json/create_match' => 'solo_leagues#create_match'
 
 
   get 'matchcommentspartial' => 'matches#match_comments_partial'
+  get 'solo_leagues_json/get_players' => 'solo_leagues#get_players'
   post 'matchcomment' => 'matches#create_match_comment'
   post 'matchcomment_delete' => 'matches#delete_match_comment'
 

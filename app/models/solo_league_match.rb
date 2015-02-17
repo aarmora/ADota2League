@@ -11,6 +11,8 @@ class SoloLeagueMatch < ActiveRecord::Base
 	belongs_to :away_player_4, :class_name => "Player", :foreign_key => "away_team_id4"
 	belongs_to :away_player_5, :class_name => "Player", :foreign_key => "away_team_id5"
 
+	belongs_to :season
+
   def home_participant_class_id
     "#{home_participant_type}/#{home_participant_id}"
   end
