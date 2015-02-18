@@ -12,9 +12,16 @@ $(document).ready(function(){
     "iDisplayLength": 25,
     "aaSorting": [[ 1, "desc" ]]
   });
-	//$('#perm-data-table').dataTable({
-  //  "bPaginate": false,
-  //  "aaSorting": [[ 5, "asc" ]]
-  //});
-  //$('select').select2();
+
+  // CSS and so on support for seeding tournaments
+  $("#playoff_setup #size").on('change', function() {
+    $(".list-dimming").removeClass("list-dimming-2 list-dimming-4 list-dimming-8 list-dimming-16 list-dimming-32 list-dimming-64 list-dimming-128");
+    $(".list-dimming").addClass("list-dimming-" + $(this).val());
+  });
+  // Assign the seed values to the inputs
+  $("#playoff_setup").on('submit', function() {
+    $(this).find("li input").each(function() {
+      $(this).val($(this).closest("li").index());
+    });
+  });
 });

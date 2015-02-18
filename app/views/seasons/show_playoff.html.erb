@@ -1,0 +1,65 @@
+<% content_for :page_subtitle do %>
+    Schedule
+<% end %>
+<% content_for :meta_description do %>
+    Check out the schedules for all the currently running AD2L tournaments
+<% end %>
+<% content_for :subnav do %>
+    <ul class="nav nav-tabs">
+    <%- @seasons.each do |season| %>
+            <% unless season.active == false %>
+             <li class="tab <%= (@season == season ? "active" : "")%>" + ><%= link_to season.title, season %></li>
+            <%end%>
+        <% end %>
+    </ul>
+<% end %>
+
+<script>
+
+/* Edit function is called when team label is clicked */
+function edit_fn(container, data, doneCb) {
+}
+
+<%- @results_for_js = @results_for_js.map {|round, matches| matches.map {|m| [m.home_score, m.away_score, {
+  id: m.id,
+  url: match_path(m),
+  time: format_datetime_month(m.date),
+  home_name: m.home_participant ? m.home_participant.name : nil,
+  away_name: m.away_participant ? m.away_participant.name : nil,
+  caster: m.caster ? m.caster.name : nil}
+]}} %>
+
+var singleElimination = {
+  teams: <%= raw @teams_for_js.to_json %>,
+  results: <%= raw @results_for_js.to_json %>
+}
+
+$(function() {
+    $('#bracketHolder').bracket({
+      onMatchClick: function(data) {
+        window.location = data.url;
+      },
+
+      onMatchHover: function(data, hoverIn) {
+        if (hoverIn) {
+          var html = "<b>" + data.time + "</b>";
+          if (data.caster) html += "<br />Cast by: " + data.caster;
+          $("#bracketHoverContainer").html(html);
+        } else {
+          $("#bracketHoverContainer").empty();
+        }
+      },
+      // skipSecondaryFinal: true,
+      skipConsolationRound: true,
+      init: singleElimination  /* data to initialize the bracket with */ })
+  })
+
+</script>
+
+<h4>Playoffs</h4>
+<p>Hover over a match to view time information, you can also click on a match to go to the page for that match</p>
+
+<h4>Bracket</h4>
+<div id="bracketHoverContainer" style="min-height: 50px"></div>
+<div id="bracketHolder">
+</div>

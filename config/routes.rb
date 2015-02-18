@@ -7,6 +7,12 @@ Ad2l::Application.routes.draw do
   resources :seasons, :only => [:create, :update, :index, :show] do
     member do
       get 'manage' => "seasons#manage"
+
+      get 'playoffs' => "seasons#playoffs"
+      post 'playoffs' => "seasons#create_playoffs"
+      get 'start_playoffs' => "seasons#start_playoffs"
+      get 'reset_playoffs' => "seasons#reset_playoffs"
+
       get 'setup_challonge' => "challonge#setup"
       get 'sync_challonge_matches' => "challonge#sync_matches"
       get 'launch_challonge' => "challonge#launch"

@@ -1,15 +1,15 @@
-
-function IsEmail(email) {
-    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    return regex.test(email);
-}
-
 $(document).ready(function() {
     // JQuery Tooltips
     $('[data-toggle=tooltip]').tooltip();
 
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();
+
+    $(".js-sortable").sortable();
+    $(".js-sortable").disableSelection();
+    $(".js-date").datetimepicker({
+        showTimepicker: false
+    });
 
     // Intercept all AJAX requests to add in rails auth token where needed
     jQuery(document).ajaxSend(function(event, request, settings) {
@@ -23,9 +23,7 @@ $(document).ready(function() {
     function pulloutZeroOffset() {
         return $("#LiveGames").outerHeight() - $("#LiveGames-Callout").outerHeight();
     }
-
     $("#LiveGames").css("top", pulloutZeroOffset() * -1);
-
     $("#LiveGames-Callout").on('click', function() {
         if ($("#LiveGames").css("top") == "0px") {
             $(this).find(".glyphicon").removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");

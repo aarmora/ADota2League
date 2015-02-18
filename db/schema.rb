@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202215637) do
+ActiveRecord::Schema.define(version: 20150206014659) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "match_id",             limit: 4
@@ -108,8 +108,10 @@ ActiveRecord::Schema.define(version: 20150202215637) do
     t.string   "lobby_password",        limit: 255
     t.datetime "reschedule_time"
     t.integer  "reschedule_proposer",   limit: 4
-    t.string   "home_participant_type", limit: 255, default: "Team", null: false
-    t.string   "away_participant_type", limit: 255, default: "Team", null: false
+    t.string   "home_participant_type", limit: 255, default: "Team"
+    t.string   "away_participant_type", limit: 255, default: "Team"
+    t.integer  "winner_match_id",       limit: 4
+    t.integer  "loser_match_id",        limit: 4
   end
 
   add_index "matches", ["away_participant_id", "away_participant_type"], name: "index_matches_on_away_participant_id_and_away_participant_type", using: :btree
@@ -204,7 +206,7 @@ ActiveRecord::Schema.define(version: 20150202215637) do
     t.datetime "start_date"
     t.text     "description",       limit: 65535
     t.boolean  "solo_league",       limit: 1,     default: false
-    t.integer  "season_type",       limit: 4,     default: 1
+    t.integer  "season_type",       limit: 4,     default: 0,     null: false
     t.boolean  "team_tourney",      limit: 1,     default: true
   end
 

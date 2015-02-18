@@ -4,7 +4,10 @@ $(document).ready(function(){
   	"iDisplayLength": 25,
   	"aaSorting": [[ 0, "desc" ]]
 	});
-  $("select.addplayer").select2();
+
+  if (typeof $.prototype.select2 === "function") {
+    $("select.addplayer").select2();
+  }
 
 	$(document).on('change', '.addplayer', function() {
 
@@ -17,7 +20,7 @@ $(document).ready(function(){
 	$('.fa-question-circle').popover();
 	$('.fa-question-circle').on('shown.bs.popover', function(){
 		setTimeout(function(){
-			$('.fa-question-circle').popover('hide');		
+			$('.fa-question-circle').popover('hide');
 		}, 2500);
 	})
 });

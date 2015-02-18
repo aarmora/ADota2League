@@ -149,7 +149,7 @@
 					<%= link_to "Pay Registration Fee", ts, :class => "btn btn-primary" %>
 				<% end %>
 				<%= form_for ts, :html => {:method => :delete} do |f|  %>
-				  <%= f.submit "Withdraw", :confirm => "Are you sure you want to withdraw from this season? This is NOT easily reversable!", :class => "btn btn-danger btn-sm fa fa-trash-o" %>
+				  <%= f.submit "Withdraw", data: {confirm: "Are you sure you want to withdraw from this season? This is NOT easily reversable!"}, class: "btn btn-danger btn-sm fa fa-trash-o" %>
 				<% end %>
 			<% end %>
 		<% end %>

@@ -11,6 +11,7 @@
  *= require_self
  *= require jquery-ui/slider
  *= require jquery-ui/datepicker
+ *= require jquery-ui/sortable
  *= require select2
  *= require select2-bootstrap
  *= require dataTables/jquery.dataTables
@@ -37,15 +38,6 @@
 	}
 	.formdivs label{
 		vertical-align:middle;
-	}
-
-	.rosterholder{
-		width:300px;
-	}
-
-	.rosterholder .pluslink{
-		float:right;
-		margin-top:-5px;
 	}
 
     html{

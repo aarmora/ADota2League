@@ -5,21 +5,22 @@ gem 'rails', '~> 4.2'
 gem 'rails-observers'
 gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'mysql2', '> 0.3'
 gem 'execjs'
 gem 'nokogiri', '1.6.6.1'
 
 # use Steam OpenID Omniauth gem for authenticating Steam users
 gem 'omniauth-steam'
+gem 'dota', :git => 'git://github.com/nashby/dota.git'
 
 # gem for managing environment variables (steam webapi key)
 gem 'figaro'
 
-gem 'dota', :git => 'git://github.com/nashby/dota.git'
+# Bracketing solutions
 gem 'challonge-api'
+gem 'bracket_tree'
+gem 'rubin' # round robin
+gem 'rrschedule' #, git: 'https://github.com/wlangstroth/rrschedule.git'
 
 #Twitch API
 gem 'kappa', '~> 1.0'
@@ -31,12 +32,9 @@ gem 'mandrill-api'
 group :development do
   gem 'tzinfo-data'
 # gem "httparty"
-  gem 'yaml_db'
 end
 
 
-
-gem 'rubin' # round robin
 gem 'icalendar' # Ical support
 
 group :production do
