@@ -8,16 +8,30 @@ class ApplicationController < ActionController::Base
 
   def load_user
     Permissions.current_user = nil
-    return unless session[:current_user] && session[:current_user][:uid]
-	  @current_user = Player.find_or_create_by!(:steamid => session[:current_user][:uid]) do |user|
-  	  # If they are a new user, ship them over to the profile page
-      user.steam32id = user.steamid.to_i - 76561197960265728.to_i
-  		user.save!
-      flash[:notice] = "Welcome to AD2L!  Your account has been created.  If you want to register a team, please click the register tab above.  If you would like to sign up as a free agent, just toggle your free agent status below!  Play on!"
-      redirect_to user
+
+    # Lookup the player either by steamId (temp) or by userId (new)
+    @current_user = if session[:current_user] && !session[:current_user][:id]
+      # We don't know where it's stored at the moment since old sessions are lurking
+      Player.find_by(:steamid => session[:current_user][:uid] || session[:current_user][:steam][:uid])
+    elsif session[:current_user]
+      Player.find_by_id(session[:current_user][:id])
     end
-    if @current_user
-      Player.find(@current_user.id).update_attributes(:name => session[:current_user][:nickname])
+
+    return unless @current_user
+
+    # Set the account here to convert the session to new style
+    session[:current_user][:id] = @current_user.id
+
+    # If the user is logged in and has a steam token, update their attributes
+    # TODO: Just do this when they login once we get most people
+    if @current_user && session[:current_user] && session[:current_user][:steam]
+      @current_user.update_attributes({
+        name: session[:current_user][:steam][:nickname],
+        real_name: session[:current_user][:steam][:name],
+        avatar: session[:current_user][:steam][:image],
+        country: session[:current_user][:steam][:country]},
+        as: :admin
+      )
   	end
 
     Permissions.current_user = @current_user

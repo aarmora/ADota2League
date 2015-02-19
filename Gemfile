@@ -9,8 +9,9 @@ gem 'mysql2', '> 0.3'
 gem 'execjs'
 gem 'nokogiri', '1.6.6.1'
 
-# use Steam OpenID Omniauth gem for authenticating Steam users
+# use Omniauth gems for authenticating users
 gem 'omniauth-steam'
+gem 'omniauth-bnet'
 gem 'dota', :git => 'git://github.com/nashby/dota.git'
 
 # gem for managing environment variables (steam webapi key)

@@ -126,6 +126,7 @@ GEM
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     json (1.8.2)
+    jwt (1.2.1)
     kappa (1.0.2)
       addressable (~> 2.3.5)
       httparty (~> 0.12.0)
@@ -150,12 +151,26 @@ GEM
       mini_portile (~> 0.6.0)
     nokogiri (1.6.6.1-x86-mingw32)
       mini_portile (~> 0.6.0)
+    oauth2 (1.0.0)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
     oink (0.10.1)
       activerecord
       hodel_3000_compliant_logger
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
+    omniauth-bnet (1.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth2 (1.2.0)
+      faraday (>= 0.8, < 0.10)
+      multi_json (~> 1.3)
+      oauth2 (~> 1.0)
+      omniauth (~> 1.2)
     omniauth-openid (1.0.1)
       omniauth (~> 1.0)
       rack-openid (~> 1.3.1)
@@ -274,6 +289,7 @@ DEPENDENCIES
   mysql2 (> 0.3)
   nokogiri (= 1.6.6.1)
   oink
+  omniauth-bnet
   omniauth-steam
   protected_attributes
   rails (~> 4.2)
