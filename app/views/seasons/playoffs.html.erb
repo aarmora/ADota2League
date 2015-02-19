@@ -55,7 +55,7 @@
   </div>
   <div class="col-sm-4">
     <h4>Teams</h4>
-    <p>Re-order for seedings...only the top teams will be taken. THe first round matchups will look exactly as below (i.e. top seed will not play last seed)</p>
+    <p>Re-order for seedings...only the top teams will be taken.</p>
     <p>Only teams with at least one win are shown...</p>
     <ul class="js-sortable list-group list-dimming list-dimming-8">
       <% @total_scores.sort_by {|k,v| v.to_i }.reverse.each do |class_id,score|

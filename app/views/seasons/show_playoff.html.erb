@@ -20,17 +20,37 @@
 function edit_fn(container, data, doneCb) {
 }
 
-<%- @results_for_js = @results_for_js.map {|round, matches| matches.map {|m| [m.home_score, m.away_score, {
-  id: m.id,
-  url: match_path(m),
-  time: format_datetime_month(m.date),
-  home_name: m.home_participant ? m.home_participant.name : nil,
-  away_name: m.away_participant ? m.away_participant.name : nil,
-  caster: m.caster ? m.caster.name : nil}
-]}} %>
+<%- @results_for_js = @results_for_js.map do |round, matches|
+  matches.map do |m|
+    [ m.has_score? ? m.home_score : nil,
+      m.has_score? ? m.away_score : nil,
+      {
+        id: m.id,
+        url: match_path(m),
+        time: format_datetime_month(m.date),
+        home_name: m.home_participant ? m.home_participant.name : nil,
+        away_name: m.away_participant ? m.away_participant.name : nil,
+        caster: m.caster ? m.caster.name : nil
+      }
+    ]
+  end
+end
+@teams_for_js = @teams_for_js.map { |m| [m.home_participant ? m.home_participant.name : nil, m.away_participant ? m.away_participant.name : nil] }
+
+%>
+
+var teams = <%= raw @teams_for_js.to_json %>;
+
+// Byes need to be undefined and not null, so let's fix those in the first round
+teams.forEach(function(pair) {
+  if (pair[0] === null)
+    pair[0] = undefined;
+  if (pair[1] === null)
+    pair[1] = undefined;
+ });
 
 var singleElimination = {
-  teams: <%= raw @teams_for_js.to_json %>,
+  teams: teams,
   results: <%= raw @results_for_js.to_json %>
 }
 

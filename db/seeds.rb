@@ -48,7 +48,7 @@ matches.each_with_index do |pairings, i|
 end
 
 single = Season.create({title: "Single Elim", season_type: :single_elim, active: true, start_date: Time.now - 1.day}, :without_protection => true)
-Team.first(8).each do |t|
+Team.first(7).each do |t|
   single.team_seasons.create({division: t.id, participant: t, paid: true, checked_in: true}, :without_protection => true)
 end
 single.setup_tournament_matches

@@ -38,7 +38,7 @@ class SeasonsController < ApplicationController
       end
       render :action => 'show' # explicitly needed because index calls this method and expects it to render
     else
-      @teams_for_js = @season.matches.where(week: 1).map { |m| [m.home_participant.name, m.away_participant.name] }
+      @teams_for_js = @season.matches.where(week: 1)
       # TODO: Add timestamp for JS side rendering
       @results_for_js = @season.matches.group_by(&:week)
 

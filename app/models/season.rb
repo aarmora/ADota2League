@@ -49,10 +49,16 @@ class Season < ActiveRecord::Base
   # No start date implies that we are running it ASAP or anything but weekly
   def setup_tournament_matches(start_date = nil, utc_offset = nil)
     # verify all this shit and blah blah blah
-    teams = self.team_seasons.order(:division).map {|ts| {participant: ts.participant, seed_order: ts.division} }
+    teams = self.team_seasons.where(paid: true, checked_in: true).order(:division).map {|ts| {participant: ts.participant, seed_order: ts.division} }
+
     # Add in Byes
-    bracket = BracketTree::Bracket::SingleElimination.by_size teams.length
-    bracket.seed teams
+    bracket_size = 2 ** Math.log(teams.length,2).ceil
+    bracket = BracketTree::Bracket::SingleElimination.by_size bracket_size
+    seeds = Season.seed_mappings(bracket_size)
+    teams = teams.fill({participant: nil}, teams.length...bracket_size)
+
+    seeded_teams = seeds.map{|i| teams[i-1]}
+    bracket.seed seeded_teams
     matches = transform_from_bracket(bracket)
 
     # loop and create the matches...keep a mapping of psuedo-ids to real ids so we can relink in a second pass
@@ -74,7 +80,7 @@ class Season < ActiveRecord::Base
         match_data[:date] = Time.now + ((pseudo_match[:round] - 1) * 1.5).hours
       end
 
-      m = self.matches.create(match_data, :without_protection => true)
+      m = self.matches.create!(match_data, :without_protection => true)
       mapping[pseudo_match[:id]] = m.id
     end
 
@@ -84,6 +90,12 @@ class Season < ActiveRecord::Base
       m.winner_match_id = mapping[pseudo_match[:winner_to]]
       m.loser_match_id = mapping[pseudo_match[:loser_to]]
       m.save!
+
+      # If a bye, progress immediately
+      if m.week == 1 && !!m.home_participant ^ !!m.away_participant
+        m2 = Match.find(m.winner_match_id)
+        m2.add_participant(m.home_participant || m.away_participant)
+      end
     end
 
     self.matches
@@ -127,6 +139,28 @@ class Season < ActiveRecord::Base
       setRound(useful_matches, match)
     end
     useful_matches
+  end
+
+  # subroutine for doign a round
+  def self.nextLayer (pls)
+    out = []
+    length = pls.length * 2 + 1;
+    pls.each do |d|
+      out << d
+      out << length - d
+    end
+    out
+  end
+
+  def self.seed_mappings(size)
+    rounds = Math.log(size)/Math.log(2)-1;
+    # Work backwards to ensure right people would meet in the finals
+    pls = [1,2];
+    (0...rounds).each do
+      pls = Season.nextLayer(pls);
+    end
+
+    pls
   end
 
 

@@ -17,10 +17,10 @@ class Match < ActiveRecord::Base
   validates_each :home_participant, :away_participant do |record, attr, value|
     home_query = Match.where(home_participant: value).where_values.reduce(:and)
     away_query = Match.where(away_participant: value).where_values.reduce(:and)
-    if Match.where(season_id: record.season_id, week: record.week).where(home_query.or(away_query)).where.not(id: record.id).exists?
+    if value && Match.where(season_id: record.season_id, week: record.week).where(home_query.or(away_query)).where.not(id: record.id).exists?
       record.errors.add(attr, 'cannot play more than one match per week/round')
     end
-    if !TeamSeason.where(season_id: record.season_id, participant: value).exists?
+    if value && !TeamSeason.where(season_id: record.season_id, participant: value).exists?
       record.errors.add(attr, 'does not appear to be registered for this match\'s season')
     end
   end
@@ -42,6 +42,9 @@ class Match < ActiveRecord::Base
   end
   def away_score
     super.to_i
+  end
+  def has_score?
+    home_score > 0 || away_score > 0
   end
 
   # Used by tournament code to slot a new participant in when the previous game ends
