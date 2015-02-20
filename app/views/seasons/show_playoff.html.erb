@@ -1,0 +1,85 @@
+<% content_for :page_subtitle do %>
+    Schedule
+<% end %>
+<% content_for :meta_description do %>
+    Check out the schedules for all the currently running AD2L tournaments
+<% end %>
+<% content_for :subnav do %>
+    <ul class="nav nav-tabs">
+    <%- @seasons.each do |season| %>
+            <% unless season.active == false %>
+             <li class="tab <%= (@season == season ? "active" : "")%>" + ><%= link_to season.title, season %></li>
+            <%end%>
+        <% end %>
+    </ul>
+<% end %>
+
+<script>
+
+/* Edit function is called when team label is clicked */
+function edit_fn(container, data, doneCb) {
+}
+
+<%- @results_for_js = @results_for_js.map do |round, matches|
+  matches.map do |m|
+    [ m.has_score? ? m.home_score : nil,
+      m.has_score? ? m.away_score : nil,
+      {
+        id: m.id,
+        url: match_path(m),
+        time: format_datetime_month(m.date),
+        home_name: m.home_participant ? m.home_participant.name : nil,
+        away_name: m.away_participant ? m.away_participant.name : nil,
+        caster: m.caster ? m.caster.name : nil
+      }
+    ]
+  end
+end
+@teams_for_js = @teams_for_js.map { |m| [m.home_participant ? m.home_participant.name : nil, m.away_participant ? m.away_participant.name : nil] }
+
+%>
+
+var teams = <%= raw @teams_for_js.to_json %>;
+
+// Byes need to be undefined and not null, so let's fix those in the first round
+teams.forEach(function(pair) {
+  if (pair[0] === null)
+    pair[0] = undefined;
+  if (pair[1] === null)
+    pair[1] = undefined;
+ });
+
+var singleElimination = {
+  teams: teams,
+  results: <%= raw @results_for_js.to_json %>
+}
+
+$(function() {
+    $('#bracketHolder').bracket({
+      onMatchClick: function(data) {
+        window.location = data.url;
+      },
+
+      onMatchHover: function(data, hoverIn) {
+        if (hoverIn) {
+          var html = "<b>" + data.time + "</b>";
+          if (data.caster) html += "<br />Cast by: " + data.caster;
+          $("#bracketHoverContainer").html(html);
+        } else {
+          $("#bracketHoverContainer").empty();
+        }
+      },
+      // skipSecondaryFinal: true,
+      skipConsolationRound: true,
+      init: singleElimination  /* data to initialize the bracket with */ })
+  })
+
+</script>
+
+<h4>Playoffs</h4>
+<p>Hover over a match to view time information, you can also click on a match to go to the page for that match</p>
+
+<h4>Bracket</h4>
+<div id="bracketHoverContainer" style="min-height: 50px"></div>
+<div id="bracketHolder">
+</div>

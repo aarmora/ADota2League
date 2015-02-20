@@ -437,7 +437,7 @@ namespace :dota do
       end
 
       test_matches.each do |test_match|
-        time = rand(3) === 0 ? "22:00:00" : "20:30:00"
+        time = DOTA_GAME_TIMES.sample
         datetime = "#{date} #{time} #{tz}"
         match = season.matches.build
         match.week = week

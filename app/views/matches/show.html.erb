@@ -6,90 +6,120 @@
     <div class="alert alert-warning" role="alert">There has been a request to change the game time to <%= format_datetime(@match.reschedule_time) %>. Please <%= link_to "click here to accept", accept_reschedule_match_url(@match) %> the other captain's proposal, or counter propose below</div>
   <% end %>
 
-	<div class="row">
-		<div class="col-md-8">
-			<% if Permissions.can_edit?(@match) || @can_edit %>
-				NOTE: The below selector will allow you to ask to reschedule the match. Both parties must agree on a time for it to become official. If your opponent has already asked for a reschedule, you can simply click above to accept it. Beware of the timezone resetting when you open the selector!
-			<% end %>
-			<h4>
-				<%if Permissions.can_edit?(@match) || @can_edit%>
-					<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
-					  :reschedule_time,
-					  :display_with => lambda { |date| format_datetime(date)}, # TODO: this doesn't pre-fill the time right
-					  :activator => ".fa-calendar.#{@match.id}-date, .js-time",
-			      :type => :datetime
+	<div class="form-horizontal">
+		<h4>Match Details</h4>
+	  <div class="form-group">
+	    <label class="col-sm-3 control-label">Official Match Time</label>
+	    <div class="col-sm-7">
+	      <p class="form-control-static"><%= format_datetime(@match.date) %></p>
+	    </div>
+	  </div>
+
+	  <% if Permissions.can_edit?(@match) || @can_edit%>
+		  <div class="form-group">
+		    <label class="col-sm-3 control-label">Proposed Reschedule Time</label>
+		    <div class="col-sm-7">
+		      <p class="form-control-static">
+		      	<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
+						  :reschedule_time,
+						  :display_with => lambda { |date| format_datetime(date)}, # TODO: this doesn't pre-fill the time right
+						  :activator => ".fa-calendar.#{@match.id}-date",
+				      :type => :datetime
+						%>
+						<span class="fa fa-calendar form-control-feedback <%=@match.id%>-date" title="Reschedule this Game"></span>
+					</p>
+					<% if @match.date > Time.now - 1.day && (Permissions.can_edit?(@match) || @can_edit) %>
+						<div class="alert alert-warning" role="alert">Clicking the calendar icon will allow you to ask to reschedule the match. However, both parties must agree on a time for it to become official. If your opponent has already asked for a reschedule, you can simply click above to accept it. Beware of the timezone resetting when you open the selector!</div>
+					<% end %>
+		    </div>
+		  </div>
+		<% end %>
+
+		<% if @match.lobby_password && @match.date > Time.now - 1.day %>
+			<div class="form-group">
+		    <label class="col-sm-3 control-label">Lobby Password</label>
+		    <div class="col-sm-7">
+		      <p class="form-control-static"><%= @match.lobby_password %></p>
+		      <div class="alert alert-info" role="alert"><%= @match.home_participant.name %> is responsible for hosting this lobby!</div>
+		    </div>
+		  </div>
+		<% end %>
+
+		<div class="form-group">
+	    <label class="col-sm-3 control-label">Caster</label>
+	    <div class="col-sm-7">
+	      <p class="form-control-static">
+		      <%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
+					  :caster_id,
+					  :display_with => (lambda do |caster_id|
+					    @match.caster ? (link_to @match.caster.name, @match.caster.twitch, :target => "blank") : ""
+					  end),
+					  :activator => ".glyphicon-warning-sign.#{@match.id}-caster",
+			      	  :type => :select,
+			      	  collection: [["", "None"]] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 					%>
-				<%else%>
-					<%=format_datetime(@match.date)%>
-				<%end%>
-				<% if Permissions.can_edit?(@match) || @can_edit %>
-					<span class="fa fa-calendar form-control-feedback <%=@match.id%>-date" title="Reschedule this Game"></span>
-				<%end%>
-			</h4>
-			<% if @match.lobby_password && @match.date > Time.now - 1.day %>
-				<h3>Lobby Password: <%= @match.lobby_password %></h3>
-				<% if @match.home_participant %>
-					<h4><%= @match.home_participant.name %> is responsible for hosting this lobby!</h4>
-				<% end %>
-			<% end %>
-			Caster:
-			<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
-			  :caster_id,
-			  :display_with => (lambda do |caster_id|
-			    @match.caster ? (link_to @match.caster.name, @match.caster.twitch, :target => "blank") : ""
-			  end),
-			  :activator => ".glyphicon-warning-sign.#{@match.id}-caster",
-	      	  :type => :select,
-	      	  collection: [["", "None"]] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
-			%>
-			<% if Permissions.can_edit?(@match) || @can_edit %>
-				<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=@match.id%>-caster"></span>
-			<%end%>
-		</div>
+					<% if Permissions.can_edit?(@match) || @can_edit %>
+						<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=@match.id%>-caster"></span>
+					<% end %>
+	      </p>
+	    </div>
+	  </div>
 	</div>
-	<br /><br />
-	<b>Result:</b>
+
+	<hr>
+	<h4>Results:</h4>
+
 	<div class="row">
-		<div class="col-xs-3 text-center">
-			<h5><%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match, :home_score, :type => :input %></h5>
+		<div class="col-xs-5 text-center">
+			<% if @match.home_participant.nil? %>
+				<h3>TBD / Bye</h3>
+			<% else %>
+				<h3><%= link_to @match.home_participant.name, @match.home_participant%></h3>
+
+			<% end %>
 		</div>
-		<div class="col-xs-2 text-center">
+
+		<div class="col-xs-2 text-center" style="margin-top: 15px;">
 			<h5>vs</h5>
 		</div>
-		<div class="col-xs-3 text-center">
-			<h5><%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match, :away_score, :type => :input %></h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12">
-			<% if Permissions.can_edit?(@match) || @can_edit %>
-				<%= best_in_place @match, :forfeit, :type => :checkbox%>
-				<br>
-				<sub>Forfeit?</sub>
+
+		<div class="col-xs-5 text-center">
+			<% if @match.away_participant.nil? %>
+				<h3>TBD / Bye</h3>
+			<% else %>
+				<h3><%= link_to @match.away_participant.name, @match.away_participant%></h3>
 			<% end %>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-sm-4 rosterholder">
-			<% if @match.home_participant.nil? %>
-				<h3>Bye</h3>
-			<% else %>
-				<h3><%= link_to @match.home_participant.name, @match.home_participant%></h3>
-				<%= render :partial => "teams/roster", :locals => {:roster => @home_team_roster, :team => @match.home_participant}%>
-			<% end %>
+		<div class="col-xs-5 text-center">
+			<h4><%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match, :home_score, :type => :input %></h4>
 		</div>
-		<div class="col-sm-4 col-sm-offset-1 rosterholder">
-			<% if @match.away_participant.nil? %>
-				<h3>Bye</h3>
-			<% else %>
-				<h3><%= link_to @match.away_participant.name, @match.away_participant%></h3>
-				<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_participant}%>
-			<% end %>
+		<div class="col-sm-offset-2 col-xs-5 text-center">
+			<h4><%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match, :away_score, :type => :input %></h4>
 		</div>
 	</div>
-	<br>
-	<br>
+
+	<% if Permissions.can_edit?(@match) || @can_edit %>
+		<div class="col-xs-12 text-center">
+			Forfeit win? <%= best_in_place @match, :forfeit, :type => :checkbox%>
+		</div>
+	<% end %>
+
+	<div class="row">
+		<div class="col-xs-5 text-center">
+			<%= render :partial => "teams/roster", :locals => {:roster => @home_team_roster, :team => @match.home_participant}%>
+		</div>
+
+		<div class="col-xs-offset-2 col-xs-5 text-center">
+			<%= render :partial => "teams/roster", :locals => {:roster => @away_team_roster, :team => @match.away_participant}%>
+		</div>
+	</div>
+
+
+
+	<hr>
 	<h4>Match Comments</h4>
 	<div class="container-fluid" id="matchcommentspartial">
 		<%= render :partial => "matches/match_comments"%>

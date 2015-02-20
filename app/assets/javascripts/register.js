@@ -1,3 +1,10 @@
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 $(document).ready(function(){
 	// When they select a team, load the season select partial
 	$('#teamPicker').change(function(){
@@ -17,4 +24,7 @@ $(document).ready(function(){
 	$('#new_team').on('ajax:error' , function(e, data, status, xhr) {
 		alert("Sorry, there was an error creating your team. Please try again later!");
 	});
+	if(getParameterByName("refid")){
+		ga('send', 'event', 'our_ads', 'click', getParameterByName("refid"));
+	}
 });

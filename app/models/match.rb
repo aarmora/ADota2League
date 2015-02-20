@@ -14,10 +14,14 @@ class Match < ActiveRecord::Base
   attr_accessible :home_participant_id, :away_participant_id, :lobby_password, :week, :season_id, :as => :admin
 
   # We could use a uniqueness validator, but since we have home and away, it wouldn't work so well
-  # TODO: Update the validators to be updated for polymorphism
-  validates_each :home_participant_id, :away_participant_id do |record, attr, value|
-    if Match.where("id != :match AND season_id = :season AND week = :week AND (home_participant_id = :id OR away_participant_id = :id)", {:id => value, :match => record.id, :season => record.season_id, :week => record.week}).count > 0
-      record.errors.add(attr, 'cannot play more than one match per week')
+  validates_each :home_participant, :away_participant do |record, attr, value|
+    home_query = Match.where(home_participant: value).where_values.reduce(:and)
+    away_query = Match.where(away_participant: value).where_values.reduce(:and)
+    if value && Match.where(season_id: record.season_id, week: record.week).where(home_query.or(away_query)).where.not(id: record.id).exists?
+      record.errors.add(attr, 'cannot play more than one match per week/round')
+    end
+    if value && !TeamSeason.where(season_id: record.season_id, participant: value).exists?
+      record.errors.add(attr, 'does not appear to be registered for this match\'s season')
     end
   end
 
@@ -36,9 +40,41 @@ class Match < ActiveRecord::Base
   def home_score
     super.to_i
   end
-
   def away_score
     super.to_i
+  end
+  def has_score?
+    home_score > 0 || away_score > 0
+  end
+
+  # Used by tournament code to slot a new participant in when the previous game ends
+  def add_participant(participant)
+    # Assume we are in a tournament, we'll want to look at the seeds and slot the higher seed as home
+    self.logger.info("Adding #{participant.name} to match ##{self.id}")
+    self.logger.error("Cannot add participants when match has scores already") and raise if self.home_score > 0 || self.away_score > 0
+    self.logger.error("Cannot add participants; no free slots in match") and raise if self.home_participant && self.away_participant
+
+    current_participant = self.home_participant || self.away_participant
+    current_seed = current_participant ? TeamSeason.where(participant: current_participant, season_id: self.season_id).first.division : nil
+    participant_seed = TeamSeason.where(participant: participant, season_id: self.season_id).first.division
+    if !current_seed || participant_seed > current_seed
+      self.home_participant = participant
+      self.away_participant = current_participant
+    else
+      self.home_participant = current_participant
+      self.away_participant = participant
+    end
+    self.save!
+  end
+
+  # Used by tournament code to slot a new participant in when the previous game ends
+  def remove_participants(*participants)
+    participants = participants.flatten
+    self.logger.error("Cannot remove participants when match has scores already") and raise if self.home_score > 0 || self.away_score > 0
+
+    self.home_participant = nil if participants.include? self.home_participant
+    self.away_participant = nil if participants.include? self.away_participant
+    self.save!
   end
 
   # Called to update the match score from the associated games

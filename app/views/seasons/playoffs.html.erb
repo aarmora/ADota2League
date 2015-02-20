@@ -1,0 +1,97 @@
+<h2>Convert Season to Playoffs</h2>
+<%= form_for playoffs_season_path(@season), html: {id: "playoff_setup"} do %>
+  <div class="col-sm-4">
+    <h4>Settings</h4>
+    <div class="form-group">
+      <label for="season_type">
+        Tournament Type
+      </label>
+      <select id="season_type" name="season_type" class="form-control">
+        <option value="single_elim">Single Elimination</option>
+        <option value="double_elim">Double Elimination</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="size">
+        Tournament Size
+      </label>
+      <select id="size" name="size" class="form-control">
+        <option>4</option>
+        <option selected>8</option>
+        <%- if @total_scores.length >= 16 %><option>16</option><% end %>
+        <%- if @total_scores.length >= 32 %><option>32</option><% end %>
+        <%- if @total_scores.length >= 64 %><option>64</option><% end %>
+        <%- if @total_scores.length >= 128 %><option>128</option><% end %>
+      </select>
+    </div>
+
+    <div>
+      <label for="start_date">
+        Tournament Start Date
+      </label>
+      <input id="start_date" name="start_date" class="js-date form-control" value="<%= @start_date.strftime("%m/%d/%Y") %>">
+      <p class="help-block">The first games will occur on the given date. Each subsequent round will be scheduled one week later.</p>
+    </div>
+
+    <div>
+      <label for="utc_offset">
+        Tournament Timezone
+      </label>
+      <select id="utc_offset" name="utc_offset" class="form-control">
+      <%- ActiveSupport::TimeZone.all.map {|k, v| [k.name, k.formatted_offset]}.each do |name, value| %>
+        <option value="<%= value %>"><%= "#{name} (#{value})" %></option>
+      <% end %>
+      </select>
+      <p class="help-block">Games will occur at one of: <%= DOTA_GAME_TIMES.join(", ") %> in the timezone.</p>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="deactivate" value="1" checked> Deactive Season after creation?
+      </label>
+    </div>
+    <%= submit_tag "Create Tournament", class: "btn btn-primary", data: {confirm: "Are you sure? This will immediately create a new season"} %>
+  </div>
+  <div class="col-sm-4">
+    <h4>Teams</h4>
+    <p>Re-order for seedings...only the top teams will be taken.</p>
+    <p>Only teams with at least one win are shown...</p>
+    <ul class="js-sortable list-group list-dimming list-dimming-8">
+      <% @total_scores.sort_by {|k,v| v.to_i }.reverse.each do |class_id,score|
+          ts = @team_seasons.detect {|ts| ts.class_id == class_id }
+          if ts
+      %>
+            <li class="list-group-item"><input type=hidden name="participants[<%= ts.participant.id %>]" value=""><%= ts.participant.name %></li>
+       <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-sm-4">
+    <h4>Results</h4>
+
+    <%# TODO: Partially copied from season/show %>
+    <% @teams_by_division.each do |division, team_seasons| %>
+      <h5><%= division %></h5>
+      <table>
+        <thead>
+          <th></th>
+          <th>Name</th>
+          <th>Wins</th>
+        </thead>
+        <tbody>
+        <% team_seasons.sort_by {|ts| @total_scores[ts.class_id].to_i }.reverse.each_with_index do |team_season, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= team_season.participant.name %></td>
+            <td><%= @total_scores[team_season.class_id].to_i %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+  </div>
+
+<% end %>

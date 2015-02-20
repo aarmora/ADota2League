@@ -23,7 +23,7 @@
   	<br>
   	<br>
     <%= f.hidden_field :participant_id, :value => participant.id %>
-    <%= submit_tag "Register!", :class => "btn btn-primary", :confirm => "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one can be ABOVE the stated MMR." %>
+    <%= submit_tag "Register!", :class => "btn btn-primary", data: { confirm: "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one on your team can be ABOVE the stated MMR."} %>
   <% end %>
 <% else %>
   <h3>No Tournaments Available</h3>

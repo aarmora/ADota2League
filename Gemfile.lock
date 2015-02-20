@@ -81,6 +81,7 @@ GEM
     best_in_place (3.0.3)
       actionpack (>= 3.2)
       railties (>= 3.2)
+    bracket_tree (0.1.0)
     builder (3.2.2)
     challonge-api (0.2.0)
       activeresource
@@ -128,6 +129,7 @@ GEM
     kappa (1.0.2)
       addressable (~> 2.3.5)
       httparty (~> 0.12.0)
+    kgio (2.9.3)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -199,6 +201,7 @@ GEM
       activesupport (= 4.2.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    raindrops (0.13.0)
     rake (10.4.2)
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
@@ -207,6 +210,7 @@ GEM
       ffi (~> 1.9)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rrschedule (0.3.3)
     rubin (0.2.0)
     ruby-openid (2.6.0)
     sass (3.4.11)
@@ -240,9 +244,10 @@ GEM
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    yaml_db (0.3.0)
-      rails (>= 3.0, < 4.3)
-      rake (>= 0.8.7)
+    unicorn (4.8.3)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
 
 PLATFORMS
   ruby
@@ -250,6 +255,7 @@ PLATFORMS
 
 DEPENDENCIES
   best_in_place (~> 3.0)
+  bracket_tree
   challonge-api
   coffee-rails
   coffee-script-source (= 1.8.0)
@@ -274,6 +280,7 @@ DEPENDENCIES
   rails (~> 4.2)
   rails-observers
   rails_12factor
+  rrschedule
   rubin
   sass-rails
   select2-rails!
@@ -282,4 +289,4 @@ DEPENDENCIES
   twitter-bootstrap-rails!
   tzinfo-data
   uglifier (>= 1.0.3)
-  yaml_db
+  unicorn

@@ -1,12 +1,14 @@
+<ul>
+  <%- roster.each do |player| %>
+  	<li>
+      <%= link_to player.name, player%> <%= "(Captain)" if player.id == team.captain_id %>
+    	<%= link_to "", "steam://friends/add/#{player.steamid}", :style => "margin-left:15px", :title => "Add on steam", :class => "pluslink fa fa-plus" %><br>
 
-<%- roster.each do |player| %>
-	<%= link_to player.name, player%> <%= "(Captain)" if player.id == team.captain_id %>
-	<%= link_to "", "steam://friends/add/#{player.steamid}", :style => "margin-left:15px", :title => "Add on steam", :class => "pluslink fa fa-plus" %><br>
-
-  <% if Permissions.can_edit?(@team) %>
-    <%= form_tag(players_team_url(@team), :method => "DELETE", :id => "remove_players_form") do %>
-      <input type="hidden" name="players[]" value="<%= player.id %>">
-      <button class="btn btn-danger btn-sm fa fa-trash-o">Remove</button>
-    <% end %>
+      <% if Permissions.can_edit?(@team) %>
+        <%= form_tag(players_team_url(@team), :method => "DELETE", :id => "remove_players_form") do %>
+          <input type="hidden" name="players[]" value="<%= player.id %>">
+          <button class="btn btn-danger btn-sm fa fa-trash-o">Remove</button>
+        <% end %>
+      <% end %>
+    </li>
   <% end %>
-<% end %>

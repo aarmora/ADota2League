@@ -18,64 +18,64 @@
     <div style="clear: both"></div>
     <div class="TabsContainer">
         <div class="tabbody3 active">
-            <div class="steam_chat container-fluid">
-                Can't find your opponent?  Join the <a href="steam://friends/joinchat/103582791435143521" class="btn btn-primary">STEAM group chat!</a>
-            </div>
-            <% if (@season.challonge_url && !@season.challonge_tournament) || (@season.challonge_tournament && @season.challonge_tournament.state != "pending") %>
-                <iframe src="http://challonge.com/<%=@season.challonge_url%>/module" width="1100px" height="1000px" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
-            <% else %>
-                <div class="col-sm-4">
-                    <h2 class="rankings">Rankings</h2>                        
-                    <%= render :partial => "seasons/season_rankings" %>
+            <% if Permissions.can_view?(@season) %>
+                <div>
+                    <%= link_to "Manage Season", manage_season_path(@season), class: "btn btn-primary" %>
                 </div>
-                <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
-                    <% if @season.team_tourney %>
-                        <h2>Schedule</h2>
-                        <% if @season.challonge_tournament || (@season.late_fee_start && @season.late_fee_start > Time.now) %>
-                            <%if @season.challonge_id.nil?%>
-                                <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
-                            <% else %>
-                                <p>Schedule will be released when the tournament starts on <%= format_datetime_month(@season.start_date) %></p>
-                            <% end %>
+            <% end %>
+            <div>
+                Can't find your opponent?  Join the <a href="steam://friends/joinchat/103582791435143521" class="btn btn-primary btn-xs">STEAM group chat!</a>
+            </div>
+            <div class="col-sm-4">
+                <h2><%= @season.start_date || Time.now >= Time.now ? "Participants" : "Rankings" %></h2>                      
+                <%= render :partial => "seasons/season_rankings" %>
+            </div>
+            <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-2">
+                <% if @season.team_tourney %>
+                    <h2>Schedule</h2>
+                    <% if !@season.matches.exists? %>
+                        <% if @season.round_robin? %>
+                            <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
                         <% else %>
-                            <ul class="list-inline week-selector">
-                                <span class="week">Week</span>
-                                <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
-                                    <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
-                                <% end %>
-                            </ul>
-                            <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
-                                <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
-                                    <%= render :partial => "matches/match_table", :object => @matches.select{|m| m.week == week_num } %>
-                                </div>
-                            <% end %>
+                            <p>Schedule will be released when the tournament starts on <%= format_datetime_month(@season.start_date) %></p>
                         <% end %>
                     <% else %>
-                        <!-- Solo tourney stuff -->
-                        <h2>Matches</h2>
-                        <% if @season.challonge_tournament || (@season.late_fee_start && @season.late_fee_start > Time.now) %>
-                            <%if @season.challonge_id.nil?%>
-                                <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
-                            <% else %>
-                                <p>Schedule will be released when the tournament starts on <%= format_datetime_month(@season.start_date) %></p>
+                        <ul class="list-inline week-selector">
+                            <span class="week">Week</span>
+                            <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
+                                <li><%= link_to week_num, {:week => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
                             <% end %>
-                        <% else %>
-                            <ul class="list-inline week-selector">
-                               <span class="week">Round</span>
-                                <% @season.solo_league_matches.pluck(:round).uniq.sort.each do |week_num| %>
-                                    <li><%= link_to week_num, {:week_num => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
-                                <% end %>
-                            </ul>
-                            <% @season.solo_league_matches.pluck(:round).uniq.sort.each do |week_num| %>
-                                <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
-                                    <%= render :partial => "solo_leagues/solo_league_matches", :locals => { :@sl_week_matches => @solo_league_matches.select{|m| m.round == week_num } }%>
-                                </div>
-                            <% end %>
+                        </ul>
+                        <% @season.matches.pluck(:week).uniq.sort.each do |week_num| %>
+                            <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
+                                <%= render :partial => "matches/match_table", :object => @matches.select{|m| m.week == week_num } %>
+                            </div>
                         <% end %>
-                     
                     <% end %>
-                </div>
-            <%end%>
+                <% else %>
+                 <!-- Solo tourney stuff -->
+                    <h2>Matches</h2>
+                    <% if @season.challonge_tournament || (@season.late_fee_start && @season.late_fee_start > Time.now) %>
+                        <%if @season.challonge_id.nil?%>
+                            <p>Schedule will be released when the tournament starts on <%= format_date(@season.start_date) %></p>
+                        <% else %>
+                            <p>Schedule will be released when the tournament starts on <%= format_datetime_month(@season.start_date) %></p>
+                        <% end %>
+                    <% else %>
+                        <ul class="list-inline week-selector">
+                           <span class="week">Round</span>
+                            <% @season.solo_league_matches.pluck(:round).uniq.sort.each do |week_num| %>
+                                <li><%= link_to week_num, {:week_num => week_num}, "data-week" => week_num, :class => ("active" if week_num == @week_num) %></li>
+                            <% end %>
+                        </ul>
+                        <% @season.solo_league_matches.pluck(:round).uniq.sort.each do |week_num| %>
+                            <div class="week-holder" id="week_<%= week_num %>" style='<%= "display: none;" unless @week_num == week_num %>'>
+                                <%= render :partial => "solo_leagues/solo_league_matches", :locals => { :@sl_week_matches => @solo_league_matches.select{|m| m.round == week_num } }%>
+                            </div>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </div>
         </div>
     </div>
 <% end %>

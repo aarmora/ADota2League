@@ -28,12 +28,9 @@ class MatchesController < ApplicationController
   def show
 
     @match = Match.find(params[:id])
-    unless @match.home_participant.nil?
-      @home_team_roster = @match.home_participant.players.to_a.sort_by {|p| p.id == @match.home_participant.captain_id ? 0 : 1}
-    end
-    unless @match.away_participant.nil?
-      @away_team_roster = @match.away_participant.players.to_a.sort_by {|p| p.id == @match.away_participant.captain_id ? 0 : 1}
-    end
+    @home_team_roster = @match.home_participant.nil? ? [] : @match.home_participant.players.to_a.sort_by {|p| p.id == @match.home_participant.captain_id ? 0 : 1}
+    @away_team_roster = @match.away_participant.nil? ? [] : @match.away_participant.players.to_a.sort_by {|p| p.id == @match.away_participant.captain_id ? 0 : 1}
+
     @matchcomments = @match.matchcomments
     @casters = Player.order("name ASC").where(:caster => true)
 
