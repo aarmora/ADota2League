@@ -11,7 +11,8 @@ class AuthenticationController < ApplicationController
       name: auth.info['name'],
       image: auth.info['image'],
       country: auth.extra.raw_info['loccountrycode'],
-      uid: auth.uid
+      uid: auth.uid,
+      timestamp: Time.now
     }
     generic_callback
   end
@@ -20,7 +21,8 @@ class AuthenticationController < ApplicationController
     auth = request.env['omniauth.auth']
     @data = {
       battletag: auth.info['battletag'],
-      uid: auth.uid
+      uid: auth.uid,
+      timestamp: Time.now
     }
     generic_callback
   end

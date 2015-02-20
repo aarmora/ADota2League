@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
     # Update avatars for old-style logins
     # TODO: Just do this when they login once we get most people
-    if @current_user && session[:current_user][:image]
+    if @current_user && session[:current_user][:image] && !session[:current_user][:steam]
       @current_user.avatar = session[:current_user][:image]
       @current_user.save
     end
