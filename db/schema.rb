@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 20150219230119) do
     t.boolean "home_wins",      limit: 1
     t.integer "round",          limit: 4
     t.integer "season_id",      limit: 4
+    t.string  "lobby_password", limit: 255
   end
 
   create_table "team_seasons", force: :cascade do |t|
