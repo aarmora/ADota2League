@@ -46,11 +46,11 @@ class AuthenticationController < ApplicationController
     end
 
     if @current_user #update them when they relog in
-      user.name = session[:current_user][:steam][:nickname]
-      user.real_name = session[:current_user][:steam][:name]
-      user.avatar = session[:current_user][:steam][:image]
-      user.country = session[:current_user][:steam][:country]
-      user.save!
+      @current_user.name = session[:current_user][:steam][:nickname]
+      @current_user.real_name = session[:current_user][:steam][:name]
+      @current_user.avatar = session[:current_user][:steam][:image]
+      @current_user.country = session[:current_user][:steam][:country]
+      @current_user.save!
     end
 
     session[:current_user][:id] = @current_user.id
