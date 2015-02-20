@@ -45,6 +45,14 @@ class AuthenticationController < ApplicationController
       redirect_to user and return
     end
 
+    if @current_user #update them when they relog in
+      user.name = session[:current_user][:steam][:nickname]
+      user.real_name = session[:current_user][:steam][:name]
+      user.avatar = session[:current_user][:steam][:image]
+      user.country = session[:current_user][:steam][:country]
+      user.save!
+    end
+
     session[:current_user][:id] = @current_user.id
 
     redirect_to request.env['omniauth.origin'] || root_path
