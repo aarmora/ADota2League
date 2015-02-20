@@ -22,17 +22,12 @@ class ApplicationController < ActionController::Base
     # Set the account here to convert the session to new style
     session[:current_user][:id] = @current_user.id
 
-    # If the user is logged in and has a steam token, update their attributes
+    # Update avatars for old-style logins
     # TODO: Just do this when they login once we get most people
-    if @current_user && session[:current_user] && session[:current_user][:steam]
-      @current_user.update_attributes({
-        name: session[:current_user][:steam][:nickname],
-        real_name: session[:current_user][:steam][:name],
-        avatar: session[:current_user][:steam][:image],
-        country: session[:current_user][:steam][:country]},
-        as: :admin
-      )
-  	end
+    if @current_user && session[:current_user][:image]
+      @current_user.avatar = session[:current_user][:image]
+      @current_user.save
+    end
 
     Permissions.current_user = @current_user
   end

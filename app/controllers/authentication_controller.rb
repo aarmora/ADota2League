@@ -33,14 +33,14 @@ class AuthenticationController < ApplicationController
     # Find the appopriate user
     @current_user = Player.find_or_create_by!(:steamid => session[:current_user][:steam][:uid]) do |user|
       # If they are a new user, ship them over to the profile page
-      user.name = session[:current_user][:steam][:nickname],
-      user.real_name = session[:current_user][:steam][:name],
-      user.avatar = session[:current_user][:steam][:image],
-      user.country = session[:current_user][:steam][:country],
+      user.name = session[:current_user][:steam][:nickname]
+      user.real_name = session[:current_user][:steam][:name]
+      user.avatar = session[:current_user][:steam][:image]
+      user.country = session[:current_user][:steam][:country]
       user.steam32id = user.steamid.to_i - 76561197960265728.to_i
       user.save!
-      flash[:notice] = "Welcome to AD2L!  Your account has been created.  If you want to register a team, please click the register tab above.  If you would like to sign up as a free agent, just toggle your free agent status below!  Play on!"
-      redirect_to user
+      flash[:notice] = "Welcome to AD2L!  Your account has been created.  If you want to register a team or for tournaments, please click the register tab above. Play on!"
+      redirect_to user and return
     end
 
     session[:current_user][:id] = @current_user.id
