@@ -114,16 +114,18 @@ class SeasonsController < ApplicationController
   def manage
     # custom permissions for this one
     @season = Season.find(params[:id])
-    if !@season.solo_league
-      # TODO: load captains in if there are teams instead of just players
-      @season = Season.includes({:team_seasons => [:participant], :matches => [:home_participant, :away_participant]}).find(params[:id])
-      @player_season = false
+
+    s = Season.includes(:matches => [:home_participant, :away_participant])
+    if @season.team_tourney
+      s = s.includes({:team_seasons => [:participant => [:captain]]})
     else
-      @player_season = true
+      s = s.includes(:team_seasons => :participant)
     end
+    @season = s.find(params[:id])
+
     head :forbidden and return unless Permissions.can_view?(@season)
 
-    @players = Player.order("name ASC").pluck(:id, :name)
+    @players_query = Player.order("name ASC")
   end
 
   def playoffs
