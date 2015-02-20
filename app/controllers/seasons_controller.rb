@@ -115,7 +115,8 @@ class SeasonsController < ApplicationController
     # custom permissions for this one
     @season = Season.find(params[:id])
     if !@season.solo_league
-      @season = Season.includes({:team_seasons => [:participant => [:captain]], :matches => [:home_participant, :away_participant]}).find(params[:id])
+      # TODO: load captains in if there are teams instead of just players
+      @season = Season.includes({:team_seasons => [:participant], :matches => [:home_participant, :away_participant]}).find(params[:id])
       @player_season = false
     else
       @player_season = true
