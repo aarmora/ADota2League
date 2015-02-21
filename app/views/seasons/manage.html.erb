@@ -34,7 +34,7 @@
     <%= form_for TeamSeason.new, :role => "form" do |f| %>
       <label>Select team to add:</label>
 
-      <%= f.select(:participant_id, options_for_select(Team.where(:active => true).order(:name).map{|team| [team.name, team.id]}), {}, :style => "min-width: 300px;" ) %>
+      <%= f.select(:participant_id, options_for_select(Team.where(:active => true).order(:name).pluck(:name, :id)), {}, :style => "min-width: 300px;" ) %>
       <%= f.hidden_field :season_id, :value => @season.id %>
       <%= submit_tag "Add Team", :class => "btn btn-primary" %>
     <% end %>
@@ -42,7 +42,7 @@
     <%= form_for TeamSeason.new, :role => "form" do |f| %>
       <label>Select player to add:</label>
 
-      <%= f.select(:participant_id, options_for_select(Player.order(:name).map{|player| [player.name, player.id]}), {}, :style => "min-width: 300px;" ) %>
+      <%= f.select(:participant_id, options_for_select(@players_query.pluck(:name, :id)), {}, :style => "min-width: 300px;" ) %>
       <%= f.hidden_field :season_id, :value => @season.id %>
       <%= submit_tag "Add Player", :class => "btn btn-primary" %>
     <% end %>
@@ -63,7 +63,7 @@
   <tr>
     <td>
       <% if Permissions.can_edit?(@season) %>
-        <%=best_in_place_if Permissions.can_edit?(@season), permission, :player_id, :type => :select, collection: @players%>
+        <%=best_in_place_if Permissions.can_edit?(@season), permission, :player_id, type: :select, collection: @players_query.pluck(:id, :name) %>
       <% else %>
         <% if permission.player %>
           <%= permission.player.name%>

@@ -49,11 +49,13 @@ Ad2l::Application.routes.draw do
     end
   end
 
-  post 'auth/steam/callback' => 'welcome#auth_callback'
+  post 'auth/steam/callback' => 'authentication#steam_callback'
+  get 'auth/bnet/callback' => 'authentication#bnet_callback'
+  get 'logout' => 'authentication#logout'
+
   get 'contact', :to => 'welcome#community', :as => 'contact'
   get 'community', :to => 'welcome#community', :as => 'community'
   get 'faq', :to => 'welcome#community', :as => 'faq'
-  get 'logout' => 'welcome#logout'
   get 'reg_form_partial' => 'seasons#reg_form_partial'
   post 'register_caster' => "players#register_caster"
   get 'welcome/get_posts' => 'welcome#get_posts'

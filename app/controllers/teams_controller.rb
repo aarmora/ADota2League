@@ -58,7 +58,6 @@ class TeamsController < ApplicationController
   			end
   		end
   		@roster = @team.players.to_a.sort_by {|p| p.id == @team.captain_id ? 0 : 1}
-    	@players = Player.order(:name).pluck(:id, :name)
   		@casters = Player.order(:name).where(:caster => true)
   		@permissions = Permission.includes(:player).all
     end
