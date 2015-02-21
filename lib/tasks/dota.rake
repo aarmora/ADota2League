@@ -638,7 +638,7 @@ namespace :dota do
     round = STDIN.gets.chomp.to_i
     #There is no validation for rounds.  This means the same round could be run more than once (ouch).
 
-    @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true).order('rand()')
+    @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true, :checked_in => true).order('rand()')
     
     @players = @season.players.order('rand()')
 

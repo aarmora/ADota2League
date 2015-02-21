@@ -49,8 +49,6 @@
                         <% else %>
                             <%= @total_wins[team_season.participant.id].to_i %> - <%= @total_losses[team_season.participant.id].to_i%>
                         <% end %>
-                        <%=@season.start_date%>
-                        <%=Time.now%>
                     </td>
                     <% if @season.check_in_available? %>
                         <td>

@@ -37,7 +37,6 @@ end
 
 
 gem 'coffee-script-source', '1.8.0'
-gem 'rubin' # round robin
 gem 'icalendar' # Ical support
 
 group :production do

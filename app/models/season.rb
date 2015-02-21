@@ -35,7 +35,7 @@ class Season < ActiveRecord::Base
 
   def check_in_available?
     if self.start_date
-      Time.now > (self.start_date - 30.minutes) && !self.round_robin?
+      Time.now > (self.start_date - 30.minutes)  && !self.round_robin?
     else
       Time.now
     end

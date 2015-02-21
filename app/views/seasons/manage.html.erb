@@ -23,8 +23,8 @@
     <td><%= best_in_place_if Permissions.can_edit?(@season), ts.participant, :region, :type => :input %></td>
     <td><%= best_in_place_if Permissions.can_edit?(@season) && !@season.tournament_started?, ts, :division, :type => :input %></td>
     <td><%= format_datetime(ts.created_at) if ts.created_at %>
-    <td><%= best_in_place_if Permissions.can_edit?(@season) && !@season.tournament_started?, ts, :paid, :type => :checkbox %></td>
-    <td><%= best_in_place_if Permissions.can_edit?(@season) && !@season.tournament_started?, ts, :checked_in, :type => :checkbox %></td>
+    <td><%= best_in_place_if Permissions.can_edit?(@season) && !@season.tournament_started?, ts, :paid, :as => :checkbox %></td>
+    <td><%= best_in_place_if Permissions.can_edit?(@season) && !@season.tournament_started?, ts, :checked_in, :as => :checkbox %></td>
   </tr>
   <% end %>
 </table>
