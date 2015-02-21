@@ -39,6 +39,11 @@ soloApp.controller('soloController', ['$scope', '$http', function ($scope, $http
 			$('form')[0].reset();
 		});
 	}
+
+	$scope.removeTeam = function(index){
+		$scope.chosenPlayers.splice(index, 1);
+
+	};
 }]);
 
 blogApp

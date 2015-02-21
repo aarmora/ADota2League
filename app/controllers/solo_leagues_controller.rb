@@ -85,7 +85,7 @@ class SoloLeaguesController < ApplicationController
 		end
 
 
-		render :json => {:players => @players, :total_wins => @total_wins, :total_losses => @total_losses}
+		render :json => @players#{:players => @players, :total_wins => @total_wins, :total_losses => @total_losses}
 
 	end
 

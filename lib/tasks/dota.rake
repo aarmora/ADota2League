@@ -637,6 +637,8 @@ namespace :dota do
     puts "What round?"
     round = STDIN.gets.chomp.to_i
     #There is no validation for rounds.  This means the same round could be run more than once (ouch).
+
+    @teams_by_division = @season.team_seasons.includes(:participant).where(:paid => true).order('rand()')
     
     @players = @season.players.order('rand()')
 
@@ -644,57 +646,55 @@ namespace :dota do
     if 1 == 1
       count = 0
       subtractor = 0 
-      @players.each do |player|   
-        puts count
-        puts subtractor
+      @teams_by_division.each do |ts|   
         if count % 10 == 0
           puts count
           puts "new"
           puts "home_1"
-          puts player.name
+          puts ts.participant.name
           subtractor = count
           @sl_match = SoloLeagueMatch.new
-          @sl_match.home_team_id_1 = player.id
+          @sl_match.home_team_id_1 = ts.participant.id
           @sl_match.season_id = @season.id
           @sl_match.lobby_password =  "ad2l" + rand(1000).to_s
           @sl_match.round = round
         elsif count.to_i - subtractor.to_i == 1
           puts subtractor
           puts "home_2"
-          puts player.name
-          @sl_match.home_team_id_2 = player.id
+          puts ts.participant.name
+          @sl_match.home_team_id_2 = ts.participant.id
         elsif count.to_i - subtractor.to_i == 2
           puts "home_3"
-          puts player.name
-          @sl_match.home_team_id_3 = player.id
+          puts ts.participant.name
+          @sl_match.home_team_id_3 = ts.participant.id
         elsif count.to_i - subtractor.to_i == 3
           puts "home_4"
-          puts player.name
-          @sl_match.home_team_id_4 = player.id
+          puts ts.participant.name
+          @sl_match.home_team_id_4 = ts.participant.id
         elsif count.to_i - subtractor.to_i == 4
           puts "home_5"
-          puts player.name
-          @sl_match.home_team_id_5 = player.id
+          puts ts.participant.name
+          @sl_match.home_team_id_5 = ts.participant.id
         elsif count.to_i - subtractor.to_i == 5
           puts "away_1"
-          puts player.name
-          @sl_match.away_team_id1 = player.id
+          puts ts.participant.name
+          @sl_match.away_team_id1 = ts.participant.id
         elsif count.to_i - subtractor.to_i == 6
           puts "away_2"
-          puts player.name
-          @sl_match.away_team_id2 = player.id
+          puts ts.participant.name
+          @sl_match.away_team_id2 = ts.participant.id
         elsif count.to_i - subtractor.to_i == 7
           puts "away_3"
-          puts player.name
-          @sl_match.away_team_id3 = player.id
+          puts ts.participant.name
+          @sl_match.away_team_id3 = ts.participant.id
         elsif count.to_i - subtractor.to_i == 8
           puts "away_4"
-          puts player.name
-          @sl_match.away_team_id4 = player.id
+          puts ts.participant.name
+          @sl_match.away_team_id4 = ts.participant.id
         elsif count.to_i - subtractor.to_i == 9
           puts "away_5"
-          puts player.name
-          @sl_match.away_team_id5 = player.id
+          puts ts.participant.name
+          @sl_match.away_team_id5 = ts.participant.id
           @sl_match.save!
           puts "match created!"
         end

@@ -49,10 +49,12 @@
                         <% else %>
                             <%= @total_wins[team_season.participant.id].to_i %> - <%= @total_losses[team_season.participant.id].to_i%>
                         <% end %>
+                        <%=@season.start_date%>
+                        <%=Time.now%>
                     </td>
                     <% if @season.check_in_available? %>
                         <td>
-                            <% if Permissions.can_edit?(team_season.participant) || Permissions.can_edit?(team_season) && !team_season.checked_in %>
+                            <% if Permissions.can_edit?(team_season.participant) && !team_season.checked_in || Permissions.can_edit?(team_season) && !team_season.checked_in %>
                                 <%= button_tag "Check In", :class => "btn btn-primary btn-block js-check-in", "data-url" => team_season_path(team_season) %>
                             <% else %>
                                 <%= team_season.checked_in ? "Yes" : "" %>

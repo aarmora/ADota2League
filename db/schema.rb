@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150214175617) do
-=======
-ActiveRecord::Schema.define(version: 20150206014659) do
->>>>>>> master
 
   create_table "games", force: :cascade do |t|
     t.integer  "match_id",             limit: 4
