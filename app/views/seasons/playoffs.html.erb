@@ -19,10 +19,10 @@
       <select id="size" name="size" class="form-control">
         <option>4</option>
         <option selected>8</option>
-        <%- if @total_scores.length >= 16 %><option>16</option><% end %>
-        <%- if @total_scores.length >= 32 %><option>32</option><% end %>
-        <%- if @total_scores.length >= 64 %><option>64</option><% end %>
-        <%- if @total_scores.length >= 128 %><option>128</option><% end %>
+        <%- if @total_scores.length > 8 %><option>16</option><% end %>
+        <%- if @total_scores.length > 16 %><option>32</option><% end %>
+        <%- if @total_scores.length > 32 %><option>64</option><% end %>
+        <%- if @total_scores.length > 64 %><option>128</option><% end %>
       </select>
     </div>
 

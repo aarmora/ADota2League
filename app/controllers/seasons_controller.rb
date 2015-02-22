@@ -38,9 +38,10 @@ class SeasonsController < ApplicationController
       end
       render :action => 'show' # explicitly needed because index calls this method and expects it to render
     else
-      @teams_for_js = @season.matches.where(week: 1)
+      @matches = @season.matches.includes(:home_participant, :away_participant, :caster)
+      @teams_for_js = @matches.where(week: 1)
       # TODO: Add timestamp for JS side rendering
-      @results_for_js = @season.matches.group_by(&:week)
+      @results_for_js = @matches.group_by(&:week)
 
       # cull the last rounds with no score
       # deal with grouping by loser / winner bracket
