@@ -40,7 +40,7 @@
 		    <label class="col-sm-3 control-label">Lobby Password</label>
 		    <div class="col-sm-7">
 		      <p class="form-control-static"><%= @match.lobby_password %></p>
-		      <div class="alert alert-info" role="alert"><%= @match.home_participant.name %> is responsible for hosting this lobby!</div>
+		      <div class="alert alert-info" role="alert"><%= @match.home_participant ? @match.home_participant.name : "TBD" %> is responsible for hosting this lobby!</div>
 		    </div>
 		  </div>
 		<% end %>
