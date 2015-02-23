@@ -11,16 +11,12 @@ Finally, we need to add the data from application.yml (our Dota2 API key and so 
 
 == Rails 4
 Recent migration to Rails 4 was a minimal effort update, meaning some things might not be best practices. Some things to evaluate:
-- AREL removal in favor of ".not" support
 - attr_accessible to new style (Strong Paramaters)
 - config/secrets.yml
 - upgraded cookie signing (secret_key_base)
-- dalli is default memcache client.
 - Web Console...do we want it?
 - have our milliseconds desynched anywhere (to_json)
-- mutator methods on relations
 - PATCH vs PUT
-- Gemfile environments and organization
 
 == Polymorphism
 As we make the scheduling and tournament system more generic:
@@ -30,4 +26,3 @@ As we make the scheduling and tournament system more generic:
 Implementing native single and double elimination tournaments:
 - Jquery Plugin needs tweaks (maybe cherry picks) to not hover nil teams, fix CSS class naming to not conflict with bootstrap (SUIT?), handle better inline editing callbacks
 - Double elimination needs to be implmented
-- Fix seeding (top should play last...)
