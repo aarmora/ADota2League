@@ -28,14 +28,14 @@
         <div style="margin-bottom: 22px">Join our <%=link_to "steam group chat", "steam://friends/joinchat/103582791435143521"%> for possibly instant answers!</div>
         <p>
             <div><b>Us</b></div>
-            <div>Contact Shadowkiller for all of your adminning and scheduling needs! --<%= link_to "sethad2l@gmail.com", "mailto:sethad2l@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198096413824", :class => "fa fa-plus" %></div>
-            <div>Rasputin --<%= link_to "amateurdota2league@gmail.com", "mailto:amateurdota2league@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198040889152", :class => "fa fa-plus" %></div>
+            <div>Contact Shadowkiller for all of your adminning and scheduling needs! --<%= link_to "sethad2l@gmail.com", "mailto:sethad2l@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198096413824", :class => "glyphicon glyphicon-plus" %></div>
+            <div>Rasputin --<%= link_to "amateurdota2league@gmail.com", "mailto:amateurdota2league@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198040889152", :class => "glyphicon glyphicon-plus" %></div>
             <div class="col-md-12">Contact <%= link_to "Submaniac", "/players/2974" %> or <%=link_to "ThatPhageGuy", "/players/13066" %> for information on inhouses.</div>
         </p>
          <p>
             <div><b>Our awesome admins!</b></div>
             <%@admins.each do |admin|%>
-                <div><%= link_to admin.name, admin%> --add him on steam <%= link_to "", "steam://friends/add/#{admin.steamid}", :class => "fa fa-plus" %></div>
+                <div><%= link_to admin.name, admin%> --add him on steam <%= link_to "", "steam://friends/add/#{admin.steamid}", :class => "glyphicon glyphicon-plus" %></div>
             <%end%>
         </p>
     </div>

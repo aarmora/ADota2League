@@ -30,10 +30,10 @@
       <div class="col-sm-6">
         <%= best_in_place_if Permissions.can_edit?(season), season,
         :start_date,
-        :display_with => lambda { |date| format_datetime(date)},
+        :display_with => lambda { |date| date.nil? ? nil : format_datetime(date)},
         :activator => ".glyphicon-warning-sign.#{season.id}-date",
         :type => :datetime%>
-        <span class="glyphicon glyphicon-warning-sign form-control-feedback <%=season.id%>-date"></span>
+        <span class="glyphicon glyphicon-warning-sign <%=season.id%>-date"></span>
       </div>
     </div>
     <div class="form-group">

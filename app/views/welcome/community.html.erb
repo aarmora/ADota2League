@@ -190,7 +190,7 @@
             <p>
               <div><b>Us</b></div>
               <div>Message all admins -- <%= link_to "ad2l-admins@googlegroups.com", "mailto:ad2l-admins@googlegroups.com"%></div>
-              <div>Shadowkiller --<%= link_to "sethad2l@gmail.com", "mailto:sethad2l@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198096413824", :class => "fa fa-plus" %></div>
+              <div>Shadowkiller --<%= link_to "sethad2l@gmail.com", "mailto:sethad2l@gmail.com"%> or add him on steam <%= link_to "", "steam://friends/add/76561198096413824", :class => "glyphicon glyphicon-plus" %></div>
               <div>Rasputin --<%= link_to "amateurdota2league@gmail.com", "mailto:amateurdota2league@gmail.com"%></div>
             </p>
              <p>
@@ -198,7 +198,7 @@
                 <div>Contact <%= link_to "Submaniac", "/players/2974" %> or <%=link_to "KuroSaki", "/players/13066" %> for information on inhouses.</div>
                 <% if false %>
                   <%@admins.each do |admin|%>
-                      <div><%= link_to admin.name, admin%> --add him on steam <%= link_to "", "steam://friends/add/#{admin.steamid}", :class => "fa fa-plus" %></div>
+                      <div><%= link_to admin.name, admin%> --add him on steam <%= link_to "", "steam://friends/add/#{admin.steamid}", :class => "glyphicon glyphicon-plus" %></div>
                   <%end%>
                 <%end%>
             </p>

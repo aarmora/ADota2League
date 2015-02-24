@@ -22,11 +22,12 @@
 		      <p class="form-control-static">
 		      	<%= best_in_place_if Permissions.can_edit?(@match) || @can_edit, @match,
 						  :reschedule_time,
-						  :display_with => lambda { |date| format_datetime(date)}, # TODO: this doesn't pre-fill the time right
-						  :activator => ".fa-calendar.#{@match.id}-date",
+						  :display_with => lambda { |date| date.nil? ? nil : format_datetime(date)}, # TODO: this doesn't pre-fill the time right
+						  :nil => "None",
+						  :activator => ".glyphicon.#{@match.id}-date",
 				      :type => :datetime
 						%>
-						<span class="fa fa-calendar form-control-feedback <%=@match.id%>-date" title="Reschedule this Game"></span>
+						<span class="glyphicon glyphicon-calendar <%=@match.id%>-date" title="Reschedule this Game"></span>
 					</p>
 					<% if @match.date > Time.now - 1.day && (Permissions.can_edit?(@match) || @can_edit) %>
 						<div class="alert alert-warning" role="alert">Clicking the calendar icon will allow you to ask to reschedule the match. However, both parties must agree on a time for it to become official. If your opponent has already asked for a reschedule, you can simply click above to accept it. Beware of the timezone resetting when you open the selector!</div>
@@ -59,7 +60,7 @@
 			      	  collection: [["", "None"]] + @casters.collect {|player| ["#{player.id}", "#{player.name}"]}
 					%>
 					<% if Permissions.can_edit?(@match) || @can_edit %>
-						<span class="glyphicon glyphicon-warning-sign form-control-feedback <%=@match.id%>-caster"></span>
+						<span class="glyphicon glyphicon-warning-sign <%=@match.id%>-caster"></span>
 					<% end %>
 	      </p>
 	    </div>

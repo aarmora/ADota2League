@@ -18,6 +18,7 @@ module ApplicationHelper
   end
 
   def format_datetime(t)
+    return nil if t.nil?
     tz = @current_user.time_zone if @current_user
     tz ||= "Eastern Time (US & Canada)"
     time = t ? t.in_time_zone(tz).strftime("%-m/%-d/%y %l:%M%p %Z") : ""

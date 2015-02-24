@@ -24,7 +24,7 @@
             <%@freeagents.each do |freeagent|%>
                 <tr>
                     <td class="text-center">
-                    	<%= link_to "", "steam://friends/add/#{freeagent.steamid}", :class => "fa fa-plus" %>
+                    	<%= link_to "", "steam://friends/add/#{freeagent.steamid}", :class => "glyphicon glyphicon-plus" %>
                     </td>
                     <td>
                         <%= link_to freeagent.name, freeagent%>

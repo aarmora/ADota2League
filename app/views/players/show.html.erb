@@ -7,7 +7,7 @@
 		<h2>
 			<%= @player.name %>
 			<%= render :partial => "players/endorsement_icon", :locals => {:user => @player} %>
-			<%= link_to "", "steam://friends/add/#{@player.steamid}", :title => "Add on Steam", "data-toggle" => "tooltip", :class => "fa fa-plus" %>
+			<%= link_to "", "steam://friends/add/#{@player.steamid}", :title => "Add on Steam", "data-toggle" => "tooltip", :class => "glyphicon glyphicon-plus" %>
 			<%= link_to "DB", "http://dotabuff.com/players/#{@player.steam32id}", :title => "View on Dotabuff", "data-toggle" => "tooltip", :target => "blank"%>
 		</h2>
 		<div class="form-horizontal" role="form">
@@ -98,7 +98,7 @@
 			      <td><%= best_in_place permission, :division, :type => :input%></td>
 			      <td>
 			      	<%= form_for permission, :method => "delete" do |f|%>
-			      		<%= f.submit "Remove", :class => "btn btn-danger btn-sm fa fa-trash-o"%>
+			      		<%= f.submit "Remove", :class => "btn btn-danger btn-sm glyphicon glyphicon-trash"%>
 			      	<% end %>
 			      </td>
 			    </tr>
@@ -149,7 +149,7 @@
 					<%= link_to "Pay Registration Fee", ts, :class => "btn btn-primary" %>
 				<% end %>
 				<%= form_for ts, :html => {:method => :delete} do |f|  %>
-				  <%= f.submit "Withdraw", data: {confirm: "Are you sure you want to withdraw from this season? This is NOT easily reversable!"}, class: "btn btn-danger btn-sm fa fa-trash-o" %>
+				  <%= f.submit "Withdraw", data: {confirm: "Are you sure you want to withdraw from this season? This is NOT easily reversable!"}, class: "btn btn-danger btn-sm glyphicon glyphicon-trash" %>
 				<% end %>
 			<% end %>
 		<% end %>
