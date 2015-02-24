@@ -49,7 +49,7 @@ class Season < ActiveRecord::Base
   # No start date implies that we are running it ASAP or anything but weekly
   def setup_tournament_matches(start_date = nil, utc_offset = nil)
     # verify all this shit and blah blah blah
-    teams = self.team_seasons.where(paid: true, checked_in: true).order(:division).map {|ts| {participant: ts.participant, seed_order: ts.division} }
+    teams = self.team_seasons.where(paid: true, checked_in: true).sort_by {|ts| ts.division.to_i }.map {|ts| {participant: ts.participant, seed_order: ts.division} }
 
     # Add in Byes
     bracket_size = 2 ** Math.log(teams.length,2).ceil

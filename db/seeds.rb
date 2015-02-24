@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-60.times do |i|
+200.times do |i|
   Player.create(name: "Player ##{i}")
 end
 
@@ -15,7 +15,7 @@ end
 havoc = Player.create({name: "Havoc", steamid: "76561197969226815", steam32id: "8961087"}, :without_protection => true)
 havoc.permissions.create(:permission_mode => "site")
 
-12.times do |i|
+32.times do |i|
   t = Team.create(name: "Team ##{i}")
   start = i * 5 + 1
   last = (i+1)* 5
@@ -47,8 +47,9 @@ matches.each_with_index do |pairings, i|
   end
 end
 
+
 single = Season.create({title: "Single Elim", season_type: :single_elim, active: true, start_date: Time.now - 1.day}, :without_protection => true)
-Team.first(7).each do |t|
+Team.first(13).each do |t|
   single.team_seasons.create({division: t.id, participant: t, paid: true, checked_in: true}, :without_protection => true)
 end
 single.setup_tournament_matches
