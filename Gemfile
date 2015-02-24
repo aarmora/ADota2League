@@ -52,11 +52,11 @@ end
 gem 'uglifier', '>= 1.0.3'
 gem "select2-rails"
 gem 'sass-rails'
+gem 'bootstrap-sass', '~> 3.3.3'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails'
-gem 'twitter-bootstrap-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', :platforms => :ruby

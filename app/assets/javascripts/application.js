@@ -15,7 +15,7 @@
 //= require jquery-ui/slider
 //= require jquery-ui/datepicker
 //= require jquery-ui/sortable
-//= require twitter/bootstrap
+//= require bootstrap-sprockets
 //= require best_in_place
 //= require best_in_place_datetime
 //= require dataTables/jquery.dataTables

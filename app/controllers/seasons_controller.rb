@@ -185,7 +185,10 @@ class SeasonsController < ApplicationController
     start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
     playoff_season.setup_tournament_matches(start_date, params[:utc_offset])
 
-    @season.active = false and @season.save if params[:deactivate] == "1"
+    if params[:deactivate].to_i == 1
+      @season.active = false
+      @season.save
+    end
 
     redirect_to playoff_season
   end

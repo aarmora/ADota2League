@@ -73,10 +73,9 @@
 
     <%# TODO: Partially copied from season/show %>
     <% @teams_by_division.each do |division, team_seasons| %>
-      <h5><%= division %></h5>
-      <table>
+      <table class="table">
         <thead>
-          <th></th>
+          <th>Div <%= division %></th>
           <th>Name</th>
           <th>Wins</th>
         </thead>

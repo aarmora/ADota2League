@@ -1,21 +1,20 @@
-/*
-  =require twitter-bootstrap-static/bootstrap
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
-  Use Font Awesome icons (default)
-  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
-  =require twitter-bootstrap-static/fontawesome
-  */
 /* These are Charlie Approved Bootstrap overrides only */
-
-
 
 body {
   background-color: transparent;
 }
 
+ol, ul {
+  padding: 0;
+  list-style: none;
+}
+
 #main {
 	background-color: white;
-	padding: 0px 30px 30px 30px;
+  padding: 0px 30px 30px 30px;
 }
 
 #sponsors {
@@ -26,13 +25,6 @@ body {
 		max-height: 120px;
     max-width: 100%;
 	}
-}
-
-
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('/assets/glyphicons-halflings-regular.eot');
-  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
 .select2 {
@@ -50,10 +42,6 @@ body {
 
 .dropdown:hover .dropdown-menu {
     display: block;
- }
-
- #community table {
-  word-break: break-all;
  }
 
 
