@@ -73,6 +73,14 @@ Ad2l::Application.configure do
     #  :channel => "#ad2l_exceptions"
     #}
 
+  # Configure CORS headers for all requests so that the caching server serves them with CORS headers
+  config.middleware.insert_before 0, Rack::Cors, :logger => (-> { Rails.logger }) do
+    allow do
+      origins 'amateurdota2league.com', 'www.amateurdota2league.com'
+      resource '*', :headers => :any, :methods => [:get, :options]
+    end
+  end
+
   # Enable threaded mode
   # config.threadsafe!
 

@@ -42,6 +42,7 @@ group :production do
   gem 'slack-notifier'
   gem 'unicorn'
   gem 'rails_12factor'
+  gem 'rack-cors', :require => 'rack/cors'
 end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

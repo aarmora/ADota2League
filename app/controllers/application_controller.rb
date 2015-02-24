@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 	before_filter :load_user
   before_filter :check_active_streams
   before_filter :load_seasons_for_nav
+
   protect_from_forgery
 
   def load_user
