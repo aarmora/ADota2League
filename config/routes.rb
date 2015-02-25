@@ -4,7 +4,7 @@ Ad2l::Application.routes.draw do
   # just remember to delete public/index.html.
   root 'welcome#index'
 
-  resources :seasons, :only => [:create, :update, :index, :show] do
+  resources :seasons, :only => [:create, :update, :destroy, :index, :show] do
     member do
       get 'manage' => "seasons#manage"
 
@@ -73,7 +73,7 @@ Ad2l::Application.routes.draw do
   post 'player_comment_delete' => 'players#delete_player_comment'
 
   scope '/admin' do
-    get '/' => "admin#index"
+    get '/' => "admin#index", :as => "admin_index"
     get 'teams' => 'admin#teams', :as => "admin_teams"
     get 'players' => 'admin#players', :as => "admin_players"
     get "manage_seasons(/:season(/:week))" => 'admin#manage_seasons'

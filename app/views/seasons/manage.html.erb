@@ -118,6 +118,7 @@
     <% else %>
       <%= link_to "Schedule/Start Tournament", start_playoffs_season_path(@season), class: "btn btn-primary btn-block", data: {confirm: "This will schedule all matches for you"} %>
     <% end %>
+    <%= link_to "WARNING: Destroy Season", @season, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "This will completely explode the season...are you really, really sure?"} %>
   </div>
 <% end %>
 

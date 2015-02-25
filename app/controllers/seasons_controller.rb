@@ -1,10 +1,17 @@
 class SeasonsController < ApplicationController
-  before_filter :verify_admin, :only => [:create, :update, :manage, :playoffs, :start_playoffs, :reset_playoffs, :create_playoffs]
+  before_filter :verify_admin, :except => [:index, :show]
 
   def index
   	# TODO: this is a hack, set it explicitly to prevent the DB call here
     params[:id] = Season.where(:active => true).first.id
     show
+  end
+
+  def destroy
+    @season = Season.find(params[:id])
+    head :forbidden and return unless Permissions.can_edit? @season
+    @season.destroy
+    redirect_to admin_index_path
   end
 
   def getRound(node)
