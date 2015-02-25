@@ -1,7 +1,7 @@
 class Season < ActiveRecord::Base
-	has_many :team_seasons, :dependent => :delete_all
+	has_many :team_seasons, :dependent => :destroy
 	has_many :participants, :through => :team_seasons
-	has_many :matches
+	has_many :matches, :dependent => :destroy
   has_many :permissions, :class_name => "Permission", :foreign_key => "season_id"
 
   enum season_type: [ :round_robin, :single_elim, :double_elim ]
