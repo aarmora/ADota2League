@@ -20,22 +20,54 @@
 function edit_fn(container, data, doneCb) {
 }
 
-<%- @results_for_js = @results_for_js.map do |round, matches|
+<%
+
+@results_for_js = @results_for_js.map do |round, matches|
+
+
   matches.map do |m|
-    [ m.has_score? ? m.home_score : nil,
-      m.has_score? ? m.away_score : nil,
-      {
-        id: m.id,
-        url: match_path(m),
-        time: format_datetime_month(m.date),
-        home_name: m.home_participant ? m.home_participant.name : nil,
-        away_name: m.away_participant ? m.away_participant.name : nil,
-        caster: m.caster ? m.caster.name : nil
-      }
-    ]
+    # This is a really terrible thing which happens because we might re-arrange teams for home/away
+    # Its really fragile and relies on ids being in ascending order in the DB as drawn from the tournament
+    # The JS will always render the top match (lower id) winner on top
+    # TODO: Try and remove / better sync with the js
+    if m.home_participant && m.away_participant
+      home_query = Match.where(home_participant: m.home_participant).where_values.reduce(:and)
+      away_query = Match.where(away_participant: m.home_participant).where_values.reduce(:and)
+      previous_home_match = Match.where(week: m.week - 1, season_id: m.season_id).where(home_query.or(away_query)).first
+
+      home_query = Match.where(home_participant: m.away_participant).where_values.reduce(:and)
+      away_query = Match.where(away_participant: m.away_participant).where_values.reduce(:and)
+      previous_away_match = Match.where(week: m.week - 1, season_id: m.season_id).where(home_query.or(away_query)).first
+    end
+
+    away_first =  previous_home_match && previous_away_match && previous_away_match.id < previous_home_match.id
+
+    data = {
+      id: m.id,
+      url: match_path(m),
+      time: format_datetime_month(m.date),
+      home_name: m.home_participant ? m.home_participant.name : nil,
+      away_name: m.away_participant ? m.away_participant.name : nil,
+      caster: m.caster ? m.caster.name : nil
+    }
+
+    if !m.has_score?
+      [ nil, nil, data ]
+    elsif away_first
+      [ m.away_score, m.home_score, data ]
+    else
+      [ m.home_score, m.away_score, data ]
+    end
   end
 end
-@teams_for_js = @teams_for_js.map { |m| [m.home_participant ? m.home_participant.name : nil, m.away_participant ? m.away_participant.name : nil] }
+@teams_for_js = @teams_for_js.map do |m|
+  # TODO: Old code to show the seeds?
+  # home_seed = TeamSeason.where(participant: m.home_participant, season_id: m.season_id).first
+  # away_seed = TeamSeason.where(participant: m.away_participant, season_id: m.season_id).first
+  #[m.home_participant ? "(#{home_seed.division.to_i + 1}) " + m.home_participant.name : nil,
+  # m.away_participant ? "(#{away_seed.division.to_i + 1}) " + m.away_participant.name : nil]
+  [m.home_participant ? m.home_participant.name : nil, m.away_participant ? m.away_participant.name : nil]
+end
 
 %>
 
@@ -61,9 +93,11 @@ $(function() {
       },
 
       onMatchHover: function(data, hoverIn) {
-        if (hoverIn) {
-          var html = "<b>" + data.time + "</b>";
-          if (data.caster) html += "<br />Cast by: " + data.caster;
+        if (hoverIn && data.home_name !== undefined && data.away_name !== undefined) {
+          var html = ""
+          if (data.home_name && data.away_name) html +=  "<b>" + data.home_name + " vs " + data.away_name + "</b><br>";
+          html += "<i>" + data.time + "</i>";
+          if (data.caster) html += "<br>Cast by: " + data.caster;
           $("#bracketHoverContainer").html(html);
         } else {
           $("#bracketHoverContainer").empty();
@@ -77,7 +111,7 @@ $(function() {
 </script>
 
 <h4>Playoffs</h4>
-<p>Hover over a match to view time information, you can also click on a match to go to the page for that match</p>
+<p>Hover over a match to view time information, you can also click on a match to go to the page for that match. Always trust the individual match pages as the final source of information, the brackets may ocasionally be drawn wrong</p>
 
 <h4>Bracket</h4>
 <div id="bracketHoverContainer" style="min-height: 50px"></div>

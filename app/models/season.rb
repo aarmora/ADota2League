@@ -2,7 +2,7 @@ class Season < ActiveRecord::Base
 	has_many :team_seasons, :dependent => :destroy
 	has_many :participants, :through => :team_seasons
 	has_many :matches, :dependent => :destroy
-  has_many :permissions, :class_name => "Permission", :foreign_key => "season_id"
+  has_many :permissions, :class_name => "Permission", :foreign_key => "season_id", :dependent => :delete_all
 
   enum season_type: [ :round_robin, :single_elim, :double_elim ]
   attr_accessible :title, :league_id, :registration_open, :active, :late_fee_start, :price_cents, :late_price_cents, :exclusive_group, :start_date, :challonge_url, :description, :team_tourney, :season_type, :as => :admin

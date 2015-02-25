@@ -55,9 +55,9 @@ class Match < ActiveRecord::Base
     self.logger.error("Cannot add participants; no free slots in match") and raise if self.home_participant && self.away_participant
 
     current_participant = self.home_participant || self.away_participant
-    current_seed = current_participant ? TeamSeason.where(participant: current_participant, season_id: self.season_id).first.division : nil
-    participant_seed = TeamSeason.where(participant: participant, season_id: self.season_id).first.division
-    if !current_seed || participant_seed > current_seed
+    current_seed = current_participant ? TeamSeason.where(participant: current_participant, season_id: self.season_id).first.division.to_i : nil
+    participant_seed = TeamSeason.where(participant: participant, season_id: self.season_id).first.division.to_i
+    if !current_seed || participant_seed < current_seed
       self.home_participant = participant
       self.away_participant = current_participant
     else
