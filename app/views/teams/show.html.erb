@@ -95,7 +95,7 @@
 		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
 		<%= best_in_place_if Permissions.can_edit?(ts.season), ts, :division, :type => :input %>
 		<% if Permissions.can_edit?(@team) %>
-			<% if ts.paid == false && ts.season.current_price.to_i > 0 %>
+			<% if ts.paid == false && ts.season.current_price.to_i > 0 && ts.season.registration_open %>
 				<%= link_to "Pay Registration Fee", ts, :class => "btn btn-primary" %>
 			<% end %>
 			<%= form_for ts, :html => {:method => :delete} do |f|  %>
