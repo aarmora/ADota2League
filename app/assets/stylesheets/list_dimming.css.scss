@@ -2,7 +2,7 @@
 
 .list-dimming li {
   background: #eee;
-  color: #999;
+  color: $gray;
 }
 
 .list-dimming.list-dimming-2 li:nth-child(-n+2),
@@ -12,6 +12,6 @@
 .list-dimming.list-dimming-32 li:nth-child(-n+32),
 .list-dimming.list-dimming-64 li:nth-child(-n+64),
 .list-dimming.list-dimming-128 li:nth-child(-n+128) {
-  background: #fff;
-  color: #000;
+  background: $white;
+  color: $black;
 }

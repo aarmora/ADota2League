@@ -1,0 +1,66 @@
+/*********************************************************************************/
+/* Tournament Bracket CSS                                                        */
+/*********************************************************************************/
+
+.Bracket {
+  display: flex;
+  flex-direction: row;
+
+  .round {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:200px;
+    list-style:none;
+    padding:0;
+
+    .spacer { flex-grow:1; }
+    .game-spacer { flex-grow:1; }
+  }
+
+  ul:before, ul:after {
+    content: " ";
+    display: inline-block;
+    flex-grow:.5;
+  }
+
+  /*
+   *  General Styles
+  */
+
+  li.game {
+    cursor: default;
+    padding-left:20px;
+    &.winner {
+      font-weight:bold;
+    }
+    span {
+      float:right;
+      margin-right:5px;
+    }
+    &.active {
+      background-color: $primary-red;
+      color: $white;
+    }
+  }
+  li.game-top{ border-bottom:1px solid #aaa; }
+  li.game-spacer{
+    border-right:1px solid #aaa;
+    min-height:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .game-info {
+      font-size: .8em;
+      font-style: italic;
+      color: $dark-gray;
+      &:hover { text-decoration: none; }
+    }
+  }
+  li.game-bottom{
+    border-top:1px solid #aaa;
+  }
+  li.game-bye {
+    visibility: hidden;
+  }
+}
