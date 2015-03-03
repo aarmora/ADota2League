@@ -42,7 +42,7 @@ Ad2l::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  config.cache_store = :dalli_store
+  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache'
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   config.action_controller.asset_host = "http://d2oiplpb7rk92t.cloudfront.net"

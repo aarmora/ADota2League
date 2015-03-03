@@ -38,8 +38,9 @@ group :production do
   gem "exception_notification"
   gem 'therubyracer' # execjs
   gem "oink" # for doing memory analysis
-  gem 'memcachier'
-  gem 'dalli'
+  gem 'memcachier' # Old style for Heroku
+  gem 'dalli' # Old style for Heroku
+  gem 'redis-rails'
   gem 'slack-notifier'
   gem 'unicorn'
   gem 'rails_12factor'
