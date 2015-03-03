@@ -37,15 +37,9 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml').push('co
 # set :keep_releases, 5
 
 namespace :deploy do
-  before :finishing, 'linked_files:upload'
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
+  before :finishing, 'linked_files:upload_files'
+  # after :publishing, 'unicorn:restart'
+  # after 'deploy:restart', 'unicorn:reload'    # app IS NOT preloaded
+  after 'deploy:restart', 'unicorn:restart'   # app preloaded
+  # after 'deploy:restart', 'unicorn:duplicate' # before_fork hook implemented (zero downtime deployments)
 end

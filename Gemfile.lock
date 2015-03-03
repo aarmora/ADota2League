@@ -14,6 +14,13 @@ GIT
       faraday (~> 0.8.4)
       faraday_middleware (~> 0.9.0)
 
+GIT
+  remote: https://github.com/jameswilliamiii/capistrano-linked-files.git
+  revision: 0f532585ad9b0ffa6e61b38bc171dfa0a79e76d7
+  specs:
+    capistrano-linked-files (0.1.0)
+      capistrano (~> 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -82,8 +89,6 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-linked-files (0.1.0)
-      capistrano (~> 3.1)
     capistrano-rails (1.1.2)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -91,6 +96,9 @@ GEM
       capistrano (~> 3.0)
       sshkit (~> 1.2)
     capistrano-stats (1.1.1)
+    capistrano-unicorn-nginx (3.3.2)
+      capistrano (>= 3.1)
+      sshkit (>= 1.2.0)
     challonge-api (0.2.0)
       activeresource
     coffee-rails (4.1.0)
@@ -295,9 +303,10 @@ DEPENDENCIES
   cap-ec2
   capistrano (~> 3.1)
   capistrano-bundler
-  capistrano-linked-files
+  capistrano-linked-files!
   capistrano-rails
   capistrano-rvm
+  capistrano-unicorn-nginx
   challonge-api
   coffee-rails
   dalli

@@ -66,7 +66,11 @@ gem 'capistrano-rails'
 gem 'capistrano-bundler'
 gem 'capistrano-rvm'
 gem 'cap-ec2'
-gem 'capistrano-linked-files'
+gem 'capistrano-linked-files', git: "https://github.com/jameswilliamiii/capistrano-linked-files.git"
+gem 'capistrano-unicorn-nginx'
+# gem 'capistrano3-unicorn'
+# gem 'sepastian-capistrano3-unicorn'
+
 
 # To use debugger
 # gem 'debugger'
