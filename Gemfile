@@ -4,7 +4,7 @@ ruby "2.2.0"
 gem 'rails', '~> 4.2'
 gem 'mysql2', '> 0.3'
 # gem 'execjs'
-gem 'nokogiri', '1.6.6.1' # TODO: Fix for 1.6.6.2 not compiling right
+gem 'nokogiri'
 gem 'rails-observers'
 gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 
@@ -36,6 +36,7 @@ end
 
 group :production do
   gem "exception_notification"
+  gem 'therubyracer' # execjs
   gem "oink" # for doing memory analysis
   gem 'memcachier'
   gem 'dalli'
@@ -50,19 +51,22 @@ end
 
 # Asset Related
 gem 'uglifier', '>= 1.0.3'
-gem "select2-rails"
+gem 'select2-rails'
 gem 'sass-rails'
+gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', :platforms => :ruby
-
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano',  '~> 3.1'
+gem 'capistrano-rails'
+gem 'capistrano-bundler'
+gem 'capistrano-rvm'
+gem 'cap-ec2'
+gem 'capistrano-linked-files'
 
 # To use debugger
 # gem 'debugger'

@@ -36,7 +36,6 @@ $(document).ready(function(){
     // mousein
     function(e) {
       var teamId = $(this).data("participant-id");
-      console.log("hovering: " + teamId );
       if (teamId) {
         $(".Bracket .game[data-participant-id=" + teamId + "]").addClass("active");
       }

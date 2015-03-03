@@ -19,6 +19,9 @@ config/database.yml
 
 # Ignore application configuration
 /config/application.yml
+/config/ec2.yml
+/.capistrano
+*.pem
 
 #ignore gemfile.lock
 Gemfile.lock
