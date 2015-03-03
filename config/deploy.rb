@@ -39,7 +39,8 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml').push('co
 namespace :deploy do
   before :finishing, 'linked_files:upload_files'
   # after :publishing, 'unicorn:restart'
-  # after 'deploy:restart', 'unicorn:reload'    # app IS NOT preloaded
-  after 'deploy:restart', 'unicorn:restart'   # app preloaded
-  # after 'deploy:restart', 'unicorn:duplicate' # before_fork hook implemented (zero downtime deployments)
+  # after 'deploy:publishing', 'unicorn:reload'    # app IS NOT preloaded
+  after 'deploy:publishing', 'deploy:restart'
+  after 'deploy:publishing', 'unicorn:restart'   # app preloaded
+  # after 'deploy:publishing', 'unicorn:duplicate' # before_fork hook implemented (zero downtime deployments)
 end

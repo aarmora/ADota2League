@@ -21,7 +21,12 @@
 # }
 
 ec2_role :web,
-  user: 'ubuntu',
+  ssh_options: {
+    user: 'ubuntu', # overrides user setting above
+    keys: [File.join(Dir.pwd, "../chef/playon.pem")]
+  }
+
+ec2_role :app,
   ssh_options: {
     user: 'ubuntu', # overrides user setting above
     keys: [File.join(Dir.pwd, "../chef/playon.pem")]
