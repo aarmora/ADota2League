@@ -30,12 +30,22 @@
 
   li.game {
     cursor: default;
-    padding-left:20px;
+    padding-left: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
     &.winner {
       font-weight:bold;
     }
-    span {
-      float:right;
+    span.team {
+      padding-right: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    span.score {
       margin-right:5px;
     }
     &.active {

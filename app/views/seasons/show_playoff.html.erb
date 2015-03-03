@@ -14,6 +14,13 @@
     </ul>
 <% end %>
 
+<!-- IE Browser version check -->
+<% if browser.ie? && browser.version.to_i < 11 %>
+  <div class="alert alert-info">
+    <p>You appear to be using an out of date version of Internet Explorer. Unfortunately, the super fancy and modern bracketing you are supposed to see below probably doesn't look right. In order to make sure you get the best experience, please join the future and <a href="http://browsehappy.com/">get an updated one!</a></p>
+  </div>
+<% end %>
+
 <h4>Playoffs</h4>
 <p>Hover over a match to view time information, you can also click on a match to go to the page for that match. Always trust the individual match pages as the final source of information, the brackets may ocasionally be drawn wrong</p>
 

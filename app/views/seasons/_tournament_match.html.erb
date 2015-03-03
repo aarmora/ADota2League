@@ -27,8 +27,8 @@
       data-match-id="<%= m.id %>"
       data-participant-id="<%= m.away_participant_id %>"
     >
-      <%= m.away_participant ? m.away_participant.name : "&nbsp;".html_safe %>
-      <span><%= m.has_score? ? m.away_score : nil %></span>
+      <span class="team"><%= m.away_participant ? m.away_participant.name : "&nbsp;".html_safe %></span>
+      <span class="score"><%= m.has_score? ? m.away_score : nil %></span>
     </li>
 
     <li
@@ -47,8 +47,8 @@
       data-match-id="<%= m.id %>"
       data-participant-id="<%= m.home_participant_id %>"
     >
-      <%= m.home_participant ? m.home_participant.name : "&nbsp;".html_safe %>
-      <span><%= m.has_score? ? m.home_score : nil %></span>
+      <span class="team"><%= m.home_participant ? m.home_participant.name : "&nbsp;".html_safe %></span>
+      <span class="score"><%= m.has_score? ? m.home_score : nil %></span>
       </li>
 <% else %>
     <li
@@ -56,8 +56,8 @@
       data-match-id="<%= m.id %>"
       data-participant-id="<%= m.home_participant_id %>"
     >
-      <%= m.home_participant ? m.home_participant.name : "&nbsp;".html_safe %>
-      <span><%= m.has_score? ? m.home_score : nil %></span>
+      <span class="team"><%= m.home_participant ? m.home_participant.name : "&nbsp;".html_safe %></span>
+      <span class="score"><%= m.has_score? ? m.home_score : nil %></span>
       </li>
 
     <li
@@ -76,7 +76,7 @@
       data-match-id="<%= m.id %>"
       data-participant-id="<%= m.away_participant_id %>"
     >
-      <%= m.away_participant ? m.away_participant.name : "&nbsp;".html_safe %>
-      <span><%= m.has_score? ? m.away_score : nil %></span>
+      <span class="team"><%= m.away_participant ? m.away_participant.name : "&nbsp;".html_safe %></span>
+      <span class="score"><%= m.has_score? ? m.away_score : nil %></span>
     </li>
 <% end %>

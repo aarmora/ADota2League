@@ -7,6 +7,7 @@ gem 'mysql2', '> 0.3'
 gem 'nokogiri'
 gem 'rails-observers'
 gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
+gem 'browser'
 
 gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.git'
 
