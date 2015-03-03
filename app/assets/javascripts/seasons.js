@@ -30,4 +30,19 @@ $(document).ready(function(){
       }.bind(this)
     });
   });
+
+  // Tournament bracket behavior
+  $(".Bracket .game").hover(
+    // mousein
+    function(e) {
+      var teamId = $(this).data("participant-id");
+      if (teamId) {
+        $(".Bracket .game[data-participant-id=" + teamId + "]").addClass("active");
+      }
+    },
+    // mouse out
+    function(e) {
+      $(".Bracket .game").removeClass("active");
+    }
+  );
 });

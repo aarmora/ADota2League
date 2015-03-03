@@ -1,0 +1,82 @@
+<%
+  # This is a really terrible thing which happens because we might re-arrange teams for home/away
+  # Its really fragile and relies on ids being in ascending order in the DB as drawn from the tournament
+  # The JS will always render the top match (lower id) winner on top
+  # TODO: Try and remove / better sync with the js
+  if m.week > 1
+    winner_query = Match.where(week: m.week - 1, winner_match_id: m.id)
+    loser_query = Match.where(week: m.week - 1, loser_match_id: m.id)
+    matches = winner_query.to_a + loser_query.to_a
+
+    home_match = matches.detect {|ma| ma.home_participant == m.home_participant || ma.away_participant == m.home_participant} if m.home_participant
+    away_match = matches.detect {|ma| ma.home_participant == m.away_participant || ma.away_participant == m.away_participant} if m.away_participant
+
+    if home_match && home_match.id > matches.reject {|ma| ma.id == home_match.id}.first.id
+      away_first = true
+    elsif away_match && away_match.id < matches.reject {|ma| ma.id == away_match.id}.first.id
+      away_first = true
+    end
+  end
+
+  home_won = m.has_score? && m.away_score < m.home_score
+  away_won = m.has_score? && m.away_score > m.home_score
+%>
+
+<% if away_first %>
+    <li class="game game-top <%= "winner" if away_won %>"
+      data-match-id="<%= m.id %>"
+      data-participant-id="<%= m.away_participant_id %>"
+    >
+      <span class="team"><%= m.away_participant ? m.away_participant.name : "&nbsp;".html_safe %></span>
+      <span class="score"><%= m.has_score? ? m.away_score : nil %></span>
+    </li>
+
+    <li
+    data-match-id="<%= m.id %>"
+    class="game game-spacer">
+      <%= link_to m, class: "game-info" do %>
+        <%= format_datetime(m.date) %><br />
+        <% if m.caster %>
+          Cast by: <%= m.caster.name %>
+        <% end %>
+      <% end %>
+    </li>
+
+    <li
+      class="game game-bottom <%= "winner" if home_won %>"
+      data-match-id="<%= m.id %>"
+      data-participant-id="<%= m.home_participant_id %>"
+    >
+      <span class="team"><%= m.home_participant ? m.home_participant.name : "&nbsp;".html_safe %></span>
+      <span class="score"><%= m.has_score? ? m.home_score : nil %></span>
+      </li>
+<% else %>
+    <li
+      class="game game-top <%= "winner" if home_won %>"
+      data-match-id="<%= m.id %>"
+      data-participant-id="<%= m.home_participant_id %>"
+    >
+      <span class="team"><%= m.home_participant ? m.home_participant.name : "&nbsp;".html_safe %></span>
+      <span class="score"><%= m.has_score? ? m.home_score : nil %></span>
+      </li>
+
+    <li
+    data-match-id="<%= m.id %>"
+    class="game game-spacer">
+      <%= link_to m, class: "game-info" do %>
+        <%= format_datetime(m.date) %><br />
+        <% if m.caster %>
+          Cast by: <%= m.caster.name %>
+        <% end %>
+      <% end %>
+    </li>
+
+
+    <li class="game game-bottom <%= "winner" if away_won %>"
+      data-match-id="<%= m.id %>"
+      data-participant-id="<%= m.away_participant_id %>"
+    >
+      <span class="team"><%= m.away_participant ? m.away_participant.name : "&nbsp;".html_safe %></span>
+      <span class="score"><%= m.has_score? ? m.away_score : nil %></span>
+    </li>
+<% end %>

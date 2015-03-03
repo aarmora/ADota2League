@@ -1,5 +1,23 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "jquery-ui-timepicker-addon.css";
+@import "datatables.css";
+
+@import "theme.css.scss";
+
+@import "bracket.css.scss";
+@import "forms.css.scss";
+@import "footer.css.scss";
+@import "list_dimming.css.scss";
+@import "matches.css.scss";
+@import "misc.css.scss";
+@import "permissions.css.scss";
+@import "players.css.scss";
+@import "posts.css.scss";
+@import "register.css.scss";
+@import "seasons.css.scss";
+@import "teams.css.scss";
+@import "welcome.css.scss";
 
 /* These are Charlie Approved Bootstrap overrides only */
 
@@ -13,18 +31,18 @@ ol, ul {
 }
 
 #main {
-	background-color: white;
+  background-color: $white;
   padding: 0px 30px 30px 30px;
 }
 
 #sponsors {
-	background-color: white;
-	padding: 15px;
+  background-color: $white;
+  padding: 15px;
   height: 150px;
-	img {
-		max-height: 120px;
+  img {
+    max-height: 120px;
     max-width: 100%;
-	}
+  }
 }
 
 .select2 {
@@ -49,39 +67,45 @@ ol, ul {
 /* Logo                                                                          */
 /*********************************************************************************/
 
-	#logo {
-		position: relative;
-		padding: 30px 25px;
-		text-transform: uppercase;
+  #logo {
+    position: relative;
+    padding: 30px 25px;
+    text-transform: uppercase;
 
-		span {
-			color: #BC1414;
-		}
-		a {
-			text-decoration: none;
-		}
-		h1 a
-		{
-			text-decoration: none;
-			font-size: 1.5em;
-			color: #FFF;
-		}
+    span {
+      color: $primary-red;
+    }
+    a {
+      text-decoration: none;
+    }
+    h1 a
+    {
+      text-decoration: none;
+      font-size: 1.5em;
+      color: $white;
+    }
+
+    .tagline {
+      font-size: 10px;
+      color: $gray;
+      font-weight: bold;
+    }
 
 
-	    .logout{
-			font-size: 10px;
-			color: #BC1414;
-	    }
+      .logout{
+      font-size: 10px;
+      color: $primary-red;
+      }
 
-	    #current-user {
-	    	line-height: 25px;
-	    	float: right;
-	    	margin-top: 15px;
-	    	img { float: left;}
-	    	span, a { margin-left: 5px; }
-	    	span { font-size: 20px; }
-	    }
-	}
+      #current-user {
+        line-height: 25px;
+        float: right;
+        margin-top: 15px;
+        img { float: left;}
+        span, a { margin-left: 5px; }
+        span { font-size: 20px; }
+      }
+  }
 
 /*********************************************************************************/
 /* Header                                                                        */
@@ -90,17 +114,17 @@ ol, ul {
 #LiveGames-Callout {
     text-decoration:none;
     font-size: 20px;
-    background-color: #BB1717;
+    background-color: $primary-red;
     border-radius: 0 0 6px 6px;
     padding: 7px;
     cursor: pointer;
-    color: white;
+    color: $white;
     text-align: center;
     i { top: 3px; }
  }
 
 #LiveGames {
-    background-color: #1B1B1B;
+    background-color: $deep-gray;
     border-radius: 0 0 6px 6px;
     width: 60%;
     margin: 0 auto;
@@ -110,20 +134,20 @@ ol, ul {
     position: absolute;
     transition: top 0.7s ease-in-out;
     font-size: 14px;
-    color: white;
+    color: $white;
     text-transform: none;
     z-index: 1; // Put it over the bootstrap crap
 
     a {
-    	color: white;
+      color: $white;
     }
     table { width: 100%; }
     td {
-    	border: none;
-    	padding: 10px 5px;
+      border: none;
+      padding: 10px 5px;
     }
     tr + tr td {
-			border-top: 1px solid #ddd;
+      border-top: 1px solid #ddd;
     }
     .twitchtitle {
       width: 75%;
@@ -138,22 +162,22 @@ ol, ul {
 
 /* 768px -  @screen-sm-min */
 @media (min-width: 768px) {
-	html {
-		background: url(/assets/dota2background.jpg) no-repeat center center fixed;
-		background-size: cover;
-	}
+  html {
+    background: url(/assets/dota2background.jpg) no-repeat center center fixed;
+    background-size: cover;
+  }
 }
 
 /*********************************************************************************/
 /* Nav Menu                                                                          */
 /*********************************************************************************/
 .navbar { margin-bottom: 0px; }
-.icon-bar { background-color: #fff; }
+.icon-bar { background-color: $white; }
 .navbar-ad2l
 {
-  background: #1B1B1B;
+  background: $deep-gray;
   border: none;
-  border-bottom: 4px solid #BC1414;
+  border-bottom: 4px solid $primary-red;
   border-radius: 0px;
 
   ul.nav > li > a {
@@ -164,23 +188,23 @@ ol, ul {
     text-transform: uppercase;
     font-size: 1em;
     font-weight: 700;
-    color: #838383;
+    color: $gray;
 
     &:hover, &:focus {
-      color: #FFF;
-      background: #3B1B1B;
+      color: $white;
+      background: $faded-red;
     }
   }
 
   .navbar-nav > .active > a,
   .navbar-nav > .active > a:hover,
   .navbar-nav > .active > a:focus {
-    background: #BC1414;
-    color: #FFF;
+    background: $primary-red;
+    color: $white;
   }
 
   &.navbar-subnav {
-    background-color: #BC1414;
+    background-color: $primary-red;
     border-bottom: none;
   }
 
@@ -191,19 +215,19 @@ ol, ul {
     &.active {
       a, a:hover, a:focus {
         /* background-color: #8a0f0f; */
-        background-color: #fff;
-        border-color: #fff;
-        color: #BC1414;
+        background-color: $white;
+        border-color: $white;
+        color: $primary-red;
       }
     }
     a {
       line-height: 50px;
       padding: 0em 6px;
-      color: #c4c4c4;
+      color: $light-gray;
       font-size: 0.9em;
       &:hover, &:focus {
-        background-color: #8a0f0f;
-        color: #fff;
+        background-color: $dark-red;
+        color: $white;
       }
     }
   }
@@ -211,15 +235,15 @@ ol, ul {
   /* Other stuff in the nav bar */
 
   .navbar-brand {
-    color: #FFF;
+    color: $white;
     span {
-      color: #BC1414;
+      color: $primary-red;
     }
   }
 
   .user-in-bar {
     margin-top: 8px;
     margin-right: 10px;
-    color: #FFF;
+    color: $white;
   }
 }

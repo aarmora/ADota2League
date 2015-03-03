@@ -14,106 +14,32 @@
     </ul>
 <% end %>
 
-<script>
-
-/* Edit function is called when team label is clicked */
-function edit_fn(container, data, doneCb) {
-}
-
-<%
-
-@results_for_js = @results_for_js.map do |round, matches|
-
-
-  matches.map do |m|
-    # This is a really terrible thing which happens because we might re-arrange teams for home/away
-    # Its really fragile and relies on ids being in ascending order in the DB as drawn from the tournament
-    # The JS will always render the top match (lower id) winner on top
-    # TODO: Try and remove / better sync with the js
-    if m.home_participant && m.away_participant
-      home_query = Match.where(home_participant: m.home_participant).where_values.reduce(:and)
-      away_query = Match.where(away_participant: m.home_participant).where_values.reduce(:and)
-      previous_home_match = Match.where(week: m.week - 1, season_id: m.season_id).where(home_query.or(away_query)).first
-
-      home_query = Match.where(home_participant: m.away_participant).where_values.reduce(:and)
-      away_query = Match.where(away_participant: m.away_participant).where_values.reduce(:and)
-      previous_away_match = Match.where(week: m.week - 1, season_id: m.season_id).where(home_query.or(away_query)).first
-    end
-
-    away_first =  previous_home_match && previous_away_match && previous_away_match.id < previous_home_match.id
-
-    data = {
-      id: m.id,
-      url: match_path(m),
-      time: format_datetime_month(m.date),
-      home_name: m.home_participant ? m.home_participant.name : nil,
-      away_name: m.away_participant ? m.away_participant.name : nil,
-      caster: m.caster ? m.caster.name : nil
-    }
-
-    if !m.has_score?
-      [ nil, nil, data ]
-    elsif away_first
-      [ m.away_score, m.home_score, data ]
-    else
-      [ m.home_score, m.away_score, data ]
-    end
-  end
-end
-@teams_for_js = @teams_for_js.map do |m|
-  # TODO: Old code to show the seeds?
-  # home_seed = TeamSeason.where(participant: m.home_participant, season_id: m.season_id).first
-  # away_seed = TeamSeason.where(participant: m.away_participant, season_id: m.season_id).first
-  #[m.home_participant ? "(#{home_seed.division.to_i + 1}) " + m.home_participant.name : nil,
-  # m.away_participant ? "(#{away_seed.division.to_i + 1}) " + m.away_participant.name : nil]
-  [m.home_participant ? m.home_participant.name : nil, m.away_participant ? m.away_participant.name : nil]
-end
-
-%>
-
-var teams = <%= raw @teams_for_js.to_json %>;
-
-// Byes need to be undefined and not null, so let's fix those in the first round
-teams.forEach(function(pair) {
-  if (pair[0] === null)
-    pair[0] = undefined;
-  if (pair[1] === null)
-    pair[1] = undefined;
- });
-
-var singleElimination = {
-  teams: teams,
-  results: <%= raw @results_for_js.to_json %>
-}
-
-$(function() {
-    $('#bracketHolder').bracket({
-      onMatchClick: function(data) {
-        window.location = data.url;
-      },
-
-      onMatchHover: function(data, hoverIn) {
-        if (hoverIn && data.home_name !== undefined && data.away_name !== undefined) {
-          var html = ""
-          if (data.home_name && data.away_name) html +=  "<b>" + data.home_name + " vs " + data.away_name + "</b><br>";
-          html += "<i>" + data.time + "</i>";
-          if (data.caster) html += "<br>Cast by: " + data.caster;
-          $("#bracketHoverContainer").html(html);
-        } else {
-          $("#bracketHoverContainer").empty();
-        }
-      },
-      // skipSecondaryFinal: true,
-      skipConsolationRound: true,
-      init: singleElimination  /* data to initialize the bracket with */ })
-  })
-
-</script>
+<!-- IE Browser version check -->
+<% if browser.ie? && browser.version.to_i < 11 %>
+  <div class="alert alert-info">
+    <p>You appear to be using an out of date version of Internet Explorer. Unfortunately, the super fancy and modern bracketing you are supposed to see below probably doesn't look right. In order to make sure you get the best experience, please join the future and <a href="http://browsehappy.com/">get an updated one!</a></p>
+  </div>
+<% end %>
 
 <h4>Playoffs</h4>
 <p>Hover over a match to view time information, you can also click on a match to go to the page for that match. Always trust the individual match pages as the final source of information, the brackets may ocasionally be drawn wrong</p>
 
 <h4>Bracket</h4>
-<div id="bracketHoverContainer" style="min-height: 50px"></div>
-<div id="bracketHolder">
+<div class="Bracket">
+  <%- @matches_by_round.each do |round, matches| %>
+    <ul class="round round-<%= round %>">
+      <%- matches.each_with_index do |m, i| %>
+        <% if round == 1 && (!m.home_participant || !m.away_participant) %>
+          <li class="game game-bye game-top">&nbsp;</li>
+          <li class="game game-bye game-spacer">&nbsp;</li>
+          <li class="game game-bye game-bottom ">&nbsp;</li>
+        <% else %>
+          <%= render partial: "seasons/tournament_match", locals: {m: m} %>
+        <% end %>
+        <% unless i == matches.length - 1 %>
+          <li class="spacer">&nbsp;</li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
