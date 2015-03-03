@@ -5,7 +5,7 @@ set :application, 'playon'
 set :repo_url, 'https://github.com/aarmora/ADota2League.git'
 
 # Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/rails/ad2l'
