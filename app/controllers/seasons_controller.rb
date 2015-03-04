@@ -45,7 +45,15 @@ class SeasonsController < ApplicationController
       end
       render :action => 'show' # explicitly needed because index calls this method and expects it to render
     else
-      @matches_by_round = @season.matches.includes(:home_participant, :away_participant, :caster).group_by(&:week)
+      if @season.single_elim?
+        @brackets = [@season.matches.includes(:home_participant, :away_participant, :caster).group_by(&:week)]
+      elsif @season.double_elim?
+        matches = @season.matches.includes(:home_participant, :away_participant, :caster)
+        loser_bracket, winner_bracket = matches.partition { |m| !m.winner_match_id.nil? && m.loser_match_id.nil? }
+        @brackets = [winner_bracket.group_by(&:week), loser_bracket.group_by(&:week)]
+      end
+
+
       # deal with grouping by loser / winner bracket
       render "seasons/show_playoff"
     end

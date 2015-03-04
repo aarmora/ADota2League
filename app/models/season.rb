@@ -53,7 +53,11 @@ class Season < ActiveRecord::Base
 
     # Add in Byes
     bracket_size = 2 ** Math.log(teams.length,2).ceil
-    bracket = BracketTree::Bracket::SingleElimination.by_size bracket_size
+    if self.single_elim?
+      bracket = BracketTree::Bracket::SingleElimination.by_size bracket_size
+    elsif self.double_elim?
+      bracket = BracketTree::Bracket::DoubleElimination.by_size bracket_size
+    end
     seeds = Season.seed_mappings(bracket_size)
     teams = teams.fill({participant: nil}, teams.length...bracket_size)
 
@@ -138,6 +142,7 @@ class Season < ActiveRecord::Base
     useful_matches.each do |match|
       setRound(useful_matches, match)
     end
+
     useful_matches
   end
 
