@@ -33,6 +33,7 @@ gem 'rrschedule' #, git: 'https://github.com/wlangstroth/rrschedule.git'
 
 group :development do
   gem 'tzinfo-data'
+  gem 'coffee-script-source', '1.8.0' #Windows doesn't like CS 1.9
 end
 
 group :production do

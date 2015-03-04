@@ -334,7 +334,7 @@ namespace :dota do
 
   desc "Send email"
   task :mail => :environment do
-    @players = Player.where("id > 13643")
+    @players = Player.where(:receive_emails => true)
     playerz = Player.find(205)
     @players.each do |player|
       unless player.email.nil?
@@ -515,9 +515,9 @@ namespace :dota do
   desc "Get the inhouse stuff"
   task :pull_inhousegames => :environment do
 
-    @inhouse_games_ids = Inhousegame.where(:leagueid => 2047).uniq.pluck(:match_id)
+    @inhouse_games_ids = Inhousegame.where(:leagueid => 2642).uniq.pluck(:match_id)
 
-    @games = Dota.history(:league_id => 2047)
+    @games = Dota.history(:league_id => 2642)
 
     @all_games = Array.new
 
@@ -541,10 +541,11 @@ namespace :dota do
         end
       end
     end
-
+    compile_inhouse
   end
 
-  task :compile_inhouse => :environment do
+  def compile_inhouse
+    puts "begin compilation"
 
     @accounts = Inhousegame.uniq.pluck(:account_id)
 
@@ -600,7 +601,7 @@ namespace :dota do
 
         @inhouseleaderboard_record.account_id = account
         @inhouseleaderboard_record.player_id = @player.id
-        @inhouseleaderboard_record.season_id = 1
+        @inhouseleaderboard_record.season_id = 2
         @inhouseleaderboard_record.wins = @wins + @inhouseleaderboard_record.wins.to_i
         @inhouseleaderboard_record.games_played = @games_played + @inhouseleaderboard_record.games_played.to_i
         @inhouseleaderboard_record.kills = @kills + @inhouseleaderboard_record.kills.to_i
