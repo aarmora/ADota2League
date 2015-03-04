@@ -14,7 +14,8 @@ class RegisterController < ApplicationController
         config.access_token_secret = session[:current_user][:twitter][:auth_secret]
       end
 
-      puts twitter_client.friendship?(twitter_client.user, "Adota2l").inspect
+      puts twitter_client.friendship?(twitter_client.user, DOTA_TWITTER_ACCOUNT).inspect
+      # Depending on what requirements we want, we could use search more efficently instead
       puts twitter_client.user_timeline(twitter_client.user.id, {exclude_replies: true, include_rts: false}).first.inspect
 		end
 	end
