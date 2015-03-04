@@ -4,7 +4,7 @@
       <%= link_to player.name, player%> <%= "(Captain)" if player.id == team.captain_id %>
     	<%= link_to "", "steam://friends/add/#{player.steamid}", :style => "margin-left:15px", :title => "Add on steam", :class => "pluslink glyphicon glyphicon-plus" %><br>
 
-      <% if Permissions.can_edit?(@team) || Permissions.can_edit(player) %>
+      <% if Permissions.can_edit?(@team) || Permissions.can_edit?(player) %>
         <%= form_tag(players_team_url(@team), :method => "DELETE", :id => "remove_players_form") do %>
           <input type="hidden" name="players[]" value="<%= player.id %>">
           <button class="btn btn-danger btn-sm glyphicon glyphicon-trash">Remove</button>
