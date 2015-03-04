@@ -40,7 +40,7 @@
 				<a href="/">Amateur <span>Dota</span> 2 League</a>
 				<% if @current_user %>
 					<div id="current-user"><%= image_tag @current_user.avatar, :alt => "" %>
-						<span><%= @current_user.name %></span>
+						<span><%=link_to @current_user.name, @current_user, :class => "noLinkStyle" %></span>
 						<br />
 						<%= link_to 'Logout', logout_url, :class => 'logout' %>
 					</div>
@@ -84,7 +84,7 @@
         </ul>
     	</li>
 			<li <%if @current_tab == 'inhouse'%> class="active" <%end%>>
-				<%= link_to "Inhouses", inhouse_path(1) %>
+				<%= link_to "Inhouses", inhouse_path(2) %>
 			</li>
 			<li <%if @current_tab == 'freeagents'%> class="active" <%end%>>
 				<%= link_to "Free Agents", players_path %>

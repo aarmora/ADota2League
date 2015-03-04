@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219230119) do
+ActiveRecord::Schema.define(version: 20150303234044) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "match_id",             limit: 4
@@ -161,15 +161,17 @@ ActiveRecord::Schema.define(version: 20150219230119) do
     t.datetime "updated_at"
     t.text     "bio",                limit: 16777215
     t.boolean  "admin",              limit: 1
-    t.integer  "endorsements_count", limit: 4,        default: 0, null: false
+    t.integer  "endorsements_count", limit: 4,        default: 0,    null: false
     t.integer  "mmr",                limit: 4
     t.integer  "hours_played",       limit: 4
     t.string   "stripe_customer_id", limit: 255
     t.string   "time_zone",          limit: 255
-    t.integer  "comments_count",     limit: 4,        default: 0, null: false
+    t.integer  "comments_count",     limit: 4,        default: 0,    null: false
     t.string   "real_name",          limit: 255
     t.string   "avatar",             limit: 255
     t.string   "country",            limit: 255
+    t.boolean  "receive_emails",     limit: 1,        default: true
+    t.string   "twitter",            limit: 255
   end
 
   create_table "players_teams", force: :cascade do |t|

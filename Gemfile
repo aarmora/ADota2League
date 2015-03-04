@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.0"
+ruby "2.1.5"
 
 gem 'rails', '~> 4.2'
 gem 'mysql2', '> 0.3'
@@ -33,6 +33,7 @@ gem 'rrschedule' #, git: 'https://github.com/wlangstroth/rrschedule.git'
 
 group :development do
   gem 'tzinfo-data'
+  gem 'coffee-script-source', '1.8.0' #Windows doesn't like CS 1.9
 end
 
 group :production do
@@ -41,7 +42,7 @@ group :production do
   gem 'memcachier'
   gem 'dalli'
   gem 'slack-notifier'
-  gem 'unicorn'
+  #gem 'unicorn'
   gem 'rails_12factor'
   gem 'rack-cors', :require => 'rack/cors'
 end
