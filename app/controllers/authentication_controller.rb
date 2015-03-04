@@ -27,6 +27,18 @@ class AuthenticationController < ApplicationController
     generic_callback
   end
 
+  def twitter_callback
+    auth = request.env['omniauth.auth']
+    @data = {
+      handle: auth.info['nickname'],
+      uid: auth.uid,
+      timestamp: Time.now,
+      auth_token: auth['credentials']['token'],
+      auth_secret: auth['credentials']['secret']
+    }
+    generic_callback
+  end
+
   def generic_callback
     session[:current_user] ||= {}
     session[:current_user][request.env['omniauth.auth'].provider.to_sym] = @data

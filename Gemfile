@@ -14,8 +14,10 @@ gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.gi
 # use Omniauth gems for authenticating users
 gem 'omniauth-steam'
 gem 'omniauth-bnet'
+gem 'omniauth-twitter'
 
 # Misc APIS
+gem 'twitter'
 gem 'dota', :git => 'git://github.com/nashby/dota.git'
 gem 'stripe'
 gem 'mandrill-api' # Email Support
