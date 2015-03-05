@@ -49,8 +49,17 @@ class TeamSeasonsController < ApplicationController
     @ts = TeamSeason.find(params[:id])
     head :forbidden and return unless Permissions.can_edit? @ts.participant
 
+    # Check for discount applications
+    discount_amount
+  end
+
+  private def discount_amount
+    # memoize to preserve api calls
+    @discount_amount ||= qualifies_for_twitter_discount? ? 100 : 0
+  end
+
+  private def qualifies_for_twitter_discount?
     if session[:current_user][:twitter]
-      puts "har be twitter"
       twitter_client = Twitter::REST::Client.new do |config|
         config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
         config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
@@ -58,23 +67,18 @@ class TeamSeasonsController < ApplicationController
         config.access_token_secret = session[:current_user][:twitter][:auth_secret]
       end
 
-      discounted = false
-      tweeted = false
-      followed = false
-      if twitter_client.friendship?(twitter_client.user, DOTA_TWITTER_ACCOUNT).inspect
-        followed = true
+      begin
+        followed = twitter_client.friendship?(twitter_client.user, DOTA_TWITTER_ACCOUNT)
+        result = twitter_client.search("amateurdota2league.com @namecheap @adota2l from:#{session[:current_user][:twitter][:handle]}", count: 10).take(1)
+        tweeted = !result.empty?
+      rescue
+        @twitter_error = true
       end
-      # Depending on what requirements we want, we could use search more efficently instead
-      @twitters = twitter_client.user_timeline(twitter_client.user.id, {exclude_replies: true, include_rts: false, count: 5}).each do |tweet|
-        if (tweet.text.include? "@adota2l") && (tweet.text.include? "http://amateurdota2league.com") && (tweet.text.include? ("@namecheap"))
-          tweeted = true
-        end
-      end
-      if tweeted == true && followed == true
-        discounted = true
-      end
-    end
 
+      tweeted == true && followed == true
+    else
+      false
+    end
   end
 
   # payment callback page and admin overrides
@@ -94,41 +98,45 @@ class TeamSeasonsController < ApplicationController
     else
       head :forbidden and return unless Permissions.can_edit? @ts.participant
 
-      #attempt to find them in the Stripe DB first
-      if @current_user.stripe_customer_id.nil?
-        customer = Stripe::Customer.create(
-        :description => @current_user.name,
-        :email => @current_user.email,
-        :metadata => {:user => @current_user.id, :participant_id => @current_user.steamid},
-        :card  => params[:stripeToken]
-      )
-      else
-        customer = Stripe::Customer.retrieve(@current_user.stripe_customer_id)
-        customer.card = params[:stripeToken]
-        customer.save
+      # if the price is 0 or less after discounts, then we don't need to run a charge
+      price = @ts.season.current_price - discount_amount
+      if price > 0
+        #attempt to find them in the Stripe DB first
+        if @current_user.stripe_customer_id.nil?
+          customer = Stripe::Customer.create(
+          :description => @current_user.name,
+          :email => @current_user.email,
+          :metadata => {:user => @current_user.id, :participant_id => @current_user.steamid},
+          :card  => params[:stripeToken]
+        )
+        else
+          customer = Stripe::Customer.retrieve(@current_user.stripe_customer_id)
+          customer.card = params[:stripeToken]
+          customer.save
+        end
+
+        charge = Stripe::Charge.create(
+          :customer    => customer.id,
+          :amount      => @ts.season.current_price - discount_amount,
+          :description => "AD2L #{@ts.season.title} Entry Fee",
+          :statement_description => "AD2L #{@ts.season.title} Entry Fee",
+          :metadata => {
+            :season => @ts.season.id,
+            :team => @ts.participant.id,
+            :team_season => @ts.id,
+            :was_late => @ts.season.late_fee_applies ? true : false
+          },
+          :currency    => 'usd'
+        )
+
+        # update our records
+        @current_user.email = params[:stripeEmail] if @current_user.email.nil?
+        @current_user.stripe_customer_id = customer.id
+        @current_user.save!
       end
 
-      charge = Stripe::Charge.create(
-        :customer    => customer.id,
-        :amount      => @ts.season.current_price,
-        :description => "AD2L #{@ts.season.title} Entry Fee",
-        :statement_description => "Entry Fee",
-        :metadata => {
-          :season => @ts.season.id,
-          :team => @ts.participant.id,
-          :team_season => @ts.id,
-          :was_late => @ts.season.late_fee_applies ? true : false
-        },
-        :currency    => 'usd'
-      )
-
-      # update our records
-      @current_user.email = params[:stripeEmail] if @current_user.email.nil?
-      @current_user.stripe_customer_id = customer.id
-      @current_user.save!
-
       @ts.paid = true
-      @ts.price_paid_cents = @ts.season.current_price
+      @ts.price_paid_cents = @ts.season.current_price - discount_amount
       @ts.save!
 
       flash[:notice] = "You have been successfully registered for " + @ts.season.title

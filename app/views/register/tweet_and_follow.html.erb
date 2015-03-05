@@ -1,19 +1,21 @@
 <script>
-	$('.btn').click(function(){
+	$(document).on('click', '.btn', function() {
 		var ready = true;
 		$(this).attr('clicked', 'true');
-		$('.btn').each(function(){
-			if($(this).attr("clicked") == "false"){
-				ready = false
+		$('.btn').each(function() {
+			if ($(this).attr("clicked") == "false") {
+				ready = false;
 			}
 		});
-		if(ready == true){
+		if (ready == true) {
 			window.close();
 		}
 	});
 </script>
 
-
-<a href="https://twitter.com/intent/tweet?text=Excited%20to%20play%20in%20Season%207%20of%20the%20@adota2l%20sponsored%20by%20@namecheap.%20%20Come%20challenge%20us%20at%20http://amateurdota2league.com" class="btn btn-primary" clicked="false">Send the Tweet</a>
-
-<a href="https://twitter.com/intent/follow?screen_name=adota2l" class="btn btn-primary" clicked="false">Follow @Adota2l</a>
+<div class="text-center">
+	<h4>Tweeting for a discount</h4>
+	<p>Click the links below to follow and tweet. Don't worry, you can change the tweet text if you'd like! You just have to mention both AD2L and our sponsor Namecheap to receive the discount</p>
+	<a href="https://twitter.com/intent/tweet?text=Excited%20to%20play%20in%20Season%207%20of%20the%20@adota2l%20sponsored%20by%20@namecheap.%20%20Come%20challenge%20us%20at%20http://amateurdota2league.com" class="btn btn-primary btn-lg" clicked="false">Send the Tweet</a>
+	<a href="https://twitter.com/intent/follow?screen_name=adota2l" class="btn btn-primary btn-lg" clicked="false">Follow @Adota2l</a>
+</div>

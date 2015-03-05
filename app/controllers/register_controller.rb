@@ -8,10 +8,11 @@ class RegisterController < ApplicationController
 			@current_tab = "register"
 
 
-		
+
       	end
 	end
 
 	def tweet_and_follow
+		render layout: "no_chrome"
 	end
 end

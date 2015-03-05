@@ -59,3 +59,5 @@ Team.first(8).each do |t|
   double.team_seasons.create({division: t.id, participant: t, paid: true, checked_in: true}, :without_protection => true)
 end
 
+future_tourney = Season.create({start_date: Time.now + 1.month, title: "Upcoming Tourney", registration_open: true, season_type: :round_robin, active: true}, :without_protection => true)
+
