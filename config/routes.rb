@@ -21,6 +21,7 @@ Ad2l::Application.routes.draw do
   end
 
   get 'register' =>  'register#new'
+  get 'tweet_and_follow' => 'register#tweet_and_follow'
 
   get "schedule" => 'seasons#index'
 

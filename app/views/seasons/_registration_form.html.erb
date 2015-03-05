@@ -23,7 +23,8 @@
   	<br>
   	<br>
     <%= f.hidden_field :participant_id, :value => participant.id %>
-    <%= submit_tag "Register!", :class => "btn btn-primary", data: { confirm: "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one on your team can be ABOVE the stated MMR."} %>
+    <%= submit_tag "Register!", :class => "btn btn-default", data: { confirm: "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one on your team can be ABOVE the stated MMR."} %>
+    <a href="/Auth/Twitter" onclick="window.open('/Auth/Twitter', 'newwindow', 'width=800, height=500'); return false;" class="btn btn-primary">Follow AD2L on Twitter and tweet for $1 off!</a>
   <% end %>
 <% else %>
   <h3>No Tournaments Available</h3>

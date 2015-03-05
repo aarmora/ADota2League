@@ -22,6 +22,7 @@
     <div class="amount">
       <strong>Amount: <%= format_price(@ts.season.current_price) %></strong>
     </div>
+    <%=discounted%>
 
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"

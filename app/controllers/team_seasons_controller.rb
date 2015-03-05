@@ -48,6 +48,33 @@ class TeamSeasonsController < ApplicationController
     end
     @ts = TeamSeason.find(params[:id])
     head :forbidden and return unless Permissions.can_edit? @ts.participant
+
+    if session[:current_user][:twitter]
+      puts "har be twitter"
+      twitter_client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+        config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+        config.access_token        = session[:current_user][:twitter][:auth_token]
+        config.access_token_secret = session[:current_user][:twitter][:auth_secret]
+      end
+
+      discounted = false
+      tweeted = false
+      followed = false
+      if twitter_client.friendship?(twitter_client.user, DOTA_TWITTER_ACCOUNT).inspect
+        followed = true
+      end
+      # Depending on what requirements we want, we could use search more efficently instead
+      @twitters = twitter_client.user_timeline(twitter_client.user.id, {exclude_replies: true, include_rts: false, count: 5}).each do |tweet|
+        if (tweet.text.include? "@adota2l") && (tweet.text.include? "http://amateurdota2league.com") && (tweet.text.include? ("@namecheap"))
+          tweeted = true
+        end
+      end
+      if tweeted == true && followed == true
+        discounted = true
+      end
+    end
+
   end
 
   # payment callback page and admin overrides
