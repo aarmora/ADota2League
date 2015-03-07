@@ -21,7 +21,9 @@
 
     <div class="amount">
       <strong>Amount: <%= format_price(@ts.season.current_price - @discount_amount) %></strong><%= " (discount applied)" if @discount_amount > 0 %>
+
     </div>
+
 
     <% if (@ts.season.current_price - @discount_amount > 0) %>
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -32,6 +34,10 @@
               data-description="<%= @ts.season.title %> Entry Fee"
               data-amount="<%= @ts.season.current_price - @discount_amount %>"
               data-allow-remember-me="false"></script>
+
+        <% if @discount_amount === 0 %>
+          <a href="/auth/twitter" onclick="window.open('/auth/twitter', 'newwindow', 'width=800, height=500'); return false;" class="btn btn-primary">Follow AD2L on Twitter and tweet for $1 off!</a>
+        <% end %>
     <% else %>
       <%= link_to "Complete Registration", @ts, method: :put, class: "btn btn-primary", role: "button" %>
     <% end %>

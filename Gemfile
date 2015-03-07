@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.0"
+ruby "2.1.5"
 
 gem 'rails', '~> 4.2'
 gem 'mysql2', '> 0.3'
@@ -44,7 +44,7 @@ group :production do
   gem 'memcachier'
   gem 'dalli'
   gem 'slack-notifier'
-  gem 'unicorn'
+  #gem 'unicorn'
   gem 'rails_12factor'
   gem 'rack-cors', :require => 'rack/cors'
 end

@@ -60,6 +60,7 @@ class TeamSeasonsController < ApplicationController
 
   private def qualifies_for_twitter_discount?
     if session[:current_user][:twitter]
+      puts "twittered"
       twitter_client = Twitter::REST::Client.new do |config|
         config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
         config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
@@ -68,14 +69,16 @@ class TeamSeasonsController < ApplicationController
       end
 
       begin
+        puts "begin"
         followed = twitter_client.friendship?(twitter_client.user, DOTA_TWITTER_ACCOUNT)
-        result = twitter_client.search("amateurdota2league.com @namecheap @adota2l from:#{session[:current_user][:twitter][:handle]}", count: 10).take(1)
+        #result = twitter_client.search("@adota2l from:#{session[:current_user][:twitter][:handle]}", count: 10).take(1) 
+        puts twitter_client.search("amateurdota2league.com @adota2l @namecheap from:#{session[:current_user][:twitter][:handle]}", :count => 10, :result_type => "recent").take(1)
         tweeted = !result.empty?
       rescue
         @twitter_error = true
       end
-
       tweeted == true && followed == true
+      #followed == true
     else
       false
     end
@@ -119,7 +122,7 @@ class TeamSeasonsController < ApplicationController
           :customer    => customer.id,
           :amount      => @ts.season.current_price - discount_amount,
           :description => "AD2L #{@ts.season.title} Entry Fee",
-          :statement_description => "AD2L #{@ts.season.title} Entry Fee",
+          :statement_description => "AD2L #{@ts.season.title}",
           :metadata => {
             :season => @ts.season.id,
             :team => @ts.participant.id,
