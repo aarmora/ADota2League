@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    // JQuery Tooltips
-    $('[data-toggle=tooltip]').tooltip();
 
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();

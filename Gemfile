@@ -16,6 +16,10 @@ gem 'omniauth-steam'
 gem 'omniauth-bnet'
 gem 'omniauth-twitter'
 
+# WYSIWYG
+gem 'summernote-rails'
+gem 'font-awesome-rails' # required???
+
 # Misc APIS
 gem 'twitter'
 gem 'dota', :git => 'git://github.com/nashby/dota.git'

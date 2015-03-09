@@ -12,6 +12,13 @@
   <% end %>
   <div class="tab-content">
     <div class="tab-pane active" id="news">
+    <div id="summernote">Hello Summernote</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#summernote').summernote();
+  });
+</script>
         <div class="<%= @official_streams.empty? ? 'col-md-12' : 'col-md-5' %>">
             <div ng-app="blogApp" ng-controller="blogController">
               <article ng-repeat="post in posts | limitTo:5">
