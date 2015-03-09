@@ -38,9 +38,11 @@ end
 
 group :production do
   gem "exception_notification"
+  gem 'therubyracer' # execjs
   gem "oink" # for doing memory analysis
-  gem 'memcachier'
-  gem 'dalli'
+  gem 'memcachier' # Old style for Heroku
+  gem 'dalli' # Old style for Heroku
+  gem 'redis-rails'
   gem 'slack-notifier'
   gem 'unicorn'
   gem 'rails_12factor'
@@ -52,19 +54,26 @@ end
 
 # Asset Related
 gem 'uglifier', '>= 1.0.3'
-gem "select2-rails"
+gem 'select2-rails'
 gem 'sass-rails'
+gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', :platforms => :ruby
-
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano',  '~> 3.1'
+gem 'capistrano-rails'
+gem 'capistrano-bundler'
+gem 'capistrano-rvm'
+gem 'cap-ec2'
+gem 'capistrano-linked-files', git: "https://github.com/jameswilliamiii/capistrano-linked-files.git"
+gem 'capistrano-unicorn-nginx'
+# gem 'capistrano3-unicorn'
+# gem 'sepastian-capistrano3-unicorn'
+
 
 # To use debugger
 # gem 'debugger'
