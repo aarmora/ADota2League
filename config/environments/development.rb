@@ -26,7 +26,6 @@ Ad2l::Application.configure do
   #  :domain         => 'gmail.com'
   #}
 
-
   ActionMailer::Base.smtp_settings = {
     :address        => "smtp.mandrillapp.com",
     :port           => "587",

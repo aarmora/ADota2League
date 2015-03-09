@@ -8,6 +8,8 @@ gem 'nokogiri'
 gem 'rails-observers'
 gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 gem 'browser'
+gem 'paperclip'
+gem 'aws-sdk', '< 2.0'
 
 gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.git'
 

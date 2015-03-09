@@ -54,6 +54,17 @@ Ad2l::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   #config.action_mailer.default_url_options = { :host => 'amateurdota2league.com' }
 
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV['AWS_S3_BUCKET'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    s3_storage_class: :reduced_redundancy,
+    url: ':s3_domain_url'
+  }
+
   ActionMailer::Base.smtp_settings = {
     :address        => "smtp.mandrillapp.com",
     :port           => "587",
