@@ -101,9 +101,24 @@
   <%= f.hidden_field :permission_mode, :value => "division"%>
   <%= f.submit "Add permissions", :class => "btn btn-primary"%>
 <% end %>
+<hr>
 
 
-<hr >
+<h4>Rules</h4>
+<p>Edit the rules of the tournament below. You can use a template from another season by selecting below too</p>
+  <%= form_for(@season) do |f| %>
+    <%= f.text_area :rules, data: {provider: :summernote} %>
+    <%= f.submit %>
+  <%- end %>
+  <b>Update rules from another season</b>
+  <p>Select a season below to pull the rules from. This will overrite whatever is in the editor above</p>
+  <div class="js-update-rules">
+    <%= select_tag "rules_season", options_for_select(Season.order(id: :desc).pluck(:title, :id)) %>
+    <div class="btn btn-primary">Do it</div>
+  </div>
+<hr>
+
+
 <h4>Tournament Management</h4>
 <p>Use the settings to the right to turn this season into a tournament or to manage the tournament.</p>
 

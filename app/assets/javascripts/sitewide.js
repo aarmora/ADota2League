@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+    /* Summernote WYSIWYG initializer */
+    $('[data-provider="summernote"]').each(function(){
+      $(this).summernote({});
+    });
+
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();
 
