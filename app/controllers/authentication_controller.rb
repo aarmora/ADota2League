@@ -67,6 +67,12 @@ class AuthenticationController < ApplicationController
       @current_user.save!
     end
 
+    # Twitter Related updates
+    if @current_user && session[:current_user] && session[:current_user][:twitter]
+      @current_user.twitter = session[:current_user][:twitter][:handle]
+      @current_user.save!
+    end
+
     session[:current_user][:id] = @current_user.id
 
     redirect_to request.env['omniauth.origin'] || root_path if redirect
