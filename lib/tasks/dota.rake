@@ -523,6 +523,7 @@ namespace :dota do
 
     @games.raw_history["matches"].each do |game|
       if !@inhouse_games_ids.include? game["match_id"]
+        puts game["match_id"]
 
         this_game = Dota.match(game["match_id"])
         if this_game.raw_match["duration"] > 600
