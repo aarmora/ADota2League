@@ -6,11 +6,8 @@
 <% end %>
 <% content_for :subnav do %>
     <ul class="nav nav-tabs">
-    <%- @seasons.each do |season| %>
-            <% unless season.active == false %>
-             <li class="tab <%= (@season == season ? "active" : "")%>" + ><%= link_to season.title, season %></li>
-            <%end%>
-        <% end %>
+      <li class="tab active"><a data-toggle="tab" href="#schedule">Standings and Schedule</a></li>
+      <li class="tab"><a data-toggle="tab" href="#rules">Rules</a></li>
     </ul>
 <% end %>
 
@@ -21,27 +18,35 @@
   </div>
 <% end %>
 
-<h4>Playoffs</h4>
-<p>Hover over a match to view time information, you can also click on a match to go to the page for that match. Always trust the individual match pages as the final source of information, the brackets may ocasionally be drawn wrong</p>
+<div class="tab-content">
+  <div class="tab-pane active" id="schedule">
+    <h4>Playoffs</h4>
+    <p>Hover over a match to view time information, you can also click on a match to go to the page for that match. Always trust the individual match pages as the final source of information, the brackets may ocasionally be drawn wrong</p>
 
-<% @brackets.each do |matches_by_round| %>
-  <h4>Bracket</h4>
-  <div class="Bracket">
-    <%- matches_by_round.each do |round, matches| %>
-      <ul class="round round-<%= round %>">
-        <%- matches.each_with_index do |m, i| %>
-          <% if round == 1 && (!m.home_participant || !m.away_participant) %>
-            <li class="game game-bye game-top">&nbsp;</li>
-            <li class="game game-bye game-spacer">&nbsp;</li>
-            <li class="game game-bye game-bottom ">&nbsp;</li>
-          <% else %>
-            <%= render partial: "seasons/tournament_match", locals: {m: m} %>
-          <% end %>
-          <% unless i == matches.length - 1 %>
-            <li class="spacer">&nbsp;</li>
-          <% end %>
+    <% @brackets.each do |matches_by_round| %>
+      <h4>Bracket</h4>
+      <div class="Bracket">
+        <%- matches_by_round.each do |round, matches| %>
+          <ul class="round round-<%= round %>">
+            <%- matches.each_with_index do |m, i| %>
+              <% if round == 1 && (!m.home_participant || !m.away_participant) %>
+                <li class="game game-bye game-top">&nbsp;</li>
+                <li class="game game-bye game-spacer">&nbsp;</li>
+                <li class="game game-bye game-bottom ">&nbsp;</li>
+              <% else %>
+                <%= render partial: "seasons/tournament_match", locals: {m: m} %>
+              <% end %>
+              <% unless i == matches.length - 1 %>
+                <li class="spacer">&nbsp;</li>
+              <% end %>
+            <% end %>
+          </ul>
         <% end %>
-      </ul>
+      </div>
     <% end %>
   </div>
-<% end %>
+  <div class="tab-pane" id="rules">
+    <h2>Rules</h2>
+    <%= raw @season.rules %>
+  </div>
+</div>

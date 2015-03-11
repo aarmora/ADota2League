@@ -8,6 +8,8 @@ gem 'nokogiri'
 gem 'rails-observers'
 gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 gem 'browser'
+gem 'paperclip'
+gem 'aws-sdk', '< 2.0'
 
 gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.git'
 
@@ -15,6 +17,10 @@ gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.gi
 gem 'omniauth-steam'
 gem 'omniauth-bnet'
 gem 'omniauth-twitter'
+
+# WYSIWYG
+gem 'summernote-rails'
+gem 'font-awesome-rails' # required???
 
 # Misc APIS
 gem 'twitter'

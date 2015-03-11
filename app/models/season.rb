@@ -5,7 +5,7 @@ class Season < ActiveRecord::Base
   has_many :permissions, :class_name => "Permission", :foreign_key => "season_id", :dependent => :delete_all
 
   enum season_type: [ :round_robin, :single_elim, :double_elim ]
-  attr_accessible :title, :league_id, :registration_open, :active, :late_fee_start, :price_cents, :late_price_cents, :exclusive_group, :start_date, :challonge_url, :description, :team_tourney, :season_type, :as => :admin
+  attr_accessible :title, :league_id, :registration_open, :active, :late_fee_start, :price_cents, :late_price_cents, :exclusive_group, :start_date, :challonge_url, :description, :team_tourney, :season_type, :rules, :as => :admin
 
   def current_price
     self.late_fee_start && self.late_fee_start < Time.now ? self.late_price_cents : self.price_cents

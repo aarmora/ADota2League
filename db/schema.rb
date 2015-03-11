@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303234044) do
+ActiveRecord::Schema.define(version: 20150309185416) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "match_id",                limit: 4
+    t.integer  "player_id",               limit: 4,   null: false
+    t.string   "attachment_file_name",    limit: 255
+    t.string   "attachment_content_type", limit: 255
+    t.integer  "attachment_file_size",    limit: 4
+    t.datetime "attachment_updated_at"
+  end
 
   create_table "games", force: :cascade do |t|
     t.integer  "match_id",             limit: 4
@@ -213,6 +222,7 @@ ActiveRecord::Schema.define(version: 20150303234044) do
     t.boolean  "solo_league",       limit: 1,     default: false
     t.integer  "season_type",       limit: 4,     default: 0,     null: false
     t.boolean  "team_tourney",      limit: 1,     default: true
+    t.text     "rules",             limit: 65535
   end
 
   create_table "solo_league_matches", force: :cascade do |t|

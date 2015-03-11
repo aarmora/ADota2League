@@ -1,6 +1,19 @@
 class Match < ActiveRecord::Base
   has_many :games, :dependent => :destroy
   has_many :matchcomments, :dependent => :destroy
+  has_many :attachments, :dependent => :destroy
+    def attachments_array=(data)
+      user_id = data[:user_id]
+      array = data[:files]
+      puts data.inspect
+      if array.kind_of?(Array)
+        array.each do |file|
+          attachments.build(:attachment => file, :player_id => user_id)
+        end
+      else
+        attachments.build(:attachment => array, :player_id => user_id)
+      end
+    end
   belongs_to :home_participant, polymorphic: true
   belongs_to :away_participant, polymorphic: true
   belongs_to :season
@@ -10,7 +23,7 @@ class Match < ActiveRecord::Base
   # TODO: This is wrong since date should be UTC or whatever
   scope :future, -> {where "date > ?", Time.zone.now }
   scope :scored, -> {where "(home_score IS NOT NULL AND home_score > 0) OR (away_score IS NOT NULL AND away_score > 0)"}
-  attr_accessible :home_score, :away_score, :caster_id, :forfeit, :date, :reschedule_time, :as => [:admin, :captain]
+  attr_accessible :home_score, :away_score, :caster_id, :forfeit, :date, :reschedule_time, :attachments_array, :as => [:admin, :captain]
   attr_accessible :home_participant_id, :away_participant_id, :lobby_password, :week, :season_id, :as => :admin
 
   # We could use a uniqueness validator, but since we have home and away, it wouldn't work so well

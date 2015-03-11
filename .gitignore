@@ -17,6 +17,9 @@ config/database.yml
 /tmp
 */.DS_Store
 
+# Ignore Paperclip uploads
+/public/system
+
 # Ignore application configuration
 /config/application.yml
 /config/ec2.yml

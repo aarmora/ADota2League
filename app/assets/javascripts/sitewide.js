@@ -1,6 +1,9 @@
 $(document).ready(function() {
-    // JQuery Tooltips
-    $('[data-toggle=tooltip]').tooltip();
+
+    /* Summernote WYSIWYG initializer */
+    $('[data-provider="summernote"]').each(function(){
+      $(this).summernote({});
+    });
 
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();

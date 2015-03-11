@@ -118,6 +118,26 @@
 		</div>
 	</div>
 
+	<hr>
+
+		<% if @match.attachments.count > 0 %>
+			<div class="row">
+				<h4>Files</h4>
+				<%- @match.attachments.each do |item| %>
+					<%= link_to item.attachment_file_name, item.attachment.url %><br>
+				<% end %>
+			</div>
+		<% end %>
+		<% if (Permissions.can_edit?(@match) || @can_edit) && @match.date && @match.date > Time.now - 1.week && @match.date < Time.now + 1.week && @match.home_participant && @match.away_participant %>
+			<div class="row">
+				<b>Upload replay and/or win screen</b> (< 1.5MB)
+				<%= form_for @match, :html => { :multipart => true } do |form| %>
+				  <%= form.file_field :attachments_array %>
+				  <%= form.submit %>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
 
 
 	<hr>

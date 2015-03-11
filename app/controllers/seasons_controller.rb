@@ -3,8 +3,13 @@ class SeasonsController < ApplicationController
 
   def index
   	# TODO: this is a hack, set it explicitly to prevent the DB call here
-    params[:id] = Season.where(:active => true).first.id
-    show
+    season = Season.where(:active => true).first
+    params[:id] = season.id if season
+    if season
+      show
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -21,41 +26,45 @@ class SeasonsController < ApplicationController
 
   def show
     @current_tab = 'seasons'
-    @seasons = Season.all
-    @season = @seasons.detect {|season| season.id == params[:id].to_i}
+    @season = Season.find_by(id: params[:id])
 
-    if @season.nil?
-      redirect_to seasons_path and return
-    end
+    respond_to do |format|
+        format.json { render :json => @season }
+        format.html do
+          if @season.nil?
+            redirect_to seasons_path and return
+          end
 
-    # Check if it's a tournament or round robin for determining what to render
-    if @season.round_robin? || !@season.tournament_started?
-      @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
+          # Check if it's a tournament or round robin for determining what to render
+          if @season.round_robin? || !@season.tournament_started?
+            @week_num = params[:week].to_i == 0 ? @season.matches.maximum(:week) : params[:week].to_i
 
-      # we always need the above, only run all the queries if we need to rebuild the cache or it's an admin or users need to see their individual check in
-      @no_cache = Permissions.can_view?(@season) || @season.check_in_available?
-      if @no_cache || !fragment_exist?("seasonPage-" + params[:id].to_s)
-        # Cue the permission system to load the divisions if we might need those
-        Permissions.match_captain_permissions_off
-        Permissions.load_team_divisions_for_season(@season.id) unless Permissions.can_edit?(@season) || !Permissions.can_view?(@season)
-        generate_season_data
+            # we always need the above, only run all the queries if we need to rebuild the cache or it's an admin or users need to see their individual check in
+            @no_cache = Permissions.can_view?(@season) || @season.check_in_available?
+            if @no_cache || !fragment_exist?("seasonPage-" + params[:id].to_s)
+              # Cue the permission system to load the divisions if we might need those
+              Permissions.match_captain_permissions_off
+              Permissions.load_team_divisions_for_season(@season.id) unless Permissions.can_edit?(@season) || !Permissions.can_view?(@season)
+              generate_season_data
 
-        # Tournaments hijack the division field for seedings, so don't use it
-        @teams_by_division = {foo: @teams_by_division.values.flatten } unless @season.round_robin?
-      end
-      render :action => 'show' # explicitly needed because index calls this method and expects it to render
-    else
-      if @season.single_elim?
-        @brackets = [@season.matches.includes(:home_participant, :away_participant, :caster).group_by(&:week)]
-      elsif @season.double_elim?
-        matches = @season.matches.includes(:home_participant, :away_participant, :caster)
-        loser_bracket, winner_bracket = matches.partition { |m| !m.winner_match_id.nil? && m.loser_match_id.nil? }
-        @brackets = [winner_bracket.group_by(&:week), loser_bracket.group_by(&:week)]
-      end
+              # Tournaments hijack the division field for seedings, so don't use it
+              @teams_by_division = {foo: @teams_by_division.values.flatten } unless @season.round_robin?
+            end
+            render :action => 'show' # explicitly needed because index calls this method and expects it to render
+          else
+            if @season.single_elim?
+              @brackets = [@season.matches.includes(:home_participant, :away_participant, :caster).group_by(&:week)]
+            elsif @season.double_elim?
+              matches = @season.matches.includes(:home_participant, :away_participant, :caster)
+              loser_bracket, winner_bracket = matches.partition { |m| !m.winner_match_id.nil? && m.loser_match_id.nil? }
+              @brackets = [winner_bracket.group_by(&:week), loser_bracket.group_by(&:week)]
+            end
 
 
-      # deal with grouping by loser / winner bracket
-      render "seasons/show_playoff"
+            # deal with grouping by loser / winner bracket
+            render "seasons/show_playoff"
+          end
+        end
     end
   end
 
