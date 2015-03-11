@@ -21,6 +21,7 @@ Ad2l::Application.routes.draw do
   end
 
   get 'register' =>  'register#new'
+  get 'tweet_and_follow' => 'register#tweet_and_follow'
 
   get "schedule" => 'seasons#index'
 
@@ -50,6 +51,7 @@ Ad2l::Application.routes.draw do
 
   post 'auth/steam/callback' => 'authentication#steam_callback'
   get 'auth/bnet/callback' => 'authentication#bnet_callback'
+  get 'auth/twitter/callback' => 'authentication#twitter_callback'
   get 'logout' => 'authentication#logout'
 
   get 'contact', :to => 'welcome#community', :as => 'contact'

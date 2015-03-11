@@ -27,7 +27,21 @@ class AuthenticationController < ApplicationController
     generic_callback
   end
 
-  def generic_callback
+  def twitter_callback
+    auth = request.env['omniauth.auth']
+    @data = {
+      handle: auth.info['nickname'],
+      uid: auth.uid,
+      timestamp: Time.now,
+      auth_token: auth['credentials']['token'],
+      auth_secret: auth['credentials']['secret']
+    }
+
+    generic_callback(false)
+    redirect_to "/tweet_and_follow"
+  end
+
+  def generic_callback(redirect = true)
     session[:current_user] ||= {}
     session[:current_user][request.env['omniauth.auth'].provider.to_sym] = @data
 
@@ -53,9 +67,15 @@ class AuthenticationController < ApplicationController
       @current_user.save!
     end
 
+    # Twitter Related updates
+    if @current_user && session[:current_user] && session[:current_user][:twitter]
+      @current_user.twitter = session[:current_user][:twitter][:handle]
+      @current_user.save!
+    end
+
     session[:current_user][:id] = @current_user.id
 
-    redirect_to request.env['omniauth.origin'] || root_path
+    redirect_to request.env['omniauth.origin'] || root_path if redirect
   end
 
   def logout

@@ -14,6 +14,7 @@
   <%= javascript_include_tag "application" %>
   <%= javascript_tag "const AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
   <%= javascript_tag "const USER_TZ = '#{user_js_tz_name}';" %>
+  <%= javascript_tag "const RAILS_ENV = '#{Rails.env}';"%>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.6/select2.js"></script>
   <%= csrf_meta_tags %>
 </head>
@@ -76,7 +77,7 @@
 				<%= link_to "Home", root_path %>
 			</li>
 			<li <%if @current_tab == 'seasons'%>class="dropdown active"<%else%>class="dropdown"<%end%>>
-				<%= link_to "Schedule", seasons_path, :class => "dropdown-toggle", :"data-toggle" => "dropdown" %>
+				<%= link_to "Tournaments", seasons_path, :class => "dropdown-toggle", :"data-toggle" => "dropdown" %>
         <ul class="dropdown-menu">
 					<%- @active_seasons.each do |season| %>
 	        	<li><%= link_to season.title, season %></li>
@@ -138,7 +139,7 @@
 	</div>
 	<div id="copyright" class="container">
 		<p>Copyright (c) <%= Time.now.year %> AmateurDota2League.com. All rights reserved. | <a href="http://www.steampowered.com/">Powered by Steam</a></p>
-    <p><a href="https://twitter.com/ADota2L" class="twitter-follow-button" data-show-count="true">Follow @ADota2L</a>
+    <p><a href="https://twitter.com/<%= DOTA_TWITTER_ACCOUNT %>" class="twitter-follow-button" data-show-count="true">Follow @<%= DOTA_TWITTER_ACCOUNT %></a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FADota2L&amp;width=100&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=false&amp;height=21&amp;appId=239030119468888" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
 	</div>

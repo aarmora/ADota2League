@@ -16,6 +16,7 @@
 //= require jquery-ui/datepicker
 //= require jquery-ui/sortable
 //= require bootstrap-sprockets
+//= require summernote
 //= require best_in_place
 //= require best_in_place_datetime
 //= require dataTables/jquery.dataTables

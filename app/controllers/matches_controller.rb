@@ -90,6 +90,14 @@ class MatchesController < ApplicationController
       # TODO: send mail to both captains?
     end
 
+    # Alter any uploaded files to include the current user
+    if params[:match][:attachments_array]
+      params[:match][:attachments_array] = {
+        user_id: @current_user.id,
+        files: params[:match][:attachments_array]
+      }
+    end
+
     # Log changes for later
     changes = {}
     params[:match].map do |item, value|
@@ -99,7 +107,7 @@ class MatchesController < ApplicationController
     respond_to do |format|
       if @match.update_attributes(params[:match], :as => @current_user.role_for_object(@match))
         @match.create_auto_match_comments(changes, @current_user)
-        format.html { redirect_to(@match, :notice => 'Player was successfully updated.') }
+        format.html { redirect_to(@match, :notice => 'Match was successfully updated.') }
         format.json { respond_with_bip(@match) }
       else
         format.html { render :action => "show" }

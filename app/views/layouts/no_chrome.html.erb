@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%=favicon_link_tag 'ad2l.ico'%>
+
+  <title><%= content_for?(:page_subtitle) ? yield(:page_subtitle) + " - " : "" %>Amateur Dota 2 League</title>
+   <meta name="description" content="
+  <%= content_for?(:meta_description) ? yield(:meta_description) : "The Amateur Dota 2 League enables non-professional DotA players to play in a competitive environment with both season-based and weekend tournaments." %>">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_tag "const AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+  <%= javascript_tag "const USER_TZ = '#{user_js_tz_name}';" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="main" class="container" style="margin-top: 100px; padding: 100px;">
+    <%= render :partial => "layouts/flash_messages" %>
+    <%= yield %>
+  </div>
+  <div id="copyright" class="container">
+    <p>Copyright (c) <%= Time.now.year %> AmateurDota2League.com. All rights reserved. | <a href="http://www.steampowered.com/">Powered by Steam</a></p>
+    <p><a href="https://twitter.com/<%= DOTA_TWITTER_ACCOUNT %>" class="twitter-follow-button" data-show-count="true">Follow @<%= DOTA_TWITTER_ACCOUNT %></a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FADota2L&amp;width=100&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=false&amp;height=21&amp;appId=239030119468888" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+  </div>
+</body>
+</html>

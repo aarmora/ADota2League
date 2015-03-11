@@ -1,4 +1,3 @@
-
 $('input.filter').on('keyup', function() {
     var rex = new RegExp($(this).val(), 'i');
     $('.searchable tr').hide();
@@ -23,5 +22,16 @@ $(document).ready(function(){
     $(this).find("li input").each(function() {
       $(this).val($(this).closest("li").index());
     });
+  });
+
+  $(".js-update-rules").on("click", ".btn", function(e) {
+    var seasonId = $(e.delegateTarget).find("select").val();
+    if (seasonId) {
+      $.get("/seasons/" + seasonId + ".json", {}, function(data, status) {
+        if (data.rules) {
+          $('#season_rules').code(data.rules);
+        }
+      });
+    }
   });
 });

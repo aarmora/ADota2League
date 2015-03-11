@@ -196,6 +196,13 @@ ol, ul {
     }
   }
 
+  // When people tap on mobile, make it pop more against the background
+  @media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu > li > a {
+      color: $white;
+    }
+  }
+
   .navbar-nav > .active > a,
   .navbar-nav > .active > a:hover,
   .navbar-nav > .active > a:focus {
