@@ -12,6 +12,7 @@
 <% end %>
 
 <% cache_unless @no_cache, "seasonPage-" + @season.id.to_s, skip_digest: true do %>
+    <h2><%= @season.title %></h2>
     <div class="tab-content">
         <div class="tab-pane active" id="schedule">
             <% if Permissions.can_view?(@season) %>
