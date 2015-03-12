@@ -13,7 +13,7 @@
 <div class="col-md-12">
     <div><h2>Season <%=@ih_season_id%> - Inhouse Leaderboard </h2> </div>
     <div><h4>Want to play?  View the <button class="btn-primary btn" data-toggle="modal" data-target="#inhouseModal">Rules</button> and join the <%= link_to "AD2L Steam Group", "http://steamcommunity.com/groups/AD2L", :target => "blank", :class => "btn-primary btn"%>!</h4></div>
-    <div>The points formula where GP is games played.(10*(wins/GP) + (k(.02)-d(.01)+a(.01)))(gp/gp+10)</div>
+    <div>Each win counts for 5 points and each loss costs you 3.</div>
     <div>Contact <%= link_to "Submaniac", "/players/2974" %> or <%=link_to "ThatPhageGuy", "/players/5351" %> for further explanation.</div>
 	<table id="datatableInhouse" class="table table-hover table-bordered" >
         <thead>
@@ -50,7 +50,7 @@
                     </td>
                     <td>
                     	<%if player.games_played > 4%>
-                        	<% this = (10*(player.wins.to_f / player.games_played) + ( (player.kills * 0.02 ) + (player.assists * 0.01 ) - (player.deaths * 0.01 ) ))*(player.games_played.to_f / (player.games_played + 10))%>
+                        	<% this = (5*(player.wins.to_f)) - (3*(player.games_played.to_f - player.wins.to_f ) )%>
                         	<%=this.round(2)%>
                         <%end%>
                     </td>
