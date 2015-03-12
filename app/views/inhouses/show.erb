@@ -50,7 +50,7 @@
                     </td>
                     <td>
                     	<%if player.games_played > 4%>
-                        	<% this = (5*(player.wins.to_f)) - (3*(player.games_played.to_f - player.wins.to_f ) )%>
+                        	<% this = (5*(player.wins.to_f)) - (2*(player.games_played.to_f - player.wins.to_f ) )%>
                         	<%=this.round(2)%>
                         <%end%>
                     </td>
