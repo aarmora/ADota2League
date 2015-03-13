@@ -72,13 +72,16 @@ class TeamSeasonsController < ApplicationController
         #This is the better way to do it, when the search is working.
         #result = twitter_client.search("amateurdota2league.com @adota2l @namecheap from:#{session[:current_user][:twitter][:handle]}", count: 10).take(1)
         results = twitter_client.user_timeline(session[:current_user][:twitter][:handle], count: 10)
+        puts results
         tweeted = results.any? do |tweet|
           # TODO: Read the uris to check for the url entity
-          puts tweet.inspect
-          puts.tweet.uris
-          tweet.text.include?('@adota2l') && tweet.text.include?('@namecheap') #&& tweet.text.include? 'amateurdota2league.com' ##This last part doesn't work because twitter changes the link
+          urls = tweet.urls
+          #Just in case there is more than one link
+          tweet_with_url = urls.any? do |url|
+            url.display_url.include?('amateurdota2league.com')
+          end
+          tweet.text.include?('@adota2l') && tweet.text.include?('@namecheap') && tweet_with_url ##This last part doesn't work because twitter changes the link
         end
-        #tweeted = !result.empty?
       rescue
         @twitter_error = true
       end
