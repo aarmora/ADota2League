@@ -60,7 +60,6 @@ class TeamSeasonsController < ApplicationController
 
   private def qualifies_for_twitter_discount?
     if session[:current_user][:twitter]
-      puts "twittered"
       twitter_client = Twitter::REST::Client.new do |config|
         config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
         config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
@@ -69,17 +68,15 @@ class TeamSeasonsController < ApplicationController
       end
 
       begin
-        puts "begin"
         followed = twitter_client.friendship?(twitter_client.user, DOTA_TWITTER_ACCOUNT)
         #This is the better way to do it, when the search is working.
-        #result = twitter_client.search("amateurdota2league.com @adota2l @namecheap from:#{session[:current_user][:twitter][:handle]}", count: 10).take(1) 
+        #result = twitter_client.search("amateurdota2league.com @adota2l @namecheap from:#{session[:current_user][:twitter][:handle]}", count: 10).take(1)
         results = twitter_client.user_timeline(session[:current_user][:twitter][:handle], count: 10)
-        tweeted = false
-        results.each do |tweet|
-
-          if (tweet.text.include? '@adota2l') && (tweet.text.include? '@namecheap') #&& tweet.text.include? 'amateurdota2league.com' ##This last part doesn't work because twitter changes the link
-            tweeted = true
-          end
+        tweeted = results.any? do |tweet|
+          # TODO: Read the uris to check for the url entity
+          puts tweet.inspect
+          puts.tweet.uris
+          tweet.text.include?('@adota2l') && tweet.text.include?('@namecheap') #&& tweet.text.include? 'amateurdota2league.com' ##This last part doesn't work because twitter changes the link
         end
         #tweeted = !result.empty?
       rescue
