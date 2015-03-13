@@ -27,7 +27,7 @@ config/database.yml
 *.pem
 
 #ignore gemfile.lock
-Gemfile.lock
+#Gemfile.lock
 
 # Ignore SASS cache
 /.sass-cache
