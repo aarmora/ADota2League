@@ -71,9 +71,17 @@ class TeamSeasonsController < ApplicationController
       begin
         puts "begin"
         followed = twitter_client.friendship?(twitter_client.user, DOTA_TWITTER_ACCOUNT)
-        #result = twitter_client.search("@adota2l from:#{session[:current_user][:twitter][:handle]}", count: 10).take(1) 
-        puts twitter_client.search("amateurdota2league.com @adota2l @namecheap from:#{session[:current_user][:twitter][:handle]}", :count => 10, :result_type => "recent").take(1)
-        tweeted = !result.empty?
+        #This is the better way to do it, when the search is working.
+        #result = twitter_client.search("amateurdota2league.com @adota2l @namecheap from:#{session[:current_user][:twitter][:handle]}", count: 10).take(1) 
+        results = twitter_client.user_timeline(session[:current_user][:twitter][:handle], count: 10)
+        tweeted = false
+        results.each do |tweet|
+
+          if (tweet.text.include? '@adota2l') && (tweet.text.include? '@namecheap') #&& tweet.text.include? 'amateurdota2league.com' ##This last part doesn't work because twitter changes the link
+            tweeted = true
+          end
+        end
+        #tweeted = !result.empty?
       rescue
         @twitter_error = true
       end
