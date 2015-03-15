@@ -19,10 +19,10 @@ class UserMailer < ActionMailer::Base
 
   def season4_reminder(player, playerz)
     unless player.email.nil?
-      @player = player
+      @player = playerz
       puts player.email
       puts player.id
-      mail(to: player.email, subject: "AD2L Solo Tourney!")
+      mail(to: player.email, subject: "Season 7 registration is open!")
     end
   end
 

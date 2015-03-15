@@ -115,5 +115,21 @@ class PlayersController < ApplicationController
 
   end
 
+  skip_before_filter  :verify_authenticity_token
+  def no_emails
+
+    @player = Player.find(params[:id])
+    if params[:unsubscribe_key] == @player.unsubscribe_key
+      @player.receive_emails = false
+      @player.save!
+      flash[:notice] = "You have been successfully unsubscribed from future emails!" 
+      redirect_to @player
+    else
+      flash[:notice] = "Doesn't look like you have permission to unsubscribe for this player." 
+      redirect_to @player
+    end
+
+  end
+
 
 end

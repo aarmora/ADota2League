@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309185416) do
+ActiveRecord::Schema.define(version: 20150315211154) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "match_id",                limit: 4
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 20150309185416) do
     t.string   "country",            limit: 255
     t.boolean  "receive_emails",     limit: 1,        default: true
     t.string   "twitter",            limit: 255
+    t.string   "unsubscribe_key",    limit: 255
   end
 
   create_table "players_teams", force: :cascade do |t|

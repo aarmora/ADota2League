@@ -69,6 +69,8 @@ Ad2l::Application.routes.draw do
 
   post 'add_player' => 'teams#add_player'
 
+  get 'no_emails' => "players#no_emails"
+
   #player comments
   get 'player_comments_partial' => 'players#player_comments_partial'
   post 'player_comment' => 'players#create_player_comment'
