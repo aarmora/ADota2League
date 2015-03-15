@@ -79,11 +79,12 @@ Ad2l::Application.configure do
       :sender_address => %{"AD2L Bug Notifier" <amateurdota2league@gmail.com>},
       :exception_recipients => %w{charlie.croom@gmail.com, jbhansen84@gmail.com, amateurdota2league@gmail.com},
       :normalize_subject => true
-    },
-    :slack => {
-     :webhook_url => "[https://hooks.slack.com/services/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]",
-     :channel => "#ad2l_exceptions"
     }
+    #,
+    #:slack => {
+    # :webhook_url => "[https://hooks.slack.com/services/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]",
+    # :channel => "#ad2l_exceptions"
+    #}
 
   # Configure CORS headers for all requests so that the caching server serves them with CORS headers
   config.middleware.insert_before 0, Rack::Cors, :logger => (-> { Rails.logger }) do
