@@ -21,6 +21,14 @@ GIT
     capistrano-linked-files (0.1.0)
       capistrano (~> 3.1)
 
+GIT
+  remote: https://github.com/smartinez87/exception_notification.git
+  revision: b5d7262cb1f896f40c7c8705304f79fa631e912c
+  specs:
+    exception_notification (4.1.0.rc1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -120,9 +128,6 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     equalizer (0.0.9)
     erubis (2.7.0)
-    exception_notification (4.0.1)
-      actionmailer (>= 3.0.4)
-      activesupport (>= 3.0.4)
     excon (0.44.4)
     execjs (2.4.0)
     faraday (0.8.9)
@@ -375,7 +380,7 @@ DEPENDENCIES
   coffee-script-source (= 1.8.0)
   dalli
   dota!
-  exception_notification
+  exception_notification!
   figaro
   font-awesome-rails
   icalendar

@@ -42,8 +42,13 @@ group :development do
   gem 'coffee-script-source', '1.8.0' #Windows doesn't like CS 1.9
 end
 
+#Trying to debug slack notifications
+#gem 'exception_notification', :git => 'https://github.com/smartinez87/exception_notification.git'
+#gem 'slack-notifier'#, :git => 'git://github.com/rails/exception_notification.git'
+
 group :production do
-  gem "exception_notification"
+  gem "exception_notification", :git => 'https://github.com/smartinez87/exception_notification.git'
+  gem 'slack-notifier'
   gem 'therubyracer' # execjs
   gem "oink" # for doing memory analysis
   gem 'memcachier' # Old style for Heroku
@@ -51,7 +56,6 @@ group :production do
   gem 'aws-sdk', '< 2.0'
   gem 'mandrill-api'
   gem 'redis-rails'
-  gem 'slack-notifier'
   gem 'unicorn'
   gem 'rails_12factor'
   gem 'rack-cors', :require => 'rack/cors'
