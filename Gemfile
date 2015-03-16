@@ -10,6 +10,7 @@ gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 gem 'browser'
 gem 'paperclip'
 
+# git for checkbox yes/no live updating fix
 gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.git'
 
 # use Omniauth gems for authenticating users
@@ -42,13 +43,10 @@ group :development do
   gem 'coffee-script-source', '1.8.0' #Windows doesn't like CS 1.9
 end
 
-#Trying to debug slack notifications
-#gem 'exception_notification', :git => 'https://github.com/smartinez87/exception_notification.git'
-#gem 'slack-notifier'#, :git => 'git://github.com/rails/exception_notification.git'
-
 group :production do
-  gem "exception_notification"#, :git => 'https://github.com/smartinez87/exception_notification.git'
-  #gem 'slack-notifier'
+  # Using git for slack notifier support
+  gem "exception_notification", :git => 'https://github.com/smartinez87/exception_notification.git'
+  gem 'slack-notifier'
   gem 'therubyracer' # execjs
   gem "oink" # for doing memory analysis
   gem 'memcachier' # Old style for Heroku
