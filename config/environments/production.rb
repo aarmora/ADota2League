@@ -63,7 +63,8 @@ Ad2l::Application.configure do
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     },
     s3_storage_class: :reduced_redundancy,
-    url: ':s3_domain_url'
+    url: ':s3_domain_url',
+    :path => "/:class/:attachment/:id_partition/:style/:filename"
   }
 
   ActionMailer::Base.smtp_settings = {
