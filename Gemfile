@@ -47,8 +47,8 @@ end
 #gem 'slack-notifier'#, :git => 'git://github.com/rails/exception_notification.git'
 
 group :production do
-  gem "exception_notification", :git => 'https://github.com/smartinez87/exception_notification.git'
-  gem 'slack-notifier'
+  gem "exception_notification"#, :git => 'https://github.com/smartinez87/exception_notification.git'
+  #gem 'slack-notifier'
   gem 'therubyracer' # execjs
   gem "oink" # for doing memory analysis
   gem 'memcachier' # Old style for Heroku
