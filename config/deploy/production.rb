@@ -15,7 +15,7 @@
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-set :nginx_server_name, 'amateurdota2league.com www.amateurdota2league.com dota.playon.gg dota.playongg.com'
+set :nginx_server_name, 'beta.amateurdota2league.com amateurdota2league.com www.amateurdota2league.com dota.playon.gg dota.playongg.com'
 
 ec2_role :web,
   ssh_options: {
