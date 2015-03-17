@@ -30,9 +30,6 @@ ec2_role :app,
     keys: [File.join(Dir.pwd, "./config/playon.pem")]
   }
 
-# set :ssh_options, {:auth_methods => "publickey"}
-# set :ssh_options, {:keys => [File.join(Dir.pwd, "../chef/playon.pem")]}
-
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a

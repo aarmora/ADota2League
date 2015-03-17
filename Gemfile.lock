@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/bernat/best_in_place.git
-  revision: fd40a44656ef01425799d7e34e848057887c324e
+  revision: 53ef06ab47769d7af0def4c1bd2caf6db197c708
   specs:
     best_in_place (3.0.3)
       actionpack (>= 3.2)
@@ -73,6 +73,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.7)
     arel (6.0.0)
+    attr_required (1.0.0)
     autoprefixer-rails (5.1.7)
       execjs
       json
@@ -152,7 +153,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     icalendar (2.2.2)
-    jquery-datatables-rails (3.1.1)
+    jquery-datatables-rails (3.2.0)
       actionpack (>= 3.1)
       jquery-rails
       railties (>= 3.1)
@@ -234,6 +235,10 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paypal-express (0.8.1)
+      activesupport (>= 2.3)
+      attr_required (>= 0.0.5)
+      rest-client
     protected_attributes (1.0.9)
       activemodel (>= 4.0.1, < 5.0)
     rack (1.6.0)
@@ -256,7 +261,7 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.5)
+    rails-dom-testing (1.0.6)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
@@ -375,11 +380,11 @@ DEPENDENCIES
   autoprefixer-rails
   aws-sdk (< 2.0)
   best_in_place (~> 3.0)!
-  bootstrap-sass (~> 3.3.3)
+  bootstrap-sass
   bracket_tree
   browser
   cap-ec2
-  capistrano (~> 3.1)
+  capistrano (~> 3.4)
   capistrano-bundler
   capistrano-linked-files!
   capistrano-rails
@@ -407,6 +412,7 @@ DEPENDENCIES
   omniauth-steam
   omniauth-twitter
   paperclip
+  paypal-express
   protected_attributes
   rack-cors
   rails (~> 4.2)

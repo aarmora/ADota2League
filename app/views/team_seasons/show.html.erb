@@ -11,7 +11,7 @@
   <%= form_for @ts do |f| %>
     <h3><%= @ts.season.title %> Payment</h3>
 
-    <p>To complete your signup, you'll need to pay the registration fee by clicking on the nifty little button below. If you are unable to pay using a credit card, please contact one of the admins and we'll see what alternate methods might be available to you.</p>
+    <p>To complete your signup, you'll need to pay the registration fee by clicking on the nifty little button below. If you are unable to pay using a credit card or Paypal/balance, please contact one of the admins and we'll see what alternate methods might be available to you.</p>
 
     <p>If you don't have a card handy at the moment, you can always return to pay later by logging in and returning to this URL!</p>
 
@@ -25,7 +25,7 @@
     </div>
 
 
-    <% if (@ts.season.current_price - @discount_amount > 0) %>
+    <% if @ts.season.current_price - @discount_amount > 0 %>
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
               data-image="<%= path_to_image "AD2L.png" %>"
@@ -38,6 +38,7 @@
         <% if @discount_amount === 0 %>
           <a href="/auth/twitter" onclick="window.open('/auth/twitter', 'newwindow', 'width=800, height=500'); return false;" class="btn btn-primary">Follow AD2L on Twitter and tweet for $1 off!</a>
         <% end %>
+        <%= link_to "Pay with Paypal (Beta)", paypal_team_season_url(@ts), class: "btn btn-primary" %>
     <% else %>
       <%= link_to "Complete Registration", @ts, method: :put, class: "btn btn-primary", role: "button" %>
     <% end %>

@@ -33,7 +33,14 @@ Ad2l::Application.routes.draw do
     end
   end
 
-  resources :team_seasons, :only => [:create, :show, :update, :destroy]
+  resources :team_seasons, :only => [:create, :show, :update, :destroy] do
+    member do
+      get 'paypal' => 'team_seasons#paypal'
+      get 'paypal_success' => 'team_seasons#paypal_callback_success'
+      get 'paypal_error' => 'team_seasons#paypal_callback_error'
+    end
+  end
+
   resources :matches do
     member do
       get 'accept_reschedule' => 'matches#accept_reschedule'

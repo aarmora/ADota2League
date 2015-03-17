@@ -53,6 +53,69 @@ class TeamSeasonsController < ApplicationController
     discount_amount
   end
 
+  def paypal
+    @ts = TeamSeason.find(params[:id])
+    head :forbidden and return unless Permissions.can_edit? @ts.participant
+
+    paypal_request = generate_paypal_request
+    payment_request = generate_paypal_payment_request
+    paypal_response = paypal_request.setup(
+      payment_request,
+      paypal_success_team_season_url(@ts),
+      paypal_error_team_season_url(@ts),
+      {
+        :no_shipping => true,
+        :pay_on_paypal => true,
+        :allow_note => false
+      }
+    )
+    redirect_to paypal_response.redirect_uri
+  end
+
+  def generate_paypal_request
+    @paypal_request ||= Paypal::Express::Request.new(
+      :username   => ENV['PAYPAL_USERNAME'],
+      :password   => ENV['PAYPAL_PASSWORD'],
+      :signature  => ENV['PAYPAL_SIGNATURE']
+    )
+  end
+
+  def generate_paypal_payment_request
+    price = (@ts.season.current_price - discount_amount) / 100.0
+    @payment_request ||= Paypal::Payment::Request.new(
+      :currency_code => :USD, # if nil, PayPal use USD as default
+      :amount        => price,
+      :description => "AD2l #{@ts.season.title} Entry Fee"
+    )
+  end
+
+  def paypal_callback_success
+    @ts = TeamSeason.find(params[:id])
+    paypal_response = generate_paypal_request.checkout!(
+      params[:token],
+      params[:PayerID],
+      generate_paypal_payment_request
+    )
+    info = paypal_response.payment_info.first
+    if info.payment_status == "Success"
+      @ts.paid = true
+      @ts.price_paid_cents = paypal_response.payment_info.amount.total * 100
+      @ts.save!
+      flash[:notice] = "You have been successfully registered for " + @ts.season.title
+      redirect_to @ts.participant
+    else
+      ExceptionNotifier.notify_exception(Paypal::Exception::APIError.new, :env => request.env, :data => {:message => info}})
+      flash[:error] = "There may have been an error processing your payment. Please check your paypal records and email us."
+      redirect_to @ts.participant
+    end
+  end
+
+  def paypal_callback_error
+    @ts = TeamSeason.find(params[:id])
+    flash[:error] = "There was an error processing your payment, please try again"
+    redirect_to @ts
+  end
+
   private def discount_amount
     # memoize to preserve api calls
     @discount_amount ||= qualifies_for_twitter_discount? ? 100 : 0

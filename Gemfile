@@ -26,6 +26,7 @@ gem 'font-awesome-rails' # required???
 gem 'twitter'
 gem 'dota', :git => 'git://github.com/nashby/dota.git'
 gem 'stripe'
+gem 'paypal-express'
 gem 'icalendar' # Ical support
 gem 'kappa', '~> 1.0' # Twitch API
 
@@ -67,21 +68,21 @@ gem 'uglifier', '>= 1.0.3'
 gem 'select2-rails'
 gem 'sass-rails'
 gem 'autoprefixer-rails'
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails'
 
 # Deploy with Capistrano
-gem 'capistrano',  '~> 3.1'
+gem 'capistrano', '~> 3.4'
 gem 'capistrano-rails'
 gem 'capistrano-bundler'
 gem 'capistrano-rvm'
 gem 'cap-ec2'
 gem 'capistrano-linked-files', git: "https://github.com/jameswilliamiii/capistrano-linked-files.git"
 gem 'capistrano-unicorn-nginx'
-gem 'slackistrano'
+gem 'slackistrano', :require => nil
 # gem 'capistrano3-unicorn'
 # gem 'sepastian-capistrano3-unicorn'
 
