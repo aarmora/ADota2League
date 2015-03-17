@@ -315,6 +315,9 @@ GEM
       thor (~> 0.14)
     simple_oauth (0.2.0)
     slack-notifier (1.1.0)
+    slackistrano (0.1.6)
+      capistrano (>= 3.0.1)
+      json
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -415,6 +418,7 @@ DEPENDENCIES
   sass-rails
   select2-rails
   slack-notifier
+  slackistrano
   stripe
   summernote-rails
   therubyracer

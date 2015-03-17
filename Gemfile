@@ -81,6 +81,7 @@ gem 'capistrano-rvm'
 gem 'cap-ec2'
 gem 'capistrano-linked-files', git: "https://github.com/jameswilliamiii/capistrano-linked-files.git"
 gem 'capistrano-unicorn-nginx'
+gem 'slackistrano'
 # gem 'capistrano3-unicorn'
 # gem 'sepastian-capistrano3-unicorn'
 

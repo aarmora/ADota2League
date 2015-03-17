@@ -34,5 +34,7 @@ require 'capistrano/unicorn_nginx'
 # integrate with chef so we know where we are deploying to
 # require 'capistrano/chef'
 
+require 'slackistrano'
+
 # Load custom tasks from `lib/capistrano/tasks' if you have any defined
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
