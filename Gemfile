@@ -51,7 +51,7 @@ group :production do
   gem 'therubyracer' # execjs
   gem "oink" # for doing memory analysis
   gem 'memcachier' # Old style for Heroku
-  gem 'dalli' # Old style for Heroku
+  # gem 'dalli' # Old style for Heroku
   gem 'aws-sdk', '< 2.0'
   gem 'mandrill-api'
   gem 'redis-rails'

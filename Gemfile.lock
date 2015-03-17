@@ -124,7 +124,6 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colorize (0.7.5)
-    dalli (2.7.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     equalizer (0.0.9)
@@ -393,7 +392,6 @@ DEPENDENCIES
   challonge-api
   coffee-rails
   coffee-script-source (= 1.8.0)
-  dalli
   dota!
   exception_notification!
   figaro

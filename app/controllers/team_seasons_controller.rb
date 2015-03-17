@@ -104,7 +104,7 @@ class TeamSeasonsController < ApplicationController
       flash[:notice] = "You have been successfully registered for " + @ts.season.title
       redirect_to @ts.participant
     else
-      ExceptionNotifier.notify_exception(Paypal::Exception::APIError.new, :env => request.env, :data => {:message => info}})
+      ExceptionNotifier.notify_exception(Paypal::Exception::APIError.new, :env => request.env, :data => {:message => info})
       flash[:error] = "There may have been an error processing your payment. Please check your paypal records and email us."
       redirect_to @ts.participant
     end
