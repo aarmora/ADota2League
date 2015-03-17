@@ -37,7 +37,7 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml').push('co
 # set :keep_releases, 5
 
 namespace :deploy do
-  before :finishing, 'linked_files:upload_files'
+  after 'deploy:publishing', 'linked_files:upload_files' # Do before we restart unicorn
   # after :publishing, 'unicorn:restart'
   # after 'deploy:publishing', 'unicorn:reload'    # app IS NOT preloaded
   after 'deploy:publishing', 'deploy:restart'
