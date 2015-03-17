@@ -6,6 +6,9 @@
 <% end %>
 <% content_for :subnav do %>
     <ul class="nav nav-tabs">
+        <% if @season.registration_open %>
+            <li class="tab"><%= link_to "Register Now!", register_url %></li>
+        <% end %>
 		<li class="tab active"><a data-toggle="tab" href="#schedule">Standings and Schedule</a></li>
         <li class="tab"><a data-toggle="tab" href="#rules">Rules</a></li>
     </ul>

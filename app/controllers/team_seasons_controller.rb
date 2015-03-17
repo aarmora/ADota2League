@@ -97,7 +97,7 @@ class TeamSeasonsController < ApplicationController
       generate_paypal_payment_request
     )
     info = paypal_response.payment_info.first
-    if info.payment_status == "Success"
+    if info.payment_status == "Completed"
       @ts.paid = true
       @ts.price_paid_cents = paypal_response.payment_info.amount.total * 100
       @ts.save!
