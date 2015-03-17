@@ -1,7 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "jquery-ui-timepicker-addon.css";
-@import "datatables.css";
+@import "jquery-ui-timepicker-addon.css.scss";
+@import "datatables.css.scss";
 
 @import "theme.css.scss";
 
@@ -163,7 +163,7 @@ ol, ul {
 /* 768px -  @screen-sm-min */
 @media (min-width: 768px) {
   html {
-    background: url(/assets/dota2background.jpg) no-repeat center center fixed;
+    background: image-url("dota2background.jpg") no-repeat center center fixed;
     background-size: cover;
   }
 }
