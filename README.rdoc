@@ -26,3 +26,12 @@ As we make the scheduling and tournament system more generic:
 Implementing native single and double elimination tournaments:
 - Jquery Plugin needs tweaks (maybe cherry picks) to not hover nil teams, fix CSS class naming to not conflict with bootstrap (SUIT?), handle better inline editing callbacks
 - Double elimination needs to be implmented
+
+== Cap Notes
+- vagrant up --provider=aws
+- cap production nginx:setup
+- cap production unicorn:setup_app_config
+- cap production unicorn:setup_initializer
+- cap production linked_files:upload_files
+- Incremental:
+- cap production deploy
