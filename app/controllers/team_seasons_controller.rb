@@ -99,7 +99,7 @@ class TeamSeasonsController < ApplicationController
     info = paypal_response.payment_info.first
     if info.payment_status == "Completed"
       @ts.paid = true
-      @ts.price_paid_cents = paypal_response.payment_info.amount.total * 100
+      @ts.price_paid_cents = info.amount.total * 100
       @ts.save!
       flash[:notice] = "You have been successfully registered for " + @ts.season.title
       redirect_to @ts.participant
