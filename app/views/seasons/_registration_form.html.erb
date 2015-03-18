@@ -5,7 +5,7 @@
   <%= form_for TeamSeason.new, :id => "season_registration", :role => "form" do |f| %>
     <label>Select season:</label>
     <% participant.seasons_available_for_registration.each do |season, i| %>
-      <div class="radio">
+      <div class="radio container indent">
         <%= f.radio_button(:season_id, season.id) %>
         <%= label_tag "team_season_season_id_" + season.id.to_s do %>
           <b><%= season.title %></b> - <i><%= format_price(season.current_price) %></i><br />
@@ -15,14 +15,11 @@
             <span>Begins <%= format_datetime_month(season.start_date) %></span>
           <% end %>
         <% end %>
+        <div class="indent">
+          <p><i><%= season.description%></i></p>
+        </div>
       </div>
-      <div class="col-md-12 indent">
-        <p><i><%= season.description%></i></p>
-      </div>
-      <hr>
     <% end %>
-  	<br>
-  	<br>
     <%= f.hidden_field :participant_id, :value => participant.id %>
     <%= submit_tag "Register!", :class => "btn btn-default", data: { confirm: "Please make sure you are committed to playing before registering!  If this is an MMR tournament, remember that no one on your team can be ABOVE the stated MMR."} %>
     <a href="/auth/twitter" onclick="window.open('/auth/twitter', 'newwindow', 'width=800, height=500'); return false;" class="btn btn-primary">Follow AD2L on Twitter and tweet for $1 off!</a>
