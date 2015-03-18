@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   def load_user
     Permissions.current_user = nil
+    puts session.inspect
     # Lookup the player either by steamId (temp) or by userId (new)
     @current_user = if session[:current_user] && !session[:current_user][:id]
       # We don't know where it's stored at the moment since old sessions are lurking
