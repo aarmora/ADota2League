@@ -64,7 +64,7 @@ Ad2l::Application.routes.draw do
   get 'contact', :to => 'welcome#community', :as => 'contact'
   get 'community', :to => 'welcome#community', :as => 'community'
   get 'faq', :to => 'welcome#community', :as => 'faq'
-  get 'reg_form_partial' => 'seasons#reg_form_partial'
+  get 'reg_form_partial' => 'register#reg_form_partial'
   post 'register_caster' => "players#register_caster"
   get 'welcome/get_posts' => 'welcome#get_posts'
   post 'top_plays_email' => 'welcome#top_plays_email'

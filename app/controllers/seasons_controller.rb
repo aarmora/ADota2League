@@ -122,11 +122,6 @@ class SeasonsController < ApplicationController
     end
   end
 
-  def reg_form_partial
-    @team = Team.find(params[:team_id])
-    render :partial => "seasons/registration_form", :locals => {:participant => @team}
-  end
-
   #
   # TODO: Admin stuff that totally doesn't belong here
   #

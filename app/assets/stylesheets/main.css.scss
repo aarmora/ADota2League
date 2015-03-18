@@ -38,7 +38,7 @@ ol, ul {
 #sponsors {
   background-color: $white;
   padding: 15px;
-  height: 150px;
+  max-height: 150px;
   img {
     max-height: 120px;
     max-width: 100%;
