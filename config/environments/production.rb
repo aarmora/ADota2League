@@ -78,7 +78,7 @@ Ad2l::Application.configure do
     :email => {
       :email_prefix => "[AD2L Site] ",
       :sender_address => %{"AD2L Bug Notifier" <amateurdota2league@gmail.com>},
-      :exception_recipients => %w{charlie.croom@gmail.com, jbhansen84@gmail.com, amateurdota2league@gmail.com},
+      :exception_recipients => %w{charlie.croom@gmail.com},
       :normalize_subject => true
     },
     :slack => {
