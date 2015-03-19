@@ -74,7 +74,7 @@ GEM
     addressable (2.3.7)
     arel (6.0.0)
     attr_required (1.0.0)
-    autoprefixer-rails (5.1.7)
+    autoprefixer-rails (5.1.7.1)
       execjs
       json
     aws-sdk (1.63.0)
@@ -82,7 +82,7 @@ GEM
     aws-sdk-v1 (1.63.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
-    bootstrap-sass (3.3.4)
+    bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     bracket_tree (0.1.0)
