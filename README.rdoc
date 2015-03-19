@@ -11,7 +11,6 @@ Finally, we need to add the data from application.yml (our Dota2 API key and so 
 
 == Rails 4
 Recent migration to Rails 4 was a minimal effort update, meaning some things might not be best practices. Some things to evaluate:
-- attr_accessible to new style (Strong Paramaters)
 - config/secrets.yml
 - upgraded cookie signing (secret_key_base)
 - Web Console...do we want it?

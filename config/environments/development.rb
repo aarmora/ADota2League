@@ -34,16 +34,14 @@ Ad2l::Application.configure do
     :password       => ENV["MANDRILL_API_KEY"]
   }
 
- 
+  # Raise an error on unpermitted paramaters in development for debugging
+  config.action_controller.action_on_unpermitted_parameters = :log
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
-
-  # Raise exception on mass assignment protection for Active Record models
-  config.active_record.mass_assignment_sanitizer = :strict
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)

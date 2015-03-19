@@ -111,7 +111,7 @@ class SeasonsController < ApplicationController
     @season = Season.find(params[:id])
     head :forbidden and return unless Permissions.can_edit? @season
     respond_to do |format|
-      if @season.update_attributes(params[:season], :as => @current_user.role_for_object(@season))
+      if @season.update_attributes(season_params)
         expire_fragment("seasonPage-" + @season.id.to_s)
         format.html { redirect_to(@season, :notice => 'Season was successfully updated.') }
         format.json { respond_with_bip(@season) }
@@ -205,6 +205,14 @@ class SeasonsController < ApplicationController
     end
 
     redirect_to playoff_season
+  end
+
+  private
+
+  def season_params
+    if @current_user.role_for_object(@season) == :admin
+      params.require(:season).permit(:title, :league_id, :registration_open, :active, :late_fee_start, :price_cents, :late_price_cents, :exclusive_group, :start_date, :challonge_url, :description, :team_tourney, :season_type, :rules)
+    end
   end
 
 end

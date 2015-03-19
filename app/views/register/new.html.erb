@@ -54,6 +54,7 @@
     		Anyone is allowed to cast for AD2L!  To be listed as an official caster for the next eight weeks, pay $3.00 below!   If you've cast with us before and are reliable, let us know and we would be more than happy to waive the fee.  Not sure if casting is for you?  Join our <%=link_to "AD2L steam group", "steam://friends/joinchat/103582791435143521", :target => "_blank"%> and pick up some matches on game day to try it out!
     	</p>
 			<form action="/register_caster" method="POST">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 		    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 		            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
 		            data-image="<%= path_to_image "AD2L.png" %>"

@@ -25,11 +25,9 @@ class PlayersController < ApplicationController
     end
   end
 
-
-
   def create_player_comment
     @player_comment = PlayerComment.new
-    @player_comment.attributes = params[:player_comment]
+    @player_comment.attributes = player_comment_params
     @player_comment.save!
     @player_comments = PlayerComment.where(:recipient_id => params[:player_comment][:recipient_id]).order("created_at desc")
     respond_to do |format|
@@ -69,9 +67,7 @@ class PlayersController < ApplicationController
     end
   end
 
-  skip_before_filter  :verify_authenticity_token
   def register_caster
-
     #attempt to find them in the Stripe DB first
       if @current_user.stripe_customer_id.nil?
         customer = Stripe::Customer.create(
@@ -106,12 +102,9 @@ class PlayersController < ApplicationController
 
       flash[:notice] = "You have been successfully registered as a caster! "
       redirect_to @current_user
-
   end
 
-  skip_before_filter  :verify_authenticity_token
   def no_emails
-
     @player = Player.find(params[:id])
     if params[:unsubscribe_key] == @player.unsubscribe_key
       @player.receive_emails = false
@@ -122,8 +115,22 @@ class PlayersController < ApplicationController
       flash[:notice] = "Doesn't look like you have permission to unsubscribe for this player."
       redirect_to @player
     end
-
   end
 
+  private
 
+  def player_params
+    role = @current_user.role_for_object(@player)
+    if role == :caster
+      params.require(:player).permit(:name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :steamid, :receive_emails, :real_name, :country, :avatar, :twitch, :region)
+    elsif role == :admin
+      params.require(:player).permit(:name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :steamid, :receive_emails, :real_name, :country, :avatar, :twitch, :region, :caster)
+    else
+      params.require(:player).permit(:name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :steamid, :receive_emails)
+    end
+  end
+
+  def player_comment_params
+    params.require(:player_comment).permit(:commenter_id, :recipient_id, :comment)
+  end
 end

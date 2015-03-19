@@ -6,7 +6,6 @@ gem 'mysql2', '> 0.3'
 # gem 'execjs'
 gem 'nokogiri'
 gem 'rails-observers'
-gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 gem 'browser'
 gem 'paperclip'
 
