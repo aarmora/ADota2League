@@ -90,21 +90,21 @@ class TeamSeasonsController < ApplicationController
 
   def paypal_callback_success
     @ts = TeamSeason.find(params[:id])
-    paypal_response = generate_paypal_request.checkout!(
-      params[:token],
-      params[:PayerID],
-      generate_paypal_payment_request
-    )
-    info = paypal_response.payment_info.first
-    if info.payment_status == "Completed"
+    begin
+      paypal_response = generate_paypal_request.checkout!(
+        params[:token],
+        params[:PayerID],
+        generate_paypal_payment_request
+      )
+      info = paypal_response.payment_info.first
       @ts.paid = true
       @ts.price_paid_cents = info.amount.total * 100
       @ts.save!
       flash[:notice] = "You have been successfully registered for " + @ts.season.title
       redirect_to @ts.participant
-    else
-      ExceptionNotifier.notify_exception(Paypal::Exception::APIError.new, :env => request.env, :data => {:message => info})
-      flash[:error] = "There may have been an error processing your payment. Please check your paypal records and email us."
+    rescue Exception => e
+      ExceptionNotifier.notify_exception(e, :env => request.env, :data => {:message => paypal_response})
+      flash[:error] = "There was an error processing your payment. Please check your Paypal records. Perhaps your card was declined? Email us if you continue to have issues."
       redirect_to @ts.participant
     end
   end

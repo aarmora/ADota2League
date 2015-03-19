@@ -80,7 +80,7 @@ gem 'capistrano-rails'
 gem 'capistrano-bundler'
 gem 'capistrano-rvm'
 gem 'cap-ec2'
-gem 'capistrano-linked-files', git: "https://github.com/jameswilliamiii/capistrano-linked-files.git"
+gem 'capistrano-linked-files'
 gem 'capistrano-unicorn-nginx'
 gem 'slackistrano', :require => nil
 # gem 'capistrano3-unicorn'
