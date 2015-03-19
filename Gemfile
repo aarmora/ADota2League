@@ -33,6 +33,8 @@ gem 'kappa', '~> 1.0' # Twitch API
 # gem for managing environment variables (steam webapi key)
 gem 'figaro'
 
+gem 'slack-notifier'
+
 # Bracketing solutions
 gem 'challonge-api'
 gem 'bracket_tree'
@@ -47,7 +49,6 @@ end
 group :production do
   # Using git for slack notifier support
   gem "exception_notification", :git => 'https://github.com/smartinez87/exception_notification.git'
-  gem 'slack-notifier'
   gem 'therubyracer' # execjs
   gem "oink" # for doing memory analysis
   gem 'memcachier' # Old style for Heroku
