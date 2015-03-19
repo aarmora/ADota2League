@@ -73,37 +73,31 @@
 			</div>
     </div>
 		<ul class="nav navbar-nav collapse navbar-collapse" id="ad2l-main-nav-collapse">
-			<li <%if @current_tab == 'index'%> class="active" <%end%> >
-				<%= link_to "Home", root_path %>
-			</li>
-			<li <%if @current_tab == 'seasons'%>class="dropdown active"<%else%>class="dropdown"<%end%>>
-				<%= link_to "Tournaments", seasons_path, :class => "dropdown-toggle", :"data-toggle" => "dropdown" %>
+      <li <%if @current_tab == 'index'%> class="active" <%end%> >
+      	<%= link_to "Home", root_path %>
+      </li>
+      <li <%if @current_tab == 'seasons'%>class="dropdown active"<%else%>class="dropdown"<%end%>>
+      	<%= link_to "Tournaments", seasons_path, :class => "dropdown-toggle", :"data-toggle" => "dropdown" %>
         <ul class="dropdown-menu">
-					<%- @active_seasons.each do |season| %>
-	        	<li><%= link_to season.title, season %></li>
-	        <% end %>
+      		<%- @active_seasons.each do |season| %>
+          	<li><%= link_to season.title, season %></li>
+          <% end %>
         </ul>
-    	</li>
-			<li <%if @current_tab == 'inhouse'%> class="active" <%end%>>
-				<%= link_to "Inhouses", inhouse_path(2) %>
-			</li>
-			<li <%if @current_tab == 'freeagents'%> class="active" <%end%>>
-				<%= link_to "Free Agents", players_path %>
-			</li>
-			<li <%if @current_tab == 'teams'%> class="active" <%end%>>
-				<%= link_to "Teams", teams_path %>
-			</li>
-			<%if @current_user%>
-		        <li <%if @current_tab == 'myinfo'%> class="active" <%end%>  >
-	        		<%= link_to "My info", @current_user %>
-	        	</li>
-	        <%end%>
-	        <li <%if @current_tab == 'register'%> class="active" <%end%>  >
-        		<%= link_to "Register!", "/register" %>
-        	</li>
-			<li <%if @current_tab == 'community'%> class="active" <%end%> >
-				<%= link_to "Community", community_path%>
-			</li>
+      </li>
+      <li <%if @current_tab == 'inhouse'%> class="active" <%end%>>
+      	<%= link_to "Inhouses", inhouse_path(2) %>
+      </li>
+      <%if @current_user%>
+        <li <%if @current_tab == 'myinfo'%> class="active" <%end%>  >
+      		<%= link_to "My info", @current_user %>
+      	</li>
+      <% end %>
+      <li <%if @current_tab == 'register'%> class="active" <%end%>  >
+      	<%= link_to "Register!", "/register" %>
+      </li>
+      <li <%if @current_tab == 'community'%> class="active" <%end%> >
+      	<%= link_to "Community", community_path%>
+      </li>
 		</ul>
   </nav>
   <%- if content_for?(:subnav) %>

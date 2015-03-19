@@ -1,10 +1,4 @@
 class PlayersController < ApplicationController
-  def index
-  	@current_tab = "freeagents"
-    @freeagents = Player.where(:freeagentflag => true)
-    @player = @current_user ? Player.find(@current_user.id) : nil
-  end
-
   def new
   	redirect_to @current_user if @current_user
     @current_tab = "signup"
@@ -110,7 +104,7 @@ class PlayersController < ApplicationController
       @current_user.caster = true
       @current_user.save!
 
-      flash[:notice] = "You have been successfully registered as a caster! " 
+      flash[:notice] = "You have been successfully registered as a caster! "
       redirect_to @current_user
 
   end
@@ -122,10 +116,10 @@ class PlayersController < ApplicationController
     if params[:unsubscribe_key] == @player.unsubscribe_key
       @player.receive_emails = false
       @player.save!
-      flash[:notice] = "You have been successfully unsubscribed from future emails!" 
+      flash[:notice] = "You have been successfully unsubscribed from future emails!"
       redirect_to @player
     else
-      flash[:notice] = "Doesn't look like you have permission to unsubscribe for this player." 
+      flash[:notice] = "Doesn't look like you have permission to unsubscribe for this player."
       redirect_to @player
     end
 

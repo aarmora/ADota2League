@@ -50,7 +50,7 @@ Ad2l::Application.routes.draw do
   resources :permissions
   resources :inhouses
 
-  resources :players, :only => [:new, :index, :show, :update] do
+  resources :players, :only => [:new, :show, :update] do
     member do
       post 'endorse' => 'players#endorse'
     end
