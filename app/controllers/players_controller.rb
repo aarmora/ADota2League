@@ -15,7 +15,7 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @player
     respond_to do |format|
-      if @player.update_attributes(params[:player], :as => @current_user.role_for_object(@player))
+      if @player.update_attributes(player_params)
         format.html { redirect_to(@player, :notice => 'Player was successfully updated.') }
         format.json { respond_with_bip(@player) }
       else
