@@ -9,8 +9,12 @@ gem 'rails-observers'
 gem 'browser'
 gem 'paperclip'
 
+# Forums
+gem 'forem', :github => "radar/forem", :branch => "rails4"
+gem 'will_paginate', '3.0.5'
+
 # git for checkbox yes/no live updating fix
-gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.git'
+gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.git', :ref => "fd40a44"
 
 # use Omniauth gems for authenticating users
 gem 'omniauth-steam'

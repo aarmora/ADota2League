@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/bernat/best_in_place.git
-  revision: 53ef06ab47769d7af0def4c1bd2caf6db197c708
+  revision: fd40a44656ef01425799d7e34e848057887c324e
+  ref: fd40a44
   specs:
     best_in_place (3.0.3)
       actionpack (>= 3.2)
@@ -15,6 +16,22 @@ GIT
       faraday_middleware (~> 0.9.0)
 
 GIT
+  remote: git://github.com/radar/forem.git
+  revision: 97206f1bb5b9dfa3de10c19c60f76119aaf7a7a2
+  branch: rails4
+  specs:
+    forem (1.0.0.beta1)
+      cancancan (~> 1.7)
+      decorators (~> 1.0.2)
+      friendly_id (~> 5.0.0)
+      gemoji (= 2.1.0)
+      rails (~> 4.0, <= 4.2)
+      sanitize (= 2.0.6)
+      select2-rails (~> 3.5.4)
+      simple_form (~> 3.0)
+      workflow (= 1.0.0)
+
+GIT
   remote: https://github.com/smartinez87/exception_notification.git
   revision: b5d7262cb1f896f40c7c8705304f79fa631e912c
   specs:
@@ -25,40 +42,40 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.2.1)
-      actionpack (= 4.2.1)
-      actionview (= 4.2.1)
-      activejob (= 4.2.1)
+    actionmailer (4.2.0)
+      actionpack (= 4.2.0)
+      actionview (= 4.2.0)
+      activejob (= 4.2.0)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
-    actionpack (4.2.1)
-      actionview (= 4.2.1)
-      activesupport (= 4.2.1)
-      rack (~> 1.6)
+    actionpack (4.2.0)
+      actionview (= 4.2.0)
+      activesupport (= 4.2.0)
+      rack (~> 1.6.0)
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    actionview (4.2.1)
-      activesupport (= 4.2.1)
+    actionview (4.2.0)
+      activesupport (= 4.2.0)
       builder (~> 3.1)
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    activejob (4.2.1)
-      activesupport (= 4.2.1)
+    activejob (4.2.0)
+      activesupport (= 4.2.0)
       globalid (>= 0.3.0)
-    activemodel (4.2.1)
-      activesupport (= 4.2.1)
+    activemodel (4.2.0)
+      activesupport (= 4.2.0)
       builder (~> 3.1)
-    activerecord (4.2.1)
-      activemodel (= 4.2.1)
-      activesupport (= 4.2.1)
+    activerecord (4.2.0)
+      activemodel (= 4.2.0)
+      activesupport (= 4.2.0)
       arel (~> 6.0)
     activeresource (4.0.0)
       activemodel (~> 4.0)
       activesupport (~> 4.0)
       rails-observers (~> 0.1.1)
-    activesupport (4.2.1)
+    activesupport (4.2.0)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -82,6 +99,7 @@ GEM
     browser (0.8.0)
     buftok (0.2.0)
     builder (3.2.2)
+    cancancan (1.10.1)
     cap-ec2 (0.0.19)
       aws-sdk-v1
       capistrano (>= 3.0)
@@ -119,6 +137,8 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colorize (0.7.5)
+    decorators (1.0.3)
+      railties (>= 3.0.19, != 3.2.9, != 3.2.8, != 3.2.7, != 3.2.6, != 3.2.5, != 3.2.4, != 3.2.3, != 3.2.2, != 3.2.10, != 3.2.1, != 3.2.0, != 3.1.9, != 3.1.8, != 3.1.7, != 3.1.6, != 3.1.5, != 3.1.4, != 3.1.3, != 3.1.2, != 3.1.1, != 3.1.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     equalizer (0.0.9)
@@ -134,6 +154,9 @@ GEM
       thor (~> 0.14)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    friendly_id (5.0.5)
+      activerecord (>= 4.0.0)
+    gemoji (2.1.0)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     hashie (3.4.0)
@@ -240,16 +263,16 @@ GEM
       ruby-openid (>= 2.1.8)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (4.2.1)
-      actionmailer (= 4.2.1)
-      actionpack (= 4.2.1)
-      actionview (= 4.2.1)
-      activejob (= 4.2.1)
-      activemodel (= 4.2.1)
-      activerecord (= 4.2.1)
-      activesupport (= 4.2.1)
+    rails (4.2.0)
+      actionmailer (= 4.2.0)
+      actionpack (= 4.2.0)
+      actionview (= 4.2.0)
+      activejob (= 4.2.0)
+      activemodel (= 4.2.0)
+      activerecord (= 4.2.0)
+      activesupport (= 4.2.0)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.2.1)
+      railties (= 4.2.0)
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -266,9 +289,9 @@ GEM
       rails_stdout_logging
     rails_serve_static_assets (0.0.4)
     rails_stdout_logging (0.0.3)
-    railties (4.2.1)
-      actionpack (= 4.2.1)
-      activesupport (= 4.2.1)
+    railties (4.2.0)
+      actionpack (= 4.2.0)
+      activesupport (= 4.2.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
@@ -301,6 +324,8 @@ GEM
     rrschedule (0.3.3)
     rubin (0.2.0)
     ruby-openid (2.7.0)
+    sanitize (2.0.6)
+      nokogiri (>= 1.4.4)
     sass (3.4.13)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -310,6 +335,9 @@ GEM
       tilt (~> 1.1)
     select2-rails (3.5.9.3)
       thor (~> 0.14)
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     simple_oauth (0.2.0)
     slack-notifier (1.1.0)
     slackistrano (0.1.6)
@@ -363,6 +391,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    will_paginate (3.0.5)
+    workflow (1.0.0)
 
 PLATFORMS
   ruby
@@ -389,6 +419,7 @@ DEPENDENCIES
   exception_notification!
   figaro
   font-awesome-rails
+  forem!
   icalendar
   jquery-datatables-rails
   jquery-rails
@@ -422,3 +453,4 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.0.3)
   unicorn
+  will_paginate (= 3.0.5)
