@@ -40,4 +40,7 @@ class Player < ActiveRecord::Base
     name
   end
 
+  def forem_admin?
+    Permissions.user_is_site_admin? self
+  end
 end

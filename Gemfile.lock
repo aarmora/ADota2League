@@ -16,6 +16,12 @@ GIT
       faraday_middleware (~> 0.9.0)
 
 GIT
+  remote: git://github.com/radar/forem-theme-base.git
+  revision: 218ddc3f021756858c1b642139dfe65747adec3d
+  specs:
+    forem-theme-base (0.0.1)
+
+GIT
   remote: git://github.com/radar/forem.git
   revision: 97206f1bb5b9dfa3de10c19c60f76119aaf7a7a2
   branch: rails4
@@ -154,6 +160,8 @@ GEM
       thor (~> 0.14)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    forem-rdiscount (1.0.0)
+      rdiscount
     friendly_id (5.0.5)
       activerecord (>= 4.0.0)
     gemoji (2.1.0)
@@ -296,6 +304,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
+    rdiscount (2.1.8)
     redis (3.2.1)
     redis-actionpack (4.0.0)
       actionpack (~> 4)
@@ -420,6 +429,8 @@ DEPENDENCIES
   figaro
   font-awesome-rails
   forem!
+  forem-rdiscount
+  forem-theme-base!
   icalendar
   jquery-datatables-rails
   jquery-rails

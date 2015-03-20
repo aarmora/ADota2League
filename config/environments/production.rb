@@ -53,7 +53,7 @@ Ad2l::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
-  #config.action_mailer.default_url_options = { :host => 'amateurdota2league.com' }
+  config.action_mailer.default_url_options = { :host => 'amateurdota2league.com' }
 
   config.paperclip_defaults = {
     storage: :s3,

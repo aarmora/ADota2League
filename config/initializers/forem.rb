@@ -5,6 +5,8 @@ Forem.avatar_user_method = :avatar
 Forem.per_page = 20
 
 Forem.sign_in_path = "/auth/steam"
+Forem.user_profile_links = true
+Forem.formatter = Forem::Formatters::RDiscount
 
 Rails.application.config.to_prepare do
   # If you want to change the layout that Forem uses, uncomment and customize the next line:

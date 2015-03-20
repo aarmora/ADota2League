@@ -11,6 +11,8 @@ gem 'paperclip'
 
 # Forums
 gem 'forem', :github => "radar/forem", :branch => "rails4"
+gem 'forem-theme-base', :github => 'radar/forem-theme-base'
+gem 'forem-rdiscount'
 gem 'will_paginate', '3.0.5'
 
 # git for checkbox yes/no live updating fix
