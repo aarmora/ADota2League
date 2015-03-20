@@ -164,7 +164,7 @@ class TeamSeasonsController < ApplicationController
     if params[:team_season]
       head :forbidden and return unless Permissions.can_edit? @ts.participant
       respond_to do |format|
-        if @ts.update_attributes(params[:team_season], :as => @current_user.role_for_object(@ts))
+        if @ts.update_attributes(team_season_params)
           format.html { redirect_to(manage_season_path(@ts.season_id), :notice => 'TeamSeason was successfully updated.') }
           format.json { respond_with_bip(@ts) }
         else
@@ -238,4 +238,13 @@ class TeamSeasonsController < ApplicationController
     flash[:notice] = "You have withdrawn from " + title
     redirect_to @ts.participant
   end
+
+  private
+
+  def team_season_params
+    if @current_user.role_for_object(@ts) == :admin
+      params.require(:team_season).permit(:checked_in, :paid, :division, :season)
+    else
+      params.require(:team_season).permit(:checked_in)
+    end
 end

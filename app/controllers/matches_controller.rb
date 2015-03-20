@@ -15,7 +15,7 @@ class MatchesController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?(@current_user)
     @match = Match.new
     @match.lobby_password = "ad2l" + rand(1000).to_s
-    @match.update_attributes(params[:match], :as => @current_user.role_for_object(@match))
+    @match.update_attributes(match_params)
     puts @match.home_participant_id
     puts @match.away_participant_id
     @match.date = Date.today
@@ -105,7 +105,7 @@ class MatchesController < ApplicationController
     end
 
     respond_to do |format|
-      if @match.update_attributes(params[:match], :as => @current_user.role_for_object(@match))
+      if @match.update_attributes(match_params)
         @match.create_auto_match_comments(changes, @current_user)
         format.html { redirect_to(@match, :notice => 'Match was successfully updated.') }
         format.json { respond_with_bip(@match) }
@@ -119,7 +119,7 @@ class MatchesController < ApplicationController
   def create_match_comment
     @match_comment = Matchcomment.new
     @match_comment.player_id = @current_user.id
-    @match_comment.attributes = params[:matchcomment]
+    @match_comment.attributes = match_comment_params
     @match_comment.save!
     @matchcomments = Matchcomment.where(:match_id => params[:matchcomment][:match_id]).order("created_at desc")
     respond_to do |format|
@@ -143,4 +143,18 @@ class MatchesController < ApplicationController
     render :partial => 'match_comments', :object => @matchcomments
   end
 
+  private
+
+  def match_params
+    role = @current_user.role_for_object(@match)
+    if role == :captain
+      params.require(:match).permit(:home_score, :away_score, :caster_id, :forfeit, :date, :reschedule_time, :attachments_array)
+    elsif role == :admin
+      params.require(:match).permit(:home_score, :away_score, :caster_id, :forfeit, :date, :reschedule_time, :attachments_array, :home_participant_id, :away_participant_id, :lobby_password, :week, :season_id)
+    end
+  end
+
+  def match_comment_params
+    params.require(:matchcomment).permit(:match_id, :player_id, :comment)
+  end
 end

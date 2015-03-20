@@ -6,12 +6,17 @@ gem 'mysql2', '> 0.3'
 # gem 'execjs'
 gem 'nokogiri'
 gem 'rails-observers'
-gem 'protected_attributes' # TODO: Remove and rework attr_accessibles
 gem 'browser'
 gem 'paperclip'
 
+# Forums
+gem 'forem', :github => "radar/forem", :branch => "rails4"
+gem 'forem-theme-base', :github => 'radar/forem-theme-base'
+gem 'forem-rdiscount'
+gem 'will_paginate', '3.0.5'
+
 # git for checkbox yes/no live updating fix
-gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.git'
+gem 'best_in_place', "~> 3.0", :git => 'git://github.com/bernat/best_in_place.git', :ref => "fd40a44"
 
 # use Omniauth gems for authenticating users
 gem 'omniauth-steam'

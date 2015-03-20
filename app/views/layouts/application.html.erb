@@ -41,9 +41,9 @@
 				<a href="/">Amateur <span>Dota</span> 2 League</a>
 				<% if @current_user %>
 					<div id="current-user"><%= image_tag @current_user.avatar, :alt => "" %>
-						<span><%=link_to @current_user.name, @current_user, :class => "noLinkStyle" %></span>
+						<span><%=link_to @current_user.name, main_app.player_path(@current_user), :class => "noLinkStyle" %></span>
 						<br />
-						<%= link_to 'Logout', logout_url, :class => 'logout' %>
+						<%= link_to 'Logout', main_app.logout_url, :class => 'logout' %>
 					</div>
 				<%else%>
 					<%= link_to image_tag("http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png"), '/auth/steam', :style => "float:right" %>
@@ -73,37 +73,34 @@
 			</div>
     </div>
 		<ul class="nav navbar-nav collapse navbar-collapse" id="ad2l-main-nav-collapse">
-			<li <%if @current_tab == 'index'%> class="active" <%end%> >
-				<%= link_to "Home", root_path %>
-			</li>
-			<li <%if @current_tab == 'seasons'%>class="dropdown active"<%else%>class="dropdown"<%end%>>
-				<%= link_to "Tournaments", seasons_path, :class => "dropdown-toggle", :"data-toggle" => "dropdown" %>
+      <li <%if @current_tab == 'index'%> class="active" <%end%> >
+      	<%= link_to "Home", main_app.root_path %>
+      </li>
+      <li <%if @current_tab == 'seasons'%>class="dropdown active"<%else%>class="dropdown"<%end%>>
+      	<%= link_to "Tournaments", main_app.seasons_path, :class => "dropdown-toggle", :"data-toggle" => "dropdown" %>
         <ul class="dropdown-menu">
-					<%- @active_seasons.each do |season| %>
-	        	<li><%= link_to season.title, season %></li>
-	        <% end %>
+      		<%- @active_seasons.each do |season| %>
+          	<li><%= link_to season.title, main_app.season_path(season) %></li>
+          <% end %>
         </ul>
-    	</li>
-			<li <%if @current_tab == 'inhouse'%> class="active" <%end%>>
-				<%= link_to "Inhouses", inhouse_path(2) %>
-			</li>
-			<li <%if @current_tab == 'freeagents'%> class="active" <%end%>>
-				<%= link_to "Free Agents", players_path %>
-			</li>
-			<li <%if @current_tab == 'teams'%> class="active" <%end%>>
-				<%= link_to "Teams", teams_path %>
-			</li>
-			<%if @current_user%>
-		        <li <%if @current_tab == 'myinfo'%> class="active" <%end%>  >
-	        		<%= link_to "My info", @current_user %>
-	        	</li>
-	        <%end%>
-	        <li <%if @current_tab == 'register'%> class="active" <%end%>  >
-        		<%= link_to "Register!", "/register" %>
-        	</li>
-			<li <%if @current_tab == 'community'%> class="active" <%end%> >
-				<%= link_to "Community", community_path%>
-			</li>
+      </li>
+      <li <%if @current_tab == 'inhouse'%> class="active" <%end%>>
+      	<%= link_to "Inhouses", main_app.inhouse_path(2) %>
+      </li>
+      <% if @current_user %>
+        <li <%if @current_tab == 'myinfo'%> class="active" <%end%>  >
+      		<%= link_to "My info", main_app.player_path(@current_user) %>
+      	</li>
+      <% end %>
+      <li <%if @current_tab == 'register'%> class="active" <%end%>  >
+      	<%= link_to "Register!", main_app.register_path %>
+      </li>
+      <li <% if forem? %> class="active" <%end %> >
+        <%= link_to "Forums", "/forums" %>
+      </li>
+      <li <%if @current_tab == 'community'%> class="active" <%end%> >
+      	<%= link_to "Community", main_app.community_path %>
+      </li>
 		</ul>
   </nav>
   <%- if content_for?(:subnav) %>
@@ -143,7 +140,7 @@
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FADota2L&amp;width=100&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=false&amp;height=21&amp;appId=239030119468888" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
 	</div>
-	<%= render :partial => "layouts/dialogs" %>
+  <%= render :partial => "layouts/dialogs" unless forem? %>
 	<%= render :partial => "layouts/ga" %>
 </body>
 </html>

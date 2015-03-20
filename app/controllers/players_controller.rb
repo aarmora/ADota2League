@@ -1,10 +1,4 @@
 class PlayersController < ApplicationController
-  def index
-  	@current_tab = "freeagents"
-    @freeagents = Player.where(:freeagentflag => true)
-    @player = @current_user ? Player.find(@current_user.id) : nil
-  end
-
   def new
   	redirect_to @current_user if @current_user
     @current_tab = "signup"
@@ -21,7 +15,7 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @player
     respond_to do |format|
-      if @player.update_attributes(params[:player], :as => @current_user.role_for_object(@player))
+      if @player.update_attributes(player_params)
         format.html { redirect_to(@player, :notice => 'Player was successfully updated.') }
         format.json { respond_with_bip(@player) }
       else
@@ -31,11 +25,9 @@ class PlayersController < ApplicationController
     end
   end
 
-
-
   def create_player_comment
     @player_comment = PlayerComment.new
-    @player_comment.attributes = params[:player_comment]
+    @player_comment.attributes = player_comment_params
     @player_comment.save!
     @player_comments = PlayerComment.where(:recipient_id => params[:player_comment][:recipient_id]).order("created_at desc")
     respond_to do |format|
@@ -75,9 +67,7 @@ class PlayersController < ApplicationController
     end
   end
 
-  skip_before_filter  :verify_authenticity_token
   def register_caster
-
     #attempt to find them in the Stripe DB first
       if @current_user.stripe_customer_id.nil?
         customer = Stripe::Customer.create(
@@ -110,26 +100,37 @@ class PlayersController < ApplicationController
       @current_user.caster = true
       @current_user.save!
 
-      flash[:notice] = "You have been successfully registered as a caster! " 
+      flash[:notice] = "You have been successfully registered as a caster! "
       redirect_to @current_user
-
   end
 
-  skip_before_filter  :verify_authenticity_token
   def no_emails
-
     @player = Player.find(params[:id])
     if params[:unsubscribe_key] == @player.unsubscribe_key
       @player.receive_emails = false
       @player.save!
-      flash[:notice] = "You have been successfully unsubscribed from future emails!" 
+      flash[:notice] = "You have been successfully unsubscribed from future emails!"
       redirect_to @player
     else
-      flash[:notice] = "Doesn't look like you have permission to unsubscribe for this player." 
+      flash[:notice] = "Doesn't look like you have permission to unsubscribe for this player."
       redirect_to @player
     end
-
   end
 
+  private
 
+  def player_params
+    role = @current_user.role_for_object(@player)
+    if role == :caster
+      params.require(:player).permit(:name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :steamid, :receive_emails, :real_name, :country, :avatar, :twitch, :region)
+    elsif role == :admin
+      params.require(:player).permit(:name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :steamid, :receive_emails, :real_name, :country, :avatar, :twitch, :region, :caster)
+    else
+      params.require(:player).permit(:name, :bio, :email, :time_zone, :freeagentflag, :role, :mmr, :hours_played, :steamid, :receive_emails)
+    end
+  end
+
+  def player_comment_params
+    params.require(:player_comment).permit(:commenter_id, :recipient_id, :comment)
+  end
 end

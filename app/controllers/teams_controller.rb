@@ -67,7 +67,7 @@ class TeamsController < ApplicationController
 		raise unless @current_user
 		@team = Team.new
 		@team.captain_id = @current_user.id
-		@team.attributes = params[:team]
+		@team.attributes = team_params
 		@team.players << @current_user
     	@team.mmr = @team.originalmmr || @team.default_mmr
 		@team.save!
@@ -79,9 +79,9 @@ class TeamsController < ApplicationController
 
 	def update
 		@team = Team.find(params[:id])
-		raise unless Permissions.can_edit? @team
+		head :forbidden and return unless Permissions.can_edit? @team
 		respond_to do |format|
-			if @team.update_attributes(params[:team], :as => @current_user.role_for_object(@team))
+			if @team.update_attributes(team_params)
 		        format.html { redirect_to(@team, :notice => 'Player was successfully updated.') }
 		        format.json { respond_with_bip(@team) }
 		    else
@@ -123,6 +123,16 @@ class TeamsController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') unless Permissions.can_edit? @team
   	@team.players.delete(Player.find(params[:players].select{|i| i.to_i > 0}))
   	redirect_to @team
+  end
+
+  private
+
+  def team_params
+    if @current_user.role_for_object(@team) == :admin
+      params.require(:team).permit(:name, :region, :originalmmr, :dotabuff_id, :captain_id, :mmr, :active)
+    else
+      params.require(:team).permit(:name, :region, :originalmmr)
+    end
   end
 
 end

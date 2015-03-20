@@ -1,5 +1,13 @@
 Ad2l::Application.routes.draw do
 
+  # This line mounts Forem's routes at /forums by default.
+  # This means, any requests to the /forums URL of your application will go to Forem::ForumsController#index.
+  # If you would like to change where this extension is mounted, simply change the :at option to something different.
+  #
+  # We ask that you don't use the :as option here, as Forem relies on it being the default of "forem"
+  mount Forem::Engine, :at => '/forums'
+
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root 'welcome#index'
@@ -50,7 +58,7 @@ Ad2l::Application.routes.draw do
   resources :permissions
   resources :inhouses
 
-  resources :players, :only => [:new, :index, :show, :update] do
+  resources :players, :only => [:new, :show, :update] do
     member do
       post 'endorse' => 'players#endorse'
     end

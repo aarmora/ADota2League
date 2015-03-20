@@ -8,9 +8,6 @@ class Team < ActiveRecord::Base
   has_many :team_seasons, :dependent => :delete_all, :as => :participant
   has_many :seasons, :through => :team_seasons
 
-  attr_accessible :name, :region, :originalmmr, :as => [:default, :admin]
-  attr_accessible :dotabuff_id, :captain_id, :mmr, :active, :as => :admin
-
   # Note: this will probably be read only
   def matches
      home_matches + away_matches

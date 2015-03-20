@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new
-		@post.attributes = params[:post]
+		@post.attributes = post_params
 		@post.author_id = @current_user.id
 		@post.save!
 		redirect_to root_path
@@ -15,5 +15,12 @@ class PostsController < ApplicationController
 
   def verify_admin
   	raise ActionController::RoutingError.new('Not Found') unless Permissions.user_is_site_admin?
+  end
+
+  private
+  def post_params
+    if Permissions.user_is_site_admin?
+      params.require(:post).permit(:text, :title, :author_id)
+    end
   end
 end

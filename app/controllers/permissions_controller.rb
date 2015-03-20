@@ -4,12 +4,12 @@ class PermissionsController < ApplicationController
 
 	def create
     @permission = Permission.new
-    @permission.attributes = params[:permission]
+    @permission.attributes = permission_params
     @permission.save!
 
     session[:return_to] ||= request.referer
     redirect_to session.delete(:return_to)
-    
+
 	end
 
 
@@ -17,7 +17,7 @@ class PermissionsController < ApplicationController
     @permission = Permission.find(params[:id])
 
     respond_to do |format|
-      if @permission.update_attributes(params[:permission])
+      if @permission.update_attributes(permission_params)
         format.html { redirect_to(@permission.player, :notice => 'Player was successfully updated.') }
         format.json { respond_with_bip(@permission) }
       else
@@ -35,6 +35,8 @@ class PermissionsController < ApplicationController
     session[:return_to] ||= request.referer
     redirect_to session.delete(:return_to)
   end
+
+  private
 
   def check_permission_access
     # Verify that we can actually create this specific permission
@@ -55,6 +57,10 @@ class PermissionsController < ApplicationController
       valid = Permissions.permissions_for_user.any? {|p| p.permission_mode == "season" && p.season_id == season_id}
     end
     raise "Illegal Permission Access" unless valid
+  end
+
+  def permission_params
+    params.require(:permission).permit(:player_id, :permission_mode, :organization_id, :season_id, :division)
   end
 
 end
