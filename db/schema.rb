@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319235641) do
+ActiveRecord::Schema.define(version: 20150320181029) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "match_id",                limit: 4
@@ -90,11 +90,11 @@ ActiveRecord::Schema.define(version: 20150319235641) do
     t.string   "subject",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "locked",       limit: 1,   default: false,            null: false
+    t.boolean  "locked",       limit: 1,   default: false,      null: false
     t.boolean  "pinned",       limit: 1,   default: false
     t.boolean  "hidden",       limit: 1,   default: false
     t.datetime "last_post_at"
-    t.string   "state",        limit: 255, default: "pending_review"
+    t.string   "state",        limit: 255, default: "approved"
     t.integer  "views_count",  limit: 4,   default: 0
     t.string   "slug",         limit: 255
   end
