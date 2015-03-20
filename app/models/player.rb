@@ -36,4 +36,8 @@ class Player < ActiveRecord::Base
     result
   end
 
+  def forem_name
+    name
+  end
+
 end

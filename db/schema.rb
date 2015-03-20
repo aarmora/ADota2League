@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315211154) do
+ActiveRecord::Schema.define(version: 20150319235641) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "match_id",                limit: 4
@@ -21,6 +21,103 @@ ActiveRecord::Schema.define(version: 20150315211154) do
     t.integer  "attachment_file_size",    limit: 4
     t.datetime "attachment_updated_at"
   end
+
+  create_table "forem_categories", force: :cascade do |t|
+    t.string   "name",       limit: 255,             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug",       limit: 255
+    t.integer  "position",   limit: 4,   default: 0
+  end
+
+  add_index "forem_categories", ["slug"], name: "index_forem_categories_on_slug", unique: true, using: :btree
+
+  create_table "forem_forums", force: :cascade do |t|
+    t.string  "name",        limit: 255
+    t.text    "description", limit: 65535
+    t.integer "category_id", limit: 4
+    t.integer "views_count", limit: 4,     default: 0
+    t.string  "slug",        limit: 255
+    t.integer "position",    limit: 4,     default: 0
+  end
+
+  add_index "forem_forums", ["slug"], name: "index_forem_forums_on_slug", unique: true, using: :btree
+
+  create_table "forem_groups", force: :cascade do |t|
+    t.string "name", limit: 255
+  end
+
+  add_index "forem_groups", ["name"], name: "index_forem_groups_on_name", using: :btree
+
+  create_table "forem_memberships", force: :cascade do |t|
+    t.integer "group_id",  limit: 4
+    t.integer "member_id", limit: 4
+  end
+
+  add_index "forem_memberships", ["group_id"], name: "index_forem_memberships_on_group_id", using: :btree
+
+  create_table "forem_moderator_groups", force: :cascade do |t|
+    t.integer "forum_id", limit: 4
+    t.integer "group_id", limit: 4
+  end
+
+  add_index "forem_moderator_groups", ["forum_id"], name: "index_forem_moderator_groups_on_forum_id", using: :btree
+
+  create_table "forem_posts", force: :cascade do |t|
+    t.integer  "topic_id",    limit: 4
+    t.text     "text",        limit: 65535
+    t.integer  "user_id",     limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "reply_to_id", limit: 4
+    t.string   "state",       limit: 255,   default: "pending_review"
+    t.boolean  "notified",    limit: 1,     default: false
+  end
+
+  add_index "forem_posts", ["reply_to_id"], name: "index_forem_posts_on_reply_to_id", using: :btree
+  add_index "forem_posts", ["state"], name: "index_forem_posts_on_state", using: :btree
+  add_index "forem_posts", ["topic_id"], name: "index_forem_posts_on_topic_id", using: :btree
+  add_index "forem_posts", ["user_id"], name: "index_forem_posts_on_user_id", using: :btree
+
+  create_table "forem_subscriptions", force: :cascade do |t|
+    t.integer "subscriber_id", limit: 4
+    t.integer "topic_id",      limit: 4
+  end
+
+  create_table "forem_topics", force: :cascade do |t|
+    t.integer  "forum_id",     limit: 4
+    t.integer  "user_id",      limit: 4
+    t.string   "subject",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "locked",       limit: 1,   default: false,            null: false
+    t.boolean  "pinned",       limit: 1,   default: false
+    t.boolean  "hidden",       limit: 1,   default: false
+    t.datetime "last_post_at"
+    t.string   "state",        limit: 255, default: "pending_review"
+    t.integer  "views_count",  limit: 4,   default: 0
+    t.string   "slug",         limit: 255
+  end
+
+  add_index "forem_topics", ["forum_id"], name: "index_forem_topics_on_forum_id", using: :btree
+  add_index "forem_topics", ["slug"], name: "index_forem_topics_on_slug", unique: true, using: :btree
+  add_index "forem_topics", ["state"], name: "index_forem_topics_on_state", using: :btree
+  add_index "forem_topics", ["user_id"], name: "index_forem_topics_on_user_id", using: :btree
+
+  create_table "forem_views", force: :cascade do |t|
+    t.integer  "user_id",           limit: 4
+    t.integer  "viewable_id",       limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "count",             limit: 4,   default: 0
+    t.string   "viewable_type",     limit: 255
+    t.datetime "current_viewed_at"
+    t.datetime "past_viewed_at"
+  end
+
+  add_index "forem_views", ["updated_at"], name: "index_forem_views_on_updated_at", using: :btree
+  add_index "forem_views", ["user_id"], name: "index_forem_views_on_user_id", using: :btree
+  add_index "forem_views", ["viewable_id"], name: "index_forem_views_on_viewable_id", using: :btree
 
   create_table "games", force: :cascade do |t|
     t.integer  "match_id",             limit: 4
@@ -154,34 +251,37 @@ ActiveRecord::Schema.define(version: 20150315211154) do
   add_index "player_votes", ["recipient_id"], name: "index_player_votes_on_recipient_id", using: :btree
 
   create_table "players", force: :cascade do |t|
-    t.integer  "team_id",            limit: 4
-    t.string   "name",               limit: 100
-    t.string   "email",              limit: 50
-    t.string   "steamid",            limit: 50
-    t.boolean  "cptflag",            limit: 1
-    t.boolean  "freeagentflag",      limit: 1
-    t.string   "role",               limit: 100
-    t.string   "steam32id",          limit: 50
-    t.boolean  "caster",             limit: 1
-    t.string   "region",             limit: 50
-    t.string   "twitch",             limit: 50
-    t.integer  "clickedprobuilt",    limit: 4
+    t.integer  "team_id",              limit: 4
+    t.string   "name",                 limit: 100
+    t.string   "email",                limit: 50
+    t.string   "steamid",              limit: 50
+    t.boolean  "cptflag",              limit: 1
+    t.boolean  "freeagentflag",        limit: 1
+    t.string   "role",                 limit: 100
+    t.string   "steam32id",            limit: 50
+    t.boolean  "caster",               limit: 1
+    t.string   "region",               limit: 50
+    t.string   "twitch",               limit: 50
+    t.integer  "clickedprobuilt",      limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "bio",                limit: 16777215
-    t.boolean  "admin",              limit: 1
-    t.integer  "endorsements_count", limit: 4,        default: 0,    null: false
-    t.integer  "mmr",                limit: 4
-    t.integer  "hours_played",       limit: 4
-    t.string   "stripe_customer_id", limit: 255
-    t.string   "time_zone",          limit: 255
-    t.integer  "comments_count",     limit: 4,        default: 0,    null: false
-    t.string   "real_name",          limit: 255
-    t.string   "avatar",             limit: 255
-    t.string   "country",            limit: 255
-    t.boolean  "receive_emails",     limit: 1,        default: true
-    t.string   "twitter",            limit: 255
-    t.string   "unsubscribe_key",    limit: 255
+    t.text     "bio",                  limit: 16777215
+    t.boolean  "admin",                limit: 1
+    t.integer  "endorsements_count",   limit: 4,        default: 0,                null: false
+    t.integer  "mmr",                  limit: 4
+    t.integer  "hours_played",         limit: 4
+    t.string   "stripe_customer_id",   limit: 255
+    t.string   "time_zone",            limit: 255
+    t.integer  "comments_count",       limit: 4,        default: 0,                null: false
+    t.string   "real_name",            limit: 255
+    t.string   "avatar",               limit: 255
+    t.string   "country",              limit: 255
+    t.boolean  "receive_emails",       limit: 1,        default: true
+    t.string   "twitter",              limit: 255
+    t.string   "unsubscribe_key",      limit: 255
+    t.boolean  "forem_admin",          limit: 1,        default: false
+    t.string   "forem_state",          limit: 255,      default: "pending_review"
+    t.boolean  "forem_auto_subscribe", limit: 1,        default: false
   end
 
   create_table "players_teams", force: :cascade do |t|

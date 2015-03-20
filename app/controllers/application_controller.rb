@@ -1,11 +1,21 @@
 class ApplicationController < ActionController::Base
   include Permissions
 
-	before_filter :load_user
+  before_filter :load_user
   before_filter :check_active_streams
   before_filter :load_seasons_for_nav
 
   protect_from_forgery
+
+  def forem_user
+    @current_user
+  end
+  helper_method :forem_user
+
+  def forem?
+    false
+  end
+  helper_method :forem?
 
   def load_user
     Permissions.current_user = nil

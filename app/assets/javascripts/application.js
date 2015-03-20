@@ -21,5 +21,6 @@
 //= require best_in_place_datetime
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require forem
 //= require moment
 //= require_tree .
