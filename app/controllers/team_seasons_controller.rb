@@ -108,7 +108,7 @@ class TeamSeasonsController < ApplicationController
       redirect_to @ts.participant
     rescue Exception => e
       ExceptionNotifier.notify_exception(e, :env => request.env, :data => {:message => paypal_response})
-      flash[:error] = "There was an error processing your payment. Please check your Paypal records. Perhaps your card was declined? Email us if you continue to have issues."      
+      flash[:error] = "There was an error processing your payment. Please check your Paypal records. Perhaps your card was declined? Email us if you continue to have issues."
       redirect_to @ts.participant
     end
   end
@@ -247,4 +247,5 @@ class TeamSeasonsController < ApplicationController
     else
       params.require(:team_season).permit(:checked_in)
     end
+  end
 end
