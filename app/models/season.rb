@@ -48,7 +48,6 @@ class Season < ActiveRecord::Base
   # No start date implies that we are running it ASAP or anything but weekly
   def setup_tournament_matches(start_date = nil, utc_offset = nil)
     # verify all this shit and blah blah blah
-    puts "herehere"
     teams = self.team_seasons.where(paid: true, checked_in: true).sort_by {|ts| ts.division.to_i }.map {|ts| {participant: ts.participant, seed_order: ts.division} }
 
     # Add in Byes
@@ -84,8 +83,6 @@ class Season < ActiveRecord::Base
         match_data[:date] = Time.now + ((pseudo_match[:round] - 1) * 1.5).hours
       end
 
-      puts "therethere"
-      puts matches
       m = self.matches.create!(match_data)
       mapping[pseudo_match[:id]] = m.id
     end
