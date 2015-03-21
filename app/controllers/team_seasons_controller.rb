@@ -103,7 +103,7 @@ class TeamSeasonsController < ApplicationController
       flash[:notice] = "You have been successfully registered for " + @ts.season.title
 
       notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
-      notifier.ping "#{@ts.participant} has just paid #{@ts.price_paid_cents} for @ts.season.title", icon_url: "http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/128/paypal-icon.png"
+      notifier.ping "#{@ts.participant.name} has just paid #{@ts.price_paid_cents} for #{@ts.season.title}", icon_url: "http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/128/paypal-icon.png"
 
       redirect_to @ts.participant
     rescue Exception => e

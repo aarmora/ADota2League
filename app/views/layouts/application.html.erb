@@ -42,6 +42,11 @@
 				<% if @current_user %>
 					<div id="current-user"><%= image_tag @current_user.avatar, :alt => "" %>
 						<span><%=link_to @current_user.name, main_app.player_path(@current_user), :class => "noLinkStyle" %></span>
+            <% if Permissions.user_is_site_admin?(@current_user) %>
+              <br />
+              <%=link_to 'admin', '/admin', :class => "admin_link"%>
+            <% end %>  
+
 						<br />
 						<%= link_to 'Logout', main_app.logout_url, :class => 'logout' %>
 					</div>
