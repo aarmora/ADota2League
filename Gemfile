@@ -40,6 +40,8 @@ gem 'figaro'
 
 gem 'slack-notifier'
 
+gem 'whenever', :require => false
+
 # Bracketing solutions
 gem 'challonge-api'
 gem 'bracket_tree'

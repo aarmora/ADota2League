@@ -332,20 +332,6 @@ namespace :dota do
     end
   end
 
-  desc "Send email"
-  task :mail => :environment do
-    @players = Player.where(:receive_emails => true)
-    playerz = Player.find(205)
-    @players.each do |player|
-      unless player.email.nil?
-        player.unsubscribe_key = "ad2l" + rand(100000).to_s
-        player.save!
-        UserMailer.season4_reminder(player, playerz).deliver
-        #UserMailer.season4_reminder(playerz, playerz).deliver
-      end
-    end
-  end
-
   desc "Email about playoffs"
   task :playoff_mail => :environment do
     @seasonz = Season.where(:id => [44, 45, 46])

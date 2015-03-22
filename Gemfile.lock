@@ -131,6 +131,7 @@ GEM
       sshkit (>= 1.2.0)
     challonge-api (0.2.0)
       activeresource
+    chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -400,6 +401,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
     will_paginate (3.0.5)
     workflow (1.0.0)
 
@@ -464,4 +467,5 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.0.3)
   unicorn
+  whenever
   will_paginate (= 3.0.5)
