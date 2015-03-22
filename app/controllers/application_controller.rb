@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
   # Sync the analytics with the client side
   def setup_analytics
     cookie_value = cookies["_ga"].split(".").last(2).join(".") if cookies["_ga"]
-    cookie_value = nil if cookie_value.empty?
+    cookie_value = nil if cookie_value.blank?
     session[:ga_client_id] ||= cookie_value || SecureRandom.uuid
     opts = {}
     opts[:user_id] = @current_user.id if @current_user
