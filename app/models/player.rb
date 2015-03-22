@@ -28,6 +28,11 @@ class Player < ActiveRecord::Base
     "Player/#{id}"
   end
 
+  # method for common "Participant" interface
+  def players
+    [self]
+  end
+
   def seasons_available_for_registration
     current_season_groups = self.seasons.where("exclusive_group IS NOT NULL").pluck(:exclusive_group)
     result = Season.where(:registration_open => true, :team_tourney => false)

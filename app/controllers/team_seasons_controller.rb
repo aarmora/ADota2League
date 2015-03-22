@@ -46,7 +46,7 @@ class TeamSeasonsController < ApplicationController
       @current_user.email = nil
     end
     @ts = TeamSeason.find(params[:id])
-    head :forbidden and return unless Permissions.can_edit? @ts.participant
+    head :forbidden and return unless @ts.participant.players.include? @current_user
 
     # Check for discount applications
     discount_amount
@@ -54,7 +54,7 @@ class TeamSeasonsController < ApplicationController
 
   def paypal
     @ts = TeamSeason.find(params[:id])
-    head :forbidden and return unless Permissions.can_edit? @ts.participant
+    head :forbidden and return unless @ts.participant.players.include? @current_user
 
     paypal_request = generate_paypal_request
     payment_request = generate_paypal_payment_request
@@ -173,7 +173,7 @@ class TeamSeasonsController < ApplicationController
         end
       end
     else
-      head :forbidden and return unless Permissions.can_edit? @ts.participant
+      head :forbidden and return unless @ts.participant.players.include? @current_user
 
       # if the price is 0 or less after discounts, then we don't need to run a charge
       price = @ts.season.current_price - discount_amount
