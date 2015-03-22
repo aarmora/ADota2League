@@ -63,8 +63,9 @@ class ApplicationController < ActionController::Base
 
   # Sync the analytics with the client side
   def setup_analytics
-    cookieValue = cookies["_ga"].split("GA1.1.")[1] if cookies["_ga"]
-    session[:ga_client_id] ||= cookieValue || SecureRandom.uuid
+    cookie_value = cookies["_ga"].split(".").last(2).join(".") if cookies["_ga"]
+    cookie_value = nil if cookie_value.empty?
+    session[:ga_client_id] ||= cookie_value || SecureRandom.uuid
     opts = {}
     opts[:user_id] = @current_user.id if @current_user
     @tracker = Staccato.tracker(ENV['GA_TRACKING_ID'], session[:ga_client_id], opts)
