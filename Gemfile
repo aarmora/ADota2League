@@ -34,6 +34,7 @@ gem 'stripe'
 gem 'paypal-express'
 gem 'icalendar' # Ical support
 gem 'kappa', '~> 1.0' # Twitch API
+gem 'staccato' # Google Analytics Measurement Protocol
 
 # gem for managing environment variables (steam webapi key)
 gem 'figaro'
