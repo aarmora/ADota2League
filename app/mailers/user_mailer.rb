@@ -22,7 +22,7 @@ class UserMailer < ActionMailer::Base
       @player = player
       puts player.email
       puts player.id
-      mail(to: player.email, subject: "Season 7 registration is open!")
+      mail(to: player.email, subject: "Forums + Weekend tourney")
     end
   end
 
@@ -56,6 +56,15 @@ class UserMailer < ActionMailer::Base
     if @player.email
       mail(to: @player.email, subject: "Playoffs!")
     end
+
+  end
+
+  def signup_reminder(participant, season, ts, days_until_late_Fee)
+    @participant = participant
+    @season = season
+    @ts = ts
+    @days_until_late_Fee = days_until_late_Fee
+    mail(to: 'jbhansen84@gmail.com', subject: "Complete your #{season.title} registration now!")
 
   end
 

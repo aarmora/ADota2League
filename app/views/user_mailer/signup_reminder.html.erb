@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+	<h3>Hello <%=@participant.name%>!</h3>
+	<p>We just wanted to send you a quick email to let you know that the registration fee for <%=@season.title%> is increasing in <%=@days_until_late_Fee%> days.  We really want you in!</p>
+	<p>So...make sure to login to the AD2L site and then go <%=link_to "here", "http://amateurdota2league.com/team_seasons/#{@ts.id}"%> to finish your registration.</p>
+	<p>Hope to see you in <%=@season.title%>!</p>
+	<small>Don't want any more AD2L emails?  <a href="amateurdota2league.com/no_emails?id=<%=@participant.id%>&unsubscribe_key=<%=@participant.unsubscribe_key%>">Unsubscribe</a></small>
+  </body>
+</html>
