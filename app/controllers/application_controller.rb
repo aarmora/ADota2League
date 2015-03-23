@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :load_user
   before_filter :check_active_streams
   before_filter :load_seasons_for_nav
+  before_filter :setup_analytics
 
   protect_from_forgery
 
@@ -58,6 +59,16 @@ class ApplicationController < ActionController::Base
       end
     end
     @official_streams = @active_streams.select { |s| ["amateurdota2league","amateurdota2league1"].include? s.channel.name }
+  end
+
+  # Sync the analytics with the client side
+  def setup_analytics
+    cookie_value = cookies["_ga"].split(".").last(2).join(".") if cookies["_ga"]
+    cookie_value = nil if cookie_value.blank?
+    session[:ga_client_id] ||= cookie_value || SecureRandom.uuid
+    opts = {}
+    opts[:user_id] = @current_user.id if @current_user
+    @tracker = Staccato.tracker(ENV['GA_TRACKING_ID'], session[:ga_client_id], opts)
   end
 
   def verify_admin

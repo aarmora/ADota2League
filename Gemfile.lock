@@ -368,6 +368,7 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    staccato (0.1.1)
     stripe (1.20.3)
       json (~> 1.8.1)
       mime-types (>= 1.25, < 3.0)
@@ -463,6 +464,7 @@ DEPENDENCIES
   select2-rails
   slack-notifier
   slackistrano
+  staccato
   stripe
   summernote-rails
   therubyracer
