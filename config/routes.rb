@@ -64,6 +64,8 @@ Ad2l::Application.routes.draw do
     end
   end
 
+  get 'search/typeahead' => 'search#typeahead'
+
   post 'auth/steam/callback' => 'authentication#steam_callback'
   get 'auth/bnet/callback' => 'authentication#bnet_callback'
   get 'auth/twitter/callback' => 'authentication#twitter_callback'

@@ -1,3 +1,4 @@
+
 <div id="fullbox">
 	<h2><%= @team.name %><%= " (INACTIVE)" if !@team.active %></h2>
 
@@ -39,7 +40,7 @@
 						      <%= best_in_place @team,
 						      	:captain_id,
 						      	:type => :select,
-						      	collection: @roster.collect {|player| ["#{player.id}", "#{player.name}"]}
+						      	collection: @roster.collect {|player| ["#{player.id}", "#{player.name}"]}, :class => 'typeahead'
 						      	 %>
 								</div>
 							</div>
@@ -54,13 +55,8 @@
 					<%= form_tag(players_team_url(@team), :method => "POST", :id => "add_players_form") do %>
 						<div class="form-group" id="addplayers">
 				   		<label class="col-sm-2 control-label">Add Player</label>
-					    <div class="col-sm-10">
-					    	<select class="addplayer select2" name="players[]" team="<%=@team.id%>" width="600">
-					    		<option value=""></option>
-					    		<% Player.order(:name).pluck(:id, :name).reject{|id, name| name.blank? }.each do |id, name| %>
-					    			<option value="<%= id %>"><%= name %></option>
-					    		<% end %>
-					    	</select>
+					    	<div class="col-sm-10">
+					    		<input type="text" class="typeahead form-control addplayer" placeholder="Player name"/>
 							</div>
 						</div>
 						<button class="btn btn-primary col-sm-offset-2">Add them!</button>
@@ -94,7 +90,7 @@
 	<%- @team.team_seasons.sort.reverse.each do |ts| %>
 		<h4><%= link_to ts.season.title, ts.season %><% " (#{ts.division})" unless ts.division.nil? || ts.division.empty? %></h4>
 		<%= best_in_place_if Permissions.can_edit?(ts.season), ts, :division, :type => :input %>
-		<% if Permissions.can_edit?(@team) %>
+		<% if Permissions.can_edit?(@team) or  @team.players.include? @current_user %>
 			<% if ts.paid == false && ts.season.current_price.to_i > 0 && ts.season.registration_open %>
 				<%= link_to "Pay Registration Fee", ts, :class => "btn btn-primary" %>
 			<% end %>

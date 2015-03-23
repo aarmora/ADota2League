@@ -101,6 +101,8 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
+    bootstrap-typeahead-rails (0.10.5.1)
+      railties (>= 3.0)
     bracket_tree (0.1.0)
     browser (0.8.0)
     buftok (0.2.0)
@@ -415,6 +417,7 @@ DEPENDENCIES
   aws-sdk (< 2.0)
   best_in_place (~> 3.0)!
   bootstrap-sass
+  bootstrap-typeahead-rails
   bracket_tree
   browser
   cap-ec2

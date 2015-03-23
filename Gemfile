@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.0"
+ruby "2.1.5"
 
 gem 'rails', '~> 4.2'
 gem 'mysql2', '> 0.3'
@@ -81,6 +81,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails'
+gem 'bootstrap-typeahead-rails'
 
 # Deploy with Capistrano
 gem 'capistrano', '~> 3.4'

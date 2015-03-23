@@ -23,4 +23,5 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require forem
 //= require moment
+//= require bootstrap-typeahead-rails
 //= require_tree .
