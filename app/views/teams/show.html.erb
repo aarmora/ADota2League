@@ -56,7 +56,8 @@
 						<div class="form-group" id="addplayers">
 				   		<label class="col-sm-2 control-label">Add Player</label>
 					    	<div class="col-sm-10">
-					    		<input type="text" class="typeahead form-control addplayer" placeholder="Player name"/>
+					    		<input type="text" class="form-control typeahead addplayer" />
+    							<input type="hidden" id="hiddenField"  name="players[]" team="<%=@team.id%>" />
 							</div>
 						</div>
 						<button class="btn btn-primary col-sm-offset-2">Add them!</button>

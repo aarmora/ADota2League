@@ -28,8 +28,8 @@ $(document).ready(function(){
     },
     {
       displayKey: 'name',
-      source: function (query, process) {
-        var map = {};
+      source: function (query, process) {        
+        playerMap = {};
         var objects = [];
         $.get('/search/typeahead', { query: query }, function (data) {
           $.each(data, function(i, object){
@@ -38,10 +38,10 @@ $(document).ready(function(){
           });
           process(objects)
         });
-      },
-      updater: function(item){
-       $('.typeahead').val(map[item].id);
-       return item; 
       }
   });
+  $('.typeahead').on('typeahead:selected', function(evt, item){
+    $('#hiddenField').val(playerMap[item.name].id);
+  });
+
 });
