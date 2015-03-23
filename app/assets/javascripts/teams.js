@@ -33,7 +33,7 @@ $(document).ready(function(){
         var objects = [];
         $.get('/search/typeahead', { query: query }, function (data) {
           $.each(data, function(i, object){
-            map[object.name] = object;
+            playerMap[object.name] = object;
             objects.push({"name": object.name});
           });
           process(objects)
