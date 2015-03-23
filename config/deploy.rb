@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'playon'
-set :repo_url, 'https://github.com/aarmora/ADota2League.git'
+set :repo_url, 'git@bitbucket.org:aarmora/ad2l.git'
 
 # Default branch is :master
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
