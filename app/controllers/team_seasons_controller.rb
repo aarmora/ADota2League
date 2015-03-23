@@ -36,6 +36,7 @@ class TeamSeasonsController < ApplicationController
       redirect_to @season
     else
       # redirect to payment for this season path
+      @tracker.event(label: 'registered for #{@season.title}')
       redirect_to @ts
     end
   end
@@ -101,6 +102,7 @@ class TeamSeasonsController < ApplicationController
       @ts.price_paid_cents = info.amount.total * 100
       @ts.save!
       flash[:notice] = "You have been successfully registered for " + @ts.season.title
+      track_transaction
 
       notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
       notifier.ping "#{@ts.participant.name} has just paid #{@ts.price_paid_cents} for #{@ts.season.title}", icon_url: "http://icons.iconarchive.com/icons/chrisbanks2/cold-fusion-hd/128/paypal-icon.png"
@@ -122,6 +124,15 @@ class TeamSeasonsController < ApplicationController
   private def discount_amount
     # memoize to preserve api calls
     @discount_amount ||= qualifies_for_twitter_discount? ? 100 : 0
+  end
+
+  private def track_transaction
+    @tracker.transaction_item({
+      transaction_id: @ts.id,
+      name: @ts.season.title,
+      price: @ts.price_paid_cents,
+      quantity: 1,
+    })
   end
 
   private def qualifies_for_twitter_discount?
@@ -205,6 +216,7 @@ class TeamSeasonsController < ApplicationController
           },
           :currency    => 'usd'
         )
+        track_transaction
 
         # update our records
         @current_user.email = params[:stripeEmail] if @current_user.email.nil?
