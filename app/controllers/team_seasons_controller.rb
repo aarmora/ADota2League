@@ -127,12 +127,7 @@ class TeamSeasonsController < ApplicationController
   end
 
   private def track_transaction
-    @tracker.transaction_item({
-      transaction_id: @ts.id,
-      name: @ts.season.title,
-      price: @ts.price_paid_cents,
-      quantity: 1,
-    })
+    @tracker.event(label: '##{ts.price_paid_cents} for #{@season.title}')
   end
 
   private def qualifies_for_twitter_discount?

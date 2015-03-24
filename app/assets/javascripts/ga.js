@@ -13,5 +13,4 @@ $(document).ready(function() {
       ga('send', 'event', 'ads', 'click', adName);
     });
   }
-  ga('require', 'ecommerce');
 });
