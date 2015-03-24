@@ -24,7 +24,7 @@ $(document).ready(function(){
   //Worth noting that with typeahead it's not triggering the above clone.  This currently only allows for the addition of one player at a time.
   $('.typeahead').typeahead({
     highlight: true,
-    minLength: 3
+    minLength: 2
     },
     {
       displayKey: 'name',
